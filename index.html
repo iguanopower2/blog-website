@@ -1,22 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>De Cero al Infinito</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-  <header>
-    <h1>Bienvenido a De Cero al Infinito 🚀</h1>
-    <nav>
-      <a href="index.html">Inicio</a>
-      <a href="about.html">Sobre mí</a>
-      <a href="blog.html">Blog</a>
-    </nav>
+  <header class="main-header">
+    <div class="container">
+      <div class="logo">
+        <i class="fas fa-chart-line"></i> De Cero al Infinito
+      </div>
+      <nav class="nav-menu">
+        <a href="index.html">Inicio</a>
+        <a href="sofipos.html">SOFIPOs</a>
+        <a href="bancos.html">Bancos</a>
+        <a href="cuentas-vista.html">Cuenta a la vista</a>
+        <a href="cuentas-plazo.html">Cuenta a plazo</a>
+      </nav>
+    </div>
   </header>
-  <main>
-    <p>Este es un sitio para compartir contenido sobre finanzas personales, inversión y automatización.</p>
+
+  <main class="hero">
+    <section class="hero-content">
+      <h1>Compara servicios financieros en México</h1>
+      <p>Encuentra las mejores opciones de ahorro, inversión y cuentas bancarias de forma clara, personalizada y sin letra chiquita.</p>
+      <a href="#categorias" class="btn-primary">Ver comparaciones</a>
+    </section>
   </main>
+
+  <section class="categories" id="categorias">
+    <h2>Categorías destacadas</h2>
+    <div class="cards-container">
+      <div class="card">
+        <i class="fas fa-piggy-bank fa-2x"></i>
+        <h3>SOFIPOs</h3>
+        <p>Instituciones financieras populares para invertir con buenos rendimientos.</p>
+        <a href="sofipos.html" class="btn-link">Explorar</a>
+      </div>
+      <div class="card">
+        <i class="fas fa-university fa-2x"></i>
+        <h3>Bancos</h3>
+        <p>Compara cuentas y servicios de los principales bancos en México.</p>
+        <a href="bancos.html" class="btn-link">Explorar</a>
+      </div>
+      <div class="card">
+        <i class="fas fa-wallet fa-2x"></i>
+        <h3>Cuentas a la vista</h3>
+        <p>Opciones de liquidez inmediata con rendimientos.</p>
+        <a href="cuentas-vista.html" class="btn-link">Explorar</a>
+      </div>
+      <div class="card">
+        <i class="fas fa-lock fa-2x"></i>
+        <h3>Cuentas a plazo</h3>
+        <p>Invierte tu dinero por periodos fijos con tasas garantizadas.</p>
+        <a href="cuentas-plazo.html" class="btn-link">Explorar</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 De Cero al Infinito. Todos los derechos reservados.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-x-twitter"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
