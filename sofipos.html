@@ -85,4 +85,39 @@
     </div>
   </footer>
 </body>
+<script>
+  function aplicarGradientePorColumna() {
+    const tabla = document.querySelector('.sofipos-table');
+    const filas = Array.from(tabla.querySelectorAll('tbody tr'));
+
+    // Para cada columna de tasas (índices 1 a 3)
+    for (let col = 1; col <= 3; col++) {
+      // Obtener tasas de cada fila
+      const tasas = filas.map(fila => {
+        const celda = fila.children[col];
+        return {
+          celda,
+          valor: parseFloat(celda.getAttribute('data-rate'))
+        };
+      });
+
+      const valores = tasas.map(t => t.valor);
+      const max = Math.max(...valores);
+      const min = Math.min(...valores);
+
+      // Aplicar color a cada celda según gradiente rojo-verde
+      tasas.forEach(({ celda, valor }) => {
+        const porcentaje = (valor - min) / (max - min || 1); // evitar división por 0
+        const rojo = Math.round(255 - porcentaje * 255);
+        const verde = Math.round(porcentaje * 255);
+        const color = `rgb(${rojo}, ${verde}, 100)`;
+        celda.style.backgroundColor = color;
+        celda.style.color = 'white';
+        celda.style.fontWeight = 'bold';
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', aplicarGradientePorColumna);
+</script>
 </html>
