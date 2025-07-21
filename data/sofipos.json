@@ -3,27 +3,27 @@
     "nombre": "Didi",
     "plazos": {
       "Vista": 15,
-      "3m": 8.5,
-      "6m": 9.2,
-      "12m": 10.0
+      "3 meses": "No disponible",
+      "6 meses": "No disponible",
+      "12 meses": "No disponible"
     }
   },
   {
     "nombre": "Kubo Financiero",
     "plazos": {
-      "Vista": 7,
-      "3m": 8.0,
-      "6m": 8.5,
-      "12m": 9.0
+      "Vista": 2,
+      "3 meses": 8.3,
+      "6 meses": 8.5,
+      "12 meses": 9.5
     }
   },
   {
     "nombre": "Finsus",
     "plazos": {
-      "Vista": 10,
-      "3m": 8.2,
-      "6m": 9.0,
-      "12m": 9.8
+      "Vista": 9.09,
+      "3 meses": 9.69,
+      "6 meses": 9.91,
+      "12 meses": 11.59
     }
   }
 ]
