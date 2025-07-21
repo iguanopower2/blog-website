@@ -83,16 +83,19 @@
         };
       });
 
-      const valores = tasas.map(t => t.valor);
-      const max = Math.max(...valores);
-      const min = Math.min(...valores);
+      const valoresValidos = tasas
+        .map(t => t.valor)
+        .filter(v => !isNaN(v) && v !== null && v !== 0);
+
+      const max = Math.max(...valoresValidos);
+      const min = Math.min(...valoresValidos);
 
       tasas.forEach(({ celda, valor }) => {
-        if (valor === max) {
+        if (!isNaN(valor) && valor === max) {
           celda.style.backgroundColor = '#2e7d32'; // verde oscuro
           celda.style.color = 'white';
           celda.style.fontWeight = 'bold';
-        } else if (valor === min) {
+        } else if (!isNaN(valor) && valor === min) {
           celda.style.backgroundColor = '#b71c1c'; // rojo oscuro
           celda.style.color = 'white';
           celda.style.fontWeight = 'bold';
