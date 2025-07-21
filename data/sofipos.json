@@ -3,9 +3,9 @@
     "nombre": "Didi",
     "plazos": {
       "Vista": 15,
-      "3 meses": "No disponible",
-      "6 meses": "No disponible",
-      "12 meses": "No disponible"
+      "3 meses": 0,
+      "6 meses": 0,
+      "12 meses": 0
     }
   },
   {
