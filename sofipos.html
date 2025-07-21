@@ -74,7 +74,7 @@
   </footer>
 </body>
 <script>
-  function aplicarGradientePorColumna() {
+  function aplicarColoresMaxMin() {
     const tabla = document.querySelector('.sofipos-table');
     const filas = Array.from(tabla.querySelectorAll('tbody tr'));
 
@@ -92,14 +92,19 @@
       const min = Math.min(...valores);
 
       tasas.forEach(({ celda, valor }) => {
-        const porcentaje = (valor - min) / (max - min || 1);
-        const rojo = Math.round(255 - porcentaje * 255);
-        const verde = Math.round(porcentaje * 255);
-        const color = `rgb(${Math.round(rojo * 0.6)}, ${Math.round(verde * 0.6)}, 60)`;
-        celda.style.backgroundColor = color;
-        celda.style.borderRadius = '4px';
-        celda.style.color = porcentaje > 0.5 ? 'white' : '#111';
-        celda.style.fontWeight = 'bold';
+        if (valor === max) {
+          celda.style.backgroundColor = '#2e7d32'; // verde oscuro
+          celda.style.color = 'white';
+          celda.style.fontWeight = 'bold';
+        } else if (valor === min) {
+          celda.style.backgroundColor = '#b71c1c'; // rojo oscuro
+          celda.style.color = 'white';
+          celda.style.fontWeight = 'bold';
+        } else {
+          celda.style.backgroundColor = '';
+          celda.style.color = '';
+          celda.style.fontWeight = '';
+        }
       });
     }
   }
@@ -120,7 +125,7 @@
           `;
           cuerpo.appendChild(fila);
         });
-        aplicarGradientePorColumna();
+        aplicarColoresMaxMin();
       });
   }
 
