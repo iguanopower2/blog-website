@@ -1,0 +1,26 @@
+[
+  {
+    "nombre": "Didi",
+    "plazos": {
+      "3m": 8.5,
+      "6m": 9.2,
+      "12m": 10.0
+    }
+  },
+  {
+    "nombre": "Kubo Financiero",
+    "plazos": {
+      "3m": 8.0,
+      "6m": 8.5,
+      "12m": 9.0
+    }
+  },
+  {
+    "nombre": "Finsus",
+    "plazos": {
+      "3m": 8.2,
+      "6m": 9.0,
+      "12m": 9.8
+    }
+  }
+]
