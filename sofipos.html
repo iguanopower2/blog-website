@@ -30,14 +30,8 @@
     
     <div class="table-container">
       <table class="sofipos-table">
-        <thead>
-          <tr>
-            <th>SOFIPO</th>
-            <th>Vista</th>
-            <th>3 meses</th>
-            <th>6 meses</th>
-            <th>12 meses</th>
-          </tr>
+        <thead id="tabla-sofipos-head">
+          <!-- Encabezado generado dinámicamente -->
         </thead>
         <tbody id="tabla-sofipos-body">
           <!-- Aquí se insertarán filas dinámicamente desde JSON -->
@@ -78,8 +72,9 @@
   function aplicarColoresMaxMin() {
     const tabla = document.querySelector('.sofipos-table');
     const filas = Array.from(tabla.querySelectorAll('tbody tr'));
+    const numCols = tabla.querySelector('thead tr').children.length;
 
-    for (let col = 1; col <= 3; col++) {
+    for (let col = 1; col < numCols; col++) {
       const tasas = filas.map(fila => {
         const celda = fila.children[col];
         return {
@@ -115,17 +110,30 @@
       .then(res => res.json())
       .then(data => {
         const cuerpo = document.getElementById('tabla-sofipos-body');
+        const encabezado = document.getElementById('tabla-sofipos-head');
         cuerpo.innerHTML = '';
+        encabezado.innerHTML = '';
+
+        const plazos = Object.keys(data[0].plazos);
+
+        let encabezadoHTML = '<tr><th>SOFIPO</th>';
+        plazos.forEach(plazo => {
+          encabezadoHTML += `<th>${plazo}</th>`;
+        });
+        encabezadoHTML += '</tr>';
+        encabezado.innerHTML = encabezadoHTML;
+
         data.forEach(sofipo => {
           const fila = document.createElement('tr');
-          fila.innerHTML = `
-            <td>${sofipo.nombre}</td>
-            <td data-rate="${sofipo.plazos['3m']}">${sofipo.plazos['3m']}%</td>
-            <td data-rate="${sofipo.plazos['6m']}">${sofipo.plazos['6m']}%</td>
-            <td data-rate="${sofipo.plazos['12m']}">${sofipo.plazos['12m']}%</td>
-          `;
+          let htmlFila = `<td>${sofipo.nombre}</td>`;
+          plazos.forEach(plazo => {
+            const tasa = sofipo.plazos[plazo] ?? '';
+            htmlFila += `<td data-rate="${tasa}">${tasa}%</td>`;
+          });
+          fila.innerHTML = htmlFila;
           cuerpo.appendChild(fila);
         });
+
         aplicarColoresMaxMin();
       });
   }
