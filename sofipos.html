@@ -146,7 +146,8 @@
           let htmlFila = `<td>${sofipo.nombre}</td>`;
           plazos.forEach(plazo => {
             const tasa = sofipo.plazos[plazo] ?? '';
-            htmlFila += `<td data-rate="${tasa}">${tasa}%</td>`;
+            const mostrarTasa = (tasa !== null && tasa !== undefined && tasa !== '') ? `${tasa}%` : 'No Disponible';
+            htmlFila += `<td data-rate="${tasa}">${mostrarTasa}</td>`;
           });
           fila.innerHTML = htmlFila;
           cuerpo.appendChild(fila);
