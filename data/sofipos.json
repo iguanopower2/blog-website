@@ -20,7 +20,7 @@
   {
     "nombre": "Finsus",
     "plazos": {
-      "Vista": 9.09,
+      "Vista": 6,
       "3 meses": 9.69,
       "6 meses": 9.91,
       "12 meses": 11.59
@@ -32,7 +32,7 @@
       "Vista": 15,
       "3 meses": 8.20,
       "6 meses": 8.30,
-      "12 meses": 0
+      "12 meses": null
     }
   }
 ]
