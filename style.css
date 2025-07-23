@@ -183,8 +183,10 @@ a {
 .centered-text {
   text-align: center;
 }
-.sofipo-highlight-flex {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+.sofipo-icon {
+  width: 20%;
+  height: auto;
+  max-width: 120px;
+  display: block;
+  margin: 0 auto;
 }
