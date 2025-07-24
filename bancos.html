@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bancos - De Cero al Infinito</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <header class="main-header">
+    <div class="container">
+      <div class="logo">
+        <i class="fas fa-chart-line"></i> De Cero al Infinito
+      </div>
+      <nav class="nav-menu">
+        <a href="index.html">Inicio</a>
+        <a href="sofipos.html">SOFIPOs</a>
+        <a href="bancos.html" class="active">Bancos</a>
+        <a href="cuentas-vista.html">Cuenta a la vista</a>
+        <a href="cuentas-plazo.html">Cuenta a plazo</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Comparativa de bancos por plazo y rendimiento</h1>
+    <p>Actualizamos periódicamente esta tabla para ayudarte a comparar las cuentas a la vista y a plazo fijo que ofrecen los bancos digitales y tradicionales.</p>
+
+    <div class="table-container">
+      <table class="sofipos-table">
+        <thead id="tabla-bancos-head">
+          <!-- Encabezado generado dinámicamente -->
+        </thead>
+        <tbody id="tabla-bancos-body">
+          <!-- Filas generadas dinámicamente -->
+        </tbody>
+      </table>
+    </div>
+
+    <section class="sofipo-info">
+      <h2 class="centered-text">¿Qué revisar al comparar bancos (y neobancos)?</h2>
+      <ul>
+        <li>Tasa bruta vs. GAT real (rendimiento después de inflación).</li>
+        <li>Comisiones (manejo de cuenta, SPEI, retiro en cajeros).</li>
+        <li>Disponibilidad del dinero (a la vista vs. plazo fijo).</li>
+        <li>Tope de saldo con rendimiento y condiciones promocionales.</li>
+        <li>Seguridad: IPAB, regulación CNBV, y autenticación en la app.</li>
+      </ul>
+    </section>
+
+    <section class="sofipo-highlights">
+      <h2 class="centered-text">Openbank</h2>
+      <p><strong>Openbank</strong> es el banco 100% digital del Grupo Santander. Opera en México con cuentas de débito que ofrecen rendimiento sobre el saldo, sin comisiones ocultas y con acceso a la red de cajeros de Santander.</p>
+      <p>En esta página iremos actualizando las tasas a la vista y a plazo, así como nuevas funcionalidades (tarjetas, préstamos, cashback, etc.).</p>
+      <p>Puedes consultar su sitio oficial en <a href="https://www.openbank.mx" target="_blank" rel="noopener noreferrer">openbank.mx</a>.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 De Cero al Infinito. Todos los derechos reservados.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-x-twitter"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function aplicarColoresMaxMinBancos() {
+      const tabla = document.querySelector('.sofipos-table');
+      const filas = Array.from(tabla.querySelectorAll('tbody tr'));
+      const numCols = tabla.querySelector('thead tr').children.length;
+
+      for (let col = 1; col < numCols; col++) {
+        const tasas = filas.map(fila => {
+          const celda = fila.children[col];
+          return {
+            celda,
+            valor: parseFloat(celda.getAttribute('data-rate'))
+          };
+        });
+
+        const valoresValidos = tasas
+          .map(t => t.valor)
+          .filter(v => !isNaN(v) && v !== null && v !== 0);
+
+        const max = Math.max(...valoresValidos);
+        const min = Math.min(...valoresValidos);
+
+        tasas.forEach(({ celda, valor }) => {
+          if (!isNaN(valor) && valor === max) {
+            celda.style.backgroundColor = '#2e7d32';
+            celda.style.color = 'white';
+            celda.style.fontWeight = 'bold';
+          } else if (!isNaN(valor) && valor === min) {
+          celda.style.backgroundColor = '#b71c1c';
+          celda.style.color = 'white';
+          celda.style.fontWeight = 'bold';
+          } else {
+            celda.style.backgroundColor = '';
+            celda.style.color = '';
+            celda.style.fontWeight = '';
+          }
+        });
+      }
+    }
+
+    function cargarDatosBancos() {
+      fetch('data/bancos.json')
+        .then(res => res.json())
+        .then(data => {
+          const cuerpo = document.getElementById('tabla-bancos-body');
+          const encabezado = document.getElementById('tabla-bancos-head');
+          cuerpo.innerHTML = '';
+          encabezado.innerHTML = '';
+
+          // Detectar todos los plazos únicos del primer banco
+          const plazos = Object.keys(data[0].plazos);
+
+          // Construir encabezado dinámicamente
+          let headHTML = '<tr><th>Banco</th>';
+          plazos.forEach(plazo => {
+            headHTML += `<th>${plazo}</th>`;
+          });
+          headHTML += '</tr>';
+          encabezado.innerHTML = headHTML;
+
+          // Construir filas
+          data.forEach(banco => {
+            const fila = document.createElement('tr');
+            let htmlFila = `<td>${banco.nombre}</td>`;
+            plazos.forEach(plazo => {
+              const tasa = banco.plazos[plazo] ?? '';
+              const mostrarTasa = (tasa !== null && tasa !== undefined && tasa !== '') ? `${tasa}%` : 'No Disponible';
+              htmlFila += `<td data-rate="${tasa}">${mostrarTasa}</td>`;
+            });
+            fila.innerHTML = htmlFila;
+            cuerpo.appendChild(fila);
+          });
+
+          aplicarColoresMaxMinBancos();
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', cargarDatosBancos);
+  </script>
+</body>
+</html>

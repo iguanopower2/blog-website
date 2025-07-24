@@ -1,0 +1,11 @@
+[
+  {
+    "nombre": "Openbank",
+    "plazos": {
+      "Vista": 10,
+      "3 meses": null,
+      "6 meses": null,
+      "12 meses": null
+    }
+  }
+]
