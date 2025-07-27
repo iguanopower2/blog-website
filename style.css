@@ -185,12 +185,12 @@ a {
 }
 
 .link-accent {
-  color: #1e88e5;            /* Azul acento */
+  color: #e51e1e;            /* Azul acento */
   text-decoration: underline;
-  font-weight: 500;
+  font-weight: 700;
+  font-size: 1.2rem;
   transition: color 0.3s ease;
 }
-
 .link-accent:hover {
-  color: #1565c0;            /* Azul más oscuro al pasar el cursor */
+  color: #081cba;            /* Azul más oscuro al pasar el cursor */
 }
