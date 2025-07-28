@@ -7,5 +7,15 @@
       "6 meses": null,
       "12 meses": null
     }
+  },
+    {
+    "nombre": "Mifel (cuenta digital)",
+    "plazos": {
+      "Vista": 10,
+      "3 meses": null,
+      "6 meses": null,
+      "12 meses": null
+    }
   }
+  
 ]
