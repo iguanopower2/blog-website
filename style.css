@@ -159,13 +159,15 @@ a {
 }
 
 .sofipos-table th {
-  background-color: #f2f2f2;
+  background-color: #f5ec00;
   font-weight: bold;
 }
 
 .sofipos-table td {
   transition: background-color 0.3s ease;
 }
+
+
 
 .sofipo-info, .sofipo-highlights {
   margin: 40px 0;
