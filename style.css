@@ -42,7 +42,7 @@ a {
   font-weight: 500;
 }
 
-.logo, .nav-menu a:hover {
+.nav-menu a:hover {
   text-decoration: underline;
 }
 
