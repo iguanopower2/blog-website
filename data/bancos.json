@@ -18,6 +18,36 @@
       "6 meses": 7.95,
       "12 meses": 7.9
     }
+  },
+    {
+    "nombre": "Banco Covalto",
+    "plazos": {
+      "Vista": 10,
+      "1 mes": 6.65,
+      "3 meses": 7.9,
+      "6 meses": 8.15,
+      "12 meses": 10.5
+    }
+  },
+    {
+    "nombre": "Ualá",
+    "plazos": {
+      "Vista": 11,
+      "1 mes": null,
+      "3 meses": null,
+      "6 meses": null,
+      "12 meses": null
+    }
+  },
+  {
+    "nombre": "BIM",
+    "plazos": {
+      "Vista": null,
+      "1 mes": 7,
+      "3 meses": 7,
+      "6 meses": 7,
+      "12 meses": 7
+    }
   }
   
 ]
