@@ -3,6 +3,7 @@
     "nombre": "Openbank",
     "plazos": {
       "Vista": 10,
+      "1 mes": null,
       "3 meses": null,
       "6 meses": null,
       "12 meses": null
@@ -12,9 +13,10 @@
     "nombre": "Mifel (cuenta digital)",
     "plazos": {
       "Vista": 10,
-      "3 meses": null,
-      "6 meses": null,
-      "12 meses": null
+      "1 mes": 5.25,
+      "3 meses": 8,
+      "6 meses": 7.95,
+      "12 meses": 7.9
     }
   }
   
