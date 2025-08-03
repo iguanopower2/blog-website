@@ -1,6 +1,6 @@
 [
   {
-    "nombre": "Didi",
+    "nombre": "Didi Cuenta",
     "plazos": {
       "Vista": 15,
       "1 mes": null,
@@ -63,10 +63,10 @@
     "nombre": "Stori",
     "plazos": {
       "Vista": 8,
-      "1 mes": 8.05,
-      "3 meses": 10,
-      "6 meses": 7,
-      "12 meses": 8
+      "1 mes": 7.77,
+      "3 meses": 7.96,
+      "6 meses": 7.36,
+      "12 meses": 7
     }
   },
   {
@@ -83,7 +83,7 @@
     "nombre": "Fondeadora",
     "plazos": {
       "Vista": null,
-      "1 mes": 10,
+      "1 mes": 9,
       "3 meses": null,
       "6 meses": null,
       "12 meses": null

@@ -5,3 +5,4 @@ https://www.condusef.gob.mx/index.php?p=info-sofipo&ide=6
 Tasas
 https://www.klar.mx/inversion
 https://supertasas.com
+https://www.kubofinanciero.com/ley-transparencia/kubo-plazofijo-tasas
