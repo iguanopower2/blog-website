@@ -48,6 +48,16 @@
       "6 meses": 7,
       "12 meses": 7
     }
+  },
+  {
+    "nombre": "Pagaré digital BBVA",
+    "plazos": {
+      "Vista": null,
+      "1 mes": 2.8,
+      "3 meses": 2.85,
+      "6 meses": 2.95,
+      "12 meses": null
+    }
   }
   
 ]
