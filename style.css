@@ -167,6 +167,17 @@ a {
   transition: background-color 0.3s ease;
 }
 
+.table-footnotes {
+  margin-top: 15px; /* Añade un espacio entre la tabla y las notas */
+  font-size: 0.85em;  /* Reduce el tamaño de la fuente al 85% del texto normal. Puedes usar px también (ej. 12px) */
+  color: #666;       /* Un color de texto más suave para que no compita con los datos de la tabla */
+  padding-left: 20px; /* Añade un poco de sangría a las notas */
+}
+
+/* Opcional: Para ajustar el espaciado entre cada nota */
+.table-footnotes li {
+  margin-bottom: 5px;
+}
 
 
 .sofipo-info, .sofipo-highlights {

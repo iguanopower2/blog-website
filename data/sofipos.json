@@ -30,7 +30,7 @@
     }
   },
   {
-    "nombre": "NU",
+    "nombre": "NU<sup>(1)</sup>",
     "plazos": {
       "Vista": 15,
       "1 mes": 8.10,
