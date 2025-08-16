@@ -34,12 +34,45 @@
           </tbody>
       </table>
     </div>
-    
+
     <section class="sofipo-info">
       <h2 class="centered-text">¿Qué revisar al comparar bancos (y neobancos)?</h2>
       <ul>
-        <li>Los bancos son entidades financieras con regulaciones más estrictas...</li>
-        </ul>
+        <li>Los bancos son entidades financieras con regulaciones más estrictas que las SOFIPOS y generalmente con mayor diversificación, por lo que son más sólidos y el seguro del IPAB te protegerá hasta por 400,000 UDIS ($3,100,000 MXN aprox.).</li>
+        <li>La retención de impuestos por ISR están exentos hasta por 5 UMAS o aproximadamente $206,000MXN, si se supera dicho monto se paga un procentaje anual (ISR provisional) sobre el capital promedio que generó los intereses.</li>
+        <li>Puedes acceder a servicios más sofisticados como la dispersión de tu nómina o la obtención de créditos hipotecarios.</li>
+      </ul>
+    </section>
+
+    <section class="sofipo-highlights">
+      <h2 class="centered-text">Openbank</h2>
+      <p><strong>Openbank</strong> es el banco 100% digital del Grupo Santander. Opera en México con cuentas de débito que ofrecen rendimiento sobre el saldo, tarjetas de crédito con cashback, sin comisiones ocultas y con acceso a la red de cajeros de Santander.</p>
+      <p>Ofrece <strong>10% de rendimiento</strong> anual sobre el dinero que tengas a la vista y <strong>3% de cashback en compras digitales</strong> realizadas con la tarjeta de crédito.</p>
+      <p>Compras mayores a 1,500 pesos pueden ser diferidas hasta a 3 meses sin intereses. Por promoción, al gastar $2,000 MXN o más con tu tarjeta de crédito, podrías recibir un bono de $400 MXN, esta oferta tiene vigencia limitada, revisar su página web para mayor información.</p>
+      <p><a href="https://www.openbank.mx" target="_blank" class="link-accent">Consulta más información y abre tu cuenta</a></p>
+    </section>
+
+    <section class="sofipo-highlights">
+      <h2 class="centered-text">Cuenta digital Mifel</h2>
+      <p>Abre tu cuenta digital Mifel en menos de 10 minutos desde su página web y accede a un rendimiento del <strong>10% anual</strong></p>
+      <p>Depositos limitados a 3000 UDIS ($25,000 MXN aprox.), puedes llenar documentación adicional y acceder a la <strong>Cuenta Digital Evoluciona</strong> que te permite acceder a la tasa del 10% hasta por $500,000 MXN.</p>
+      <p>Puedes acceder a cupones de descuento, fondos de inversión, pagar tus servicios o impuestos y más desde tu cuenta digital.</p>
+      <p><a href="https://www.mifel.com.mx/personas/cuentas/cuenta-digital" target="_blank" class="link-accent">Consulta más información y abre tu cuenta</a></p>
+    </section>
+
+    <section class="sofipo-highlights">
+      <h2 class="centered-text">BBVA</h2>
+      <p><strong>BBVA México</strong> es la institución financiera más grande de México</p>
+      <p>Es líder en diversos segmentos financieros como depósitos, cartera de crédito, cajeros automáticos y sucursales</p>
+      <p>Ofrece una variedad de productos financieros para personas, empresas y gobiernos, incluyendo cuentas bancarias, tarjetas, créditos, inversiones y seguros, entre otros.</p>
+      <p><a href="https://www.bbva.mx" target="_blank" class="link-accent">Consulta más información y abre tu cuenta</a></p>
+    </section>
+
+    <section class="sofipo-highlights">
+      <h2 class="centered-text">Santander</h2>
+      <p><strong>Santander México</strong> es una de las principales instituciones financieras del país, con una amplia gama de productos y servicios financieros para individuos y empresas.</p>
+      <p>Ofrece cuentas de ahorro, tarjetas de crédito, préstamos personales, hipotecas, inversiones y seguros, entre otros. Además, cuenta con una sólida presencia digital y una red de sucursales y cajeros automáticos en todo el país.</p>
+      <p><a href="https://www.santander.com.mx" target="_blank" class="link-accent">Consulta más información y abre tu cuenta</a></p>
     </section>
 
   </main>
@@ -77,7 +110,7 @@
           .filter(v => !isNaN(v) && v !== null && v !== 0);
 
         if (valoresValidos.length < 2) continue;
-        
+
         const max = Math.max(...valoresValidos);
         const min = Math.min(...valoresValidos);
 
@@ -100,20 +133,21 @@
     }
 
     function cargarDatosBancos() {
-      fetch('data/inversiones.json') // 1. CAMBIO: Apuntamos al nuevo archivo
+      fetch('data/inversiones.json')
         .then(res => res.json())
         .then(fullData => {
-          
-          // 2. CAMBIO: Filtramos para obtener solo Bancos
+
           const data = fullData.filter(item => item.tipo === 'Banco');
 
           const cuerpo = document.getElementById('tabla-bancos-body');
           const encabezado = document.getElementById('tabla-bancos-head');
           cuerpo.innerHTML = '';
           encabezado.innerHTML = '';
+          
+          if (data.length === 0) return;
 
           const plazos = Object.keys(data[0].plazos);
-          
+
           let headHTML = '<tr><th>Banco</th>';
           plazos.forEach(plazo => {
             headHTML += `<th>${plazo}</th>`;
