@@ -207,3 +207,46 @@ a {
 .link-accent:hover {
   color: #081cba;            /* Azul más oscuro al pasar el cursor */
 }
+/* --- Estilos para la nueva tabla en el Inicio --- */
+#tabla-principal {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  text-align: center;
+}
+
+.titulo-tabla {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.subtitulo-tabla {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+/* --- Etiquetas de Categoría --- */
+.tipo-etiqueta {
+  padding: 5px 10px;
+  border-radius: 15px;
+  color: white;
+  font-weight: bold;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  min-width: 100px;
+  display: inline-block;
+  text-align: center;
+}
+
+.tipo-sofipo {
+  background-color: #d32f2f; /* Rojo */
+}
+
+.tipo-banco {
+  background-color: #303f9f; /* Azul */
+}
+
+.tipo-gubernamental {
+  background-color: #00796b; /* Verde */
+}

@@ -8,8 +8,7 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-0NV8P41XXJ"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0NV8P41XXJ"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -29,20 +28,35 @@
         <a href="index.html">Inicio</a>
         <a href="sofipos.html">SOFIPOs</a>
         <a href="bancos.html">Bancos</a>
-        <!--<a href="tarjetas-credito.html">Tarjetas de crédito</a>-->
-        <!--<a href="blog.html">Blog</a>-->
-      </nav>
+        </nav>
     </div>
   </header>
 
   <main class="hero">
     <section class="hero-content">
       <h1>Guía de Inversiones y Finanzas para Mexicanos</h1>
-      <p>Encuentra las mejores opciones de inversión de forma clara, segura y sin letras chiquita.</p>
+      <p>Encuentra las mejores opciones de inversión de forma clara, segura y sin letras chiquitas.</p>
       <p>¡Publicamos contenido nuevo todos los días!</p>
-      <!--<a href="#categorias" class="btn-primary">Ver comparaciones</a>-->
     </section>
   </main>
+
+  <section class="container" id="tabla-principal">
+    <h2 class="titulo-tabla">Mejores Tasas de Inversión en México</h2>
+    <p class="subtitulo-tabla">Comparamos las mejores opciones para que tu dinero crezca. Tasas actualizadas semanalmente.</p>
+    <div class="table-container">
+      <table class="sofipos-table">
+        <thead id="tabla-inversiones-head">
+          </thead>
+        <tbody id="tabla-inversiones-body">
+          </tbody>
+      </table>
+       <div class="table-footnotes">
+        <ol>
+          <li>Tasa del 15% en NU está topada a $25,000 MXN.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
 
   <section class="categories" id="categorias">
     <h2>Categorías destacadas</h2>
@@ -59,20 +73,6 @@
         <p>Compara los beneficios de los principales bancos en México.</p>
         <a href="bancos.html" class="btn-link">Explorar</a>
       </div>
-      <!--
-      <div class="card">
-        <i class="fas fa-wallet fa-2x"></i>
-        <h3>Tarjetas de crédito</h3>
-        <p>Conoce los beneficios de algunas tarjetas de crédito.</p>
-        <a href="tarjetas-credito.html" class="btn-link">Explorar</a>
-      </div>
-      <div class="card">
-        <i class="fas fa-file-lines fa-2x"></i>
-        <h3>Blog</h3>
-        <p>Experiencia mía sobre algunos productos.</p>
-        <a href="blog.html" class="btn-link">Explorar</a>
-      </div>
-      -->
     </div>
   </section>
 
@@ -87,5 +87,76 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    function aplicarColoresMaxMin() {
+      const tabla = document.querySelector('#tabla-principal .sofipos-table');
+      const filas = Array.from(tabla.querySelectorAll('tbody tr'));
+      if (filas.length === 0) return;
+      const numCols = tabla.querySelector('thead tr').children.length;
+
+      for (let col = 2; col < numCols; col++) { // Empezamos en 2 para saltar 'Instrumento' y 'Tipo'
+        const tasas = filas.map(fila => {
+          const celda = fila.children[col];
+          return {
+            celda,
+            valor: parseFloat(celda.getAttribute('data-rate'))
+          };
+        });
+
+        const valoresValidos = tasas
+          .map(t => t.valor)
+          .filter(v => !isNaN(v) && v !== null && v !== 0);
+        
+        if (valoresValidos.length === 0) continue;
+
+        const max = Math.max(...valoresValidos);
+        
+        tasas.forEach(({ celda, valor }) => {
+          if (!isNaN(valor) && valor === max) {
+            celda.style.backgroundColor = '#2e7d32';
+            celda.style.color = 'white';
+            celda.style.fontWeight = 'bold';
+          }
+        });
+      }
+    }
+
+    function cargarDatosInversiones() {
+      fetch('data/inversiones.json')
+        .then(res => res.json())
+        .then(data => {
+          const cuerpo = document.getElementById('tabla-inversiones-body');
+          const encabezado = document.getElementById('tabla-inversiones-head');
+          cuerpo.innerHTML = '';
+          encabezado.innerHTML = '';
+
+          const plazos = Object.keys(data[0].plazos);
+
+          let encabezadoHTML = '<tr><th>Instrumento</th><th>Tipo</th>';
+          plazos.forEach(plazo => {
+            encabezadoHTML += `<th>${plazo}</th>`;
+          });
+          encabezadoHTML += '</tr>';
+          encabezado.innerHTML = encabezadoHTML;
+
+          data.forEach(item => {
+            const fila = document.createElement('tr');
+            let htmlFila = `<td>${item.nombre}</td><td class="tipo-etiqueta tipo-${item.tipo.toLowerCase()}">${item.tipo}</td>`;
+            plazos.forEach(plazo => {
+              const tasa = item.plazos[plazo] ?? '';
+              const mostrarTasa = (tasa !== null && tasa !== undefined && tasa !== '') ? `${tasa}%` : 'No Disponible';
+              htmlFila += `<td data-rate="${tasa}">${mostrarTasa}</td>`;
+            });
+            fila.innerHTML = htmlFila;
+            cuerpo.appendChild(fila);
+          });
+
+          aplicarColoresMaxMin();
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', cargarDatosInversiones);
+  </script>
 </body>
 </html>

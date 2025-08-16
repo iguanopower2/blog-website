@@ -8,3 +8,7 @@ Tasas
 https://www.klar.mx/inversion
 https://supertasas.com
 https://www.kubofinanciero.com/ley-transparencia/kubo-plazofijo-tasas
+
+
+SEO
+https://search.google.com/search-console?utm_source=about-page&resource_id=https://deceroalinfinito.com/
