@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Calculadoras financieras para simular el rendimiento de tus inversiones y el costo de créditos hipotecarios en México.">
+  <title>Calculadoras Financieras - De Cero al Infinito</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- 1. Añadimos la librería para las gráficas -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="main-header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <i class="fa-solid fa-infinity fa-sm" style="color: #f5ec00;"></i> De Cero al Infinito
+      </a>
+      <nav class="nav-menu">
+        <a href="index.html">Inicio</a>
+        <a href="sofipos.html">SOFIPOs</a>
+        <a href="bancos.html">Bancos</a>
+        <a href="calculadoras.html" class="active">Calculadoras</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Calculadoras Financieras</h1>
+
+    <!-- Calculadora de Inversión -->
+    <section class="calculator-container">
+      <h2>Calculadora de Rendimientos (Interés Compuesto)</h2>
+      <form id="investment-form" class="calculator-form">
+        <div class="form-group">
+          <label for="investment-options">Elige una opción de inversión:</label>
+          <select id="investment-options"></select>
+        </div>
+        <div class="form-group">
+          <label for="initial-investment">Monto Inicial ($):</label>
+          <input type="number" id="initial-investment" value="10000" required>
+        </div>
+        <div class="form-group">
+          <label for="monthly-contribution">Aportación Mensual ($):</label>
+          <input type="number" id="monthly-contribution" value="1000">
+        </div>
+        <div class="form-group">
+          <label for="investment-period">Plazo (Años):</label>
+          <input type="number" id="investment-period" value="5" required>
+        </div>
+        <div class="form-group">
+          <label for="interest-rate">Tasa de Interés Anual (%):</label>
+          <input type="number" id="interest-rate" value="11.03" step="0.01" required>
+        </div>
+        <div class="form-group checkbox-group">
+          <label for="reinvest">Reinvertir Rendimientos:</label>
+          <input type="checkbox" id="reinvest" checked>
+        </div>
+        <button type="submit">Calcular</button>
+      </form>
+      <div class="results-container">
+        <h3>Resultados de Inversión</h3>
+        <p>Monto Final: <strong id="final-amount">$0.00</strong></p>
+        <p>Total Aportado: <strong id="total-contributed">$0.00</strong></p>
+        <p>Ganancia Total: <strong id="total-gain">$0.00</strong></p>
+      </div>
+      <!-- Aquí se dibujará la gráfica -->
+      <canvas id="investment-chart"></canvas>
+    </section>
+
+    <!-- Calculadora de Crédito Hipotecario -->
+    <section class="calculator-container">
+      <h2>Calculadora de Crédito Hipotecario</h2>
+      <form id="mortgage-form" class="calculator-form">
+        <div class="form-group">
+          <label for="loan-amount">Monto del Crédito ($):</label>
+          <input type="number" id="loan-amount" value="1500000" required>
+        </div>
+        <div class="form-group">
+          <label for="mortgage-rate">Tasa de Interés Anual (%):</label>
+          <input type="number" id="mortgage-rate" value="10.5" step="0.1" required>
+        </div>
+        <div class="form-group">
+          <label for="loan-term">Plazo (Años):</label>
+          <input type="number" id="loan-term" value="20" required>
+        </div>
+        <div class="form-group">
+            <label for="extra-payment">Aportación Adicional Mensual ($):</label>
+            <input type="number" id="extra-payment" value="0">
+        </div>
+        <button type="submit">Calcular</button>
+      </form>
+      <div class="results-container">
+        <h3>Resultados del Crédito</h3>
+        <p>Pago Mensual Mínimo: <strong id="monthly-payment">$0.00</strong></p>
+        <p>Total Pagado (sin aportaciones): <strong id="total-paid-no-extra">$0.00</strong></p>
+        <p>Pagarías tu crédito en: <strong id="new-loan-term">-- años</strong></p>
+        <p>Ahorro por aportaciones: <strong id="interest-saved">$0.00</strong></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+     <div class="container">
+      <p>&copy; 2025 De Cero al Infinito. Todos los derechos reservados.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-x-twitter"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="mailto:contacto@deceroalinfinito.com"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 2. Enlazamos nuestro nuevo archivo de JavaScript -->
+  <script src="calculadoras.js"></script>
+</body>
+</html>
