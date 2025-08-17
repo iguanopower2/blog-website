@@ -27,17 +27,38 @@
   <main class="container">
     <h1>Calculadoras Financieras</h1>
 
-    <!-- Calculadora de Inversión (sin cambios) -->
+    <!-- NUEVA: Calculadora de Rendimientos por Plazo -->
     <section class="calculator-container">
-      <h2>Calculadora de Rendimientos (Interés Compuesto)</h2>
-      <form id="investment-form" class="calculator-form">
+      <h2>Calculadora de Rendimientos por Plazo</h2>
+      <p class="section-description">Elige un producto y un monto para ver la ganancia exacta que obtendrías en cada uno de sus plazos disponibles.</p>
+      <form id="yield-form" class="calculator-form">
         <div class="form-group">
-          <label for="investment-options">Elige una opción de inversión:</label>
-          <select id="investment-options"></select>
+          <label for="yield-investment-options">Elige una opción de inversión:</label>
+          <select id="yield-investment-options"></select>
         </div>
         <div class="form-group">
-          <label for="initial-investment">Monto Inicial:</label>
+          <label for="yield-amount">Monto a Invertir:</label>
           <div class="input-with-symbol">
+            <input type="text" id="yield-amount" value="10,000" inputmode="numeric" required>
+          </div>
+        </div>
+      </form>
+      <div id="yield-results-container" class="results-container" style="display: none;">
+        <h3>Rendimientos Estimados</h3>
+        <table id="yield-results-table">
+            <!-- Resultados generados por JS -->
+        </table>
+      </div>
+    </section>
+
+    <!-- Calculadora de Interés Compuesto (Modificada) -->
+    <section class="calculator-container">
+      <h2>Calculadora de Interés Compuesto (Proyección a Futuro)</h2>
+      <p class="section-description">Proyecta el crecimiento de tu dinero a lo largo del tiempo con una tasa de interés anual fija.</p>
+      <form id="investment-form" class="calculator-form">
+        <div class="form-group">
+          <label for="initial-investment">Monto Inicial:</label>
+           <div class="input-with-symbol">
             <input type="text" id="initial-investment" value="10,000" inputmode="numeric" required>
           </div>
         </div>
@@ -53,16 +74,16 @@
         </div>
         <div class="form-group">
           <label for="interest-rate">Tasa de Interés Anual (%):</label>
-          <input type="number" id="interest-rate" value="11.03" step="any" required>
+          <input type="number" id="interest-rate" value="10.00" step="any" required>
         </div>
         <div class="form-group checkbox-group">
           <label for="reinvest">Reinvertir Rendimientos:</label>
           <input type="checkbox" id="reinvest" checked>
         </div>
-        <button type="submit">Calcular</button>
+        <button type="submit">Calcular Proyección</button>
       </form>
       <div class="results-container">
-        <h3>Resultados de Inversión</h3>
+        <h3>Resultados de la Proyección</h3>
         <p>Monto Final: <strong id="final-amount">$0.00</strong></p>
         <p>Total Aportado: <strong id="total-contributed">$0.00</strong></p>
         <p>Ganancia Total: <strong id="total-gain">$0.00</strong></p>
@@ -70,7 +91,7 @@
       <canvas id="investment-chart"></canvas>
     </section>
 
-    <!-- Calculadora de Crédito Hipotecario -->
+    <!-- Calculadora de Crédito Hipotecario (sin cambios en HTML) -->
     <section class="calculator-container">
       <h2>Calculadora de Crédito Hipotecario</h2>
       <form id="mortgage-form" class="calculator-form">
@@ -104,7 +125,6 @@
         <p>Pagarías tu crédito en: <strong id="new-loan-term">-- años</strong></p>
         <p>Ahorro por aportaciones: <strong id="interest-saved">$0.00</strong></p>
       </div>
-
       <div class="amortization-container">
         <h3>Tabla de Amortización</h3>
         <button id="export-csv-btn" class="btn-secondary">Exportar a CSV</button>
@@ -119,9 +139,7 @@
                         <th>Saldo Restante</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Filas generadas por JS -->
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
       </div>

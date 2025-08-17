@@ -1,21 +1,19 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // --- Almacén de datos ---
+    let investmentsData = [];
+
     // --- Elementos del DOM ---
     const investmentForm = document.getElementById('investment-form');
     const mortgageForm = document.getElementById('mortgage-form');
-    const investmentOptions = document.getElementById('investment-options');
-    const interestRateInput = document.getElementById('interest-rate');
+    const yieldForm = document.getElementById('yield-form');
+    const yieldOptions = document.getElementById('yield-investment-options');
+    const yieldAmountInput = document.getElementById('yield-amount');
     const exportCsvBtn = document.getElementById('export-csv-btn');
     let investmentChartInstance = null;
-    let amortizationData = []; // Guardar datos para exportar
+    let amortizationData = [];
 
-    // --- Lógica para formatear campos de dinero ---
-    const moneyInputs = [
-        document.getElementById('initial-investment'),
-        document.getElementById('monthly-contribution'),
-        document.getElementById('loan-amount'),
-        document.getElementById('extra-payment')
-    ];
-
+    // --- Lógica de Formateo de Moneda (Compartida) ---
+    const moneyInputs = document.querySelectorAll('input[inputmode="numeric"]');
     moneyInputs.forEach(input => {
         formatInputAsCurrency(input);
         input.addEventListener('input', (e) => formatInputAsCurrency(e.target));
@@ -24,56 +22,103 @@ document.addEventListener('DOMContentLoaded', function () {
     function formatInputAsCurrency(element) {
         let cursorPosition = element.selectionStart;
         let originalLength = element.value.length;
-        let originalCommas = (element.value.match(/,/g) || []).length;
-
-        let value = element.value;
-        let numberValue = value.replace(/[^0-9]/g, '');
-        if (numberValue === '') {
+        let value = element.value.replace(/[^0-9]/g, '');
+        
+        if (value === '') {
             element.value = '';
             return;
         }
-        let formattedValue = parseInt(numberValue, 10).toLocaleString('es-MX');
-        element.value = formattedValue;
-
+        
+        let formattedValue = parseInt(value, 10).toLocaleString('es-MX');
         let newLength = formattedValue.length;
-        let newCommas = (formattedValue.match(/,/g) || []).length;
-        let commaDifference = newCommas - originalCommas;
-
-        if (newLength > originalLength) {
-            element.selectionEnd = cursorPosition + commaDifference;
-        } else {
-            element.selectionEnd = cursorPosition - (originalCommas - newCommas);
-        }
+        
+        element.value = formattedValue;
+        
+        let newCursorPosition = cursorPosition + (newLength - originalLength);
+        element.setSelectionRange(newCursorPosition, newCursorPosition);
     }
 
     function getNumericValue(elementId) {
-        const element = document.getElementById(elementId);
-        const rawValue = element.value.replace(/,/g, '');
+        const rawValue = document.getElementById(elementId).value.replace(/,/g, '');
         return parseFloat(rawValue) || 0;
     }
+
+    function formatCurrency(value) {
+        return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(value);
+    }
+
+    // --- NUEVA: Lógica de la Calculadora de Rendimientos por Plazo ---
     
-    // --- Lógica de la Calculadora de Inversión ---
+    // Cargar datos y poblar el dropdown
     fetch('data/inversiones.json')
         .then(response => response.json())
         .then(data => {
-            investmentOptions.innerHTML = '<option value="">-- Elige una opción --</option>';
-            data.forEach(item => {
-                const rate = item.plazos['12 meses'] || item.plazos['Vista'] || 0;
-                if (rate > 0) {
-                    const option = document.createElement('option');
-                    option.value = rate;
-                    option.textContent = item.nombre;
-                    investmentOptions.appendChild(option);
-                }
+            investmentsData = data;
+            yieldOptions.innerHTML = '<option value="">-- Elige una opción --</option>';
+            investmentsData.forEach((item, index) => {
+                const option = document.createElement('option');
+                option.value = index; // Usar el índice como valor
+                option.textContent = item.nombre.replace(/<sup>.*<\/sup>/, ''); // Limpiar HTML del nombre
+                yieldOptions.appendChild(option);
             });
         });
 
-    investmentOptions.addEventListener('change', function() {
-        if (this.value) {
-            interestRateInput.value = this.value;
-        }
-    });
+    // Event listeners para calcular automáticamente
+    yieldOptions.addEventListener('change', calculateYields);
+    yieldAmountInput.addEventListener('input', calculateYields);
 
+    function calculateYields() {
+        const selectedIndex = yieldOptions.value;
+        const amount = getNumericValue('yield-amount');
+        const resultsContainer = document.getElementById('yield-results-container');
+        const resultsTable = document.getElementById('yield-results-table');
+
+        if (selectedIndex === "" || amount <= 0) {
+            resultsContainer.style.display = 'none';
+            return;
+        }
+
+        const selectedInvestment = investmentsData[selectedIndex];
+        resultsTable.innerHTML = `
+            <thead>
+                <tr>
+                    <th>Plazo</th>
+                    <th>Tasa Anual</th>
+                    <th>Ganancia Bruta</th>
+                </tr>
+            </thead>
+            <tbody></tbody>`;
+        const tableBody = resultsTable.querySelector('tbody');
+        
+        let hasResults = false;
+        // Mapeo de plazos a días para un cálculo más preciso
+        const plazoEnDias = {
+            'Vista': 1, '1 mes': 30, '3 meses': 90, '6 meses': 180, '12 meses': 365
+        };
+
+        for (const plazo in selectedInvestment.plazos) {
+            const rate = selectedInvestment.plazos[plazo];
+            if (rate !== null && rate > 0) {
+                hasResults = true;
+                const days = plazoEnDias[plazo] || 30; // Fallback a 30 días
+                const annualRate = rate / 100;
+                const dailyRate = annualRate / 365;
+                const earnings = amount * dailyRate * days;
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${plazo}</td>
+                    <td>${rate}%</td>
+                    <td><strong>${formatCurrency(earnings)}</strong></td>
+                `;
+                tableBody.appendChild(row);
+            }
+        }
+        
+        resultsContainer.style.display = hasResults ? 'block' : 'none';
+    }
+
+    // --- Lógica de la Calculadora de Interés Compuesto ---
     investmentForm.addEventListener('submit', function (e) {
         e.preventDefault();
         calculateInvestment();
@@ -83,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const initial = getNumericValue('initial-investment');
         const monthly = getNumericValue('monthly-contribution');
         const years = parseInt(document.getElementById('investment-period').value) || 0;
-        const rate = parseFloat(interestRateInput.value) / 100 || 0;
+        const rate = parseFloat(document.getElementById('interest-rate').value) / 100 || 0;
         const reinvest = document.getElementById('reinvest').checked;
 
         const monthlyRate = rate / 12;
@@ -95,15 +140,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         for (let i = 1; i <= months; i++) {
             let interestThisMonth = total * monthlyRate;
-            if (reinvest) {
-                total += interestThisMonth;
-            } else {
-                accumulatedInterest += interestThisMonth;
-            }
-            if (monthly > 0) {
-              total += monthly;
-              totalContributed += monthly;
-            }
+            if (reinvest) { total += interestThisMonth; } 
+            else { accumulatedInterest += interestThisMonth; }
+            if (monthly > 0) { total += monthly; totalContributed += monthly; }
             if (i % 12 === 0 || i === months) {
                 chartData.labels.push(`Año ${Math.ceil(i/12)}`);
                 chartData.principalData.push(totalContributed.toFixed(2));
@@ -123,10 +162,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // --- Lógica de la Calculadora de Crédito Hipotecario ---
-    mortgageForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        calculateMortgage();
-    });
+    mortgageForm.addEventListener('submit', function(e) { e.preventDefault(); calculateMortgage(); });
+    exportCsvBtn.addEventListener('click', exportAmortizationToCsv);
 
     function calculateMortgage() {
         const loanAmount = getNumericValue('loan-amount');
@@ -146,10 +183,8 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('total-paid-no-extra').textContent = formatCurrency(totalPaidNoExtra);
         document.getElementById('total-interest-paid').textContent = formatCurrency(totalInterestNoExtra);
 
-        let remainingBalance = loanAmount;
-        let monthsWithExtra = 0;
-        let totalInterestWithExtra = 0;
-        amortizationData = []; // Limpiar datos anteriores
+        let remainingBalance = loanAmount, monthsWithExtra = 0, totalInterestWithExtra = 0;
+        amortizationData = [];
         
         while (remainingBalance > 0 && monthsWithExtra < numberOfPayments * 2) {
             monthsWithExtra++;
@@ -167,11 +202,8 @@ document.addEventListener('DOMContentLoaded', function () {
             totalInterestWithExtra += interestComponent;
             
             amortizationData.push({
-                month: monthsWithExtra,
-                payment: totalMonthlyPayment,
-                interest: interestComponent,
-                principal: principalComponent,
-                balance: remainingBalance > 0 ? remainingBalance : 0
+                month: monthsWithExtra, payment: totalMonthlyPayment, interest: interestComponent,
+                principal: principalComponent, balance: remainingBalance > 0 ? remainingBalance : 0
             });
 
             if (remainingBalance <= 0) break;
@@ -194,54 +226,41 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function generateAmortizationTable(data) {
         const tableBody = document.querySelector("#amortization-table tbody");
-        tableBody.innerHTML = ""; // Limpiar tabla
+        tableBody.innerHTML = "";
         data.forEach(row => {
             const tr = document.createElement("tr");
             tr.innerHTML = `
-                <td>${row.month}</td>
-                <td>${formatCurrency(row.payment)}</td>
-                <td>${formatCurrency(row.interest)}</td>
-                <td>${formatCurrency(row.principal)}</td>
+                <td>${row.month}</td> <td>${formatCurrency(row.payment)}</td>
+                <td>${formatCurrency(row.interest)}</td> <td>${formatCurrency(row.principal)}</td>
                 <td>${formatCurrency(row.balance)}</td>
             `;
             tableBody.appendChild(tr);
         });
     }
 
-    exportCsvBtn.addEventListener('click', function() {
+    function exportAmortizationToCsv() {
         let csvContent = "data:text/csv;charset=utf-8,Mes,Pago,Interes,Capital,Saldo Restante\n";
         amortizationData.forEach(row => {
             let csvRow = [row.month, row.payment.toFixed(2), row.interest.toFixed(2), row.principal.toFixed(2), row.balance.toFixed(2)].join(",");
             csvContent += csvRow + "\n";
         });
-
-        const encodedUri = encodeURI(csvContent);
         const link = document.createElement("a");
-        link.setAttribute("href", encodedUri);
+        link.setAttribute("href", encodeURI(csvContent));
         link.setAttribute("download", "tabla_amortizacion.csv");
-        document.body.appendChild(link);
         link.click();
-        document.body.removeChild(link);
-    });
+    }
 
-    // --- Funciones de Utilidad y Gráfica ---
     function drawInvestmentChart(chartData) {
         const ctx = document.getElementById('investment-chart').getContext('2d');
-        if (investmentChartInstance) {
-            investmentChartInstance.destroy();
-        }
+        if (investmentChartInstance) { investmentChartInstance.destroy(); }
         investmentChartInstance = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: chartData.labels,
                 datasets: [{
-                    label: 'Total Aportado',
-                    data: chartData.principalData,
-                    backgroundColor: '#303f9f',
+                    label: 'Total Aportado', data: chartData.principalData, backgroundColor: '#303f9f',
                 }, {
-                    label: 'Ganancia',
-                    data: chartData.gainData,
-                    backgroundColor: '#2e7d32',
+                    label: 'Ganancia', data: chartData.gainData, backgroundColor: '#2e7d32',
                 }]
             },
             options: {
@@ -252,11 +271,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    function formatCurrency(value) {
-        return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(value);
-    }
-
-    // Disparar un cálculo inicial
+    // Disparar un cálculo inicial para las calculadoras
     calculateInvestment();
     calculateMortgage();
 });
