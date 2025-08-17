@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 hasResults = true;
                 const days = plazoEnDias[plazo] || 30; // Fallback a 30 días
                 const annualRate = rate / 100;
-                const dailyRate = annualRate / 365;
+                const dailyRate = annualRate / 360;
                 const earnings = amount * dailyRate * days;
 
                 const row = document.createElement('tr');
