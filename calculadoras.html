@@ -7,7 +7,6 @@
   <title>Calculadoras Financieras - De Cero al Infinito</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <!-- 1. Añadimos la librería para las gráficas -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -28,7 +27,6 @@
   <main class="container">
     <h1>Calculadoras Financieras</h1>
 
-    <!-- Calculadora de Inversión -->
     <section class="calculator-container">
       <h2>Calculadora de Rendimientos (Interés Compuesto)</h2>
       <form id="investment-form" class="calculator-form">
@@ -38,11 +36,11 @@
         </div>
         <div class="form-group">
           <label for="initial-investment">Monto Inicial ($):</label>
-          <input type="number" id="initial-investment" value="10000" required>
+          <input type="text" id="initial-investment" value="10,000" inputmode="numeric" pattern="[0-9,]*" required>
         </div>
         <div class="form-group">
           <label for="monthly-contribution">Aportación Mensual ($):</label>
-          <input type="number" id="monthly-contribution" value="1000">
+          <input type="text" id="monthly-contribution" value="1,000" inputmode="numeric" pattern="[0-9,]*">
         </div>
         <div class="form-group">
           <label for="investment-period">Plazo (Años):</label>
@@ -64,17 +62,15 @@
         <p>Total Aportado: <strong id="total-contributed">$0.00</strong></p>
         <p>Ganancia Total: <strong id="total-gain">$0.00</strong></p>
       </div>
-      <!-- Aquí se dibujará la gráfica -->
       <canvas id="investment-chart"></canvas>
     </section>
 
-    <!-- Calculadora de Crédito Hipotecario -->
     <section class="calculator-container">
       <h2>Calculadora de Crédito Hipotecario</h2>
       <form id="mortgage-form" class="calculator-form">
         <div class="form-group">
           <label for="loan-amount">Monto del Crédito ($):</label>
-          <input type="number" id="loan-amount" value="1500000" required>
+          <input type="text" id="loan-amount" value="1,500,000" inputmode="numeric" pattern="[0-9,]*" required>
         </div>
         <div class="form-group">
           <label for="mortgage-rate">Tasa de Interés Anual (%):</label>
@@ -86,7 +82,7 @@
         </div>
         <div class="form-group">
             <label for="extra-payment">Aportación Adicional Mensual ($):</label>
-            <input type="number" id="extra-payment" value="0">
+            <input type="text" id="extra-payment" value="0" inputmode="numeric" pattern="[0-9,]*">
         </div>
         <button type="submit">Calcular</button>
       </form>
@@ -112,7 +108,6 @@
     </div>
   </footer>
 
-  <!-- 2. Enlazamos nuestro nuevo archivo de JavaScript -->
   <script src="calculadoras.js"></script>
 </body>
 </html>

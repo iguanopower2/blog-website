@@ -6,15 +6,48 @@ document.addEventListener('DOMContentLoaded', function () {
     const interestRateInput = document.getElementById('interest-rate');
     let investmentChartInstance = null;
 
-    // --- Lógica de la Calculadora de Inversión ---
+    // --- NUEVO: Lógica para formatear campos de dinero ---
+    const moneyInputs = [
+        document.getElementById('initial-investment'),
+        document.getElementById('monthly-contribution'),
+        document.getElementById('loan-amount'),
+        document.getElementById('extra-payment')
+    ];
 
-    // Cargar opciones de inversión desde el JSON
+    moneyInputs.forEach(input => {
+        // Formatear el valor inicial al cargar la página
+        formatInputAsCurrency(input);
+        // Formatear mientras el usuario escribe
+        input.addEventListener('input', () => formatInputAsCurrency(input));
+    });
+
+    function formatInputAsCurrency(element) {
+        let value = element.value;
+        // 1. Quitar cualquier caracter que no sea un número
+        let numberValue = value.replace(/[^0-9]/g, '');
+        if (numberValue === '') {
+            element.value = '';
+            return;
+        }
+        // 2. Formatear el número con comas
+        let formattedValue = parseInt(numberValue, 10).toLocaleString('es-MX');
+        // 3. Poner el valor formateado de nuevo en el campo
+        element.value = formattedValue;
+    }
+
+    function getNumericValue(elementId) {
+        const element = document.getElementById(elementId);
+        // Quitar las comas para poder hacer cálculos
+        const rawValue = element.value.replace(/,/g, '');
+        return parseFloat(rawValue) || 0;
+    }
+    
+    // --- Lógica de la Calculadora de Inversión (actualizada) ---
     fetch('data/inversiones.json')
         .then(response => response.json())
         .then(data => {
             investmentOptions.innerHTML = '<option value="">-- Elige una opción --</option>';
             data.forEach(item => {
-                // Usamos el plazo a 12 meses como tasa de referencia, o a la vista si no existe
                 const rate = item.plazos['12 meses'] || item.plazos['Vista'] || 0;
                 if (rate > 0) {
                     const option = document.createElement('option');
@@ -25,22 +58,21 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-    // Actualizar la tasa de interés cuando se elige una opción
     investmentOptions.addEventListener('change', function() {
         if (this.value) {
             interestRateInput.value = this.value;
         }
     });
 
-    // Evento para calcular la inversión
     investmentForm.addEventListener('submit', function (e) {
         e.preventDefault();
         calculateInvestment();
     });
 
     function calculateInvestment() {
-        const initial = parseFloat(document.getElementById('initial-investment').value) || 0;
-        const monthly = parseFloat(document.getElementById('monthly-contribution').value) || 0;
+        // CAMBIO: Usar la nueva función para obtener valores numéricos
+        const initial = getNumericValue('initial-investment');
+        const monthly = getNumericValue('monthly-contribution');
         const years = parseInt(document.getElementById('investment-period').value) || 0;
         const rate = parseFloat(interestRateInput.value) / 100 || 0;
         const reinvest = document.getElementById('reinvest').checked;
@@ -50,23 +82,19 @@ document.addEventListener('DOMContentLoaded', function () {
         let total = initial;
         let totalContributed = initial;
         let accumulatedInterest = 0;
-
         const chartData = { labels: [], principalData: [], gainData: [] };
 
         for (let i = 1; i <= months; i++) {
             let interestThisMonth = total * monthlyRate;
-            
             if (reinvest) {
                 total += interestThisMonth;
             } else {
                 accumulatedInterest += interestThisMonth;
             }
-
             if (monthly > 0) {
               total += monthly;
               totalContributed += monthly;
             }
-
             if (i % 12 === 0 || i === months) {
                 chartData.labels.push(`Año ${Math.ceil(i/12)}`);
                 chartData.principalData.push(totalContributed.toFixed(2));
@@ -85,23 +113,23 @@ document.addEventListener('DOMContentLoaded', function () {
         drawInvestmentChart(chartData);
     }
 
-    // --- Lógica de la Calculadora de Crédito Hipotecario ---
+    // --- Lógica de la Calculadora de Crédito Hipotecario (actualizada) ---
     mortgageForm.addEventListener('submit', function(e) {
         e.preventDefault();
         calculateMortgage();
     });
 
     function calculateMortgage() {
-        const loanAmount = parseFloat(document.getElementById('loan-amount').value) || 0;
+        // CAMBIO: Usar la nueva función para obtener valores numéricos
+        const loanAmount = getNumericValue('loan-amount');
+        const extraPayment = getNumericValue('extra-payment');
         const annualRate = parseFloat(document.getElementById('mortgage-rate').value) / 100 || 0;
         const years = parseInt(document.getElementById('loan-term').value) || 0;
-        const extraPayment = parseFloat(document.getElementById('extra-payment').value) || 0;
         
         if (loanAmount <= 0 || annualRate <= 0 || years <= 0) return;
 
         const monthlyRate = annualRate / 12;
         const numberOfPayments = years * 12;
-
         const monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
         const totalPaidNoExtra = monthlyPayment * numberOfPayments;
         
@@ -113,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let monthsWithExtra = 0;
             let totalInterestWithExtra = 0;
             
-            while (remainingBalance > 0 && monthsWithExtra < numberOfPayments * 2) { // Safety break
+            while (remainingBalance > 0 && monthsWithExtra < numberOfPayments * 2) {
                 let interestComponent = remainingBalance * monthlyRate;
                 let principalComponent = (monthlyPayment + extraPayment) - interestComponent;
                 remainingBalance -= principalComponent;
@@ -124,7 +152,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const yearsWithExtra = Math.floor(monthsWithExtra / 12);
             const remainingMonths = monthsWithExtra % 12;
             document.getElementById('new-loan-term').textContent = `${yearsWithExtra} años y ${remainingMonths} meses`;
-
             const interestSaved = (totalPaidNoExtra - loanAmount) - totalInterestWithExtra;
             document.getElementById('interest-saved').textContent = formatCurrency(interestSaved);
         } else {
