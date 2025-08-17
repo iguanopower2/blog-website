@@ -4,9 +4,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const mortgageForm = document.getElementById('mortgage-form');
     const investmentOptions = document.getElementById('investment-options');
     const interestRateInput = document.getElementById('interest-rate');
+    const exportCsvBtn = document.getElementById('export-csv-btn');
     let investmentChartInstance = null;
+    let amortizationData = []; // Guardar datos para exportar
 
-    // --- NUEVO: Lógica para formatear campos de dinero ---
+    // --- Lógica para formatear campos de dinero ---
     const moneyInputs = [
         document.getElementById('initial-investment'),
         document.getElementById('monthly-contribution'),
@@ -15,34 +17,42 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
 
     moneyInputs.forEach(input => {
-        // Formatear el valor inicial al cargar la página
         formatInputAsCurrency(input);
-        // Formatear mientras el usuario escribe
-        input.addEventListener('input', () => formatInputAsCurrency(input));
+        input.addEventListener('input', (e) => formatInputAsCurrency(e.target));
     });
 
     function formatInputAsCurrency(element) {
+        let cursorPosition = element.selectionStart;
+        let originalLength = element.value.length;
+        let originalCommas = (element.value.match(/,/g) || []).length;
+
         let value = element.value;
-        // 1. Quitar cualquier caracter que no sea un número
         let numberValue = value.replace(/[^0-9]/g, '');
         if (numberValue === '') {
             element.value = '';
             return;
         }
-        // 2. Formatear el número con comas
         let formattedValue = parseInt(numberValue, 10).toLocaleString('es-MX');
-        // 3. Poner el valor formateado de nuevo en el campo
         element.value = formattedValue;
+
+        let newLength = formattedValue.length;
+        let newCommas = (formattedValue.match(/,/g) || []).length;
+        let commaDifference = newCommas - originalCommas;
+
+        if (newLength > originalLength) {
+            element.selectionEnd = cursorPosition + commaDifference;
+        } else {
+            element.selectionEnd = cursorPosition - (originalCommas - newCommas);
+        }
     }
 
     function getNumericValue(elementId) {
         const element = document.getElementById(elementId);
-        // Quitar las comas para poder hacer cálculos
         const rawValue = element.value.replace(/,/g, '');
         return parseFloat(rawValue) || 0;
     }
     
-    // --- Lógica de la Calculadora de Inversión (actualizada) ---
+    // --- Lógica de la Calculadora de Inversión ---
     fetch('data/inversiones.json')
         .then(response => response.json())
         .then(data => {
@@ -70,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function calculateInvestment() {
-        // CAMBIO: Usar la nueva función para obtener valores numéricos
         const initial = getNumericValue('initial-investment');
         const monthly = getNumericValue('monthly-contribution');
         const years = parseInt(document.getElementById('investment-period').value) || 0;
@@ -113,14 +122,13 @@ document.addEventListener('DOMContentLoaded', function () {
         drawInvestmentChart(chartData);
     }
 
-    // --- Lógica de la Calculadora de Crédito Hipotecario (actualizada) ---
+    // --- Lógica de la Calculadora de Crédito Hipotecario ---
     mortgageForm.addEventListener('submit', function(e) {
         e.preventDefault();
         calculateMortgage();
     });
 
     function calculateMortgage() {
-        // CAMBIO: Usar la nueva función para obtener valores numéricos
         const loanAmount = getNumericValue('loan-amount');
         const extraPayment = getNumericValue('extra-payment');
         const annualRate = parseFloat(document.getElementById('mortgage-rate').value) / 100 || 0;
@@ -132,33 +140,89 @@ document.addEventListener('DOMContentLoaded', function () {
         const numberOfPayments = years * 12;
         const monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
         const totalPaidNoExtra = monthlyPayment * numberOfPayments;
+        const totalInterestNoExtra = totalPaidNoExtra - loanAmount;
         
         document.getElementById('monthly-payment').textContent = formatCurrency(monthlyPayment);
         document.getElementById('total-paid-no-extra').textContent = formatCurrency(totalPaidNoExtra);
+        document.getElementById('total-interest-paid').textContent = formatCurrency(totalInterestNoExtra);
+
+        let remainingBalance = loanAmount;
+        let monthsWithExtra = 0;
+        let totalInterestWithExtra = 0;
+        amortizationData = []; // Limpiar datos anteriores
+        
+        while (remainingBalance > 0 && monthsWithExtra < numberOfPayments * 2) {
+            monthsWithExtra++;
+            let interestComponent = remainingBalance * monthlyRate;
+            let principalComponent = monthlyPayment - interestComponent;
+            let totalMonthlyPayment = monthlyPayment;
+
+            if (extraPayment > 0) {
+                let actualExtraPayment = Math.min(extraPayment, remainingBalance - principalComponent);
+                principalComponent += actualExtraPayment;
+                totalMonthlyPayment += actualExtraPayment;
+            }
+            
+            remainingBalance -= principalComponent;
+            totalInterestWithExtra += interestComponent;
+            
+            amortizationData.push({
+                month: monthsWithExtra,
+                payment: totalMonthlyPayment,
+                interest: interestComponent,
+                principal: principalComponent,
+                balance: remainingBalance > 0 ? remainingBalance : 0
+            });
+
+            if (remainingBalance <= 0) break;
+        }
+
+        generateAmortizationTable(amortizationData);
 
         if (extraPayment > 0) {
-            let remainingBalance = loanAmount;
-            let monthsWithExtra = 0;
-            let totalInterestWithExtra = 0;
-            
-            while (remainingBalance > 0 && monthsWithExtra < numberOfPayments * 2) {
-                let interestComponent = remainingBalance * monthlyRate;
-                let principalComponent = (monthlyPayment + extraPayment) - interestComponent;
-                remainingBalance -= principalComponent;
-                totalInterestWithExtra += interestComponent;
-                monthsWithExtra++;
-            }
-
             const yearsWithExtra = Math.floor(monthsWithExtra / 12);
             const remainingMonths = monthsWithExtra % 12;
             document.getElementById('new-loan-term').textContent = `${yearsWithExtra} años y ${remainingMonths} meses`;
-            const interestSaved = (totalPaidNoExtra - loanAmount) - totalInterestWithExtra;
+            const interestSaved = totalInterestNoExtra - totalInterestWithExtra;
             document.getElementById('interest-saved').textContent = formatCurrency(interestSaved);
+            document.getElementById('total-interest-paid').textContent = formatCurrency(totalInterestWithExtra);
         } else {
              document.getElementById('new-loan-term').textContent = `${years} años`;
              document.getElementById('interest-saved').textContent = formatCurrency(0);
         }
     }
+
+    function generateAmortizationTable(data) {
+        const tableBody = document.querySelector("#amortization-table tbody");
+        tableBody.innerHTML = ""; // Limpiar tabla
+        data.forEach(row => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td>${row.month}</td>
+                <td>${formatCurrency(row.payment)}</td>
+                <td>${formatCurrency(row.interest)}</td>
+                <td>${formatCurrency(row.principal)}</td>
+                <td>${formatCurrency(row.balance)}</td>
+            `;
+            tableBody.appendChild(tr);
+        });
+    }
+
+    exportCsvBtn.addEventListener('click', function() {
+        let csvContent = "data:text/csv;charset=utf-8,Mes,Pago,Interes,Capital,Saldo Restante\n";
+        amortizationData.forEach(row => {
+            let csvRow = [row.month, row.payment.toFixed(2), row.interest.toFixed(2), row.principal.toFixed(2), row.balance.toFixed(2)].join(",");
+            csvContent += csvRow + "\n";
+        });
+
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "tabla_amortizacion.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
 
     // --- Funciones de Utilidad y Gráfica ---
     function drawInvestmentChart(chartData) {
@@ -192,7 +256,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(value);
     }
 
-    // Disparar un cálculo inicial para que la página no se vea vacía
+    // Disparar un cálculo inicial
     calculateInvestment();
     calculateMortgage();
 });

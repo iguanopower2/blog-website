@@ -27,6 +27,7 @@
   <main class="container">
     <h1>Calculadoras Financieras</h1>
 
+    <!-- Calculadora de Inversión (sin cambios) -->
     <section class="calculator-container">
       <h2>Calculadora de Rendimientos (Interés Compuesto)</h2>
       <form id="investment-form" class="calculator-form">
@@ -35,12 +36,16 @@
           <select id="investment-options"></select>
         </div>
         <div class="form-group">
-          <label for="initial-investment">Monto Inicial ($):</label>
-          <input type="text" id="initial-investment" value="10,000" inputmode="numeric" pattern="[0-9,]*" required>
+          <label for="initial-investment">Monto Inicial:</label>
+          <div class="input-with-symbol">
+            <input type="text" id="initial-investment" value="10,000" inputmode="numeric" required>
+          </div>
         </div>
         <div class="form-group">
-          <label for="monthly-contribution">Aportación Mensual ($):</label>
-          <input type="text" id="monthly-contribution" value="1,000" inputmode="numeric" pattern="[0-9,]*">
+          <label for="monthly-contribution">Aportación Mensual:</label>
+          <div class="input-with-symbol">
+            <input type="text" id="monthly-contribution" value="1,000" inputmode="numeric">
+          </div>
         </div>
         <div class="form-group">
           <label for="investment-period">Plazo (Años):</label>
@@ -48,7 +53,7 @@
         </div>
         <div class="form-group">
           <label for="interest-rate">Tasa de Interés Anual (%):</label>
-          <input type="number" id="interest-rate" value="11.03" step="0.01" required>
+          <input type="number" id="interest-rate" value="11.03" step="any" required>
         </div>
         <div class="form-group checkbox-group">
           <label for="reinvest">Reinvertir Rendimientos:</label>
@@ -65,33 +70,60 @@
       <canvas id="investment-chart"></canvas>
     </section>
 
+    <!-- Calculadora de Crédito Hipotecario -->
     <section class="calculator-container">
       <h2>Calculadora de Crédito Hipotecario</h2>
       <form id="mortgage-form" class="calculator-form">
         <div class="form-group">
-          <label for="loan-amount">Monto del Crédito ($):</label>
-          <input type="text" id="loan-amount" value="1,500,000" inputmode="numeric" pattern="[0-9,]*" required>
+          <label for="loan-amount">Monto del Crédito:</label>
+          <div class="input-with-symbol">
+            <input type="text" id="loan-amount" value="1,500,000" inputmode="numeric" required>
+          </div>
         </div>
         <div class="form-group">
           <label for="mortgage-rate">Tasa de Interés Anual (%):</label>
-          <input type="number" id="mortgage-rate" value="10.5" step="0.1" required>
+          <input type="number" id="mortgage-rate" value="10.5" step="any" required>
         </div>
         <div class="form-group">
           <label for="loan-term">Plazo (Años):</label>
           <input type="number" id="loan-term" value="20" required>
         </div>
         <div class="form-group">
-            <label for="extra-payment">Aportación Adicional Mensual ($):</label>
-            <input type="text" id="extra-payment" value="0" inputmode="numeric" pattern="[0-9,]*">
+            <label for="extra-payment">Aportación Adicional Mensual:</label>
+            <div class="input-with-symbol">
+              <input type="text" id="extra-payment" value="0" inputmode="numeric">
+            </div>
         </div>
         <button type="submit">Calcular</button>
       </form>
       <div class="results-container">
         <h3>Resultados del Crédito</h3>
         <p>Pago Mensual Mínimo: <strong id="monthly-payment">$0.00</strong></p>
-        <p>Total Pagado (sin aportaciones): <strong id="total-paid-no-extra">$0.00</strong></p>
+        <p>Total de Intereses Pagados: <strong id="total-interest-paid">$0.00</strong></p>
+        <p>Total Pagado (Capital + Intereses): <strong id="total-paid-no-extra">$0.00</strong></p>
         <p>Pagarías tu crédito en: <strong id="new-loan-term">-- años</strong></p>
         <p>Ahorro por aportaciones: <strong id="interest-saved">$0.00</strong></p>
+      </div>
+
+      <div class="amortization-container">
+        <h3>Tabla de Amortización</h3>
+        <button id="export-csv-btn" class="btn-secondary">Exportar a CSV</button>
+        <div class="table-wrapper">
+            <table id="amortization-table">
+                <thead>
+                    <tr>
+                        <th>Mes</th>
+                        <th>Pago</th>
+                        <th>Interés</th>
+                        <th>Capital</th>
+                        <th>Saldo Restante</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Filas generadas por JS -->
+                </tbody>
+            </table>
+        </div>
       </div>
     </section>
   </main>
