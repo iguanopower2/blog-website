@@ -109,17 +109,26 @@
           .map(t => t.valor)
           .filter(v => !isNaN(v) && v !== null && v !== 0);
         
-        if (valoresValidos.length === 0) continue;
+        if (valoresValidos.length < 2) continue;
 
-        const max = Math.max(...valoresValidos);
-        
-        tasas.forEach(({ celda, valor }) => {
-          if (!isNaN(valor) && valor === max) {
-            celda.style.backgroundColor = '#2e7d32';
-            celda.style.color = 'white';
-            celda.style.fontWeight = 'bold';
-          }
-        });
+      const max = Math.max(...valoresValidos);
+      const min = Math.min(...valoresValidos);
+
+      tasas.forEach(({ celda, valor }) => {
+        if (!isNaN(valor) && valor === max) {
+          celda.style.backgroundColor = '#2e7d32';
+          celda.style.color = 'white';
+          celda.style.fontWeight = 'bold';
+        } else if (!isNaN(valor) && valor === min) {
+          celda.style.backgroundColor = '#b71c1c';
+          celda.style.color = 'white';
+          celda.style.fontWeight = 'bold';
+        } else {
+          celda.style.backgroundColor = '';
+          celda.style.color = '';
+          celda.style.fontWeight = '';
+        }
+      });
       }
     }
 

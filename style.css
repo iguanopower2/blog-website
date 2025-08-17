@@ -288,6 +288,7 @@ a {
 }
 
 .form-group input[type="number"],
+.form-group input[type="text"],
 .form-group select {
   padding: 10px;
   border: 1px solid #ccc;
