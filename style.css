@@ -1,4 +1,6 @@
-/* Global styles */
+/* ==========================================================================
+   1. ESTILOS GLOBALES Y TIPOGRAFÍA
+   ========================================================================== */
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -7,18 +9,24 @@ body {
   color: #222;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-/* Header */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.centered-text {
+  text-align: center;
+}
+
+/* ==========================================================================
+   2. ENCABEZADO Y NAVEGACIÓN
+   ========================================================================== */
 .main-header {
   background-color: #b30000;
   color: white;
@@ -42,11 +50,14 @@ a {
   font-weight: 500;
 }
 
-.nav-menu a:hover {
+.nav-menu a:hover,
+.nav-menu a.active {
   text-decoration: underline;
 }
 
-/* Hero Section */
+/* ==========================================================================
+   3. SECCIÓN HERO (BANNER PRINCIPAL)
+   ========================================================================== */
 .hero {
   background-color: #e63946;
   color: white;
@@ -64,20 +75,9 @@ a {
   margin-bottom: 30px;
 }
 
-.btn-primary {
-  display: inline-block;
-  padding: 12px 24px;
-  background-color: white;
-  color: #b30000;
-  font-weight: bold;
-  border-radius: 5px;
-}
-
-.btn-primary:hover {
-  background-color: #f2f2f2;
-}
-
-/* Categories */
+/* ==========================================================================
+   4. TARJETAS DE CATEGORÍAS (PÁGINA DE INICIO)
+   ========================================================================== */
 .categories {
   padding: 40px 20px;
   text-align: center;
@@ -115,45 +115,23 @@ a {
   color: #b30000;
 }
 
-.btn-link {
-  display: inline-block;
-  margin-top: 10px;
-  color: #b30000;
-  font-weight: bold;
-}
-
-/* Footer */
-.site-footer {
-  background-color: #222;
-  color: white;
-  padding: 20px 0;
-  text-align: center;
-}
-
-.social-links a {
-  margin: 0 10px;
-  color: white;
-  font-size: 1.2rem;
-}
-
-.social-links a:hover {
-  color: #e63946;
-}
-
-
-/* Table styles for SOFIPOs */
+/* ==========================================================================
+   5. TABLAS COMPARATIVAS (INICIO, SOFIPOS, BANCOS)
+   ========================================================================== */
 .table-container {
   overflow-x: auto;
   margin: 40px 0;
 }
 
+/* Estilo base para todas las tablas comparativas */
 .sofipos-table {
   width: 100%;
   border-collapse: collapse;
   text-align: center;
 }
 
-.sofipos-table th, .sofipos-table td {
+.sofipos-table th, 
+.sofipos-table td {
   padding: 12px 16px;
   border: 1px solid #ddd;
 }
@@ -167,47 +145,7 @@ a {
   transition: background-color 0.3s ease;
 }
 
-.table-footnotes {
-  margin-top: 15px; /* Añade un espacio entre la tabla y las notas */
-  font-size: 0.85em;  /* Reduce el tamaño de la fuente al 85% del texto normal. Puedes usar px también (ej. 12px) */
-  color: #666;       /* Un color de texto más suave para que no compita con los datos de la tabla */
-  padding-left: 20px; /* Añade un poco de sangría a las notas */
-}
-
-/* Opcional: Para ajustar el espaciado entre cada nota */
-.table-footnotes li {
-  margin-bottom: 5px;
-}
-
-
-.sofipo-info, .sofipo-highlights {
-  margin: 40px 0;
-  padding: 20px;
-  background-color: #fff6f6;
-  border: 1px solid #eee;
-  border-radius: 8px;
-}
-
-.sofipo-info ul {
-  padding-left: 20px;
-  list-style-type: disc;
-}
-
-.centered-text {
-  text-align: center;
-}
-
-.link-accent {
-  color: #e51e1e;            /* Azul acento */
-  text-decoration: underline;
-  font-weight: 700;
-  font-size: 1.2rem;
-  transition: color 0.3s ease;
-}
-.link-accent:hover {
-  color: #081cba;            /* Azul más oscuro al pasar el cursor */
-}
-/* --- Estilos para la nueva tabla en el Inicio --- */
+/* Títulos y subtítulos para la tabla de la página de inicio */
 #tabla-principal {
   padding-top: 40px;
   padding-bottom: 40px;
@@ -226,7 +164,7 @@ a {
   margin-bottom: 30px;
 }
 
-/* --- Etiquetas de Categoría --- */
+/* Etiquetas de tipo (SOFIPO, Banco, etc.) */
 .tipo-etiqueta {
   padding: 5px 10px;
   border-radius: 15px;
@@ -239,18 +177,42 @@ a {
   text-align: center;
 }
 
-.tipo-sofipo {
-  background-color: #d32f2f; /* Rojo */
+.tipo-sofipo { background-color: #d32f2f; } /* Rojo */
+.tipo-banco { background-color: #303f9f; } /* Azul */
+.tipo-gubernamental { background-color: #00796b; } /* Verde */
+
+/* Notas al pie de las tablas */
+.table-footnotes {
+  margin-top: 15px;
+  font-size: 0.85em;
+  color: #666;
+  padding-left: 20px;
+  text-align: left;
 }
 
-.tipo-banco {
-  background-color: #303f9f; /* Azul */
+.table-footnotes li {
+  margin-bottom: 5px;
 }
 
-.tipo-gubernamental {
-  background-color: #00796b; /* Verde */
+/* ==========================================================================
+   6. SECCIONES DE INFORMACIÓN (PÁGINAS SOFIPOS Y BANCOS)
+   ========================================================================== */
+.sofipo-info, .sofipo-highlights {
+  margin: 40px 0;
+  padding: 20px;
+  background-color: #fff6f6;
+  border: 1px solid #eee;
+  border-radius: 8px;
 }
-/* --- Estilos para las Calculadoras --- */
+
+.sofipo-info ul {
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+/* ==========================================================================
+   7. CALCULADORAS (PÁGINA DE CALCULADORAS)
+   ========================================================================== */
 .calculator-container {
   background-color: #ffffff;
   border: 1px solid #ddd;
@@ -264,10 +226,21 @@ a {
 .calculator-container h2 {
   text-align: center;
   margin-top: 0;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   color: #b30000;
 }
 
+.section-description {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: #666;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- Formularios de las calculadoras --- */
 .calculator-form {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -309,24 +282,25 @@ a {
     height: 20px;
 }
 
-.calculator-form button {
-  grid-column: 1 / -1; /* El botón ocupa todo el ancho */
-  padding: 12px 20px;
-  background-color: #b30000;
-  color: white;
-  font-size: 1.1rem;
+.input-with-symbol {
+  position: relative;
+}
+
+.input-with-symbol::before {
+  content: '$';
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #555;
   font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  margin-top: 10px;
 }
 
-.calculator-form button:hover {
-  background-color: #e63946;
+.input-with-symbol input[type="text"] {
+  padding-left: 25px;
 }
 
+/* --- Contenedores de resultados --- */
 .results-container {
   background-color: #f8f9fa;
   border-radius: 8px;
@@ -352,123 +326,16 @@ a {
     margin-top: 30px;
     max-height: 400px;
 }
-/* --- Estilos para Símbolo de Moneda en Inputs --- */
-.input-with-symbol {
-  position: relative;
-}
 
-.input-with-symbol::before {
-  content: '$';
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #555;
-  font-weight: bold;
-}
-
-.input-with-symbol input[type="text"] {
-  padding-left: 25px; /* Espacio para el símbolo $ */
-}
-
-/* --- Estilos para Tabla de Amortización --- */
-.amortization-container {
-  margin-top: 40px;
-  text-align: center;
-}
-.amortization-container h3 {
-    margin-bottom: 20px;
-}
-
-.btn-secondary {
-    padding: 10px 20px;
-    background-color: #6c757d;
-    color: white;
-    font-size: 1rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    margin-bottom: 20px;
-}
-
-.btn-secondary:hover {
-    background-color: #5a6268;
-}
-
-.table-wrapper {
-    max-height: 400px;
-    overflow-y: auto;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
-
-#amortization-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: center;
-}
-
-#amortization-table th, 
-#amortization-table td {
-    padding: 12px 16px;
-    border-bottom: 1px solid #ddd;
-}
-
-#amortization-table th {
-    background-color: #f8f9fa;
-    font-weight: bold;
-    position: sticky;
-    top: 0;
-}
-
-#amortization-table tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
-}
-
-#amortization-table tbody tr:hover {
-    background-color: #e9ecef;
-}
-/* --- Estilos para Símbolo de Moneda en Inputs --- */
-.input-with-symbol {
-  position: relative;
-}
-
-.input-with-symbol::before {
-  content: '$';
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #555;
-  font-weight: bold;
-}
-
-.input-with-symbol input[type="text"] {
-  padding-left: 25px; /* Espacio para el símbolo $ */
-}
-
-/* --- Estilos para la descripción de la sección de la calculadora --- */
-.section-description {
-    text-align: center;
-    margin-top: -15px;
-    margin-bottom: 25px;
-    color: #666;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-
-/* --- Estilos para la nueva tabla de rendimientos --- */
+/* --- Tabla de Rendimientos (Calculadora) --- */
 #yield-results-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
 }
 
-#yield-results-table th, #yield-results-table td {
+#yield-results-table th, 
+#yield-results-table td {
     padding: 12px;
     border-bottom: 1px solid #eee;
     text-align: left;
@@ -491,31 +358,13 @@ a {
     background-color: #e9ecef;
 }
 
-
-/* --- Estilos para Tabla de Amortización --- */
+/* --- Tabla de Amortización (Calculadora) --- */
 .amortization-container {
   margin-top: 40px;
   text-align: center;
 }
 .amortization-container h3 {
     margin-bottom: 20px;
-}
-
-.btn-secondary {
-    padding: 10px 20px;
-    background-color: #6c757d;
-    color: white;
-    font-size: 1rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    margin-bottom: 20px;
-}
-
-.btn-secondary:hover {
-    background-color: #5a6268;
 }
 
 .table-wrapper {
@@ -550,4 +399,82 @@ a {
 
 #amortization-table tbody tr:hover {
     background-color: #e9ecef;
+}
+
+/* ==========================================================================
+   8. BOTONES Y ENLACES
+   ========================================================================== */
+.btn-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: #b30000;
+  font-weight: bold;
+}
+
+.link-accent {
+  color: #e51e1e;
+  text-decoration: underline;
+  font-weight: 700;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+.link-accent:hover {
+  color: #081cba;
+}
+
+/* Botón principal de los formularios */
+.calculator-form button {
+  grid-column: 1 / -1;
+  padding: 12px 20px;
+  background-color: #b30000;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 10px;
+}
+
+.calculator-form button:hover {
+  background-color: #e63946;
+}
+
+/* Botón secundario (Exportar CSV) */
+.btn-secondary {
+    padding: 10px 20px;
+    background-color: #6c757d;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-bottom: 20px;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* ==========================================================================
+   9. PIE DE PÁGINA
+   ========================================================================== */
+.site-footer {
+  background-color: #222;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.social-links a {
+  margin: 0 10px;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.social-links a:hover {
+  color: #e63946;
 }
