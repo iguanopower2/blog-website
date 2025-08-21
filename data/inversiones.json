@@ -21,7 +21,7 @@
   },
   {
     "nombre": "Mercado Pago<sup>(3)</sup>",
-    "tipo": "SOFIPO",
+    "tipo": "Otro",
     "plazos": { "Vista": 14, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null }
   },
     {
