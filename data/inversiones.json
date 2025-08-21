@@ -7,27 +7,37 @@
   {
     "nombre": "NU<sup>(1)</sup>",
     "tipo": "SOFIPO",
-    "plazos": { "Vista": 15, "1 mes": 8.10, "3 meses": 8.20, "6 meses": 8.30, "12 meses": null }
+    "plazos": { "Vista": 15, "1 mes": 7.85, "3 meses": 7.95, "6 meses": 8.05, "12 meses": null }
   },
   {
-    "nombre": "Finsus",
+    "nombre": "Finsus<sup>(2)</sup>",
     "tipo": "SOFIPO",
-    "plazos": { "Vista": 8.59, "1 mes": 8.59, "3 meses": 9.19, "6 meses": 9.41, "12 meses": 10.59 }
+    "plazos": { "Vista": 8.19, "1 mes": 8.19, "3 meses": 8.69, "6 meses": 8.89, "12 meses": 10.09 }
   },
   {
     "nombre": "SuperTasas",
     "tipo": "SOFIPO",
-    "plazos": { "Vista": 7.7, "1 mes": 7.7, "3 meses": 8, "6 meses": 8.5, "12 meses": 9 }
+    "plazos": { "Vista": 7.7, "1 mes": 7.7, "3 meses": 8, "6 meses": 8.5, "12 meses": 9.5 }
+  },
+  {
+    "nombre": "Mercado Pago<sup>(3)</sup>",
+    "tipo": "SOFIPO",
+    "plazos": { "Vista": 14, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null }
   },
     {
     "nombre": "Mifel (cuenta digital)",
     "tipo": "Banco",
-    "plazos": { "Vista": 10, "1 mes": 5.25, "3 meses": 8, "6 meses": 7.95, "12 meses": 7.9 }
+    "plazos": { "Vista": 10, "1 mes": 5.25, "3 meses": 7.75, "6 meses": 7.7, "12 meses": 7.65 }
+  },
+  {
+    "nombre": "Openbank",
+    "tipo": "Banco",
+    "plazos": { "Vista": 10, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null }
   },
   {
     "nombre": "Banco Covalto",
     "tipo": "Banco",
-    "plazos": { "Vista": 10, "1 mes": 6.65, "3 meses": 7.9, "6 meses": 8.15, "12 meses": 10.5 }
+    "plazos": { "Vista": null, "1 mes": 6.40, "3 meses": 7.65, "6 meses": 8.05, "12 meses": 10 }
   },
   {
     "nombre": "Broxel",
@@ -35,9 +45,9 @@
     "plazos": { "Vista": 10, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null }
   },
   {
-    "nombre": "Ualá",
+    "nombre": "Ualá<sup>(4)</sup>",
     "tipo": "Banco",
-    "plazos": { "Vista": 9, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null }
+    "plazos": { "Vista": 16, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null }
   },
   {
     "nombre": "Fondeadora",
@@ -45,19 +55,19 @@
     "plazos": { "Vista": null, "1 mes": 9, "3 meses": null, "6 meses": null, "12 meses": null }
   },
   {
-    "nombre": "Kubo Financiero",
+    "nombre": "Kubo Financiero<sup>(5)</sup>",
     "tipo": "SOFIPO",
     "plazos": { "Vista": null, "1 mes": 7.5, "3 meses": 8.3, "6 meses": 8.5, "12 meses": 9.5 }
   },
    {
-    "nombre": "Stori",
+    "nombre": "Stori<sup>(6)</sup>",
     "tipo": "SOFIPO",
-    "plazos": { "Vista": 8, "1 mes": 7.77, "3 meses": 7.96, "6 meses": 7.36, "12 meses": 7 }
+    "plazos": { "Vista": 7.72, "1 mes": 7.77, "3 meses": 7.96, "6 meses": 7.36, "12 meses": 7 }
   },
   {
     "nombre": "BIM",
     "tipo": "Banco",
-    "plazos": { "Vista": null, "1 mes": 7, "3 meses": 7, "6 meses": 7, "12 meses": 7 }
+    "plazos": { "Vista": null, "1 mes": 6.5, "3 meses": 6.6, "6 meses": 7, "12 meses": 7 }
   },
     {
     "nombre": "Klar",
@@ -75,12 +85,7 @@
     "plazos": { "Vista": null, "1 mes": 2.8, "3 meses": 2.85, "6 meses": 2.95, "12 meses": null }
   },
   {
-    "nombre": "Openbank",
-    "tipo": "Banco",
-    "plazos": { "Vista": 10, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null }
-  },
-  {
-    "nombre": "Cetes Directo",
+    "nombre": "Cetes Directo<sup>(7)</sup>",
     "tipo": "Gubernamental",
     "plazos": { "Vista": null, "1 mes": 7.38, "3 meses": 7.69, "6 meses": 7.78, "12 meses": 8.04 }
   }

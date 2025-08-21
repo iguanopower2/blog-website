@@ -180,6 +180,7 @@ a {
 .tipo-sofipo { background-color: #d32f2f; } /* Rojo */
 .tipo-banco { background-color: #303f9f; } /* Azul */
 .tipo-gubernamental { background-color: #00796b; } /* Verde */
+.tipo-otro { background-color: #f57c00; } /* Naranja */
 
 /* Notas al pie de las tablas */
 .table-footnotes {
