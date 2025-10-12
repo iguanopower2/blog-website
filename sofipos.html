@@ -161,7 +161,7 @@
     }
   }
 
-  function cargarDatosSofipos() {
+    function cargarDatosSofipos() {
     fetch('data/inversiones.json')
       .then(res => res.json())
       .then(fullData => {
@@ -176,29 +176,32 @@
 
         const plazos = Object.keys(data[0].plazos);
 
+        // ✅ Agregamos columnas fijas para NICAP e IMOR
         let encabezadoHTML = '<tr><th>SOFIPO</th>';
-        encabezadoHTML += '<th>NICAP (%)</th><th>IMOR (%)</th></tr>';
         plazos.forEach(plazo => {
           encabezadoHTML += `<th>${plazo}</th>`;
         });
-        encabezadoHTML += '</tr>';
+        encabezadoHTML += '<th>NICAP (%)</th><th>IMOR (%)</th></tr>';
         encabezado.innerHTML = encabezadoHTML;
 
         data.forEach(sofipo => {
           const fila = document.createElement('tr');
           let htmlFila = `<td>${sofipo.nombre}</td>`;
 
-          const n = sofipo.NICAP;
-          htmlFila += `<td data-rate="${n ?? ''}">${n ? n.toFixed(2) + '%' : 'N/A'}</td>`;
-
-          const i = sofipo.IMOR;
-          htmlFila += `<td data-rate="${i ?? ''}">${i ? i.toFixed(2) + '%' : 'N/A'}</td>`;
-
           plazos.forEach(plazo => {
             const tasa = sofipo.plazos[plazo] ?? '';
             const mostrarTasa = (tasa !== null && tasa !== undefined && tasa !== '') ? `${tasa}%` : 'No Disponible';
             htmlFila += `<td data-rate="${tasa}">${mostrarTasa}</td>`;
           });
+
+          // ✅ Agregar NICAP
+          const n = sofipo.NICAP;
+          htmlFila += `<td data-rate="${n ?? ''}">${n ? n.toFixed(2) + '%' : 'N/A'}</td>`;
+
+          // ✅ Agregar IMOR (Cartera vencida)
+          const i = sofipo.IMOR;
+          htmlFila += `<td data-rate="${i ?? ''}">${i ? i.toFixed(2) + '%' : 'N/A'}</td>`;
+
           fila.innerHTML = htmlFila;
           cuerpo.appendChild(fila);
         });
@@ -206,6 +209,8 @@
         aplicarColoresMaxMin();
       });
   }
+
+
 
   document.addEventListener('DOMContentLoaded', cargarDatosSofipos);
 </script>
