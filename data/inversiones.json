@@ -2,32 +2,41 @@
   {
     "nombre": "Didi Cuenta",
     "tipo": "SOFIPO",
-    "plazos": { "Vista": 15, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null }
+    "plazos": { "Vista": 15, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null },
+    "NICAP": 3565.62,
+    "IMOR": 30.28
   },
   {
     "nombre": "NU<sup>(1)</sup>",
     "tipo": "SOFIPO",
-    "plazos": { "Vista": 15, "1 mes": 7.85, "3 meses": 7.95, "6 meses": 8.05, "12 meses": null }
+    "plazos": { "Vista": 15, "1 mes": 7.6, "3 meses": 7.7, "6 meses": 7.8, "12 meses": null },
+    "NICAP": 192.12,
+    "IMOR": 7.02
   },
   {
     "nombre": "Finsus<sup>(2)</sup>",
     "tipo": "SOFIPO",
-    "plazos": { "Vista": 8.19, "1 mes": 8.19, "3 meses": 8.69, "6 meses": 8.89, "12 meses": 10.09 }
+    "plazos": { "Vista": 8.19, "1 mes": 8.09, "3 meses": 8.39, "6 meses": 8.59, "12 meses": 10.09 },
+    "NICAP": 138.79,
+    "IMOR": 1.82
+
   },
   {
     "nombre": "SuperTasas",
     "tipo": "SOFIPO",
-    "plazos": { "Vista": 7.7, "1 mes": 7.7, "3 meses": 8, "6 meses": 8.5, "12 meses": 9.5 }
+    "plazos": { "Vista": 7.3, "1 mes": 7.4, "3 meses": 7.5, "6 meses": 8, "12 meses": 8.75 },
+    "NICAP": 430.32,
+    "IMOR": 2.33
   },
   {
     "nombre": "Mercado Pago<sup>(3)</sup>",
     "tipo": "Otro",
-    "plazos": { "Vista": 14, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null }
+    "plazos": { "Vista": 13, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null }
   },
     {
     "nombre": "Mifel (cuenta digital)",
     "tipo": "Banco",
-    "plazos": { "Vista": 10, "1 mes": 5.25, "3 meses": 7.75, "6 meses": 7.7, "12 meses": 7.65 }
+    "plazos": { "Vista": 10, "1 mes": 5.25, "3 meses": 7.75, "6 meses": 7.5, "12 meses": 7.6 }
   },
   {
     "nombre": "Openbank",
@@ -37,47 +46,52 @@
   {
     "nombre": "Banco Covalto",
     "tipo": "Banco",
-    "plazos": { "Vista": null, "1 mes": 6.40, "3 meses": 7.65, "6 meses": 8.05, "12 meses": 10 }
-  },
-  {
-    "nombre": "Broxel",
-    "tipo": "SOFIPO",
-    "plazos": { "Vista": 10, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null }
+    "plazos": { "Vista": null, "1 mes": 6.33, "3 meses": 7.61, "6 meses": 7.79, "12 meses": 9.75 }
   },
   {
     "nombre": "Ualá<sup>(4)</sup>",
     "tipo": "Banco",
-    "plazos": { "Vista": 16, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null }
+    "plazos": { "Vista": 16, "1 mes": 7.9, "3 meses": 8, "6 meses": 8.1, "12 meses": 8.15 }
   },
   {
     "nombre": "Fondeadora",
     "tipo": "SOFIPO",
-    "plazos": { "Vista": null, "1 mes": 9, "3 meses": null, "6 meses": null, "12 meses": null }
+    "plazos": { "Vista": null, "1 mes": 9, "3 meses": null, "6 meses": null, "12 meses": null },
+    "NICAP": 213.65,
+    "IMOR": 14.67
   },
   {
     "nombre": "Kubo Financiero<sup>(5)</sup>",
     "tipo": "SOFIPO",
-    "plazos": { "Vista": null, "1 mes": 7.5, "3 meses": 8.3, "6 meses": 8.5, "12 meses": 9.5 }
+    "plazos": { "Vista": null, "1 mes": 7.5, "3 meses": 8.3, "6 meses": 8.5, "12 meses": 9.5 },
+    "NICAP": 132.47,
+    "IMOR": 17.35
   },
    {
     "nombre": "Stori<sup>(6)</sup>",
     "tipo": "SOFIPO",
-    "plazos": { "Vista": 7.72, "1 mes": 7.77, "3 meses": 7.96, "6 meses": 7.36, "12 meses": 7 }
+    "plazos": { "Vista": 7.72, "1 mes": 7.77, "3 meses": 7.96, "6 meses": 7.36, "12 meses": 7 },
+    "NICAP": 140.99,
+    "IMOR": 12.22
   },
   {
     "nombre": "BIM",
     "tipo": "Banco",
-    "plazos": { "Vista": null, "1 mes": 6.5, "3 meses": 6.6, "6 meses": 7, "12 meses": 7 }
+    "plazos": { "Vista": null, "1 mes": 6.38, "3 meses": 6.45, "6 meses": 6.81, "12 meses": 6.7 }
   },
     {
     "nombre": "Klar",
     "tipo": "SOFIPO",
-    "plazos": { "Vista": 3, "1 mes": 6.2, "3 meses": 6.3, "6 meses": 6.4, "12 meses": 6.5 }
+    "plazos": { "Vista": 3, "1 mes": 6.2, "3 meses": 6.3, "6 meses": 6.4, "12 meses": 6.5 },
+    "NICAP": 149.3,
+    "IMOR": 12.91
   },
   {
     "nombre": "Klar Plus y Platino",
     "tipo": "SOFIPO",
-    "plazos": { "Vista": 5, "1 mes": 8.2, "3 meses": 8.3, "6 meses": 8.4, "12 meses": 8.5 }
+    "plazos": { "Vista": 5, "1 mes": 8.2, "3 meses": 8.3, "6 meses": 8.4, "12 meses": 8.5 },
+    "NICAP": 149.3,
+    "IMOR": 12.91
   },
    {
     "nombre": "Pagaré digital BBVA",
@@ -87,6 +101,6 @@
   {
     "nombre": "Cetes Directo<sup>(7)</sup>",
     "tipo": "Gubernamental",
-    "plazos": { "Vista": null, "1 mes": 7.38, "3 meses": 7.69, "6 meses": 7.78, "12 meses": 8.04 }
+    "plazos": { "Vista": null, "1 mes": 7.47, "3 meses": 7.44, "6 meses": 7.48, "12 meses": 7.63 }
   }
 ]

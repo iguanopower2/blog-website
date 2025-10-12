@@ -4,10 +4,17 @@ https://www.condusef.gob.mx/index.php?p=info-sofipo&ide=6
 https://webapps.condusef.gob.mx/SIPRES/jsp/pub/index.jsp#3179
 
 
-Tasas
+Tasas:
+Klar
 https://www.klar.mx/inversion
+Supertasas
 https://supertasas.com
+Kubo
 https://www.kubofinanciero.com/ley-transparencia/kubo-plazofijo-tasas
+Covalto:
+https://www.covalto.com/simulador-de-inversion/
+Fondeadora:
+https://personal.fondeadora.com/#1
 
 
 SEO
