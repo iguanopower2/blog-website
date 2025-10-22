@@ -10,21 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <header class="main-header">
-    <div class="container">
-      <a href="index.html" class="logo">
-        <i class="fa-solid fa-infinity fa-sm" style="color: #f5ec00;"></i> De Cero al Infinito
-      </a>
-      <nav class="nav-menu">
-        <a href="index.html">Inicio</a>
-        <a href="sofipos.html">SOFIPOs</a>
-        <a href="bancos.html">Bancos</a>
-        <a href="calculadoras.html" class="active">Calculadoras</a>
-        <a href="blog.html">Blog</a>
-      </nav>
-    </div>
-  </header>
-
+  <div id="header-container"></div>
   <main class="container">
     <h1>Calculadoras Financieras</h1>
 
@@ -146,19 +132,13 @@
       </div>
     </section>
   </main>
-
-  <footer class="site-footer">
-     <div class="container">
-      <p>&copy; 2025 De Cero al Infinito. Todos los derechos reservados.</p>
-      <div class="social-links">
-        <a href="#"><i class="fab fa-youtube"></i></a>
-        <a href="#"><i class="fab fa-x-twitter"></i></a>
-        <a href="#"><i class="fab fa-github"></i></a>
-        <a href="mailto:contacto@deceroalinfinito.com"><i class="fas fa-envelope"></i></a>
-      </div>
-    </div>
-  </footer>
-
+  <div id="footer-container"></div>
+  <script src="js/funciones.js"></script>
   <script src="calculadoras.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      funciones.cargarComponentes();
+    });
+  </script>
 </body>
 </html>

@@ -204,4 +204,36 @@ const funciones = {
 
         console.log("🎨 Colores aplicados solo a las columnas definidas en 'modos'.");
     },
+    // ========================================================
+    // 🧱 11. Cargar componentes comunes (header y footer)
+    // ========================================================
+    cargarComponentes() {
+        const headerContainer = document.createElement("div");
+        const footerContainer = document.createElement("div");
+
+        headerContainer.id = "header-container";
+        footerContainer.id = "footer-container";
+
+        // Insertar header antes del body content
+        document.body.prepend(headerContainer);
+        document.body.appendChild(footerContainer);
+
+        // Cargar header
+        fetch("components/header.html")
+            .then(res => res.text())
+            .then(html => {
+                headerContainer.innerHTML = html;
+            })
+            .catch(err => console.error("Error cargando header:", err));
+
+        // Cargar footer
+        fetch("components/footer.html")
+            .then(res => res.text())
+            .then(html => {
+                footerContainer.innerHTML = html;
+            })
+            .catch(err => console.error("Error cargando footer:", err));
+    },
+
+
 };

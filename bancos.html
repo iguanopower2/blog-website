@@ -9,20 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-  <header class="main-header">
-    <div class="container">
-      <a href="index.html" class="logo">
-        <i class="fa-solid fa-infinity fa-sm" style="color: #f5ec00;"></i> De Cero al Infinito
-      </a>
-      <nav class="nav-menu">
-        <a href="index.html">Inicio</a>
-        <a href="sofipos.html">SOFIPOs</a>
-        <a href="bancos.html" class="active">Bancos</a>
-        <a href="calculadoras.html">Calculadoras</a>
-        <a href="blog.html">Blog</a>
-      </nav>
-    </div>
-  </header>
+  <div id="header-container"></div>
 
   <main class="container">
     <h1>Comparativa de bancos por plazo y rendimiento</h1>
@@ -78,102 +65,39 @@
     </section>
 
   </main>
+  <div id="footer-container"></div>
+  <script src="js/funciones.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        // 1️⃣ Cargar header y footer comunes
+        funciones.cargarComponentes();
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; 2025 De Cero al Infinito. Todos los derechos reservados.</p>
-      <div class="social-links">
-        <a href="#"><i class="fab fa-youtube"></i></a>
-        <a href="#"><i class="fab fa-x-twitter"></i></a>
-        <a href="#"><i class="fab fa-github"></i></a>
-        <a href="mailto:contacto@deceroalinfinito.com"><i class="fas fa-envelope"></i></a>
-      </div>
-    </div>
-  </footer>
+        // 2️⃣ Cargar y validar los datos
+        const data = await funciones.obtenerDatosJSON("data/inversiones.json");
+        if (!funciones.validarEstructuraBase(data)) return;
+        const bancos = funciones.filtrarPorTipo(data, "Banco");
 
-  <script>
-    function aplicarColoresMaxMinBancos() {
-      const tabla = document.querySelector('.sofipos-table');
-      const filas = Array.from(tabla.querySelectorAll('tbody tr'));
-      if (filas.length === 0) return;
-      const numCols = tabla.querySelector('thead tr').children.length;
-
-      for (let col = 1; col < numCols; col++) {
-        const tasas = filas.map(fila => {
-          const celda = fila.children[col];
-          return {
-            celda,
-            valor: parseFloat(celda.getAttribute('data-rate'))
-          };
+        // 3️⃣ Renderizar tabla principal
+        funciones.renderizarTablaGeneral({
+          data: bancos,
+          headId: "tabla-bancos-head",
+          bodyId: "tabla-bancos-body",
+          mostrarTipo: false,
+          mostrarNICAP: false,
+          mostrarIMOR: false
         });
 
-        const valoresValidos = tasas
-          .map(t => t.valor)
-          .filter(v => !isNaN(v) && v !== null && v !== 0);
+        // 4️⃣ Aplicar colores
+        const modos = {
+          Vista: "altoMejor",
+          "1 mes": "altoMejor",
+          "3 meses": "altoMejor",
+          "6 meses": "altoMejor",
+          "12 meses": "altoMejor"
+        };
 
-        if (valoresValidos.length < 2) continue;
-
-        const max = Math.max(...valoresValidos);
-        const min = Math.min(...valoresValidos);
-
-        tasas.forEach(({ celda, valor }) => {
-          if (!isNaN(valor) && valor === max) {
-            celda.style.backgroundColor = '#2e7d32';
-            celda.style.color = 'white';
-            celda.style.fontWeight = 'bold';
-          } else if (!isNaN(valor) && valor === min) {
-            celda.style.backgroundColor = '#b71c1c';
-            celda.style.color = 'white';
-            celda.style.fontWeight = 'bold';
-          } else {
-            celda.style.backgroundColor = '';
-            celda.style.color = '';
-            celda.style.fontWeight = '';
-          }
-        });
-      }
-    }
-
-    function cargarDatosBancos() {
-      fetch('data/inversiones.json')
-        .then(res => res.json())
-        .then(fullData => {
-
-          const data = fullData.filter(item => item.tipo === 'Banco');
-
-          const cuerpo = document.getElementById('tabla-bancos-body');
-          const encabezado = document.getElementById('tabla-bancos-head');
-          cuerpo.innerHTML = '';
-          encabezado.innerHTML = '';
-          
-          if (data.length === 0) return;
-
-          const plazos = Object.keys(data[0].plazos);
-
-          let headHTML = '<tr><th>Banco</th>';
-          plazos.forEach(plazo => {
-            headHTML += `<th>${plazo}</th>`;
-          });
-          headHTML += '</tr>';
-          encabezado.innerHTML = headHTML;
-
-          data.forEach(banco => {
-            const fila = document.createElement('tr');
-            let htmlFila = `<td>${banco.nombre}</td>`;
-            plazos.forEach(plazo => {
-              const tasa = banco.plazos[plazo] ?? '';
-              const mostrarTasa = (tasa !== null && tasa !== undefined && tasa !== '') ? `${tasa}%` : 'No Disponible';
-              htmlFila += `<td data-rate="${tasa}">${mostrarTasa}</td>`;
-            });
-            fila.innerHTML = htmlFila;
-            cuerpo.appendChild(fila);
-          });
-
-          aplicarColoresMaxMinBancos();
-        });
-    }
-
-    document.addEventListener('DOMContentLoaded', cargarDatosBancos);
-  </script>
+        funciones.aplicarColoresPorNombre(".sofipos-table", modos);
+      });
+    </script>
 </body>
 </html>

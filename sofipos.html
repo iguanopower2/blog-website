@@ -9,21 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-  <header class="main-header">
-    <div class="container">
-      <a href="index.html" class="logo">
-        <i class="fa-solid fa-infinity fa-sm" style="color: #f5ec00;"></i> De Cero al Infinito
-      </a>
-      <nav class="nav-menu">
-        <a href="index.html">Inicio</a>
-        <a href="sofipos.html" class="active">SOFIPOs</a>
-        <a href="bancos.html">Bancos</a>
-        <a href="calculadoras.html">Calculadoras</a>
-        <a href="blog.html">Blog</a>
-      </nav>
-    </div>
-  </header>
-
+  <div id="header-container"></div>
   <main class="container">
     <h1>Comparativa de SOFIPOs por Plazo y Rendimiento</h1>
     <p>Actualizamos periódicamente esta tabla con las SOFIPOs más grandes del país para ayudarte a comparar las mejores opciones de inversión por rendimiento y plazo.</p>
@@ -106,21 +92,12 @@
     </section>
 
   </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; 2025 De Cero al Infinito. Todos los derechos reservados.</p>
-      <div class="social-links">
-        <a href="#"><i class="fab fa-youtube"></i></a>
-        <a href="#"><i class="fab fa-x-twitter"></i></a>
-        <a href="#"><i class="fab fa-github"></i></a>
-        <a href="mailto:contacto@deceroalinfinito.com"><i class="fas fa-envelope"></i></a>
-      </div>
-    </div>
-  </footer>
+  <div id="footer-container"></div>
 <script src="js/funciones.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", async () => {
+    // 1️⃣ Cargar header y footer comunes
+    funciones.cargarComponentes();
     const data = await funciones.obtenerDatosJSON("data/inversiones.json");
     if (!funciones.validarEstructuraBase(data)) return;
 
