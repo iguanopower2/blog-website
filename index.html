@@ -96,84 +96,31 @@
     </div>
   </footer>
 
-  <script>
-    function aplicarColoresMaxMin() {
-      const tabla = document.querySelector('#tabla-principal .sofipos-table');
-      const filas = Array.from(tabla.querySelectorAll('tbody tr'));
-      if (filas.length === 0) return;
-      const numCols = tabla.querySelector('thead tr').children.length;
+  <script src="js/funciones.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", async () => {
+    const data = await funciones.obtenerDatosJSON("data/inversiones.json");
+    if (!funciones.validarEstructuraBase(data)) return;
 
-      for (let col = 2; col < numCols; col++) { // Empezamos en 2 para saltar 'Instrumento' y 'Tipo'
-        const tasas = filas.map(fila => {
-          const celda = fila.children[col];
-          return {
-            celda,
-            valor: parseFloat(celda.getAttribute('data-rate'))
-          };
-        });
+    funciones.renderizarTablaGeneral({
+      data,
+      headId: "tabla-inversiones-head",
+      bodyId: "tabla-inversiones-body",
+      mostrarTipo: true,     // mostramos tipo (SOFIPO, Banco, etc.)
+      mostrarNICAP: false,   // no mostramos NICAP
+      mostrarIMOR: false     // no mostramos IMOR
+    });
 
-        const valoresValidos = tasas
-          .map(t => t.valor)
-          .filter(v => !isNaN(v) && v !== null && v !== 0);
-        
-        if (valoresValidos.length < 2) continue;
+    const modos = {
+  Vista: "altoMejor",
+  "1 mes": "altoMejor",
+  "3 meses": "altoMejor",
+  "6 meses": "altoMejor",
+  "12 meses": "altoMejor"
+};
 
-      const max = Math.max(...valoresValidos);
-      const min = Math.min(...valoresValidos);
-
-      tasas.forEach(({ celda, valor }) => {
-        if (!isNaN(valor) && valor === max) {
-          celda.style.backgroundColor = '#2e7d32';
-          celda.style.color = 'white';
-          celda.style.fontWeight = 'bold';
-        } else if (!isNaN(valor) && valor === min) {
-          celda.style.backgroundColor = '#b71c1c';
-          celda.style.color = 'white';
-          celda.style.fontWeight = 'bold';
-        } else {
-          celda.style.backgroundColor = '';
-          celda.style.color = '';
-          celda.style.fontWeight = '';
-        }
-      });
-      }
-    }
-
-    function cargarDatosInversiones() {
-      fetch('data/inversiones.json')
-        .then(res => res.json())
-        .then(data => {
-          const cuerpo = document.getElementById('tabla-inversiones-body');
-          const encabezado = document.getElementById('tabla-inversiones-head');
-          cuerpo.innerHTML = '';
-          encabezado.innerHTML = '';
-
-          const plazos = Object.keys(data[0].plazos);
-
-          let encabezadoHTML = '<tr><th>Instrumento</th><th>Tipo</th>';
-          plazos.forEach(plazo => {
-            encabezadoHTML += `<th>${plazo}</th>`;
-          });
-          encabezadoHTML += '</tr>';
-          encabezado.innerHTML = encabezadoHTML;
-
-          data.forEach(item => {
-            const fila = document.createElement('tr');
-            let htmlFila = `<td>${item.nombre}</td><td class="tipo-etiqueta tipo-${item.tipo.toLowerCase()}">${item.tipo}</td>`;
-            plazos.forEach(plazo => {
-              const tasa = item.plazos[plazo] ?? '';
-              const mostrarTasa = (tasa !== null && tasa !== undefined && tasa !== '') ? `${tasa}%` : 'No Disponible';
-              htmlFila += `<td data-rate="${tasa}">${mostrarTasa}</td>`;
-            });
-            fila.innerHTML = htmlFila;
-            cuerpo.appendChild(fila);
-          });
-
-          aplicarColoresMaxMin();
-        });
-    }
-
-    document.addEventListener('DOMContentLoaded', cargarDatosInversiones);
-  </script>
+funciones.aplicarColoresPorNombre(".sofipos-table", modos);
+  });
+</script>
 </body>
 </html>

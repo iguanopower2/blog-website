@@ -1,0 +1,64 @@
+# ============================================================
+# EditorConfig para el proyecto "De Cero al Infinito"
+# Mantiene un formato consistente entre PyCharm, VS Code, etc.
+# ============================================================
+
+root = true
+
+# ----------------------------------------
+# 🔧 Configuración general (todos los archivos)
+# ----------------------------------------
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# ----------------------------------------
+# 🧱 Archivos HTML
+# ----------------------------------------
+[*.html]
+indent_style = space
+indent_size = 4
+max_line_length = off
+
+# ----------------------------------------
+# 🎨 Archivos CSS
+# ----------------------------------------
+[*.css]
+indent_style = space
+indent_size = 4
+
+# ----------------------------------------
+# ⚙️ Archivos JavaScript
+# ----------------------------------------
+[*.js]
+indent_style = space
+indent_size = 4
+quote_type = double
+max_line_length = off
+
+# ----------------------------------------
+# 🐍 Archivos Python
+# ----------------------------------------
+[*.py]
+indent_style = space
+indent_size = 4
+max_line_length = 100
+trim_trailing_whitespace = true
+
+# ----------------------------------------
+# 📝 Markdown (README, documentación)
+# ----------------------------------------
+[*.md]
+trim_trailing_whitespace = false
+insert_final_newline = true
+
+# ----------------------------------------
+# ⚙️ Archivos YAML o JSON
+# ----------------------------------------
+[*.{yml,yaml,json}]
+indent_style = space
+indent_size = 2

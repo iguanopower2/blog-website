@@ -1,0 +1,68 @@
+/* css/funciones.css - Estilos para las funcionalidades modulares */
+
+/* Notificaciones flotantes */
+.notificacion-flotante {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    border-radius: 6px;
+    color: white;
+    font-weight: 500;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    animation: slideInRight 0.3s ease-out;
+}
+
+.notificacion-flotante.info {
+    background-color: #2196F3;
+}
+
+.notificacion-flotante.error {
+    background-color: #f44336;
+}
+
+.notificacion-flotante.success {
+    background-color: #4CAF50;
+}
+
+.notificacion-flotante.warning {
+    background-color: #FF9800;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Estilos para tasas máximas y mínimas */
+.tasa-maxima {
+    background-color: #2e7d32 !important;
+    color: white !important;
+    font-weight: bold !important;
+}
+
+.tasa-minima {
+    background-color: #b71c1c !important;
+    color: white !important;
+    font-weight: bold !important;
+}
+
+/* Estados de carga */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.no-data {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+    font-style: italic;
+}
