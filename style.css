@@ -130,19 +130,34 @@ a {
   text-align: center;
 }
 
-.sofipos-table th, 
+/* ==== Estilos base de la tabla ==== */
+.sofipos-table th,
 .sofipos-table td {
-  padding: 12px 16px;
-  border: 1px solid #ddd;
+    padding: 12px 16px;
+    border: 1px solid #ddd;
 }
 
 .sofipos-table th {
-  background-color: #e0dba5;
-  font-weight: bold;
+    background-color: #e0dba5;
+    font-weight: bold;
 }
 
 .sofipos-table td {
-  transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease;
+}
+
+/* ==== Enlaces dentro de la tabla ==== */
+.sofipos-table td a {
+    color: #000000;               /* Azul moderno */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    font-weight: bold;
+}
+
+.sofipos-table td a:hover {
+    color: #f5ec00;               /* Dorado, combina con tu paleta */
+    text-decoration: underline;
 }
 
 /* Títulos y subtítulos para la tabla de la página de inicio */
@@ -335,7 +350,7 @@ a {
     margin-top: 15px;
 }
 
-#yield-results-table th, 
+#yield-results-table th,
 #yield-results-table td {
     padding: 12px;
     border-bottom: 1px solid #eee;
@@ -348,7 +363,7 @@ a {
     background-color: #f8f9fa;
 }
 
-#yield-results-table td:nth-child(2), 
+#yield-results-table td:nth-child(2),
 #yield-results-table th:nth-child(2),
 #yield-results-table td:nth-child(3),
 #yield-results-table th:nth-child(3) {
@@ -381,7 +396,7 @@ a {
     text-align: center;
 }
 
-#amortization-table th, 
+#amortization-table th,
 #amortization-table td {
     padding: 12px 16px;
     border-bottom: 1px solid #ddd;
@@ -458,6 +473,21 @@ a {
 
 .btn-secondary:hover {
     background-color: #5a6268;
+}
+
+/* Ícono de información en tasas especiales */
+.info-icon {
+    color: #fbc02d;              /* dorado visible */
+    margin-left: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    vertical-align: middle;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.info-icon:hover {
+    color: #b71c1c;              /* rojo al pasar el mouse */
+    transform: scale(1.2);       /* pequeño zoom */
 }
 
 /* ==========================================================================

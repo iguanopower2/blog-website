@@ -2,86 +2,128 @@
   {
     "nombre": "Didi Cuenta",
     "tipo": "SOFIPO",
+    "sitioweb": "https://web.didiglobal.com/mx/jpsofiexpress/didi-cuenta/",
     "plazos": { "Vista": 15, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null },
     "NICAP": 3565.62,
     "IMOR": 30.28
   },
   {
-    "nombre": "NU<sup>(1)</sup>",
+    "nombre": "NU",
     "tipo": "SOFIPO",
+    "sitioweb": "https://nu.com.mx",
     "plazos": { "Vista": 15, "1 mes": 7.6, "3 meses": 7.7, "6 meses": 7.8, "12 meses": null },
     "NICAP": 192.12,
-    "IMOR": 7.02
+    "IMOR": 7.02,
+    "notas": {
+      "Vista": "Tasa del 15% disponible al una compra al mes y topada hasta $25,000 MXN. Montos mayores ofrecen 7.5% de rendimiento"
+    }
   },
   {
-    "nombre": "Finsus<sup>(2)</sup>",
+    "nombre": "Finsus",
     "tipo": "SOFIPO",
+    "sitioweb": "https://finsus.mx",
     "plazos": { "Vista": 8.19, "1 mes": 8.09, "3 meses": 8.39, "6 meses": 8.59, "12 meses": 10.09 },
     "NICAP": 138.79,
-    "IMOR": 1.82
-
+    "IMOR": 1.82,
+    "notas": {
+      "Vista": "Los rendimientos de los apartados finsus+ (a la vista) se depositan de forma mensual."
+    }
   },
   {
     "nombre": "SuperTasas",
     "tipo": "SOFIPO",
+    "sitioweb": "https://supertasas.com",
     "plazos": { "Vista": 7.3, "1 mes": 7.4, "3 meses": 7.5, "6 meses": 8, "12 meses": 8.75 },
     "NICAP": 430.32,
     "IMOR": 2.33
   },
   {
-    "nombre": "Mercado Pago<sup>(3)</sup>",
+    "nombre": "Mercado Pago",
     "tipo": "Otro",
-    "plazos": { "Vista": 13, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null }
+    "sitioweb": "https://www.mercadopago.com.mx",
+    "plazos": { "Vista": 13, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null },
+    "notas": {
+      "Vista": "Tasa del 13% disponible al ingresar $3,000MXN al mes y topada hasta $25,000 MXN. Montos mayores no ofrecen rendimientos"
+    }
   },
     {
     "nombre": "Mifel (cuenta digital)",
     "tipo": "Banco",
+    "sitioweb": "https://www.mifel.com.mx/personas",
     "plazos": { "Vista": 10, "1 mes": 5.25, "3 meses": 7.75, "6 meses": 7.5, "12 meses": 7.6 }
   },
   {
     "nombre": "Openbank",
     "tipo": "Banco",
+    "sitioweb": "https://www.openbank.mx",
     "plazos": { "Vista": 10, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null }
   },
   {
     "nombre": "Banco Covalto",
     "tipo": "Banco",
+    "sitioweb": "https://www.covalto.com",
     "plazos": { "Vista": null, "1 mes": 6.33, "3 meses": 7.61, "6 meses": 7.79, "12 meses": 9.75 }
   },
   {
-    "nombre": "Ualá<sup>(4)</sup>",
+    "nombre": "Ualá",
     "tipo": "Banco",
-    "plazos": { "Vista": 16, "1 mes": 7.9, "3 meses": 8, "6 meses": 8.1, "12 meses": 8.15 }
+    "sitioweb": "https://www.uala.mx",
+    "plazos": { "Vista": 16, "1 mes": 7.9, "3 meses": 8, "6 meses": 8.1, "12 meses": 8.15 },
+    "notas": {
+      "Vista": "Tasa del 16% está topada a $30,000 MXN y se activa si migras tu nómina o desde que consumes $3,000 MXN durante el mes. La vigencia es hasta que termine el mes."
+    }
   },
   {
     "nombre": "Fondeadora",
     "tipo": "SOFIPO",
+    "sitioweb": "https://fondeadora.com",
     "plazos": { "Vista": null, "1 mes": 9, "3 meses": null, "6 meses": null, "12 meses": null },
     "NICAP": 213.65,
     "IMOR": 14.67
   },
   {
-    "nombre": "Kubo Financiero<sup>(5)</sup>",
+    "nombre": "Kubo Financiero<sup>CON GRUPO</sup>",
     "tipo": "SOFIPO",
+    "sitioweb": "https://www.kubofinanciero.com",
+    "plazos": { "Vista": null, "1 mes": 8.5, "3 meses": 9.3, "6 meses": 9.5, "12 meses": 10.5 },
+    "NICAP": 132.47,
+    "IMOR": 17.35,
+    "notas": {
+      "nombre": "Rendimientos calculados al recibir los intereses al final del plazo. Puedes elegir los pagos de tus rendimientos mensuales con una tasa ligeramente inferior. Al crear tu cuenta puedes pedir que te agreguen a un grupo, lo cual incrementará tus rendimientos."
+    }
+  },
+  {
+    "nombre": "Kubo Financiero<sup>SIN GRUPO</sup>",
+    "tipo": "SOFIPO",
+    "sitioweb": "https://www.kubofinanciero.com",
     "plazos": { "Vista": null, "1 mes": 7.5, "3 meses": 8.3, "6 meses": 8.5, "12 meses": 9.5 },
     "NICAP": 132.47,
-    "IMOR": 17.35
+    "IMOR": 17.35,
+    "notas": {
+      "nombre": "Rendimientos calculados al recibir los intereses al final del plazo. Puedes elegir los pagos de tus rendimientos mensuales con una tasa ligeramente inferior. Al crear tu cuenta puedes pedir que te agreguen a un grupo, lo cual incrementará tus rendimientos."
+    }
   },
    {
-    "nombre": "Stori<sup>(6)</sup>",
+    "nombre": "Stori",
     "tipo": "SOFIPO",
+    "sitioweb": "https://www.storicard.com",
     "plazos": { "Vista": 7.72, "1 mes": 7.77, "3 meses": 7.96, "6 meses": 7.36, "12 meses": 7 },
     "NICAP": 140.99,
-    "IMOR": 12.22
+    "IMOR": 12.22,
+    "notas": {
+      "nombre": "Se muestra la tasa nominal (Igual que las demás sofipos)."
+    }
   },
   {
     "nombre": "BIM",
     "tipo": "Banco",
+    "sitioweb": "https://www.bim.mx",
     "plazos": { "Vista": null, "1 mes": 6.38, "3 meses": 6.45, "6 meses": 6.81, "12 meses": 6.7 }
   },
     {
     "nombre": "Klar",
     "tipo": "SOFIPO",
+    "sitioweb": "https://www.klar.mx",
     "plazos": { "Vista": 3, "1 mes": 6.2, "3 meses": 6.3, "6 meses": 6.4, "12 meses": 6.5 },
     "NICAP": 149.3,
     "IMOR": 12.91
@@ -89,6 +131,7 @@
   {
     "nombre": "Klar Plus y Platino",
     "tipo": "SOFIPO",
+    "sitioweb": "https://www.klar.mx",
     "plazos": { "Vista": 5, "1 mes": 8.2, "3 meses": 8.3, "6 meses": 8.4, "12 meses": 8.5 },
     "NICAP": 149.3,
     "IMOR": 12.91
@@ -96,11 +139,19 @@
    {
     "nombre": "Pagaré digital BBVA",
     "tipo": "Banco",
+    "sitioweb": "https://www.bbva.com/es/mx/",
     "plazos": { "Vista": null, "1 mes": 2.8, "3 meses": 2.85, "6 meses": 2.95, "12 meses": null }
   },
   {
-    "nombre": "Cetes Directo<sup>(7)</sup>",
+    "nombre": "Cetes Directo",
     "tipo": "Gubernamental",
-    "plazos": { "Vista": null, "1 mes": 7.47, "3 meses": 7.44, "6 meses": 7.48, "12 meses": 7.63 }
+    "sitioweb": "https://www.cetesdirecto.com/sites/portal/inicio",
+    "plazos": { "Vista": null, "1 mes": 7.47, "3 meses": 7.44, "6 meses": 7.48, "12 meses": 7.63 },
+    "notas": {
+      "1 mes": "La tasa es a descuento.",
+      "3 meses": "La tasa es a descuento.",
+      "6 meses": "La tasa es a descuento.",
+      "12 meses": "La tasa es a descuento."
+    }
   }
 ]

@@ -57,9 +57,7 @@ const funciones = {
         return filtrados;
     },
 
-    // ========================================================
-    // 🌐 9. Renderizar tabla genérica (configurable)
-    // ========================================================
+
     renderizarTablaGeneral({
         data,
         headId,
@@ -84,10 +82,7 @@ const funciones = {
             return;
         }
 
-        // Obtener plazos dinámicos
         const plazos = Object.keys(data[0].plazos || {});
-
-        // 🧱 Construir encabezado dinámico
         let htmlHead = "<tr><th>Instrumento</th>";
         if (mostrarTipo) htmlHead += "<th>Tipo</th>";
         if (mostrarNICAP) htmlHead += "<th>NICAP (%)</th>";
@@ -99,10 +94,15 @@ const funciones = {
         htmlHead += "</tr>";
         encabezado.innerHTML = htmlHead;
 
-        // 🧩 Generar filas dinámicamente
+        // 🧩 Filas dinámicas
         data.forEach(item => {
             const fila = document.createElement("tr");
-            let htmlFila = `<td>${item.nombre}</td>`;
+            // Celda del nombre del instrumento con enlace opcional
+            let nombreHTML = item.nombre;
+            if (item.sitioweb) {
+                nombreHTML = `<a href="${item.sitioweb}" target="_blank" rel="noopener noreferrer">${item.nombre}</a>`;
+            }
+            let htmlFila = `<td>${nombreHTML}${funciones.crearIconoNota(item.notas?.nombre)}</td>`;
 
             if (mostrarTipo) {
                 htmlFila += `<td class="tipo-etiqueta tipo-${item.tipo.toLowerCase()}">${item.tipo}</td>`;
@@ -110,12 +110,12 @@ const funciones = {
 
             if (mostrarNICAP) {
                 const n = item.NICAP;
-                htmlFila += `<td data-rate="${n ?? ''}">${n ? n.toFixed(2) + '%' : 'N/A'}</td>`;
+                htmlFila += `<td data-rate="${n ?? ''}">${n ? n.toFixed(2) + '%' : 'N/A'}${funciones.crearIconoNota(item.notas?.NICAP)}</td>`;
             }
 
             if (mostrarIMOR) {
                 const i = item.IMOR;
-                htmlFila += `<td data-rate="${i ?? ''}">${i ? i.toFixed(2) + '%' : 'N/A'}</td>`;
+                htmlFila += `<td data-rate="${i ?? ''}">${i ? i.toFixed(2) + '%' : 'N/A'}${funciones.crearIconoNota(item.notas?.IMOR)}</td>`;
             }
 
             plazos.forEach(plazo => {
@@ -123,14 +123,19 @@ const funciones = {
                 const mostrar = (tasa !== null && tasa !== undefined && tasa !== '')
                     ? `${tasa}%`
                     : "No Disponible";
-                htmlFila += `<td data-rate="${tasa}">${mostrar}</td>`;
+                const notaPlazo = item.notas?.[plazo];
+                htmlFila += `
+                    <td data-rate="${tasa}">
+                        ${mostrar}
+                        ${funciones.crearIconoNota(notaPlazo)}
+                    </td>`;
             });
 
             fila.innerHTML = htmlFila;
             cuerpo.appendChild(fila);
         });
 
-        console.log("✅ Tabla renderizada con configuración flexible.");
+        console.log("✅ Tabla renderizada con notas personalizadas.");
     },
 
     // ========================================================
@@ -234,6 +239,19 @@ const funciones = {
             })
             .catch(err => console.error("Error cargando footer:", err));
     },
+    // ========================================================
+    // 🪧 12. Crear ícono de nota o advertencia
+    // ========================================================
+    crearIconoNota(notaTexto) {
+        if (!notaTexto) return "";
+        return `
+            <i class="fa-solid fa-circle-exclamation info-icon"
+               title="${notaTexto}"
+               onclick="alert('${notaTexto.replace(/'/g, "\\'")}')">
+            </i>
+        `;
+    },
 
 
 };
+
