@@ -5,7 +5,8 @@
     "sitioweb": "https://web.didiglobal.com/mx/jpsofiexpress/didi-cuenta/",
     "plazos": { "Vista": 15, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null },
     "NICAP": 3565.62,
-    "IMOR": 30.28
+    "IMOR": 30.28,
+    "resultadoneto": -73493
   },
   {
     "nombre": "NU",
@@ -14,6 +15,7 @@
     "plazos": { "Vista": 15, "1 mes": 7.6, "3 meses": 7.7, "6 meses": 7.8, "12 meses": null },
     "NICAP": 192.12,
     "IMOR": 7.02,
+    "resultadoneto": -1396146,
     "notas": {
       "Vista": "Tasa del 15% disponible al una compra al mes y topada hasta $25,000 MXN. Montos mayores ofrecen 7.5% de rendimiento"
     }
@@ -25,6 +27,7 @@
     "plazos": { "Vista": 8.19, "1 mes": 8.09, "3 meses": 8.39, "6 meses": 8.59, "12 meses": 10.09 },
     "NICAP": 138.79,
     "IMOR": 1.82,
+    "resultadoneto": 31581,
     "notas": {
       "Vista": "Los rendimientos de los apartados finsus+ (a la vista) se depositan de forma mensual."
     }
@@ -35,7 +38,8 @@
     "sitioweb": "https://supertasas.com",
     "plazos": { "Vista": 7.3, "1 mes": 7.4, "3 meses": 7.5, "6 meses": 8, "12 meses": 8.75 },
     "NICAP": 430.32,
-    "IMOR": 2.33
+    "IMOR": 2.33,
+    "resultadoneto": 21759
   },
   {
     "nombre": "Mercado Pago",
@@ -79,7 +83,8 @@
     "sitioweb": "https://fondeadora.com",
     "plazos": { "Vista": null, "1 mes": 9, "3 meses": null, "6 meses": null, "12 meses": null },
     "NICAP": 213.65,
-    "IMOR": 14.67
+    "IMOR": 14.67,
+    "resultadoneto": -55401
   },
   {
     "nombre": "Kubo Financiero<sup>CON GRUPO</sup>",
@@ -88,6 +93,7 @@
     "plazos": { "Vista": null, "1 mes": 8.5, "3 meses": 9.3, "6 meses": 9.5, "12 meses": 10.5 },
     "NICAP": 132.47,
     "IMOR": 17.35,
+    "resultadoneto": -50785,
     "notas": {
       "nombre": "Rendimientos calculados al recibir los intereses al final del plazo. Puedes elegir los pagos de tus rendimientos mensuales con una tasa ligeramente inferior. Al crear tu cuenta puedes pedir que te agreguen a un grupo, lo cual incrementará tus rendimientos."
     }
@@ -99,6 +105,7 @@
     "plazos": { "Vista": null, "1 mes": 7.5, "3 meses": 8.3, "6 meses": 8.5, "12 meses": 9.5 },
     "NICAP": 132.47,
     "IMOR": 17.35,
+    "resultadoneto": -50785,
     "notas": {
       "nombre": "Rendimientos calculados al recibir los intereses al final del plazo. Puedes elegir los pagos de tus rendimientos mensuales con una tasa ligeramente inferior. Al crear tu cuenta puedes pedir que te agreguen a un grupo, lo cual incrementará tus rendimientos."
     }
@@ -110,6 +117,7 @@
     "plazos": { "Vista": 7.72, "1 mes": 7.77, "3 meses": 7.96, "6 meses": 7.36, "12 meses": 7 },
     "NICAP": 140.99,
     "IMOR": 12.22,
+     "resultadoneto": 21390,
     "notas": {
       "nombre": "Se muestra la tasa nominal (Igual que las demás sofipos)."
     }
@@ -126,7 +134,8 @@
     "sitioweb": "https://www.klar.mx",
     "plazos": { "Vista": 3, "1 mes": 6.2, "3 meses": 6.3, "6 meses": 6.4, "12 meses": 6.5 },
     "NICAP": 149.3,
-    "IMOR": 12.91
+    "IMOR": 12.91,
+    "resultadoneto": -415235
   },
   {
     "nombre": "Klar Plus y Platino",
@@ -134,7 +143,8 @@
     "sitioweb": "https://www.klar.mx",
     "plazos": { "Vista": 5, "1 mes": 8.2, "3 meses": 8.3, "6 meses": 8.4, "12 meses": 8.5 },
     "NICAP": 149.3,
-    "IMOR": 12.91
+    "IMOR": 12.91,
+    "resultadoneto": -415235
   },
    {
     "nombre": "Pagaré digital BBVA",

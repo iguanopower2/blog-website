@@ -39,6 +39,21 @@ const funciones = {
         console.log("✅ Estructura del JSON válida.");
         return true;
     },
+    // ========================================================
+    // ⚙️ Cargar configuración global (UDI, inflación, etc.)
+    // ========================================================
+    async cargarConfiguracion(ruta = "data/configuracion.json") {
+        try {
+            const respuesta = await fetch(ruta);
+            if (!respuesta.ok) throw new Error(`Error al cargar configuración: ${ruta}`);
+            const config = await respuesta.json();
+            console.log("✅ Configuración cargada:", config);
+            return config;
+        } catch (error) {
+            console.error("❌ Error al cargar configuración global:", error);
+            return {};
+        }
+    },
 
     // ========================================================
     // 🔍 3. Filtrar datos por tipo (ej. 'SOFIPO', 'Banco', etc.)
@@ -64,7 +79,8 @@ const funciones = {
         bodyId,
         mostrarTipo = false,
         mostrarNICAP = false,
-        mostrarIMOR = false
+        mostrarIMOR = false,
+        mostrarResultado = false
     }) {
         const cuerpo = document.getElementById(bodyId);
         const encabezado = document.getElementById(headId);
@@ -87,6 +103,7 @@ const funciones = {
         if (mostrarTipo) htmlHead += "<th>Tipo</th>";
         if (mostrarNICAP) htmlHead += "<th>NICAP (%)</th>";
         if (mostrarIMOR) htmlHead += "<th>IMOR (%)</th>";
+        if (mostrarResultado) htmlHead += "<th>Resultado Neto (millones MXN)</th>";
 
         plazos.forEach(plazo => {
             htmlHead += `<th>${plazo}</th>`;
@@ -116,6 +133,20 @@ const funciones = {
             if (mostrarIMOR) {
                 const i = item.IMOR;
                 htmlFila += `<td data-rate="${i ?? ''}">${i ? i.toFixed(2) + '%' : 'N/A'}${funciones.crearIconoNota(item.notas?.IMOR)}</td>`;
+            }
+
+            if (mostrarResultado) {
+                const r = item.resultadoneto;
+                const notaResultado = item.notas?.resultadoneto;
+
+                // Convertir a miles y redondear
+                const rMiles = r ? Math.round(r / 1000) : null;
+
+                htmlFila += `
+                    <td data-rate="${r ?? ''}">
+                        ${rMiles ? rMiles.toLocaleString('es-MX') : 'N/A'}
+                        ${funciones.crearIconoNota(notaResultado)}
+                    </td>`;
             }
 
             plazos.forEach(plazo => {
