@@ -80,7 +80,8 @@ const funciones = {
         mostrarTipo = false,
         mostrarNICAP = false,
         mostrarIMOR = false,
-        mostrarResultado = false
+        mostrarResultado = false,
+        mostrarRendimientos = true
     }) {
         const cuerpo = document.getElementById(bodyId);
         const encabezado = document.getElementById(headId);
@@ -104,10 +105,12 @@ const funciones = {
         if (mostrarNICAP) htmlHead += "<th>NICAP (%)</th>";
         if (mostrarIMOR) htmlHead += "<th>IMOR (%)</th>";
         if (mostrarResultado) htmlHead += "<th>Resultado Neto (millones MXN)</th>";
-
-        plazos.forEach(plazo => {
+        // ✅ Solo agregamos las columnas de rendimientos si está activado
+        if (mostrarRendimientos) {
+            plazos.forEach(plazo => {
             htmlHead += `<th>${plazo}</th>`;
-        });
+            });
+        }
         htmlHead += "</tr>";
         encabezado.innerHTML = htmlHead;
 
@@ -149,18 +152,21 @@ const funciones = {
                     </td>`;
             }
 
-            plazos.forEach(plazo => {
+            // ✅ Solo mostrar rendimientos si está activado
+            if (mostrarRendimientos) {
+              plazos.forEach(plazo => {
                 const tasa = item.plazos?.[plazo];
                 const mostrar = (tasa !== null && tasa !== undefined && tasa !== '')
-                    ? `${tasa}%`
-                    : "No Disponible";
+                  ? `${tasa}%`
+                  : "No Disponible";
                 const notaPlazo = item.notas?.[plazo];
                 htmlFila += `
-                    <td data-rate="${tasa}">
-                        ${mostrar}
-                        ${funciones.crearIconoNota(notaPlazo)}
-                    </td>`;
-            });
+                  <td data-rate="${tasa}">
+                    ${mostrar}
+                    ${funciones.crearIconoNota(notaPlazo)}
+                  </td>`;
+              });
+            }
 
             fila.innerHTML = htmlFila;
             cuerpo.appendChild(fila);
@@ -283,6 +289,24 @@ const funciones = {
         `;
     },
 
+    inicializarTabs() {
+      const tabs = document.querySelectorAll(".tab-btn");
+      const contents = document.querySelectorAll(".tab-content");
+
+      tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+          const target = tab.getAttribute("data-tab");
+
+          // Desactivar todo
+          tabs.forEach(t => t.classList.remove("active"));
+          contents.forEach(c => c.classList.remove("active"));
+
+          // Activar el seleccionado
+          tab.classList.add("active");
+          document.getElementById(`tab-${target}`).classList.add("active");
+        });
+      });
+    },
 
 };
 

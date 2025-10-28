@@ -14,13 +14,29 @@
     <h1>Comparativa de SOFIPOs por Plazo y Rendimiento</h1>
     <p>Actualizamos periódicamente esta tabla con las SOFIPOs más grandes del país para ayudarte a comparar las mejores opciones de inversión por rendimiento y plazo.</p>
 
+    <!-- 🟡 NUEVA ESTRUCTURA CON PESTAÑAS -->
     <div class="table-container">
-      <table class="sofipos-table">
-        <thead id="tabla-sofipos-head">
-          </thead>
-        <tbody id="tabla-sofipos-body">
-          </tbody>
-      </table>
+      <!-- Botones de pestañas -->
+      <div class="tabs" id="tabs-sofipos">
+        <button class="tab-btn active" data-tab="rendimientos">💰 Rendimientos</button>
+        <button class="tab-btn" data-tab="indicadores">📊 Indicadores Financieros</button>
+      </div>
+
+      <!-- Contenido de pestaña 1 -->
+      <div class="tab-content active" id="tab-rendimientos">
+        <table class="sofipos-table">
+          <thead id="tabla-rendimientos-head"></thead>
+          <tbody id="tabla-rendimientos-body"></tbody>
+        </table>
+      </div>
+
+      <!-- Contenido de pestaña 2 -->
+      <div class="tab-content" id="tab-indicadores">
+        <table class="sofipos-table">
+          <thead id="tabla-indicadores-head"></thead>
+          <tbody id="tabla-indicadores-body"></tbody>
+        </table>
+      </div>
 
       <div class="table-footnotes">
         <ol>
@@ -100,31 +116,51 @@
     funciones.cargarComponentes();
     const data = await funciones.obtenerDatosJSON("data/inversiones.json");
     if (!funciones.validarEstructuraBase(data)) return;
+    // Inicializar sistema de pestañas
+    funciones.inicializarTabs();
 
     const sofipos = funciones.filtrarPorTipo(data, "SOFIPO");
 
+    // 📊 Pestaña 1: Rendimientos
     funciones.renderizarTablaGeneral({
       data: sofipos,
-      headId: "tabla-sofipos-head",
-      bodyId: "tabla-sofipos-body",
+      headId: "tabla-rendimientos-head",
+      bodyId: "tabla-rendimientos-body",
+      mostrarTipo: false,
+      mostrarNICAP: false,
+      mostrarIMOR: false,
+      mostrarResultado: false,
+      mostrarRendimientos: true
+
+    });
+
+    // 📈 Pestaña 2: Indicadores Financieros
+    funciones.renderizarTablaGeneral({
+      data: sofipos,
+      headId: "tabla-indicadores-head",
+      bodyId: "tabla-indicadores-body",
       mostrarTipo: false,
       mostrarNICAP: true,
       mostrarIMOR: true,
       mostrarResultado: true,
+      mostrarRendimientos: false
     });
 
-   const modos = {
-  "NICAP (%)": "altoMejor",
-  "IMOR (%)": "bajoMejor",
-  "Resultado Neto (millones MXN)": "altoMejor",
-  Vista: "altoMejor",
-  "1 mes": "altoMejor",
-  "3 meses": "altoMejor",
-  "6 meses": "altoMejor",
-  "12 meses": "altoMejor"
-};
+    const modos = {
+    "NICAP (%)": "altoMejor",
+    "IMOR (%)": "bajoMejor",
+    "Resultado Neto (millones MXN)": "altoMejor",
+    Vista: "altoMejor",
+    "1 mes": "altoMejor",
+    "3 meses": "altoMejor",
+    "6 meses": "altoMejor",
+    "12 meses": "altoMejor"
+    };
+    // 📊 Colores para rendimientos
+    funciones.aplicarColoresPorNombre("#tab-rendimientos .sofipos-table", modos);
 
-funciones.aplicarColoresPorNombre(".sofipos-table", modos);
+    // 📈 Colores para indicadores financieros
+    funciones.aplicarColoresPorNombre("#tab-indicadores .sofipos-table", modos);
 
   });
 </script>
