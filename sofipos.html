@@ -22,26 +22,36 @@
         <button class="tab-btn" data-tab="indicadores">📊 Indicadores Financieros</button>
       </div>
 
-      <!-- Contenido de pestaña 1 -->
+      <!-- 📊 Pestaña 1: Rendimientos -->
       <div class="tab-content active" id="tab-rendimientos">
         <table class="sofipos-table">
           <thead id="tabla-rendimientos-head"></thead>
           <tbody id="tabla-rendimientos-body"></tbody>
         </table>
+
+        <div class="table-footnotes">
+          <ol>
+            <li>Las tasas están expresadas en términos anuales nominales.</li>
+            <li>Las tasas a la vista pueden estar sujetas a condiciones específicas (por ejemplo, uso de tarjeta mensual).</li>
+            <li>Los rendimientos no consideran impuestos ni retenciones.</li>
+          </ol>
+        </div>
       </div>
 
-      <!-- Contenido de pestaña 2 -->
+      <!-- 📈 Pestaña 2: Indicadores Financieros -->
       <div class="tab-content" id="tab-indicadores">
         <table class="sofipos-table">
           <thead id="tabla-indicadores-head"></thead>
           <tbody id="tabla-indicadores-body"></tbody>
         </table>
-      </div>
 
-      <div class="table-footnotes">
-        <ol>
-          <li>Tasa del 15% está topada a $25,000 MXN.</li>
-        </ol>
+        <div class="table-footnotes">
+          <ol>
+            <li><strong>NICAP:</strong> Nivel de capitalización de la SOFIPO, un indicador de solidez financiera.</li>
+            <li><strong>IMOR:</strong> Índice de morosidad, indica el porcentaje de cartera vencida sobre la cartera total.</li>
+            <li><strong>Resultado Neto:</strong> Resultado contable del periodo, en millones de pesos.</li>
+          </ol>
+        </div>
       </div>
     </div>
 
@@ -130,6 +140,7 @@
       mostrarNICAP: false,
       mostrarIMOR: false,
       mostrarResultado: false,
+      mostrarCarteraVig: false,
       mostrarRendimientos: true
 
     });
@@ -143,6 +154,7 @@
       mostrarNICAP: true,
       mostrarIMOR: true,
       mostrarResultado: true,
+      mostrarCarteraVig: true,
       mostrarRendimientos: false
     });
 
@@ -157,10 +169,9 @@
     "12 meses": "altoMejor"
     };
     // 📊 Colores para rendimientos
-    funciones.aplicarColoresPorNombre("#tab-rendimientos .sofipos-table", modos);
-
-    // 📈 Colores para indicadores financieros
-    funciones.aplicarColoresPorNombre("#tab-indicadores .sofipos-table", modos);
+    document.querySelectorAll(".tab-content .sofipos-table").forEach(tabla => {
+      funciones.aplicarColoresPorNombre(`#${tabla.closest('.tab-content').id} .sofipos-table`, modos);
+    });
 
   });
 </script>

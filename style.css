@@ -183,19 +183,12 @@ a {
 .tipo-etiqueta {
   padding: 5px 10px;
   border-radius: 15px;
-  color: white;
   font-weight: bold;
   font-size: 0.8em;
   text-transform: uppercase;
   min-width: 100px;
-  display: inline-block;
   text-align: center;
 }
-
-.tipo-sofipo { background-color: #d32f2f; } /* Rojo */
-.tipo-banco { background-color: #303f9f; } /* Azul */
-.tipo-gubernamental { background-color: #00796b; } /* Verde */
-.tipo-otro { background-color: #f57c00; } /* Naranja */
 
 /* Notas al pie de las tablas */
 .table-footnotes {
@@ -706,4 +699,19 @@ a {
 
 .tab-content.active {
     display: block;
+}
+
+.table-footnotes {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #444;
+  background: #f9f9f9;
+  border-left: 4px solid #e0dba5;
+  padding: 10px 15px;
+  border-radius: 4px;
+}
+
+.table-footnotes ol {
+  margin: 0;
+  padding-left: 20px;
 }

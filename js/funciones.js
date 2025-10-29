@@ -80,6 +80,7 @@ const funciones = {
         mostrarTipo = false,
         mostrarNICAP = false,
         mostrarIMOR = false,
+        mostrarCarteraVig = false,
         mostrarResultado = false,
         mostrarRendimientos = true
     }) {
@@ -105,6 +106,8 @@ const funciones = {
         if (mostrarNICAP) htmlHead += "<th>NICAP (%)</th>";
         if (mostrarIMOR) htmlHead += "<th>IMOR (%)</th>";
         if (mostrarResultado) htmlHead += "<th>Resultado Neto (millones MXN)</th>";
+        if (mostrarCarteraVig) htmlHead += "<th>Cartera Vigente (millones MXN)</th>";
+
         // ✅ Solo agregamos las columnas de rendimientos si está activado
         if (mostrarRendimientos) {
             plazos.forEach(plazo => {
@@ -136,6 +139,20 @@ const funciones = {
             if (mostrarIMOR) {
                 const i = item.IMOR;
                 htmlFila += `<td data-rate="${i ?? ''}">${i ? i.toFixed(2) + '%' : 'N/A'}${funciones.crearIconoNota(item.notas?.IMOR)}</td>`;
+            }
+
+            if (mostrarCarteraVig) {
+                const c = item.cartera_vig;
+                const notaCarteraVig = item.notas?.cartera_vig;
+
+                // Convertir a miles y redondear
+                const cMiles = c ? Math.round(c / 1000) : null;
+
+                htmlFila += `
+                    <td data-rate="${c ?? ''}">
+                        ${cMiles ? cMiles.toLocaleString('es-MX') : 'N/A'}
+                        ${funciones.crearIconoNota(notaCarteraVig)}
+                    </td>`;
             }
 
             if (mostrarResultado) {
