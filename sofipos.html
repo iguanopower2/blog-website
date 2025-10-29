@@ -50,6 +50,12 @@
             <li><strong>NICAP:</strong> Nivel de capitalización de la SOFIPO, un indicador de solidez financiera.</li>
             <li><strong>IMOR:</strong> Índice de morosidad, indica el porcentaje de cartera vencida sobre la cartera total.</li>
             <li><strong>Resultado Neto:</strong> Resultado contable del periodo, en millones de pesos.</li>
+            <li>
+      Tu dinero está protegido por el seguro PROSOFIPO hasta por
+      <strong>25,000 UDIS</strong>
+      (~<strong class="valor-prosofipo"></strong> MXN)
+      por persona.
+    </li>
           </ol>
         </div>
       </div>
@@ -119,13 +125,20 @@
 
   </main>
   <div id="footer-container"></div>
+
 <script src="js/funciones.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", async () => {
     // 1️⃣ Cargar header y footer comunes
     funciones.cargarComponentes();
+
     const data = await funciones.obtenerDatosJSON("data/inversiones.json");
     if (!funciones.validarEstructuraBase(data)) return;
+
+    // Cargar variables
+    const config = await funciones.cargarConfiguracion();
+    const montoMaximo = config.valor_udi * config.seguro_prosofipo_udi;
+
     // Inicializar sistema de pestañas
     funciones.inicializarTabs();
 

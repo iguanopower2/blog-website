@@ -39,6 +39,7 @@ const funciones = {
         console.log("✅ Estructura del JSON válida.");
         return true;
     },
+
     // ========================================================
     // ⚙️ Cargar configuración global (UDI, inflación, etc.)
     // ========================================================
@@ -141,20 +142,6 @@ const funciones = {
                 htmlFila += `<td data-rate="${i ?? ''}">${i ? i.toFixed(2) + '%' : 'N/A'}${funciones.crearIconoNota(item.notas?.IMOR)}</td>`;
             }
 
-            if (mostrarCarteraVig) {
-                const c = item.cartera_vig;
-                const notaCarteraVig = item.notas?.cartera_vig;
-
-                // Convertir a miles y redondear
-                const cMiles = c ? Math.round(c / 1000) : null;
-
-                htmlFila += `
-                    <td data-rate="${c ?? ''}">
-                        ${cMiles ? cMiles.toLocaleString('es-MX') : 'N/A'}
-                        ${funciones.crearIconoNota(notaCarteraVig)}
-                    </td>`;
-            }
-
             if (mostrarResultado) {
                 const r = item.resultadoneto;
                 const notaResultado = item.notas?.resultadoneto;
@@ -166,6 +153,20 @@ const funciones = {
                     <td data-rate="${r ?? ''}">
                         ${rMiles ? rMiles.toLocaleString('es-MX') : 'N/A'}
                         ${funciones.crearIconoNota(notaResultado)}
+                    </td>`;
+            }
+
+            if (mostrarCarteraVig) {
+                const c = item.cartera_vig;
+                const notaCarteraVig = item.notas?.cartera_vig;
+
+                // Convertir a miles y redondear
+                const cMiles = c ? Math.round(c / 1000) : null;
+
+                htmlFila += `
+                    <td data-rate="${c ?? ''}">
+                        ${cMiles ? cMiles.toLocaleString('es-MX') : 'N/A'}
+                        ${funciones.crearIconoNota(notaCarteraVig)}
                     </td>`;
             }
 
