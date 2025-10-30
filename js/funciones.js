@@ -326,5 +326,82 @@ const funciones = {
       });
     },
 
+
+    // ========================================================
+    // 🧠 Función modular para aplicar configuración global
+    // ========================================================
+    async aplicarConfiguracionGlobal() {
+      try {
+        const config = await this.cargarConfiguracion();
+
+        // 🧮 Calcular monto en MXN del seguro PROSOFIPO
+        if (config.valor_udi && config.seguro_prosofipo_udi) {
+          const montoSeguroMXN = config.valor_udi * config.seguro_prosofipo_udi;
+
+          // 👇 Insertar en donde uses la clase `.valor-prosofipo`
+          document.querySelectorAll(".valor-prosofipo").forEach(el => {
+            el.textContent = montoSeguroMXN.toLocaleString("es-MX", {
+              style: "currency",
+              currency: "MXN",
+              maximumFractionDigits: 0
+            });
+          });
+        }
+
+        // 📅 Insertar fecha de actualización
+        if (config.fecha_actualizacion) {
+          const fecha = new Date(config.fecha_actualizacion);
+          const opciones = { year: "numeric", month: "long", day: "numeric" };
+          let fechaFormateada = fecha.toLocaleDateString("es-MX", opciones);
+
+          // Capitalizar la primera letra
+          fechaFormateada =
+            fechaFormateada.charAt(0).toUpperCase() + fechaFormateada.slice(1);
+
+          // 👇 Insertar en elemento con ID `fecha-actualizacion`
+          const fechaElemento = document.getElementById("fecha-actualizacion");
+          if (fechaElemento) {
+            fechaElemento.textContent = fechaFormateada;
+          }
+        }
+
+        console.log("✅ Configuración global aplicada correctamente.");
+      } catch (error) {
+        console.error("❌ Error al aplicar configuración global:", error);
+      }
+    },
+
+    // ========================================================
+    // 🟣 Renderizar tarjetas modulares de SOFIPOs destacadas
+    // ========================================================
+    async renderizarSofiposDestacadas(ruta = "data/sofipos_detalle.json") {
+      try {
+        const respuesta = await fetch(ruta);
+        if (!respuesta.ok) throw new Error("Error al cargar sofipos_detalle.json");
+        const sofipos = await respuesta.json();
+
+        const contenedor = document.getElementById("contenedor-sofipos");
+        if (!contenedor) return;
+
+        contenedor.innerHTML = sofipos.map(s => `
+          <div class="sofipo-card">
+            <div class="sofipo-card-header">
+              <div class="sofipo-logo-nombre">
+                ${s.logo ? `<img src="${s.logo}" alt="${s.nombre}" class="sofipo-logo">` : ""}
+                <h3>${s.nombre}</h3>
+              </div>
+
+            </div>
+            <p>${s.descripcion}</p>
+            <p class="sofipo-respaldo"><strong>Respaldo:</strong> ${s.respaldo}</p>
+            <a href="${s.link}" target="_blank" class="btn-sofipo">Abrir cuenta</a>
+          </div>
+        `).join("");
+      } catch (error) {
+        console.error("❌ Error al renderizar sofipos destacadas:", error);
+      }
+    },
+
+
 };
 

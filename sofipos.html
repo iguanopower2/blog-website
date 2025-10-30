@@ -12,7 +12,7 @@
   <div id="header-container"></div>
   <main class="container">
     <h1>Comparativa de SOFIPOs por Plazo y Rendimiento</h1>
-    <p>Actualizamos periódicamente esta tabla con las SOFIPOs más grandes del país para ayudarte a comparar las mejores opciones de inversión por rendimiento y plazo.</p>
+    <p class="ultima-actualizacion">Última actualización: <span id="fecha-actualizacion"></span></p>
 
     <!-- 🟡 NUEVA ESTRUCTURA CON PESTAÑAS -->
     <div class="table-container">
@@ -50,77 +50,53 @@
             <li><strong>NICAP:</strong> Nivel de capitalización de la SOFIPO, un indicador de solidez financiera.</li>
             <li><strong>IMOR:</strong> Índice de morosidad, indica el porcentaje de cartera vencida sobre la cartera total.</li>
             <li><strong>Resultado Neto:</strong> Resultado contable del periodo, en millones de pesos.</li>
-            <li>
-      Tu dinero está protegido por el seguro PROSOFIPO hasta por
-      <strong>25,000 UDIS</strong>
-      (~<strong class="valor-prosofipo"></strong> MXN)
-      por persona.
-    </li>
+            <li>El seguro PROSOFIPO protege hasta por aproximadamente <span class="valor-prosofipo"></span> MXN.</li>
           </ol>
         </div>
       </div>
     </div>
 
-    <section class="sofipo-info">
+    <section class="sofipo-info-grid">
       <h2 class="centered-text">¿Qué es una SOFIPO?</h2>
-      <ul>
-        <li>Las <strong>Sociedades Financieras Populares</strong> son entidades financieras dedicadas a fomentar el ahorro y el crédito, son reguladas por la CNBV y supervisadas por la CONDUSEF. Actualmente existen 34 autorizadas en operación</li>
-        <li>Ofrecen cuentas de ahorro e inversiones usualmente con mejores tasas que la banca tradicional, así como tarjetas de crédito, débito, préstamos personales.</li>
-        <li>Antes de ahorrar en una SOFIPO, verifica que ésta se encuentre en el Padrón de Entidades Supervisadas por la Comisión Nacional Bancaria y de Valores (CNBV) (www.cnbv.gob.mx) y en el Sistema de Registro de Prestadores Financieros (SIPRES) (www.condusef.gob.mx)</li>
-        <li>Tu dinero está protegido por el seguro PROSOFIPO hasta por 25,000 UDIS (~$212,000 MXN) por persona. Si tu inversión excede dicho monto y la SOFIPO quiebra, entonces entrará en concurso mercantil y lo que se obtenga de vender sus activos será repartido entre acreedores, inversionistas, etc.</li>
-        <li>Debes verificar constantemente la situación financiera de cada SOFIPO, por regulación deben publicar sus resultados financieros. Existen varias SOFIPOs sólidas financieramente, no pocas han quebrado en el pasado. Podrías disminuir el riesgo de insolvencia al diversificar tus inversiones en varias SOFIPOs y así estar cubierta/o por el seguro PROSOFIPO. Recuerda que el seguro PROSOFIPO aplica por persona y por SOFIPO.</li>
-        <li>Las SOFIPOS se categorizan en 4 niveles de operación que son determinados por el monto de los activos totales de las SOFIPO, también se categorizan por su nivel de capitalización o <strong>NICAP</strong> y es un indicador de la solidez financiera de la SOFIPO y su capacidad para hacer frente a sus obligaciones</li>
-        <li>A continuación te mostraremos una descripción de las SOFIPOs más relevantes de México.</li>
-      </ul>
+
+      <div class="info-grid">
+        <!-- 1️⃣ Bloque: Qué son -->
+        <div class="info-card">
+          <i class="fas fa-university fa-2x"></i>
+          <h3>Sociedades Financieras Populares</h3>
+          <p>Son instituciones autorizadas y reguladas por la <strong>CNBV</strong> que fomentan el ahorro y otorgan créditos, ofreciendo mejores rendimientos que la banca tradicional.</p>
+        </div>
+
+        <!-- 2️⃣ Bloque: Supervisión -->
+        <div class="info-card">
+          <i class="fas fa-shield-alt fa-2x"></i>
+          <h3>Reguladas y Supervisadas</h3>
+          <p>Están bajo la vigilancia de la <strong>CNBV</strong> y la <strong>CONDUSEF</strong>. Puedes verificarlas en el <a href="https://www.condusef.gob.mx" target="_blank">SIPRES</a>.</p>
+        </div>
+
+        <!-- 3️⃣ Bloque: Protección -->
+        <div class="info-card">
+          <i class="fas fa-piggy-bank fa-2x"></i>
+          <h3>Protección al ahorro</h3>
+          <p>Tu dinero está protegido por el <strong>Seguro PROSOFIPO</strong> hasta por <span class="valor-prosofipo"></span> MXN por persona y por institución.</p>
+        </div>
+
+        <!-- 4️⃣ Bloque: Riesgo y diversificación -->
+        <div class="info-card">
+          <i class="fas fa-chart-line fa-2x"></i>
+          <h3>Solidez Financiera</h3>
+          <p>Cada SOFIPO publica su <strong>NICAP</strong> (nivel de capitalización) e <strong>IMOR</strong> (índice de morosidad). Diversificar reduce el riesgo.</p>
+        </div>
+      </div>
+
+      <p class="nota-final">
+        Actualmente existen <strong>34 SOFIPOs</strong> autorizadas en operación en México. En esta página comparamos sus rendimientos e indicadores financieros.
+      </p>
     </section>
 
-    <section class="sofipo-highlights">
-      <h2 class="centered-text">DIDI CUENTA</h2>
-      <p>Didi México adquirió la SOFIPO <strong>JP Sofiexpress</strong> en el 2024 y lanzó al mercado Didi Cuenta. DiDi Cuenta es una cuenta de depósitos con rendimientos 100% digital que te permite recibir, enviar dinero y pagar mientras tu dinero crece.</p>
-      <p>Los rendimientos que ofrece DiDi Cuenta son de <strong>15%</strong> a la vista y no tiene comisiones por manejo de cuenta o saldo mínimo, ni monto de apertura o plazos forzosos, ofrece además tarjeta de crédito y préstamos personales.</p>
-      <p>Cuenta con respaldo financiero de Didi México, parte de <strong>DiDi Global Inc.</strong>, una empresa global con sede en China.</p>
-      <p><a href="https://web.didiglobal.com/mx/jpsofiexpress/didi-cuenta/" target="_blank" class="link-accent">Consulta más información y abre tu cuenta</a></p>
-    </section>
-
-    <section class="sofipo-highlights">
-      <h2 class="centered-text">FINSUS</h2>
-      <p><strong>Financiera Sustentable de México</strong> opera como una plataforma digital enfocada en la democratización de las finanzas y la inclusión financiera en México.</p>
-      <p>Es una plataforma digital, sus transacciones se realizan mediante su aplicación móvil. Tiene opciones de inversión a partir de 100 pesos, en dinero a la vista y plazos fijos de hasta 5 años, ofrece tarjeta de débito y distintos tipos de créditos empresariales y personales. Una gran ventaja de FINSUS es que te permite recibir tus rendimientos mensuales sin disminuir la tasa del plazo elegido.</p>
-      <p>A lo largo de los años finsus se ha mantenido en las categorías de NICAP I o II, por lo que su desempeño financieramente ha sido estable. Se encuentra en proceso de adquirir una licencia bancaria.</p>
-      <p><a href="https://finsus.mx" target="_blank" class="link-accent">Consulta más información y abre tu cuenta</a></p>
-    </section>
-
-    <section class="sofipo-highlights">
-      <h2 class="centered-text">NU</h2>
-      <p>Nu es una plataforma digital que ofrece tarjetas de crédito, tarjetas de débito con rendimiento a la vista, préstamos personales e inversiones a plazo a través de su aplicación móvil.</p>
-      <p>Sus tarjetas de débito no cobran anualidad, ofrece tasas a la vista y a plazo, constantemente lanza nuevos productos y la aplicación es muy fiable.</p>
-      <p>Nu es una SOFIPO en proceso de convertirse en un Banco, financieramente ha demostrado un desempeño favorable y con un enorme crecimiento en México, además, está respaldada por <strong>Nu Holdings Ltd.</strong> una empresa de origen brasileño.</p>
-      <p>Actualmente ofrece rendimiento del <strong>15% anual</strong> a la vista limitado a $25,000 MXN si usas sus tarjetas una vez al mes. Al hacer uso de tu cuenta, se habilitará la cajita turbo.</p>
-      <p><a href="https://nu.com.mx" target="_blank" class="link-accent">Consulta más información y abre tu cuenta</a></p>
-    </section>
-
-    <section class="sofipo-highlights">
-      <h2 class="centered-text">KLAR</h2>
-      <p>Klar ofrece servicios financieros como cuentas de depósito, tarjetas de crédito y opciones de inversión, actualmente está en proceso de obtener una licencia bancaria para operar como banco.</p>
-      <p>Tiene segmentados a sus clientes en varias categorías: Clásico, Plus y Platino, dependiento de tu categoría están condicionados algunos beneficios como cashback o promociones. Para mejorar tu nivel debes gastar más desde tu cuenta.</p>
-      <p>Ofrece cuentas de ahorro con rendimientos a la vista y a plazo, además de tarjetas de crédito y débito que no cobra comisiones por manejo de cuenta, ni saldo mínimo, ni monto de apertura. Se encuentra en proceso de adquirir una licencia bancaria.</p>
-      <p><a href="https://www.klar.mx" target="_blank" class="link-accent">Consulta más información y abre tu cuenta</a></p>
-    </section>
-
-    <section class="sofipo-highlights">
-      <h2 class="centered-text">SUPERTASAS</h2>
-      <p>Supertasas es una plataforma digital, ofrece servicios de inversión y ahorro</p>
-      <p>Ofrece cuentas de ahorro con rendimientos a la vista y a plazo, para el plazo anual puedes cobrar tus rendimientos de forma mensual con una tasa ligeramente menor.</p>
-      <p>Supertasas es una plataforma confiable y segura, es una marca de Crediclub, con más de 20 años de experiencia en el sector y de las pocas que ha sido rentable de forma continua por lo que es de las más sólidas para invertir.</p>
-      <p><a href="https://supertasas.com" target="_blank" class="link-accent">Consulta más información y abre tu cuenta</a></p>
-    </section>
-
-    <section class="sofipo-highlights">
-      <h2 class="centered-text">FONDEADORA</h2>
-      <p>Fondeadora es una empresa que ofrece servicios financieros a personas y empresas.</p>
-      <p>Ofrece rendimientos del 10% anual al guardar tu dineró en tu bóveda directamente en la aplicación.</p>
-      <p>Fondeadora es una marca de Fondea Technologies.</p>
-      <p><a href="https://fondeadora.com" target="_blank" class="link-accent">Consulta más información y abre tu cuenta</a></p>
+    <section class="sofipo-highlights-grid" id="sofipos-destacadas">
+      <h2 class="centered-text">SOFIPOs destacadas en México</h2>
+      <div id="contenedor-sofipos" class="sofipos-grid"></div>
     </section>
 
   </main>
@@ -131,13 +107,11 @@
   document.addEventListener("DOMContentLoaded", async () => {
     // 1️⃣ Cargar header y footer comunes
     funciones.cargarComponentes();
-
     const data = await funciones.obtenerDatosJSON("data/inversiones.json");
     if (!funciones.validarEstructuraBase(data)) return;
 
-    // Cargar variables
-    const config = await funciones.cargarConfiguracion();
-    const montoMaximo = config.valor_udi * config.seguro_prosofipo_udi;
+    //Variables a nivel global
+    await funciones.aplicarConfiguracionGlobal();
 
     // Inicializar sistema de pestañas
     funciones.inicializarTabs();
@@ -170,6 +144,8 @@
       mostrarCarteraVig: true,
       mostrarRendimientos: false
     });
+
+    await funciones.renderizarSofiposDestacadas();
 
     const modos = {
     "NICAP (%)": "altoMejor",

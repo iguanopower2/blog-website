@@ -1,0 +1,38 @@
+[
+  {
+    "nombre": "Didi Cuenta",
+    "descripcion": "Didi México adquirió la SOFIPO JP Sofiexpress en 2024 y lanzó DiDi Cuenta, una cuenta 100% digital con rendimientos al ahorro, envío de dinero y pagos.",
+    "respaldo": "Didi Global Inc. (China)",
+    "link": "https://web.didiglobal.com/mx/jpsofiexpress/didi-cuenta/"
+  },
+  {
+    "nombre": "Finsus",
+    "descripcion": "Financiera Sustentable de México impulsa la inclusión financiera a través de inversiones desde $100 MXN, con rendimientos mensuales y opciones de plazo fijo.",
+    "respaldo": "En proceso de licencia bancaria",
+    "link": "https://finsus.mx"
+  },
+  {
+    "nombre": "Nu",
+    "descripcion": "Nu ofrece una cuenta digital con tarjetas de crédito y débito. Actualmente otorga 15% a la vista (limitado a $25,000 MXN con uso mensual).",
+    "respaldo": "Nu Holdings Ltd. (Brasil)",
+    "link": "https://nu.com.mx"
+  },
+  {
+    "nombre": "Klar",
+    "descripcion": "Klar ofrece cuentas de depósito, tarjetas de crédito y ahorro sin comisiones, con niveles de usuario que otorgan beneficios adicionales.",
+    "respaldo": "En proceso de licencia bancaria",
+    "link": "https://www.klar.mx"
+  },
+  {
+    "nombre": "Supertasas",
+    "descripcion": "Supertasas, marca de Crediclub, ofrece inversiones seguras con más de 20 años de experiencia y rentabilidad continua.",
+    "respaldo": "Crediclub (México)",
+    "link": "https://supertasas.com"
+  },
+  {
+    "nombre": "Fondeadora",
+    "descripcion": "Fondeadora ofrece servicios financieros digitales con rendimientos del 10% anual al guardar tu dinero en su bóveda.",
+    "respaldo": "Fondea Technologies",
+    "link": "https://fondeadora.com"
+  }
+]
