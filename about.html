@@ -2,20 +2,72 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Sobre mí</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Conoce la historia y la misión detrás de De Cero al Infinito. Descubre por qué creamos el mejor comparador de finanzas en México.">
+  <title>Sobre Mí - De Cero al Infinito</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0NV8P41XXJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0NV8P41XXJ');
+  </script>
 </head>
 <body>
-  <header>
-    <h1>Sobre mí</h1>
-    <nav>
-      <a href="index.html">Inicio</a>
-      <a href="about.html">Sobre mí</a>
-      <a href="blog.html">Blog</a>
-    </nav>
-  </header>
-  <main>
-    <p>Hola, soy el creador de este sitio. Me apasionan las finanzas y la tecnología.</p>
+  <div id="header-container"></div>
+
+  <main class="container">
+    <article class="blog-post-container">
+
+      <header class="blog-post-header">
+        <h1>Mi Misión: Claridad Financiera para Todos</h1>
+      </header>
+
+      <img src="https://placehold.co/800x400/b30000/ffffff?text=Tu+Foto+Aquí" alt="Foto del creador de De Cero al Infinito" class="post-main-image about-profile-image">
+
+      <div class="post-content">
+        <h2>Hola, soy Raúl</h2>
+        <p>Bienvenidos a "De Cero al Infinito". Creé este sitio con un objetivo simple: <strong>hacer que las finanzas personales y las inversiones en México sean transparentes y fáciles de entender.</strong></p>
+
+        <p>Como [tu profesión o pasión, ej: desarrollador de software, entusiasta de las finanzas, etc.], me cansé de la información financiera complicada, las letras chiquitas y la falta de herramientas claras para comparar opciones. ¿Por qué debería ser tan difícil saber qué SOFIPO paga más o qué banco ofrece la mejor cuenta?</p>
+
+        <p>Decidí usar mis habilidades para construir las herramientas que yo mismo quería usar: calculadoras limpias, comparativas actualizadas y análisis honestos.</p>
+
+        <h3>¿Por qué "De Cero al Infinito"?</h3>
+        <p>Porque creo que todos podemos empezar desde cero. No importa si tienes $100 pesos o $100,000, el conocimiento es lo que te permite tomar decisiones que hacen crecer tu patrimonio. Este sitio es mi contribución a esa meta.</p>
+        <p>Aquí no encontrarás consejos para hacerte rico de la noche a la mañana, pero sí encontrarás:
+          <ul>
+            <li><strong>Datos Reales:</strong> Tasas y números actualizados.</li>
+            <li><strong>Herramientas Útiles:</strong> Comparadores y calculadoras sin rodeos.</li>
+            <li><strong>Transparencia:</strong> Análisis claros de los pros y contras de cada producto.</li>
+          </ul>
+        </p>
+
+        <h3>Conecta Conmigo</h3>
+        <p>Este proyecto también es una comunidad. Conéctate conmigo en mis redes sociales donde comparto análisis semanales, tutoriales y respondo tus preguntas.</p>
+
+        <div class="social-links about-social-links">
+          <a href="[TU_LINK_DE_YOUTUBE]" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="[TU_LINK_DE_X_TWITTER]" target="_blank" title="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+          <a href="[TU_LINK_DE_GITHUB_O_OTRA]" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+          <a href="mailto:contacto@deceroalinfinito.com" title="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+
+      </div>
+    </article>
   </main>
+
+  <div id="footer-container"></div>
+
+  <script src="js/funciones.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Carga el header y footer modulares
+      funciones.cargarComponentes();
+    });
+  </script>
 </body>
 </html>
