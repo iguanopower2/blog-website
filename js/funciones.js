@@ -73,6 +73,32 @@ const funciones = {
         return filtrados;
     },
 
+    // ========================================================
+    // ⭐️ 4. NUEVA: Obtener categoría NICAP
+    // ========================================================
+    obtenerCategoriaNICAP(nicap) {
+        // --- Validación ---
+        // Si el NICAP no es un número o no está definido, retorna "N/A"
+        if (nicap === null || nicap === undefined || isNaN(nicap)) {
+            return "N/A";
+        }
+
+        // --- Lógica de Categorización ---
+        if (nicap >= 131) {
+            return "Nivel 1";
+        }
+        if (nicap >= 100) { // No es necesario el "< 131" porque ya pasó el if anterior
+            return "Nivel 2";
+        }
+        if (nicap >= 56) { // No es necesario el "< 100"
+            return "Nivel 3";
+        }
+        if (nicap < 56) {
+            return "Nivel 4";
+        }
+
+        return "N/A"; // Fallback por si algo inesperado ocurre
+    },
 
     renderizarTablaGeneral({
         data,
@@ -80,6 +106,7 @@ const funciones = {
         bodyId,
         mostrarTipo = false,
         mostrarNICAP = false,
+        mostrarCategoriaNICAP = false,
         mostrarIMOR = false,
         mostrarCarteraVig = false,
         mostrarResultado = false,
@@ -105,6 +132,7 @@ const funciones = {
         let htmlHead = "<tr><th>Instrumento</th>";
         if (mostrarTipo) htmlHead += "<th>Tipo</th>";
         if (mostrarNICAP) htmlHead += "<th>NICAP (%)</th>";
+        if (mostrarCategoriaNICAP) htmlHead += "<th>Categoría NICAP</th>";
         if (mostrarIMOR) htmlHead += "<th>IMOR (%)</th>";
         if (mostrarResultado) htmlHead += "<th>Resultado Neto (millones MXN)</th>";
         if (mostrarCarteraVig) htmlHead += "<th>Cartera Vigente (millones MXN)</th>";
@@ -135,6 +163,11 @@ const funciones = {
             if (mostrarNICAP) {
                 const n = item.NICAP;
                 htmlFila += `<td data-rate="${n ?? ''}">${n ? n.toFixed(2) + '%' : 'N/A'}${funciones.crearIconoNota(item.notas?.NICAP)}</td>`;
+            }
+            if (mostrarCategoriaNICAP) {
+                // Obtenemos el valor de la categoría llamando a nuestra nueva función
+                const categorian = funciones.obtenerCategoriaNICAP(item.NICAP);
+                htmlFila += `<td class="categoria-nicap">${categorian}</td>`;
             }
 
             if (mostrarIMOR) {
@@ -194,7 +227,7 @@ const funciones = {
     },
 
     // ========================================================
-    // 🎨 10. Aplicar colores SOLO a columnas definidas en 'modos'
+    // 🎨 10. Aplicar colores (MODIFICADA con 'positivoMejor')
     // ========================================================
     aplicarColoresPorNombre(tablaSelector, modos = {}) {
         const tabla = document.querySelector(tablaSelector);
@@ -229,41 +262,69 @@ const funciones = {
                 return { celda, valor };
             });
 
-            const valoresValidos = tasas.map(t => t.valor).filter(v => !isNaN(v));
-            if (valoresValidos.length < 2) return;
+            // --- Lógica de coloreo (SEPARADA POR MODO) ---
 
-            const max = Math.max(...valoresValidos);
-            const min = Math.min(...valoresValidos);
+            if (modo === "altoMejor" || modo === "bajoMejor") {
+                // --- MODO: Comparativo (Max/Min) ---
+                const valoresValidos = tasas.map(t => t.valor).filter(v => !isNaN(v));
 
-            // Aplicar colores según modo
-            tasas.forEach(({ celda, valor }) => {
-                if (isNaN(valor)) return;
+                // (Validación original: necesitamos al menos 2 valores para comparar)
+                if (valoresValidos.length < 2) return;
 
-                celda.style.backgroundColor = "";
-                celda.style.color = "";
-                celda.style.fontWeight = "";
+                const max = Math.max(...valoresValidos);
+                const min = Math.min(...valoresValidos);
 
-                const esMejor =
-                    (modo === "altoMejor" && valor === max) ||
-                    (modo === "bajoMejor" && valor === min);
-                const esPeor =
-                    (modo === "altoMejor" && valor === min) ||
-                    (modo === "bajoMejor" && valor === max);
+                tasas.forEach(({ celda, valor }) => {
+                    if (isNaN(valor)) return;
 
-                if (esMejor) {
-                    celda.style.backgroundColor = "#2e7d32"; // verde
-                    celda.style.color = "white";
-                    celda.style.fontWeight = "bold";
-                } else if (esPeor) {
-                    celda.style.backgroundColor = "#b71c1c"; // rojo
-                    celda.style.color = "white";
-                    celda.style.fontWeight = "bold";
-                }
-            });
+                    // Resetear estilos
+                    celda.style.backgroundColor = "";
+                    celda.style.color = "";
+                    celda.style.fontWeight = "";
+
+                    const esMejor = (modo === "altoMejor" && valor === max) || (modo === "bajoMejor" && valor === min);
+                    const esPeor = (modo === "altoMejor" && valor === min) || (modo === "bajoMejor" && valor === max);
+
+                    if (esMejor) {
+                        celda.style.backgroundColor = "#2e7d32"; // verde
+                        celda.style.color = "white";
+                        celda.style.fontWeight = "bold";
+                    } else if (esPeor) {
+                        celda.style.backgroundColor = "#b71c1c"; // rojo
+                        celda.style.color = "white";
+                        celda.style.fontWeight = "bold";
+                    }
+                });
+
+            } else if (modo === "positivoMejor") {
+                // --- NUEVO MODO: Absoluto (Positivo/Negativo) ---
+
+                tasas.forEach(({ celda, valor }) => {
+                    // Resetear estilos
+                    celda.style.backgroundColor = "";
+                    celda.style.color = "";
+                    celda.style.fontWeight = "";
+
+                    if (isNaN(valor)) return; // No colorear N/A
+
+                    if (valor > 0) {
+                        celda.style.backgroundColor = "#2e7d32"; // verde
+                        celda.style.color = "white";
+                        celda.style.fontWeight = "bold";
+                    } else if (valor < 0) {
+                        celda.style.backgroundColor = "#b71c1c"; // rojo
+                        celda.style.color = "white";
+                        celda.style.fontWeight = "bold";
+                    }
+                    // (Si valor es 0, queda sin color)
+                });
+            }
+            // --- FIN DE LA LÓGICA DE COLOREO ---
         });
 
-        console.log("🎨 Colores aplicados solo a las columnas definidas en 'modos'.");
+        console.log("🎨 Colores aplicados (con lógica actualizada) a las columnas definidas en 'modos'.");
     },
+
     // ========================================================
     // 🧱 11. Cargar componentes comunes (header y footer)
     // ========================================================
@@ -399,6 +460,39 @@ const funciones = {
         `).join("");
       } catch (error) {
         console.error("❌ Error al renderizar sofipos destacadas:", error);
+      }
+    },
+
+    // ========================================================
+    // 🟣 Renderizar tarjetas modulares de BANCOS destacados
+    // ========================================================
+    async renderizarBancosDestacados(ruta = "data/bancos_detalle.json") {
+      try {
+        const respuesta = await fetch(ruta);
+        if (!respuesta.ok) throw new Error("Error al cargar bancos_detalle.json");
+        const bancos = await respuesta.json();
+
+        // Apuntamos al nuevo contenedor que crearemos en bancos.html
+        const contenedor = document.getElementById("contenedor-bancos");
+        if (!contenedor) return;
+
+        // Usamos las MISMAS clases CSS que 'sofipos.html'
+        // para que se vean idénticas sin tocar style.css
+        contenedor.innerHTML = bancos.map(b => `
+          <div class="sofipo-card">
+            <div class="sofipo-card-header">
+              <div class="sofipo-logo-nombre">
+                ${b.logo ? `<img src="${b.logo}" alt="${b.nombre}" class="sofipo-logo">` : ""}
+                <h3>${b.nombre}</h3>
+              </div>
+            </div>
+            <p>${b.descripcion}</p>
+            <p class="sofipo-respaldo"><strong>Respaldo:</strong> ${b.respaldo}</p>
+            <a href="${b.link}" target="_blank" class="btn-sofipo">Abrir cuenta</a>
+          </div>
+        `).join("");
+      } catch (error) {
+        console.error("❌ Error al renderizar bancos destacados:", error);
       }
     },
 

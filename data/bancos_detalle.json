@@ -1,0 +1,26 @@
+[
+  {
+    "nombre": "Openbank",
+    "descripcion": "Es el banco 100% digital del Grupo Santander. Ofrece 10% de rendimiento a la vista y 3% de cashback en compras digitales. Sin comisiones y con acceso a cajeros Santander.",
+    "respaldo": "Grupo Santander (España)",
+    "link": "https://www.openbank.mx"
+  },
+  {
+    "nombre": "Cuenta digital Mifel",
+    "descripcion": "Ofrece 10% de rendimiento anual. Apertura 100% digital. La tasa del 10% está topada a $500,000 MXN en la 'Cuenta Digital Evoluciona'.",
+    "respaldo": "Banca Mifel (México)",
+    "link": "https://www.mifel.com.mx/personas/cuentas/cuenta-digital"
+  },
+  {
+    "nombre": "BBVA",
+    "descripcion": "Es la institución financiera más grande de México y líder en diversos segmentos como depósitos, cartera de crédito, cajeros automáticos y sucursales.",
+    "respaldo": "BBVA (España)",
+    "link": "https://www.bbva.mx"
+  },
+  {
+    "nombre": "Santander",
+    "descripcion": "Una de las principales instituciones del país, con una amplia gama de productos y servicios para individuos y empresas, incluyendo cuentas, tarjetas, hipotecas e inversiones.",
+    "respaldo": "Grupo Santander (España)",
+    "link": "https://www.santander.com.mx"
+  }
+]

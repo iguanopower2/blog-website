@@ -7,6 +7,14 @@
   <title>SOFIPOs - De Cero al Infinito</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0NV8P41XXJ"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0NV8P41XXJ');
+  </script>
 </head>
 <body>
   <div id="header-container"></div>
@@ -48,6 +56,7 @@
         <div class="table-footnotes">
           <ol>
             <li><strong>NICAP:</strong> Nivel de capitalización de la SOFIPO, un indicador de solidez financiera.</li>
+            <li><strong>Categorías NICAP:</strong> Nivel 1 (≥ 131%), Nivel 2 (≥ 100% y < 131%), Nivel 3 (≥ 56% y < 100%), Nivel 4 (< 56%).</li>
             <li><strong>IMOR:</strong> Índice de morosidad, indica el porcentaje de cartera vencida sobre la cartera total.</li>
             <li><strong>Resultado Neto:</strong> Resultado contable del periodo, en millones de pesos.</li>
             <li>El seguro PROSOFIPO protege hasta por aproximadamente <span class="valor-prosofipo"></span> MXN.</li>
@@ -139,6 +148,7 @@
       bodyId: "tabla-indicadores-body",
       mostrarTipo: false,
       mostrarNICAP: true,
+      mostrarCategoriaNICAP: true,
       mostrarIMOR: true,
       mostrarResultado: true,
       mostrarCarteraVig: true,
@@ -150,7 +160,7 @@
     const modos = {
     "NICAP (%)": "altoMejor",
     "IMOR (%)": "bajoMejor",
-    "Resultado Neto (millones MXN)": "altoMejor",
+    "Resultado Neto (millones MXN)": "positivoMejor",
     Vista: "altoMejor",
     "1 mes": "altoMejor",
     "3 meses": "altoMejor",
