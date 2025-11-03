@@ -23,14 +23,14 @@
   <main class="hero">
     <section class="hero-content">
       <h1>Comparador de Inversiones en México (SOFIPOs, Bancos y más)</h1>
-      <p>Encuentra las mejores opciones de inversión de forma clara, segura y sin letras chiquitas.</p>
-      <p>¡Publicamos contenido nuevo todos los días!</p>
+      <p>Encuentra las mejores opciones de inversión para que tu dinero crezca</p>
+      <p>Si deseas que agreguemos un nuevo producto mándanos un correo</p>
     </section>
   </main>
 
   <section class="container" id="tabla-principal">
     <h2 class="titulo-tabla">Mejores Tasas de Inversión en México</h2>
-    <p class="subtitulo-tabla">Comparamos las mejores opciones para que tu dinero crezca. Tasas actualizadas semanalmente.</p>
+    <p class="ultima-actualizacion">Última actualización: <span id="fecha-actualizacion"></span></p>
     <div class="table-container">
       <table class="sofipos-table">
         <thead id="tabla-inversiones-head">
@@ -77,6 +77,9 @@
   document.addEventListener("DOMContentLoaded", async () => {
     // 1️⃣ Cargar header y footer comunes
     funciones.cargarComponentes();
+
+    // 1.A️⃣ Cargar configuración global (para valor de UDI/IPAB)
+    await funciones.aplicarConfiguracionGlobal();
 
     // 2️⃣ Cargar y validar los datos
     const data = await funciones.obtenerDatosJSON("data/inversiones.json");

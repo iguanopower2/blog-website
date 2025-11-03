@@ -46,11 +46,14 @@
   </main>
 
   <div id="footer-container"></div>
-  <script src="../js/funciones.js"></script> <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    funciones.cargarComponentes();
-  });
-  </script>
+
+  <script src="../js/funciones.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        // 1️⃣ Cargar header y footer comunes
+        funciones.cargarComponentesBlog();
+      });
+    </script>
 
 </body>
 </html>

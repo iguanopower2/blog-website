@@ -356,6 +356,35 @@ const funciones = {
             .catch(err => console.error("Error cargando footer:", err));
     },
     // ========================================================
+    // 🧱 1.B NUEVA: Cargar componentes (PARA EL BLOG)
+    // ========================================================
+    // Esta es la nueva función para páginas en subdirectorios (ej. /blog/articulo.html)
+    async cargarComponentesBlog() {
+        const headerCont = document.getElementById("header-container");
+        const footerCont = document.getElementById("footer-container");
+
+        try {
+            // Rutas relativas al subdirectorio (../)
+            const headerRes = await fetch("../components/header.html");
+            const footerRes = await fetch("../components/footer.html");
+
+            if (!headerRes.ok) throw new Error("Error al cargar ../components/header.html");
+            if (!footerRes.ok) throw new Error("Error al cargar ../components/footer.html");
+
+            headerCont.innerHTML = await headerRes.text();
+            footerCont.innerHTML = await footerRes.text();
+
+            if (typeof this.activarMenuMovil === 'function') {
+                this.activarMenuMovil();
+            }
+
+        } catch (error) {
+            console.error("❌ Error al cargar componentes del blog:", error);
+            if (headerCont) headerCont.innerHTML = "<p style='color:red; text-align:center;'>Error al cargar el menú.</p>";
+            if (footerCont) footerCont.innerHTML = "<p style='color:red; text-align:center;'>Error al cargar el pie de página.</p>";
+        }
+    },
+    // ========================================================
     // 🪧 12. Crear ícono de nota o advertencia
     // ========================================================
     crearIconoNota(notaTexto) {
@@ -409,6 +438,20 @@ const funciones = {
           });
         }
 
+        // 🧮 Calcular monto en MXN del IPAB
+        if (config.valor_udi && config.seguro_prosofipo_udi) {
+          const montoSeguroMXNIPAB = config.valor_udi * config.seguro_prosofipo_ipab;
+
+          // 👇 Insertar en donde uses la clase `.valor-ipab`
+          document.querySelectorAll(".valor-ipab").forEach(el => {
+            el.textContent = montoSeguroMXNIPAB.toLocaleString("es-MX", {
+              style: "currency",
+              currency: "MXN",
+              maximumFractionDigits: 0
+            });
+          });
+        }
+
         // 📅 Insertar fecha de actualización
         if (config.fecha_actualizacion) {
           const fecha = new Date(config.fecha_actualizacion);
@@ -424,6 +467,14 @@ const funciones = {
           if (fechaElemento) {
             fechaElemento.textContent = fechaFormateada;
           }
+        }
+
+        // 📅 Insertar fecha de actualización de Indicadores Financieros
+        if (config.fecha_actualizacion_indicadores_fin) {
+          const fechaIndicadores = config.fecha_actualizacion_indicadores_fin;
+          document.querySelectorAll(".fecha-indicadores-fin").forEach(el => {
+            el.textContent = fechaIndicadores;
+          });
         }
 
         console.log("✅ Configuración global aplicada correctamente.");
