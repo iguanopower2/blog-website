@@ -983,6 +983,7 @@ a {
     padding-left: 40px; /* Indentación para jerarquía */
     font-size: 0.95rem;
     border-color: #555;
+    color: #f4f4f4;
   }
   .nav-menu .dropdown-menu li:last-child a {
     border-bottom: none;
