@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Calculadoras financieras para simular el rendimiento de tus inversiones y el costo de créditos hipotecarios en México.">
+  <title>Calculadoras Financieras - De Cero al Infinito</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0NV8P41XXJ"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0NV8P41XXJ');
+  </script>
+</head>
+<body>
+  <div id="header-container"></div>
+  <main class="container">
+    <h1>Calculadoras Financieras</h1>
+
+    <!-- NUEVA: Calculadora de Rendimientos por Plazo -->
+    <section class="calculator-container">
+      <h2>Calculadora de Rendimientos por Plazo</h2>
+      <p class="section-description">Elige un producto y un monto para ver la ganancia exacta que obtendrías en cada uno de sus plazos disponibles.</p>
+      <form id="yield-form" class="calculator-form">
+        <div class="form-group">
+          <label for="yield-investment-options">Elige una opción de inversión:</label>
+          <select id="yield-investment-options"></select>
+        </div>
+        <div class="form-group">
+          <label for="yield-amount">Monto a Invertir:</label>
+          <div class="input-with-symbol">
+            <input type="text" id="yield-amount" value="10,000" inputmode="numeric" required>
+          </div>
+        </div>
+      </form>
+      <div id="yield-results-container" class="results-container" style="display: none;">
+        <h3>Rendimientos Estimados</h3>
+        <table id="yield-results-table">
+            <!-- Resultados generados por JS -->
+        </table>
+      </div>
+    </section>
+
+    <!-- Calculadora de Interés Compuesto (Modificada) -->
+    <section class="calculator-container">
+      <h2>Calculadora de Interés Compuesto (Proyección a Futuro)</h2>
+      <p class="section-description">Proyecta el crecimiento de tu dinero a lo largo del tiempo con una tasa de interés anual fija.</p>
+      <form id="investment-form" class="calculator-form">
+        <div class="form-group">
+          <label for="initial-investment">Monto Inicial:</label>
+           <div class="input-with-symbol">
+            <input type="text" id="initial-investment" value="10,000" inputmode="numeric" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="monthly-contribution">Aportación Mensual:</label>
+          <div class="input-with-symbol">
+            <input type="text" id="monthly-contribution" value="1,000" inputmode="numeric">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="investment-period">Plazo (Años):</label>
+          <input type="number" id="investment-period" value="5" required>
+        </div>
+        <div class="form-group">
+          <label for="interest-rate">Tasa de Interés Anual (%):</label>
+          <input type="number" id="interest-rate" value="10.00" step="any" required>
+        </div>
+        <div class="form-group checkbox-group">
+          <label for="reinvest">Reinvertir Rendimientos:</label>
+          <input type="checkbox" id="reinvest" checked>
+        </div>
+        <button type="submit">Calcular Proyección</button>
+      </form>
+      <div class="results-container">
+        <h3>Resultados de la Proyección</h3>
+        <p>Monto Final: <strong id="final-amount">$0.00</strong></p>
+        <p>Total Aportado: <strong id="total-contributed">$0.00</strong></p>
+        <p>Ganancia Total: <strong id="total-gain">$0.00</strong></p>
+      </div>
+      <canvas id="investment-chart"></canvas>
+    </section>
+
+    <!-- Calculadora de Crédito Hipotecario (sin cambios en HTML) -->
+    <section class="calculator-container">
+      <h2>Calculadora de Crédito Hipotecario o Personal</h2>
+      <form id="mortgage-form" class="calculator-form">
+        <div class="form-group">
+          <label for="loan-amount">Monto del Crédito:</label>
+          <div class="input-with-symbol">
+            <input type="text" id="loan-amount" value="1,500,000" inputmode="numeric" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="mortgage-rate">Tasa de Interés Anual (%):</label>
+          <input type="number" id="mortgage-rate" value="10.5" step="any" required>
+        </div>
+        <div class="form-group">
+          <label for="loan-term">Plazo (Años):</label>
+          <input type="number" id="loan-term" value="20" required>
+        </div>
+        <div class="form-group">
+            <label for="extra-payment">Aportación Adicional Mensual:</label>
+            <div class="input-with-symbol">
+              <input type="text" id="extra-payment" value="0" inputmode="numeric">
+            </div>
+        </div>
+        <button type="submit">Calcular</button>
+      </form>
+      <div class="results-container">
+        <h3>Resultados del Crédito</h3>
+        <p>Pago Mensual Mínimo: <strong id="monthly-payment">$0.00</strong></p>
+        <p>Total de Intereses Pagados: <strong id="total-interest-paid">$0.00</strong></p>
+        <p>Total Pagado (Capital + Intereses): <strong id="total-paid-no-extra">$0.00</strong></p>
+        <p>Pagarías tu crédito en: <strong id="new-loan-term">-- años</strong></p>
+        <p>Ahorro por aportaciones: <strong id="interest-saved">$0.00</strong></p>
+      </div>
+      <div class="amortization-container">
+        <h3>Tabla de Amortización</h3>
+        <button id="export-csv-btn" class="btn-secondary">Exportar a CSV</button>
+        <div class="table-wrapper">
+            <table id="amortization-table">
+                <thead>
+                    <tr>
+                        <th>Mes</th>
+                        <th>Pago</th>
+                        <th>Interés</th>
+                        <th>Capital</th>
+                        <th>Saldo Restante</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="footer-container"></div>
+  <script src="js/funciones.js"></script>
+  <script src="calculadoras.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      funciones.cargarComponentes();
+    });
+  </script>
+</body>
+</html>

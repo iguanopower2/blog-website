@@ -1,0 +1,36 @@
+[
+  {
+    "nombre": "Openbank",
+    "tipo": "Banco",
+    "beneficio": "Gana $100 al abrir tu cuenta",
+    "codigo": "70031712187151510199",
+    "link": "https://www.openbank.mx/",
+    "notas": "Ingresa el código en tu solicitud."
+  },
+  {
+    "nombre": "Finsus",
+    "tipo": "SOFIPO",
+    "beneficio": "Gana $50 en tu primera inversión desde $100 a un plazo de 1 año o más",
+    "codigo": "SALAZAR39079",
+    "link": "https://finsus.onelink.me/MWGf/k3keny16?deep_link_sub1=SALAZAR39079",
+    "notas": "Usa el código al registrarte."
+  },
+  {
+    "nombre": "Didi Cuenta",
+    "tipo": "SOFIPO",
+    "beneficio": "Rendimiento especial de 15%",
+    "codigo": null,
+    "link": "https://didicard.com/didi-cuenta",
+    "notas": "El beneficio se aplica automáticamente desde el enlace."
+  },
+  {
+    "nombre": "Nu",
+    "tipo": "SOFIPO",
+    "beneficio": "Rendimiento especial de 15%",
+    "codigo": null,
+    "link": "https://link.nubank.com.br/e/JhHNIimWYXb",
+    "notas": null
+  }
+]
+
+https://link.nubank.com.br/e/JhHNIimWYXb

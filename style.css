@@ -844,3 +844,77 @@ a {
   margin: 0;
   padding-left: 20px;
 }
+
+/* ==========================================================================
+   15. HEADER RESPONSIVO Y MENÚ MÓVIL (AÑADIDO)
+   ========================================================================== */
+
+/* 1. Ajuste del contenedor del header en desktop */
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 2. Ocultar el botón de hamburguesa en desktop */
+#mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* 3. Estilos de la navegación en desktop (ya los tienes, pero esto asegura) */
+.nav-menu {
+  display: flex;
+}
+.nav-menu a {
+  margin-left: 20px;
+  color: white;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   ¡AQUÍ COMIENZA LA MAGIA! (PANTALLAS PEQUEÑAS)
+   ========================================================================== */
+@media (max-width: 768px) {
+
+  /* 4. Ocultar el menú horizontal en móvil */
+  .nav-menu {
+    /* Posicionarlo absolutamente debajo del header */
+    position: absolute;
+    top: 70px; /* Ajusta esto a la altura de tu header si es diferente */
+    left: 0;
+    width: 100%;
+
+    /* Fondo oscuro y enlaces apilados */
+    background-color: #333;
+    flex-direction: column;
+
+    /* Animación de deslizamiento (estilo Klar) */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+  }
+
+  /* 5. Estilo de los enlaces en el menú móvil */
+  .nav-menu a {
+    margin: 0;
+    padding: 18px 20px;
+    width: 100%;
+    border-bottom: 1px solid #4e4e4e;
+    box-sizing: border-box; /* Importante para que el padding no rompa el diseño */
+  }
+
+  /* 6. Clase 'active' que el JS añadirá para MOSTRAR el menú */
+  .nav-menu.active {
+    max-height: 500px; /* Altura suficiente para mostrar todos los enlaces */
+  }
+
+  /* 7. Mostrar el botón de hamburguesa en móvil */
+  #mobile-menu-toggle {
+    display: block;
+  }
+}

@@ -548,5 +548,22 @@ const funciones = {
     },
 
 
+    // ========================================================
+    // 📱 NUEVA: Activar menú móvil (Versión simple)
+    // ========================================================
+    activarMenuMovil() {
+      const toggleBtn = document.getElementById("mobile-menu-toggle");
+      const nav = document.querySelector(".nav-menu");
+
+      if (toggleBtn && nav) {
+        toggleBtn.addEventListener("click", () => {
+          // Esta línea es la única lógica necesaria:
+          // Añade o quita la clase '.active' del menú
+          nav.classList.toggle("active");
+        });
+      }
+    },
+
+
 };
 
