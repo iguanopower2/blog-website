@@ -326,34 +326,40 @@ const funciones = {
     },
 
     // ========================================================
-    // 🧱 11. Cargar componentes comunes (header y footer)
+    // 🧱 11. Cargar componentes (PARA PÁGINAS PRINCIPALES) - (CORREGIDA)
     // ========================================================
-    cargarComponentes() {
-        const headerContainer = document.createElement("div");
-        const footerContainer = document.createElement("div");
+    async cargarComponentes() {
+        // Busca los contenedores que YA EXISTEN en tu HTML
+        const headerCont = document.getElementById("header-container");
+        const footerCont = document.getElementById("footer-container");
 
-        headerContainer.id = "header-container";
-        footerContainer.id = "footer-container";
+        if (!headerCont || !footerCont) {
+            console.warn("No se encontraron los contenedores de header/footer.");
+            return;
+        }
 
-        // Insertar header antes del body content
-        document.body.prepend(headerContainer);
-        document.body.appendChild(footerContainer);
+        try {
+            // Rutas relativas a la raíz (index.html, sofipos.html, etc.)
+            const headerRes = await fetch("components/header.html");
+            const footerRes = await fetch("components/footer.html");
 
-        // Cargar header
-        fetch("components/header.html")
-            .then(res => res.text())
-            .then(html => {
-                headerContainer.innerHTML = html;
-            })
-            .catch(err => console.error("Error cargando header:", err));
+            if (!headerRes.ok) throw new Error("Error al cargar components/header.html");
+            if (!footerRes.ok) throw new Error("Error al cargar components/footer.html");
 
-        // Cargar footer
-        fetch("components/footer.html")
-            .then(res => res.text())
-            .then(html => {
-                footerContainer.innerHTML = html;
-            })
-            .catch(err => console.error("Error cargando footer:", err));
+            headerCont.innerHTML = await headerRes.text();
+            footerCont.innerHTML = await footerRes.text();
+
+            // 👇 ¡ESTA ES LA LÍNEA QUE FALTABA! 👇
+            // Llama a la función para activar la lógica del menú
+            if (typeof this.activarMenuMovil === 'function') {
+                this.activarMenuMovil();
+            }
+
+        } catch (error) {
+            console.error("❌ Error al cargar componentes:", error);
+            if (headerCont) headerCont.innerHTML = "<p style='color:red; text-align:center;'>Error al cargar el menú.</p>";
+            if (footerCont) footerCont.innerHTML = "<p style='color:red; text-align:center;'>Error al cargar el pie de página.</p>";
+        }
     },
     // ========================================================
     // 🧱 1.B NUEVA: Cargar componentes (PARA EL BLOG)
