@@ -999,3 +999,53 @@ a {
     display: block;
   }
 }
+/* ==========================================================================
+   16. MEJORAS PARA EL DROPDOWN (AGREGAR AL FINAL DE TU CSS)
+   ========================================================================== */
+
+/* Smooth transitions para el dropdown */
+.nav-menu .dropdown-menu {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(-10px);
+    display: block; /* Siempre visible para las transiciones */
+    pointer-events: none;
+}
+
+.nav-menu .dropdown:hover .dropdown-menu,
+.nav-menu .dropdown-menu.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Mejorar la flecha del dropdown */
+.nav-menu .dropdown-toggle i {
+    transition: transform 0.3s ease;
+}
+
+/* En móvil, el dropdown debe ser visible cuando está activo */
+@media (max-width: 768px) {
+    .nav-menu .dropdown-menu {
+        opacity: 1;
+        transform: none;
+        transition: max-height 0.3s ease;
+        max-height: 0;
+        display: block;
+    }
+
+    .nav-menu .dropdown-menu.active {
+        max-height: 300px; /* Ajusta según la altura de tus 3 items */
+    }
+}
+
+/* Prevenir que el hover interfiera en móvil */
+@media (max-width: 768px) {
+    .nav-menu .dropdown:hover .dropdown-menu {
+        display: none; /* En móvil, solo se muestra con JS */
+    }
+
+    .nav-menu .dropdown-menu.active {
+        display: block !important;
+    }
+}

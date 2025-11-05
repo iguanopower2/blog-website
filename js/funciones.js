@@ -555,42 +555,99 @@ const funciones = {
 
 
     // ========================================================
-    // 📱 NUEVA: Activar menú móvil (CON LÓGICA DE DROPDOWN)
+    // 📱 NUEVA: Activar menú móvil (CON LÓGICA MEJORADA)
     // ========================================================
     activarMenuMovil() {
-      const toggleBtn = document.getElementById("mobile-menu-toggle");
-      const nav = document.querySelector(".nav-menu");
-      const dropdownToggle = document.querySelector(".dropdown-toggle"); // El enlace "Calculadoras"
+        const toggleBtn = document.getElementById("mobile-menu-toggle");
+        const nav = document.querySelector(".nav-menu");
+        const dropdownToggle = document.querySelector(".dropdown-toggle");
 
-      // 1. Lógica del Hamburger (para abrir/cerrar menú principal)
-      if (toggleBtn && nav) {
-        toggleBtn.addEventListener("click", () => {
-          nav.classList.toggle("active");
+        // Estado para rastrear si estamos en móvil
+        let isMobileView = window.innerWidth <= 768;
+
+        // 1. Lógica del Hamburger (para abrir/cerrar menú principal)
+        if (toggleBtn && nav) {
+            toggleBtn.addEventListener("click", () => {
+                nav.classList.toggle("active");
+
+                // Si abrimos el menú móvil, cerrar cualquier dropdown abierto
+                if (nav.classList.contains("active")) {
+                    cerrarTodosLosDropdowns();
+                }
+            });
+        }
+
+        // 2. Lógica del Dropdown MEJORADA
+        if (dropdownToggle) {
+            dropdownToggle.addEventListener("click", (e) => {
+                // Prevenir que el enlace '#' navegue en todos los casos
+                e.preventDefault();
+
+                const dropdownMenu = dropdownToggle.nextElementSibling;
+                const icon = dropdownToggle.querySelector("i");
+
+                if (dropdownMenu) {
+                    // Cerrar otros dropdowns antes de abrir este
+                    cerrarOtrosDropdowns(dropdownMenu);
+
+                    // Alternar estado del dropdown actual
+                    dropdownMenu.classList.toggle("active");
+                    icon.classList.toggle("rotated");
+                }
+            });
+        }
+
+        // 3. Cerrar menús al hacer clic fuera (MEJORADO)
+        document.addEventListener("click", (e) => {
+            if (!nav.contains(e.target) && !toggleBtn?.contains(e.target)) {
+                // Cerrar menú móvil si está abierto
+                if (nav.classList.contains("active")) {
+                    nav.classList.remove("active");
+                }
+
+                // Cerrar todos los dropdowns
+                cerrarTodosLosDropdowns();
+            }
         });
-      }
 
-      // 2. Lógica del Dropdown (para sub-menú de Calculadoras)
-      if (dropdownToggle) {
-        dropdownToggle.addEventListener("click", (e) => {
+        // 4. Cerrar dropdowns al cambiar tamaño de ventana
+        window.addEventListener("resize", () => {
+            const newIsMobile = window.innerWidth <= 768;
 
-          // Solo activar en vista móvil (basado en el breakpoint del CSS)
-          if (window.innerWidth <= 768) {
-            // Prevenir que el enlace '#' navegue
-            e.preventDefault();
-
-            // El sub-menú es el siguiente elemento <ul>
-            const dropdownMenu = dropdownToggle.nextElementSibling;
-
-            if (dropdownMenu) {
-                // Muestra u oculta el sub-menú
-                dropdownMenu.classList.toggle("active");
+            // Si cambiamos de móvil a desktop, cerrar menús
+            if (isMobileView && !newIsMobile) {
+                nav.classList.remove("active");
+                cerrarTodosLosDropdowns();
             }
 
-            // Rota la flecha (ícono <i>)
-            dropdownToggle.querySelector("i").classList.toggle("rotated");
-          }
+            isMobileView = newIsMobile;
         });
-      }
+
+        // ========================================================
+        // 🔧 FUNCIONES AUXILIARES
+        // ========================================================
+
+        function cerrarTodosLosDropdowns() {
+            document.querySelectorAll(".dropdown-menu.active").forEach(menu => {
+                menu.classList.remove("active");
+            });
+            document.querySelectorAll(".dropdown-toggle i.rotated").forEach(icon => {
+                icon.classList.remove("rotated");
+            });
+        }
+
+        function cerrarOtrosDropdowns(dropdownActual) {
+            document.querySelectorAll(".dropdown-menu.active").forEach(menu => {
+                if (menu !== dropdownActual) {
+                    menu.classList.remove("active");
+                }
+            });
+            document.querySelectorAll(".dropdown-toggle i.rotated").forEach(icon => {
+                if (!icon.parentElement.nextElementSibling === dropdownActual) {
+                    icon.classList.remove("rotated");
+                }
+            });
+        }
     },
 
 
