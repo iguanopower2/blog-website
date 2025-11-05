@@ -553,134 +553,135 @@ const funciones = {
       }
     },
 
-
     // ========================================================
-    // 📱 ACTIVAR MENÚ MÓVIL (VERSIÓN CORREGIDA)
+    // 📱 ACTIVAR MENÚ MÓVIL (COMPORTAMIENTO NATURAL)
     // ========================================================
     activarMenuMovil() {
         const toggleBtn = document.getElementById("mobile-menu-toggle");
         const nav = document.querySelector(".nav-menu");
-        const dropdownToggle = document.querySelector(".dropdown-toggle");
 
-        // Estado para rastrear dropdowns abiertos
-        let dropdownAbierto = null;
+        let hoverTimeouts = new Map();
 
-        // 1. Asegurar que todo esté cerrado al inicio (IMPORTANTE para móvil)
-        this.cerrarTodosLosDropdowns();
-
-        // 2. Lógica del Hamburger
+        // 1. Menú Hamburguesa
         if (toggleBtn && nav) {
-            toggleBtn.addEventListener("click", () => {
-                const estabaAbierto = nav.classList.contains("active");
-
-                // Cerrar todo primero
-                this.cerrarTodosLosDropdowns();
-                dropdownAbierto = null;
-
-                // Luego alternar el menú principal
+            toggleBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
                 nav.classList.toggle("active");
-
-                // Si estamos cerrando el menú móvil, asegurar que todo esté cerrado
-                if (estabaAbierto) {
-                    nav.classList.remove("active");
+                if (nav.classList.contains("active")) {
+                    this.cerrarTodosLosDropdowns();
                 }
             });
         }
 
-        // 3. Lógica del Dropdown MEJORADA - funciona en desktop y móvil
-        if (dropdownToggle) {
-            dropdownToggle.addEventListener("click", (e) => {
-                // Prevenir navegación SOLO si es el dropdown de calculadoras
-                if (dropdownToggle.getAttribute('href') === '#') {
-                    e.preventDefault();
+        // 2. Dropdowns - COMPORTAMIENTO SIMPLE
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            const toggle = dropdown.querySelector('.dropdown-toggle');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            const icon = toggle?.querySelector('i');
+
+            if (!toggle || !menu) return;
+
+            hoverTimeouts.set(dropdown, null);
+
+            // HOVER ENTER - Solo desktop
+            dropdown.addEventListener('mouseenter', () => {
+                if (window.innerWidth > 768) {
+                    const timeout = hoverTimeouts.get(dropdown);
+                    if (timeout) clearTimeout(timeout);
+
+                    this.cerrarOtrosDropdowns(menu);
+                    this.abrirDropdown(menu, icon);
                 }
+            });
 
-                const dropdownMenu = dropdownToggle.nextElementSibling;
-                const icon = dropdownToggle.querySelector("i");
+            // HOVER LEAVE - Solo desktop
+            dropdown.addEventListener('mouseleave', () => {
+                if (window.innerWidth > 768) {
+                    const timeout = setTimeout(() => {
+                        this.cerrarDropdown(menu, icon);
+                    }, 150);
+                    hoverTimeouts.set(dropdown, timeout);
+                }
+            });
 
-                // Verificar si estamos en móvil
-                const esMovil = window.innerWidth <= 768;
+            // CLICK - COMPORTAMIENTO NATURAL
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
 
-                if (dropdownMenu) {
-                    // Si ya está abierto, cerrarlo
-                    if (dropdownAbierto === dropdownMenu) {
-                        dropdownMenu.classList.remove("active");
-                        icon.classList.remove("rotated");
-                        dropdownAbierto = null;
-                    } else {
-                        // Cerrar dropdown anterior
-                        if (dropdownAbierto) {
-                            dropdownAbierto.classList.remove("active");
-                            document.querySelectorAll(".dropdown-toggle i.rotated").forEach(i => {
-                                i.classList.remove("rotated");
-                            });
-                        }
+                const isMobile = window.innerWidth <= 768;
 
-                        // Abrir nuevo dropdown
-                        dropdownMenu.classList.add("active");
-                        icon.classList.add("rotated");
-                        dropdownAbierto = dropdownMenu;
+                // Cancelar cualquier timeout de hover
+                const timeout = hoverTimeouts.get(dropdown);
+                if (timeout) clearTimeout(timeout);
 
-                        // En móvil, si el menú principal está cerrado, abrirlo
-                        if (esMovil && nav && !nav.classList.contains("active")) {
-                            nav.classList.add("active");
-                        }
+                if (menu.classList.contains('active')) {
+                    // SI ESTÁ ABIERTO → CERRAR (sin importar cómo se abrió)
+                    this.cerrarDropdown(menu, icon);
+                } else {
+                    // SI ESTÁ CERRADO → ABRIR
+                    this.cerrarTodosLosDropdowns();
+                    this.abrirDropdown(menu, icon);
+
+                    if (isMobile && nav && !nav.classList.contains('active')) {
+                        nav.classList.add('active');
                     }
                 }
             });
-        }
+        });
 
-        // 4. Cerrar menús al hacer clic fuera (MEJORADO)
-        document.addEventListener("click", (e) => {
-            const target = e.target;
-            const esClicEnDropdown = target.closest('.dropdown') ||
-                                    target.closest('.dropdown-toggle') ||
-                                    target.closest('.dropdown-menu');
-
-            const esClicEnHamburger = target === toggleBtn || toggleBtn?.contains(target);
-
-            // Si el clic NO fue en elementos del menú NI en el botón hamburguesa
-            if (!esClicEnDropdown && !esClicEnHamburger) {
-                // Cerrar menú móvil si está abierto
-                if (nav && nav.classList.contains("active")) {
-                    nav.classList.remove("active");
-                }
-
-                // Cerrar todos los dropdowns
+        // 3. Cerrar todo al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.dropdown') && !e.target.closest('#mobile-menu-toggle')) {
                 this.cerrarTodosLosDropdowns();
-                dropdownAbierto = null;
+                if (nav) nav.classList.remove('active');
             }
         });
 
-        // 5. Cerrar dropdowns al cambiar tamaño de ventana
-        window.addEventListener("resize", () => {
-            // Solo cerrar si cambiamos de móvil a desktop
+        // 4. Limpiar al cambiar tamaño
+        window.addEventListener('resize', () => {
+            hoverTimeouts.forEach(timeout => {
+                if (timeout) clearTimeout(timeout);
+            });
+            hoverTimeouts.clear();
+
             if (window.innerWidth > 768) {
+                if (nav) nav.classList.remove('active');
+            } else {
                 this.cerrarTodosLosDropdowns();
-                dropdownAbierto = null;
             }
         });
     },
 
-    // ========================================================
-    // 🔧 FUNCIÓN AUXILIAR PARA CERRAR DROPDOWNS
-    // ========================================================
+    // (Mantener las mismas funciones auxiliares)
+    abrirDropdown(menu, icon) {
+        menu.classList.add('active');
+        if (icon) icon.classList.add('rotated');
+    },
+
+    cerrarDropdown(menu, icon) {
+        menu.classList.remove('active');
+        if (icon) icon.classList.remove('rotated');
+    },
+
     cerrarTodosLosDropdowns() {
-        // Cerrar todos los dropdown-menus
-        document.querySelectorAll(".dropdown-menu").forEach(menu => {
-            menu.classList.remove("active");
+        document.querySelectorAll('.dropdown-menu.active').forEach(menu => {
+            menu.classList.remove('active');
         });
-
-        // Resetear todas las flechas
-        document.querySelectorAll(".dropdown-toggle i").forEach(icon => {
-            icon.classList.remove("rotated");
+        document.querySelectorAll('.dropdown-toggle i.rotated').forEach(icon => {
+            icon.classList.remove('rotated');
         });
+    },
 
-        // También cerrar el menú móvil principal si existe
-        const nav = document.querySelector(".nav-menu");
-        if (nav) {
-            nav.classList.remove("active");
-        }
+    cerrarOtrosDropdowns(menuActual) {
+        document.querySelectorAll('.dropdown-menu.active').forEach(menu => {
+            if (menu !== menuActual) {
+                menu.classList.remove('active');
+                const toggle = menu.previousElementSibling;
+                const icon = toggle?.querySelector('i');
+                if (icon) icon.classList.remove('rotated');
+            }
+        });
     },
 
 
