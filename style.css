@@ -1049,3 +1049,54 @@ a {
         display: block !important;
     }
 }
+
+/* Asegurar que el dropdown esté CERRADO por defecto en móvil */
+@media (max-width: 768px) {
+    .nav-menu .dropdown-menu {
+        display: none !important; /* FORZAR que esté cerrado inicialmente */
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+    }
+
+    .nav-menu .dropdown-menu.active {
+        display: block !important;
+        max-height: 300px;
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Comportamiento desktop con hover PERO también con clic */
+.nav-menu .dropdown-menu {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.nav-menu .dropdown:hover .dropdown-menu,
+.nav-menu .dropdown-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Prevenir que el hover abra dropdowns en móvil */
+@media (max-width: 768px) {
+    .nav-menu .dropdown:hover .dropdown-menu:not(.active) {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transform: translateY(-10px) !important;
+    }
+}
+
+/* Mejorar la flecha - transición suave */
+.nav-menu .dropdown-toggle i {
+    transition: transform 0.3s ease;
+}
+
+.nav-menu .dropdown-toggle i.rotated {
+    transform: rotate(180deg);
+}

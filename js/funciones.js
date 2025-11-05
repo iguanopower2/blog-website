@@ -555,98 +555,131 @@ const funciones = {
 
 
     // ========================================================
-    // 📱 NUEVA: Activar menú móvil (CON LÓGICA MEJORADA)
+    // 📱 ACTIVAR MENÚ MÓVIL (VERSIÓN CORREGIDA)
     // ========================================================
     activarMenuMovil() {
         const toggleBtn = document.getElementById("mobile-menu-toggle");
         const nav = document.querySelector(".nav-menu");
         const dropdownToggle = document.querySelector(".dropdown-toggle");
 
-        // Estado para rastrear si estamos en móvil
-        let isMobileView = window.innerWidth <= 768;
+        // Estado para rastrear dropdowns abiertos
+        let dropdownAbierto = null;
 
-        // 1. Lógica del Hamburger (para abrir/cerrar menú principal)
+        // 1. Asegurar que todo esté cerrado al inicio (IMPORTANTE para móvil)
+        this.cerrarTodosLosDropdowns();
+
+        // 2. Lógica del Hamburger
         if (toggleBtn && nav) {
             toggleBtn.addEventListener("click", () => {
+                const estabaAbierto = nav.classList.contains("active");
+
+                // Cerrar todo primero
+                this.cerrarTodosLosDropdowns();
+                dropdownAbierto = null;
+
+                // Luego alternar el menú principal
                 nav.classList.toggle("active");
 
-                // Si abrimos el menú móvil, cerrar cualquier dropdown abierto
-                if (nav.classList.contains("active")) {
-                    cerrarTodosLosDropdowns();
+                // Si estamos cerrando el menú móvil, asegurar que todo esté cerrado
+                if (estabaAbierto) {
+                    nav.classList.remove("active");
                 }
             });
         }
 
-        // 2. Lógica del Dropdown MEJORADA
+        // 3. Lógica del Dropdown MEJORADA - funciona en desktop y móvil
         if (dropdownToggle) {
             dropdownToggle.addEventListener("click", (e) => {
-                // Prevenir que el enlace '#' navegue en todos los casos
-                e.preventDefault();
+                // Prevenir navegación SOLO si es el dropdown de calculadoras
+                if (dropdownToggle.getAttribute('href') === '#') {
+                    e.preventDefault();
+                }
 
                 const dropdownMenu = dropdownToggle.nextElementSibling;
                 const icon = dropdownToggle.querySelector("i");
 
-                if (dropdownMenu) {
-                    // Cerrar otros dropdowns antes de abrir este
-                    cerrarOtrosDropdowns(dropdownMenu);
+                // Verificar si estamos en móvil
+                const esMovil = window.innerWidth <= 768;
 
-                    // Alternar estado del dropdown actual
-                    dropdownMenu.classList.toggle("active");
-                    icon.classList.toggle("rotated");
+                if (dropdownMenu) {
+                    // Si ya está abierto, cerrarlo
+                    if (dropdownAbierto === dropdownMenu) {
+                        dropdownMenu.classList.remove("active");
+                        icon.classList.remove("rotated");
+                        dropdownAbierto = null;
+                    } else {
+                        // Cerrar dropdown anterior
+                        if (dropdownAbierto) {
+                            dropdownAbierto.classList.remove("active");
+                            document.querySelectorAll(".dropdown-toggle i.rotated").forEach(i => {
+                                i.classList.remove("rotated");
+                            });
+                        }
+
+                        // Abrir nuevo dropdown
+                        dropdownMenu.classList.add("active");
+                        icon.classList.add("rotated");
+                        dropdownAbierto = dropdownMenu;
+
+                        // En móvil, si el menú principal está cerrado, abrirlo
+                        if (esMovil && nav && !nav.classList.contains("active")) {
+                            nav.classList.add("active");
+                        }
+                    }
                 }
             });
         }
 
-        // 3. Cerrar menús al hacer clic fuera (MEJORADO)
+        // 4. Cerrar menús al hacer clic fuera (MEJORADO)
         document.addEventListener("click", (e) => {
-            if (!nav.contains(e.target) && !toggleBtn?.contains(e.target)) {
+            const target = e.target;
+            const esClicEnDropdown = target.closest('.dropdown') ||
+                                    target.closest('.dropdown-toggle') ||
+                                    target.closest('.dropdown-menu');
+
+            const esClicEnHamburger = target === toggleBtn || toggleBtn?.contains(target);
+
+            // Si el clic NO fue en elementos del menú NI en el botón hamburguesa
+            if (!esClicEnDropdown && !esClicEnHamburger) {
                 // Cerrar menú móvil si está abierto
-                if (nav.classList.contains("active")) {
+                if (nav && nav.classList.contains("active")) {
                     nav.classList.remove("active");
                 }
 
                 // Cerrar todos los dropdowns
-                cerrarTodosLosDropdowns();
+                this.cerrarTodosLosDropdowns();
+                dropdownAbierto = null;
             }
         });
 
-        // 4. Cerrar dropdowns al cambiar tamaño de ventana
+        // 5. Cerrar dropdowns al cambiar tamaño de ventana
         window.addEventListener("resize", () => {
-            const newIsMobile = window.innerWidth <= 768;
-
-            // Si cambiamos de móvil a desktop, cerrar menús
-            if (isMobileView && !newIsMobile) {
-                nav.classList.remove("active");
-                cerrarTodosLosDropdowns();
+            // Solo cerrar si cambiamos de móvil a desktop
+            if (window.innerWidth > 768) {
+                this.cerrarTodosLosDropdowns();
+                dropdownAbierto = null;
             }
+        });
+    },
 
-            isMobileView = newIsMobile;
+    // ========================================================
+    // 🔧 FUNCIÓN AUXILIAR PARA CERRAR DROPDOWNS
+    // ========================================================
+    cerrarTodosLosDropdowns() {
+        // Cerrar todos los dropdown-menus
+        document.querySelectorAll(".dropdown-menu").forEach(menu => {
+            menu.classList.remove("active");
         });
 
-        // ========================================================
-        // 🔧 FUNCIONES AUXILIARES
-        // ========================================================
+        // Resetear todas las flechas
+        document.querySelectorAll(".dropdown-toggle i").forEach(icon => {
+            icon.classList.remove("rotated");
+        });
 
-        function cerrarTodosLosDropdowns() {
-            document.querySelectorAll(".dropdown-menu.active").forEach(menu => {
-                menu.classList.remove("active");
-            });
-            document.querySelectorAll(".dropdown-toggle i.rotated").forEach(icon => {
-                icon.classList.remove("rotated");
-            });
-        }
-
-        function cerrarOtrosDropdowns(dropdownActual) {
-            document.querySelectorAll(".dropdown-menu.active").forEach(menu => {
-                if (menu !== dropdownActual) {
-                    menu.classList.remove("active");
-                }
-            });
-            document.querySelectorAll(".dropdown-toggle i.rotated").forEach(icon => {
-                if (!icon.parentElement.nextElementSibling === dropdownActual) {
-                    icon.classList.remove("rotated");
-                }
-            });
+        // También cerrar el menú móvil principal si existe
+        const nav = document.querySelector(".nav-menu");
+        if (nav) {
+            nav.classList.remove("active");
         }
     },
 
