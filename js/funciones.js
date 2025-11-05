@@ -554,7 +554,7 @@ const funciones = {
     },
 
     // ========================================================
-    // 📱 ACTIVAR MENÚ MÓVIL (COMPORTAMIENTOS SEPARADOS)
+    // 📱 ACTIVAR MENÚ MÓVIL (COMPORTAMIENTO NATURAL)
     // ========================================================
     activarMenuMovil() {
         const toggleBtn = document.getElementById("mobile-menu-toggle");
@@ -573,7 +573,7 @@ const funciones = {
             });
         }
 
-        // 2. Dropdowns - COMPORTAMIENTOS SEPARADOS
+        // 2. Dropdowns - COMPORTAMIENTO SIMPLE
         document.querySelectorAll('.dropdown').forEach(dropdown => {
             const toggle = dropdown.querySelector('.dropdown-toggle');
             const menu = dropdown.querySelector('.dropdown-menu');
@@ -583,81 +583,58 @@ const funciones = {
 
             hoverTimeouts.set(dropdown, null);
 
-            // HOVER - Solo desktop
-            if (window.innerWidth > 768) {
-                dropdown.addEventListener('mouseenter', () => {
+            // HOVER ENTER - Solo desktop
+            dropdown.addEventListener('mouseenter', () => {
+                if (window.innerWidth > 768) {
                     const timeout = hoverTimeouts.get(dropdown);
                     if (timeout) clearTimeout(timeout);
 
                     this.cerrarOtrosDropdowns(menu);
                     this.abrirDropdown(menu, icon);
-                });
+                }
+            });
 
-                dropdown.addEventListener('mouseleave', () => {
+            // HOVER LEAVE - Solo desktop
+            dropdown.addEventListener('mouseleave', () => {
+                if (window.innerWidth > 768) {
                     const timeout = setTimeout(() => {
                         this.cerrarDropdown(menu, icon);
                     }, 150);
                     hoverTimeouts.set(dropdown, timeout);
-                });
-            }
+                }
+            });
 
-            // CLICK - Comportamientos separados
+            // CLICK - COMPORTAMIENTO NATURAL
             toggle.addEventListener('click', (e) => {
                 e.preventDefault();
+                e.stopPropagation();
 
                 const isMobile = window.innerWidth <= 768;
 
-                if (isMobile) {
-                    // 🎯 COMPORTAMIENTO MÓVIL
-                    e.stopPropagation(); // IMPORTANTE: evitar cierre inmediato
+                // Cancelar cualquier timeout de hover
+                const timeout = hoverTimeouts.get(dropdown);
+                if (timeout) clearTimeout(timeout);
 
-                    if (menu.classList.contains('active')) {
-                        // CERRAR en móvil
-                        this.cerrarDropdown(menu, icon);
-                    } else {
-                        // ABRIR en móvil
-                        this.cerrarTodosLosDropdowns();
-                        this.abrirDropdown(menu, icon);
-
-                        // Asegurar que el menú principal esté abierto
-                        if (nav && !nav.classList.contains('active')) {
-                            nav.classList.add('active');
-                        }
-                    }
+                if (menu.classList.contains('active')) {
+                    // SI ESTÁ ABIERTO → CERRAR (sin importar cómo se abrió)
+                    this.cerrarDropdown(menu, icon);
                 } else {
-                    // 🖥️ COMPORTAMIENTO DESKTOP
-                    // Cancelar cualquier timeout de hover
-                    const timeout = hoverTimeouts.get(dropdown);
-                    if (timeout) clearTimeout(timeout);
+                    // SI ESTÁ CERRADO → ABRIR
+                    this.cerrarTodosLosDropdowns();
+                    this.abrirDropdown(menu, icon);
 
-                    if (menu.classList.contains('active')) {
-                        // CERRAR en desktop
-                        this.cerrarDropdown(menu, icon);
-                    } else {
-                        // ABRIR en desktop
-                        this.cerrarTodosLosDropdowns();
-                        this.abrirDropdown(menu, icon);
+                    if (isMobile && nav && !nav.classList.contains('active')) {
+                        nav.classList.add('active');
                     }
                 }
             });
         });
 
-        // 3. Cerrar todo al hacer clic fuera (MEJORADO)
+        // 3. Cerrar todo al hacer clic fuera
         document.addEventListener('click', (e) => {
-            const isMobile = window.innerWidth <= 768;
-            const target = e.target;
-
-            // Verificar si el clic fue en elementos del menú
-            const esClicEnMenu = target.closest('.nav-menu') ||
-                                target.closest('#mobile-menu-toggle') ||
-                                target.closest('.dropdown-menu');
-
-            if (!esClicEnMenu) {
-                // Cerrar todo solo si el clic fue fuera del menú
+            if (!e.target.closest('.dropdown') && !e.target.closest('#mobile-menu-toggle')) {
                 this.cerrarTodosLosDropdowns();
-                if (nav && isMobile) {
-                    nav.classList.remove('active');
-                }
+                if (nav) nav.classList.remove('active');
             }
         });
 
@@ -672,6 +649,37 @@ const funciones = {
                 if (nav) nav.classList.remove('active');
             } else {
                 this.cerrarTodosLosDropdowns();
+            }
+        });
+    },
+
+    // (Mantener las mismas funciones auxiliares)
+    abrirDropdown(menu, icon) {
+        menu.classList.add('active');
+        if (icon) icon.classList.add('rotated');
+    },
+
+    cerrarDropdown(menu, icon) {
+        menu.classList.remove('active');
+        if (icon) icon.classList.remove('rotated');
+    },
+
+    cerrarTodosLosDropdowns() {
+        document.querySelectorAll('.dropdown-menu.active').forEach(menu => {
+            menu.classList.remove('active');
+        });
+        document.querySelectorAll('.dropdown-toggle i.rotated').forEach(icon => {
+            icon.classList.remove('rotated');
+        });
+    },
+
+    cerrarOtrosDropdowns(menuActual) {
+        document.querySelectorAll('.dropdown-menu.active').forEach(menu => {
+            if (menu !== menuActual) {
+                menu.classList.remove('active');
+                const toggle = menu.previousElementSibling;
+                const icon = toggle?.querySelector('i');
+                if (icon) icon.classList.remove('rotated');
             }
         });
     },
