@@ -555,17 +555,40 @@ const funciones = {
 
 
     // ========================================================
-    // 📱 NUEVA: Activar menú móvil (Versión simple)
+    // 📱 NUEVA: Activar menú móvil (CON LÓGICA DE DROPDOWN)
     // ========================================================
     activarMenuMovil() {
       const toggleBtn = document.getElementById("mobile-menu-toggle");
       const nav = document.querySelector(".nav-menu");
+      const dropdownToggle = document.querySelector(".dropdown-toggle"); // El enlace "Calculadoras"
 
+      // 1. Lógica del Hamburger (para abrir/cerrar menú principal)
       if (toggleBtn && nav) {
         toggleBtn.addEventListener("click", () => {
-          // Esta línea es la única lógica necesaria:
-          // Añade o quita la clase '.active' del menú
           nav.classList.toggle("active");
+        });
+      }
+
+      // 2. Lógica del Dropdown (para sub-menú de Calculadoras)
+      if (dropdownToggle) {
+        dropdownToggle.addEventListener("click", (e) => {
+
+          // Solo activar en vista móvil (basado en el breakpoint del CSS)
+          if (window.innerWidth <= 768) {
+            // Prevenir que el enlace '#' navegue
+            e.preventDefault();
+
+            // El sub-menú es el siguiente elemento <ul>
+            const dropdownMenu = dropdownToggle.nextElementSibling;
+
+            if (dropdownMenu) {
+                // Muestra u oculta el sub-menú
+                dropdownMenu.classList.toggle("active");
+            }
+
+            // Rota la flecha (ícono <i>)
+            dropdownToggle.querySelector("i").classList.toggle("rotated");
+          }
         });
       }
     },
