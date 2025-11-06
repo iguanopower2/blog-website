@@ -993,3 +993,26 @@ a {
     color: #f4f4f4;
   }
 }
+/* ==========================================================================
+   16. CONTENEDOR DE GRÁFICA (AÑADIDO)
+   ========================================================================== */
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 450px; /* Darle una altura fija */
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Hacerla responsiva en móviles */
+@media (max-width: 768px) {
+  .chart-container {
+    height: 350px;
+    padding: 10px;
+  }
+}

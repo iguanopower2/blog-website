@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Calculadora de crédito hipotecario - Simula tu préstamo y tabla de amortización">
+  <title>Calculadora de Crédito Hipotecario - De Cero al Infinito</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0NV8P41XXJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0NV8P41XXJ');
+  </script>
+</head>
+<body>
+  <div id="header-container"></div>
+
+  <main class="container">
+
+    <section class="calculator-container">
+      <h1>Calculadora de Crédito Hipotecario o Personal</h1>
+      <form id="mortgage-form" class="calculator-form">
+        <div class="form-group">
+          <label for="loan-amount">Monto del Crédito:</label>
+          <div class="input-with-symbol">
+            <input type="text" id="loan-amount" value="1,500,000" inputmode="numeric" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="mortgage-rate">Tasa de Interés Anual (%):</label>
+          <input type="number" id="mortgage-rate" value="10.5" step="any" required>
+        </div>
+        <div class="form-group">
+          <label for="loan-term">Plazo (Años):</label>
+          <input type="number" id="loan-term" value="20" required>
+        </div>
+        <div class="form-group">
+            <label for="extra-payment">Aportación Adicional Mensual:</label>
+            <div class="input-with-symbol">
+              <input type="text" id="extra-payment" value="0" inputmode="numeric">
+            </div>
+        </div>
+        <button type="submit">Calcular</button>
+      </form>
+
+      <div class="results-container">
+        <h3>Resultados del Crédito</h3>
+        <p>Pago Mensual Mínimo: <strong id="monthly-payment">$0.00</strong></p>
+        <p>Total de Intereses Pagados: <strong id="total-interest-paid">$0.00</strong></p>
+        <p>Total Pagado (Capital + Intereses): <strong id="total-paid-no-extra">$0.00</strong></p>
+        <p>Pagarías tu crédito en: <strong id="new-loan-term">-- años</strong></p>
+        <p>Ahorro por aportaciones: <strong id="interest-saved">$0.00</strong></p>
+      </div>
+
+      <div class="amortization-container">
+        <h3>Tabla de Amortización</h3>
+        <button id="export-csv-btn" class="btn-secondary">Exportar a CSV</button>
+        <div class="table-wrapper">
+            <table id="amortization-table">
+                <thead>
+                    <tr>
+                        <th>Mes</th>
+                        <th>Pago</th>
+                        <th>Interés</th>
+                        <th>Capital</th>
+                        <th>Saldo Restante</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script src="js/funciones.js"></script>
+
+  <script src="calculadoras.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      console.log("🚀 DOM de Hipoteca cargado. Iniciando componentes...");
+      funciones.cargarComponentes();
+
+      // 2. LLAMADA CORRECTA:
+      // Llamamos al inicializador global 'calculadoras.init()'.
+      // Este 'init' es lo suficientemente inteligente para solo
+      // activar la calculadora que está en esta página.
+      calculadoras.init();
+    });
+  </script>
+</body>
+</html>

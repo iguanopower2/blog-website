@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Calculadora de Plazo Fijo | Simula tu Inversión</title>
+  <meta name="description" content="Calcula la ganancia de tu inversión a plazo fijo. Ingresa tu monto, la tasa de interés y el plazo para ver tu rendimiento total y la retención de ISR.">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0NV8P41XXJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0NV8P41XXJ');
+  </script>
+</head>
+<body>
+
+  <div id="header-container"></div>
+
+  <main class="container">
+
+    <section class="calculator-container">
+      <h1>Calculadora de Plazo Fijo</h1>
+      <p>Simula tu ganancia en una inversión a plazo fijo y conoce el impacto de los impuestos.</p>
+
+      <form id="form-plazo-fijo" class="calculator-form">
+        <div class="form-group">
+          <label for="monto-plazo-fijo">Monto a Invertir (MXN):</label>
+           <div class="input-with-symbol">
+            <input type="text" id="monto-plazo-fijo" value="50,000" inputmode="numeric" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="tasa-plazo-fijo">Tasa de Interés Anual (%):</label>
+          <input type="number" id="tasa-plazo-fijo" value="12" min="0" step="0.01" required>
+        </div>
+        <div class="form-group">
+          <label for="plazo-dias">Plazo (Días):</label>
+          <input type="number" id="plazo-dias" value="90" min="1" step="1" required>
+        </div>
+        <div class="form-group">
+          <label for="tasa-isr">Tasa Retención ISR (%):</label>
+          <input type="number" id="tasa-isr" value="0.50" min="0" step="0.01" required>
+          <small>Tasa 2024: 0.50%. Tasa 2023: 0.15%</small>
+        </div>
+        <button type="submit" class="btn-principal">Calcular</button>
+      </form>
+
+      <div id="resultado-plazo-fijo" class="results-container" style="display: none;">
+        </div>
+    </section>
+
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script src="js/funciones.js"></script>
+  <script src="calculadoras.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      console.log("🚀 DOM de Plazo Fijo cargado. Iniciando componentes...");
+      funciones.cargarComponentes();
+      calculadoras.init();
+    });
+  </script>
+</body>
+</html>
