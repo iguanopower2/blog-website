@@ -554,26 +554,25 @@ const funciones = {
     },
 
     // ========================================================
-    // 📱 ACTIVAR MENÚ MÓVIL (COMPORTAMIENTO NATURAL)
+    // 📱 MENÚ MÓVIL (VERSIÓN SIMPLIFICADA)
     // ========================================================
     activarMenuMovil() {
         const toggleBtn = document.getElementById("mobile-menu-toggle");
         const nav = document.querySelector(".nav-menu");
-
         let hoverTimeouts = new Map();
 
-        // 1. Menú Hamburguesa
+        // Menú hamburguesa
         if (toggleBtn && nav) {
             toggleBtn.addEventListener("click", (e) => {
                 e.stopPropagation();
                 nav.classList.toggle("active");
                 if (nav.classList.contains("active")) {
-                    this.cerrarTodosLosDropdowns();
+                    this.cerrarDropdowns();
                 }
             });
         }
 
-        // 2. Dropdowns - COMPORTAMIENTO SIMPLE
+        // Dropdowns
         document.querySelectorAll('.dropdown').forEach(dropdown => {
             const toggle = dropdown.querySelector('.dropdown-toggle');
             const menu = dropdown.querySelector('.dropdown-menu');
@@ -581,79 +580,66 @@ const funciones = {
 
             if (!toggle || !menu) return;
 
-            hoverTimeouts.set(dropdown, null);
-
-            // HOVER ENTER - Solo desktop
-            dropdown.addEventListener('mouseenter', () => {
-                if (window.innerWidth > 768) {
-                    const timeout = hoverTimeouts.get(dropdown);
-                    if (timeout) clearTimeout(timeout);
-
+            // Hover para desktop
+            if (window.innerWidth > 768) {
+                dropdown.addEventListener('mouseenter', () => {
+                    clearTimeout(hoverTimeouts.get(dropdown));
                     this.cerrarOtrosDropdowns(menu);
                     this.abrirDropdown(menu, icon);
-                }
-            });
+                });
 
-            // HOVER LEAVE - Solo desktop
-            dropdown.addEventListener('mouseleave', () => {
-                if (window.innerWidth > 768) {
-                    const timeout = setTimeout(() => {
+                dropdown.addEventListener('mouseleave', () => {
+                    hoverTimeouts.set(dropdown, setTimeout(() => {
                         this.cerrarDropdown(menu, icon);
-                    }, 150);
-                    hoverTimeouts.set(dropdown, timeout);
-                }
-            });
+                    }, 150));
+                });
+            }
 
-            // CLICK - COMPORTAMIENTO NATURAL
+            // Click para todos los dispositivos
             toggle.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
 
-                const isMobile = window.innerWidth <= 768;
-
-                // Cancelar cualquier timeout de hover
-                const timeout = hoverTimeouts.get(dropdown);
-                if (timeout) clearTimeout(timeout);
+                clearTimeout(hoverTimeouts.get(dropdown));
 
                 if (menu.classList.contains('active')) {
-                    // SI ESTÁ ABIERTO → CERRAR (sin importar cómo se abrió)
                     this.cerrarDropdown(menu, icon);
                 } else {
-                    // SI ESTÁ CERRADO → ABRIR
-                    this.cerrarTodosLosDropdowns();
+                    this.cerrarDropdowns();
                     this.abrirDropdown(menu, icon);
 
-                    if (isMobile && nav && !nav.classList.contains('active')) {
+                    // En móvil, abrir menú principal si está cerrado
+                    if (window.innerWidth <= 768 && nav && !nav.classList.contains('active')) {
                         nav.classList.add('active');
                     }
                 }
             });
         });
 
-        // 3. Cerrar todo al hacer clic fuera
+        // Cerrar al hacer clic fuera
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.dropdown') && !e.target.closest('#mobile-menu-toggle')) {
-                this.cerrarTodosLosDropdowns();
+                this.cerrarDropdowns();
                 if (nav) nav.classList.remove('active');
             }
         });
 
-        // 4. Limpiar al cambiar tamaño
+        // Limpiar al cambiar tamaño
         window.addEventListener('resize', () => {
-            hoverTimeouts.forEach(timeout => {
-                if (timeout) clearTimeout(timeout);
-            });
+            hoverTimeouts.forEach(timeout => clearTimeout(timeout));
             hoverTimeouts.clear();
 
-            if (window.innerWidth > 768) {
-                if (nav) nav.classList.remove('active');
+            if (window.innerWidth > 768 && nav) {
+                nav.classList.remove('active');
             } else {
-                this.cerrarTodosLosDropdowns();
+                this.cerrarDropdowns();
             }
         });
     },
 
-    // (Mantener las mismas funciones auxiliares)
+    // ========================================================
+    // 🔧 FUNCIONES AUXILIARES SIMPLIFICADAS
+    // ========================================================
     abrirDropdown(menu, icon) {
         menu.classList.add('active');
         if (icon) icon.classList.add('rotated');
@@ -664,22 +650,16 @@ const funciones = {
         if (icon) icon.classList.remove('rotated');
     },
 
-    cerrarTodosLosDropdowns() {
-        document.querySelectorAll('.dropdown-menu.active').forEach(menu => {
-            menu.classList.remove('active');
-        });
-        document.querySelectorAll('.dropdown-toggle i.rotated').forEach(icon => {
-            icon.classList.remove('rotated');
+    cerrarDropdowns() {
+        document.querySelectorAll('.dropdown-menu.active, .dropdown-toggle i.rotated').forEach(el => {
+            el.classList.remove('active', 'rotated');
         });
     },
 
     cerrarOtrosDropdowns(menuActual) {
         document.querySelectorAll('.dropdown-menu.active').forEach(menu => {
             if (menu !== menuActual) {
-                menu.classList.remove('active');
-                const toggle = menu.previousElementSibling;
-                const icon = toggle?.querySelector('i');
-                if (icon) icon.classList.remove('rotated');
+                this.cerrarDropdown(menu, menu.previousElementSibling?.querySelector('i'));
             }
         });
     },

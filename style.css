@@ -846,17 +846,17 @@ a {
 }
 
 /* ==========================================================================
-   15. HEADER RESPONSIVO Y MENÚ MÓVIL (ACTUALIZADO CON DROPDOWN)
+   HEADER Y MENÚ MÓVIL (VERSIÓN LIMPIA)
    ========================================================================== */
 
-/* 1. Ajuste del contenedor del header */
+/* Contenedor del header */
 .header-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* 2. Ocultar el botón de hamburguesa en desktop */
+/* Botón hamburguesa (oculto en desktop) */
 #mobile-menu-toggle {
   display: none;
   background: none;
@@ -866,193 +866,130 @@ a {
   cursor: pointer;
 }
 
-/* 3. Estilos de la navegación en desktop (AHORA CON UL/LI) */
+/* Navegación desktop */
 .nav-menu ul {
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
 }
+
 .nav-menu li {
-  position: relative; /* Clave para el dropdown */
+  position: relative;
 }
+
 .nav-menu a {
   display: block;
-  padding: 10px 15px; /* Ajuste para mejor clic */
+  padding: 10px 15px;
   margin-left: 5px;
   color: white;
   font-weight: 500;
   text-decoration: none;
   transition: background-color 0.3s ease;
 }
+
 .nav-menu a:hover {
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
 }
 
-/* 4. Estilos del Dropdown (Desktop) */
+/* Dropdown base */
 .nav-menu .dropdown-toggle i {
   font-size: 0.8em;
   margin-left: 4px;
   transition: transform 0.3s ease;
 }
+
 .nav-menu .dropdown-menu {
-  display: none; /* Oculto por defecto */
+  display: none;
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #ffffff;
+  background: white;
   border-radius: 8px;
   padding: 10px 0;
   list-style: none;
   margin: 0;
-  min-width: 260px; /* Ancho del sub-menú */
+  min-width: 260px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
   z-index: 1000;
 }
+
 .nav-menu .dropdown-menu li {
   width: 100%;
 }
+
 .nav-menu .dropdown-menu a {
-  color: #333; /* Texto oscuro en fondo blanco */
+  color: #333;
   padding: 12px 20px;
   margin: 0;
 }
+
 .nav-menu .dropdown-menu a:hover {
-  background-color: #f4f4f4;
-  color: #b30000; /* Tu color principal */
+  background: #f4f4f4;
+  color: #b30000;
+}
+
+/* Estados controlados por JavaScript */
+.nav-menu .dropdown-menu.active {
+  display: block;
+}
+
+.nav-menu .dropdown-toggle i.rotated {
+  transform: rotate(180deg);
 }
 
 /* ==========================================================================
-   ¡AQUÍ COMIENZA LA MAGIA MÓVIL! (PANTALLAS PEQUEÑAS)
+   VERSIÓN MÓVIL
    ========================================================================== */
 @media (max-width: 768px) {
+  #mobile-menu-toggle {
+    display: block;
+  }
 
-  /* 5. Ocultar el menú horizontal en móvil */
   .nav-menu {
     position: absolute;
-    top: 70px; /* Altura de tu header */
+    top: 70px;
     left: 0;
     width: 100%;
-    background-color: #333;
-    max-height: 0; /* Oculto para la animación */
+    background: #333;
+    max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s ease-out;
   }
+
   .nav-menu.active {
-    max-height: 500px; /* Mostrar menú */
+    max-height: 500px;
   }
 
-  /* 6. Estilos de la lista móvil */
   .nav-menu ul {
     flex-direction: column;
     width: 100%;
   }
+
   .nav-menu li {
     width: 100%;
   }
+
   .nav-menu a {
     margin: 0;
     padding: 18px 20px;
     width: 100%;
     border-bottom: 1px solid #4e4e4e;
     box-sizing: border-box;
-    border-radius: 0; /* Sin bordes redondeados en móvil */
-  }
-  .nav-menu a:hover {
-    background-color: #444;
   }
 
-  /* 7. Estilos del Dropdown (Móvil) */
   .nav-menu .dropdown-menu {
-    position: static; /* Ya no es absoluto */
-    display: none; /* Oculto hasta hacer clic */
+    position: static;
     width: 100%;
-    background-color: #3a3a3a; /* Un poco más oscuro */
+    background: #3a3a3a;
     box-shadow: none;
     padding: 0;
   }
-  .nav-menu .dropdown-menu.active {
-    display: block; /* Se muestra con JS */
-  }
+
   .nav-menu .dropdown-menu a {
-    padding-left: 40px; /* Indentación para jerarquía */
+    padding-left: 40px;
     font-size: 0.95rem;
-    border-color: #555;
     color: #f4f4f4;
   }
-  .nav-menu .dropdown-menu li:last-child a {
-    border-bottom: none;
-  }
-
-  /* 8. Rotar flecha en móvil */
-  .nav-menu .dropdown-toggle i.rotated {
-    transform: rotate(180deg);
-  }
-
-  /* 9. Mostrar el botón de hamburguesa */
-  #mobile-menu-toggle {
-    display: block;
-  }
-}
-/* ==========================================================================
-   16. DROPDOWN - SOLO JAVASCRIPT (ELIMINAR HOVER COMPLETAMENTE)
-   ========================================================================== */
-
-/* DESKTOP: Posicionamiento */
-@media (min-width: 769px) {
-    .nav-menu .dropdown-menu {
-        display: block;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-10px);
-        transition: all 0.3s ease;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background-color: #ffffff;
-        border-radius: 8px;
-        padding: 10px 0;
-        min-width: 260px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-        z-index: 1000;
-        pointer-events: none;
-    }
-}
-
-/* IMPORTANTE: ELIMINAR COMPLETAMENTE EL HOVER DE CSS */
-/* NO USAR .nav-menu .dropdown:hover .dropdown-menu */
-
-/* JavaScript controla TODO con la clase .active */
-.nav-menu .dropdown-menu.active {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: translateY(0) !important;
-    pointer-events: auto !important;
-}
-
-/* MÓVIL */
-@media (max-width: 768px) {
-    .nav-menu .dropdown-menu {
-        display: none;
-        position: static;
-        width: 100%;
-        background-color: #3a3a3a;
-        box-shadow: none;
-        padding: 0;
-    }
-
-    .nav-menu .dropdown-menu.active {
-        display: block;
-    }
-}
-
-/* Flecha */
-.nav-menu .dropdown-toggle i {
-    transition: transform 0.3s ease;
-    margin-left: 5px;
-}
-
-.nav-menu .dropdown-toggle i.rotated {
-    transform: rotate(180deg);
 }
