@@ -1,11 +1,10 @@
 {
-    "valor_udi": 8.562410,
+    "valor_udi": 8.598735,
     "inflacion_anual": 4.45,
-    "fecha_actualizacion": "2025-11-02",
+    "fecha_actualizacion": "2025-11-17",
     "fecha_actualizacion_indicadores_fin": "Agosto 2025",
     "mensaje_tabla": "Tasas actualizadas semanalmente con datos públicos de las instituciones financieras.",
     "contacto": "contacto@deceroalinfinito.com",
     "seguro_prosofipo_udi": 25000,
     "seguro_prosofipo_ipab": 400000
-
 }
