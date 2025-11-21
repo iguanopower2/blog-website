@@ -179,36 +179,6 @@
     ]
   },
   {
-    "id": "amex-gold-elite",
-    "nombre": "American Express Gold Elite",
-    "emisor": "American Express",
-    "imagen_url": "assets/tarjetas/amex-gold.png",
-    "color_hex": "#cfaa3d",
-    "link_solicitud": "https://www.americanexpress.com/",
-    "destacado": true,
-    "etiquetas": ["Servicio", "Meses sin Intereses", "Puntos"],
-    "garantia": {
-      "requiere_garantia": false,
-      "monto_minimo": 0,
-      "descripcion": null
-    },
-    "costos": {
-      "anualidad_titular": 1700,
-      "cat_promedio": 78.2,
-      "condicion_exencion_anualidad": { "es_exenta": false, "descripcion": "Primer año sin costo." }
-    },
-    "recompensas": {
-      "tipo": "Puntos",
-      "programa_nombre": "Membership Rewards",
-      "porcentaje_general": null,
-      "reglas": [
-        { "condicion": "Compras generales", "tasa": "1 Puntos", "detalle": "Por cada dólar gastado" }
-      ],
-      "tope_recompensa": { "aplica": false, "descripcion": "Sin límite." }
-    },
-    "beneficios_clave": ["6 MSI en automático (compras > $2,400)", "Dining Program", "Protección de compras"]
-  },
-  {
     "id": "nu-credito",
     "nombre": "Tarjeta de Crédito Nu",
     "emisor": "Nu México",
