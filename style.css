@@ -1169,3 +1169,280 @@ a {
     padding: 10px;
   }
 }
+
+/* ==========================================================================
+   ESTILOS PARA TARJETAS DE CRÉDITO (NUEVO)
+   ========================================================================== */
+
+/* Contenedor Grid */
+.cards-grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+/* Diseño de la Carta Individual */
+.credit-card-item {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.credit-card-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+/* Banda de color superior (toma el color del JSON) */
+.card-header-band {
+    height: 8px;
+    width: 100%;
+}
+
+.cc-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Parte superior: Imagen y Título */
+.cc-top {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+}
+
+.cc-img-wrapper {
+    flex-shrink: 0;
+    width: 100px; /* Ancho fijo para consistencia */
+}
+
+.cc-img-wrapper img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.cc-title h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.cc-emisor {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Badges (Garantía, etc) */
+.badge-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-top: 5px;
+    display: inline-block;
+    font-weight: 600;
+}
+
+/* Grid de información (Anualidad, CAT) */
+.cc-grid-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.cc-info-block label {
+    font-size: 0.75rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 3px;
+}
+
+.cc-info-block p {
+    margin: 0;
+    font-weight: 700;
+    color: #333;
+    font-size: 0.95rem;
+}
+.anualidad-price {
+    color: #b30000 !important;
+}
+
+/* Sección de Recompensas */
+.cc-rewards-section {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 0.85rem;
+}
+
+.cc-rewards-section label {
+    font-weight: 700;
+    color: #2e7d32; /* Verde dinero */
+    display: block;
+    margin-bottom: 5px;
+}
+
+.reward-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3px;
+    color: #555;
+}
+.reward-row.main {
+    color: #333;
+    font-size: 0.9rem;
+}
+
+/* Etiquetas (Tags) */
+.cc-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.card-tag {
+    background-color: #e9ecef;
+    color: #495057;
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+}
+
+/* Botones de Acción */
+.cc-actions {
+    margin-top: auto; /* Empuja los botones al fondo */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.btn-apply {
+    background-color: #b30000;
+    color: white;
+    text-align: center;
+    padding: 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+.btn-apply:hover {
+    background-color: #d32f2f;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-details {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    color: #555;
+    padding: 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+.btn-details:hover {
+    background-color: #f5f5f5;
+}
+
+/* Filtros (Pills) */
+.filter-pills {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+
+.filter-btn {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.filter-btn:hover {
+    background: #f8f8f8;
+    border-color: #bbb;
+}
+
+.filter-btn.active {
+    background-color: #333;
+    color: white;
+    border-color: #333;
+}
+
+/* Hero pequeño para secciones internas */
+.hero-section-small {
+    text-align: center;
+    margin: 30px 0;
+}
+.hero-section-small h1 {
+    color: #b30000;
+    margin-bottom: 10px;
+}
+.tope-alerta {
+    background-color: #fff3cd;
+    color: #856404;
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 4px;
+    margin-top: 6px;
+    display: inline-block;
+    border: 1px solid #ffeeba;
+}
+/* Estilos para iconos de Billeteras (Apple Pay / Google Wallet) */
+.wallet-icons-container {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px; /* Espacio antes de los botones */
+    padding-top: 10px;
+    border-top: 1px dashed #eee;
+}
+
+.wallet-icon {
+    font-size: 1.5rem;
+    color: #333;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.wallet-icon:hover {
+    transform: scale(1.1);
+    color: #000;
+}
+
+/* Color específico para Apple */
+.wallet-icon .fa-apple {
+    color: #000;
+}
+/* Color específico para Google Pay (suelen usar azul o logo multicolor, gris está bien para minimalismo o azul) */
+.wallet-icon .fa-google-pay {
+    color: #4285F4;
+}

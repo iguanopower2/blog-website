@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Comparador de Tarjetas de Crédito en México 2025. Encuentra tarjetas con cashback, sin anualidad o garantizadas.">
+  <title>Mejores Tarjetas de Crédito en México | De Cero al Infinito</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div id="header-container"></div>
+
+  <main class="container">
+
+    <section class="hero-section-small">
+        <h1>Comparador de Tarjetas de Crédito</h1>
+        <p>Analizamos las letras chiquitas para que tú elijas la mejor opción. Filtra por beneficios y encuentra tu tarjeta ideal.</p>
+    </section>
+
+    <section id="filtros-container" class="filters-section">
+        </section>
+
+    <div id="contenedor-tarjetas" class="cards-grid-layout">
+        <p class="loading-text">Cargando mejores tarjetas...</p>
+    </div>
+
+    <section class="info-section mt-5">
+        <h2>¿Cómo elegir tu tarjeta ideal?</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <i class="fas fa-money-bill-wave fa-2x"></i>
+                <h3>Cashback</h3>
+                <p>Algunas tarjetas te regresan un porcentaje de tus compras. Revisa si el cashback es en todas las compras o solo en categorías específicas.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-calendar-times fa-2x"></i>
+                <h3>Anualidad</h3>
+                <p>El costo por tener la tarjeta. Muchas ofrecen exentar este cobro si la usas al menos una vez al mes (regla de uso mínimo).</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-lock fa-2x"></i>
+                <h3>Tarjetas Garantizadas</h3>
+                <p>Si no tienes historial o tienes mal buró, estas tarjetas te piden un depósito que sirve como tu límite de crédito.</p>
+            </div>
+        </div>
+    </section>
+
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script src="js/funciones.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      funciones.cargarComponentes();
+      funciones.renderizarTarjetasCredito("contenedor-tarjetas");
+    });
+  </script>
+</body>
+</html>

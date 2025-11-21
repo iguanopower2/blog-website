@@ -664,6 +664,174 @@ const funciones = {
         });
     },
 
+    // ========================================================
+    // 💳 MÓDULO DE TARJETAS DE CRÉDITO (NUEVO)
+    // ========================================================
+
+    async renderizarTarjetasCredito(contenedorId) {
+        const contenedor = document.getElementById(contenedorId);
+        if (!contenedor) return;
+
+        const tarjetas = await this.obtenerDatosJSON('data/tarjetas_credito.json');
+        if (!tarjetas.length) return;
+
+        // Guardamos referencia global para el filtrado
+        window.datosTarjetasGlobal = tarjetas;
+
+        this.pintarTarjetas(tarjetas, contenedor);
+        this.generarFiltrosTarjetas(tarjetas);
+    },
+
+    pintarTarjetas(tarjetas, contenedor) {
+        contenedor.innerHTML = tarjetas.map(t => {
+            // 1. Lógica de Garantía
+            let badgeGarantia = '';
+            if (t.garantia && t.garantia.requiere_garantia) {
+                const monto = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(t.garantia.monto_minimo);
+                badgeGarantia = `<div class="badge-warning" title="${t.garantia.descripcion}"><i class="fas fa-lock"></i> Garantía: ${monto}</div>`;
+            }
+
+            // 2. Lógica de Anualidad
+            let textoAnualidad = t.costos.anualidad_titular === 0 ? "Sin Anualidad" : `$${t.costos.anualidad_titular} MXN`;
+            if(t.costos.anualidad_titular > 0 && t.costos.condicion_exencion_anualidad.descripcion.includes("Primer año")) {
+                textoAnualidad += " (1er año gratis)";
+            }
+
+            // 3. Lógica de Recompensas y TOPES (NUEVO)
+            let htmlRecompensas = '';
+
+            if (t.recompensas.tipo === "Sin recompensas") {
+                htmlRecompensas = `<p class="text-muted"><small>Esta tarjeta no ofrece recompensas directas.</small></p>`;
+            } else {
+                // Mostrar tasa general
+                if (t.recompensas.porcentaje_general) {
+                    htmlRecompensas += `<div class="reward-row main"><span>Todo:</span> <strong>${t.recompensas.porcentaje_general}%</strong></div>`;
+                }
+                // Mostrar reglas específicas
+                if (t.recompensas.reglas && t.recompensas.reglas.length > 0) {
+                    t.recompensas.reglas.forEach(r => {
+                        const valor = isNaN(r.tasa) ? r.tasa : `${r.tasa}%`;
+                        htmlRecompensas += `<div class="reward-row"><span>${r.condicion}:</span> <strong>${valor}</strong></div>`;
+                    });
+                }
+
+                // BLOQUE NUEVO: ALERTA DE TOPE
+                if (t.recompensas.tope_recompensa && t.recompensas.tope_recompensa.aplica) {
+                    const topeMonto = t.recompensas.tope_recompensa.monto_tope_mensual
+                        ? `$${t.recompensas.tope_recompensa.monto_tope_mensual}`
+                        : 'Límite aplicado';
+
+                    htmlRecompensas += `
+                        <div class="tope-alerta" title="${t.recompensas.tope_recompensa.descripcion}">
+                            <i class="fas fa-exclamation-circle"></i> Tope: ${topeMonto}/mes
+                        </div>`;
+                }
+            }
+
+            // 4. Etiquetas
+            const htmlEtiquetas = t.etiquetas.map(tag => `<span class="card-tag">${tag}</span>`).join('');
+
+            // 5. Billeteras digitales
+            let htmlBilleteras = '';
+            if (t.billeteras) {
+                htmlBilleteras += '<div class="wallet-icons">';
+                if (t.billeteras.apple_pay) htmlBilleteras += '<i class="fab fa-apple" title="Apple Pay"></i> ';
+                if (t.billeteras.google_wallet) htmlBilleteras += '<i class="fab fa-google-pay" title="Google Wallet"></i> '; // O un svg de GPay
+                htmlBilleteras += '</div>';
+            }
+
+            return `
+            <div class="credit-card-item">
+                <div class="card-header-band" style="background-color: ${t.color_hex || '#333'};"></div>
+
+                <div class="cc-content">
+                    <div class="cc-top">
+                        <div class="cc-img-wrapper">
+                             <img src="${t.imagen_url}" alt="${t.nombre}" onerror="this.src='https://placehold.co/180x110/EEE/31343C?text=Tarjeta'">
+                        </div>
+                        <div class="cc-title">
+                            <h3>${t.nombre}</h3>
+                            <p class="cc-emisor">${t.emisor}</p>
+                            <div class="cc-badges">${badgeGarantia}</div>
+                        </div>
+                    </div>
+
+                    <div class="cc-grid-info">
+                        <div class="cc-info-block">
+                            <label>Anualidad</label>
+                            <p class="anualidad-price">${textoAnualidad}</p>
+                            <small class="text-muted">${t.costos.anualidad_titular === 0 ? t.costos.condicion_exencion_anualidad.descripcion : ''}</small>
+                        </div>
+                        <div class="cc-info-block">
+                            <label>CAT Promedio</label>
+                            <p>${t.costos.cat_promedio}%</p>
+                        </div>
+                    </div>
+
+                    <div class="cc-rewards-section">
+                        <label><i class="fas fa-gift"></i> ${t.recompensas.tipo}</label>
+                        ${htmlRecompensas}
+                    </div>
+
+                    <div class="cc-tags-container">
+                        ${htmlEtiquetas}
+                    </div>
+
+                    ${htmlBilleteras}
+
+                    <div class="cc-actions">
+                        <a href="${t.link_solicitud}" target="_blank" class="btn-apply">Solicitar</a>
+                        <button class="btn-details" onclick="alert('${t.beneficios_clave.join('\\n- ')}')">Ver Beneficios</button>
+                    </div>
+                </div>
+            </div>
+            `;
+        }).join('');
+    },
+
+    generarFiltrosTarjetas(tarjetas) {
+        const contenedorFiltros = document.getElementById('filtros-container');
+        if(!contenedorFiltros) return;
+
+        // Definir filtros predeterminados
+        const filtros = [
+            { id: 'all', label: 'Todas' },
+            { id: 'sin-anualidad', label: 'Sin Anualidad', fn: t => t.costos.anualidad_titular === 0 },
+            { id: 'cashback', label: 'Con Cashback', fn: t => t.recompensas.tipo === 'Cashback' },
+            { id: 'garantizada', label: 'Garantizadas', fn: t => t.garantia && t.garantia.requiere_garantia },
+            { id: 'sin-historial', label: 'Para Iniciar', fn: t => t.etiquetas.includes('Para Iniciar') || t.etiquetas.includes('Garantizada') || t.etiquetas.includes('Sin Historial') },
+            { id: 'billeteras', label: 'Apple/Google Pay', fn: t => t.billeteras && (t.billeteras.apple_pay || t.billeteras.google_wallet) }
+        ];
+
+        let html = `<div class="filter-pills">`;
+        filtros.forEach(f => {
+            html += `<button class="filter-btn ${f.id === 'all' ? 'active' : ''}" data-filter="${f.id}">${f.label}</button>`;
+        });
+        html += `</div>`;
+
+        contenedorFiltros.innerHTML = html;
+
+        // Agregar Event Listeners
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // Quitar active a todos
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                // Poner active al actual
+                e.target.classList.add('active');
+
+                const filtroId = e.target.getAttribute('data-filter');
+                const filtroConfig = filtros.find(f => f.id === filtroId);
+
+                let filtradas = window.datosTarjetasGlobal;
+
+                if (filtroId !== 'all' && filtroConfig.fn) {
+                    filtradas = window.datosTarjetasGlobal.filter(filtroConfig.fn);
+                }
+
+                this.pintarTarjetas(filtradas, document.getElementById('contenedor-tarjetas'));
+            });
+        });
+    }
 
 };
 
