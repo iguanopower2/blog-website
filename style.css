@@ -1419,30 +1419,53 @@ a {
     border: 1px solid #ffeeba;
 }
 /* Estilos para iconos de Billeteras (Apple Pay / Google Wallet) */
+/* =========================================
+   ESTILOS PARA BILLETERAS (VERSIÓN MEJORADA)
+   ========================================= */
+
 .wallet-icons-container {
     display: flex;
-    gap: 12px;
-    margin-bottom: 20px; /* Espacio antes de los botones */
-    padding-top: 10px;
-    border-top: 1px dashed #eee;
+    align-items: center;       /* Alineación vertical centrada */
+    gap: 15px;                 /* Más espacio entre iconos */
+
+    /* Espaciado del contenedor */
+    width: 100%;
+    margin-top: 15px;          /* Separación de las etiquetas de arriba */
+    margin-bottom: 20px;       /* Separación de los botones de abajo */
+    padding-top: 15px;         /* Aire interno superior */
+    border-top: 1px solid #eee; /* Línea sutil separadora */
 }
+
+/* OPCIONAL: Si prefieres que estén centrados en la tarjeta,
+   descomenta la siguiente línea: */
+/* .wallet-icons-container { justify-content: center; } */
+
 
 .wallet-icon {
-    font-size: 1.5rem;
-    color: #333;
-    transition: transform 0.2s ease, color 0.2s ease;
+    font-size: 2rem;           /* Aumentamos de 1.5rem a 2rem para que se vean bien */
+    line-height: 1;            /* Evita espacios extra arriba/abajo */
+    color: #888;               /* Color base elegante (gris medio) */
+    transition: all 0.3s ease;
+    cursor: help;              /* Pone un signo de interrogación al pasar el mouse */
 }
 
+/* Efectos al pasar el mouse */
 .wallet-icon:hover {
-    transform: scale(1.1);
-    color: #000;
+    transform: scale(1.2);     /* Crecen un poco más */
 }
 
-/* Color específico para Apple */
+/* Colores específicos cuando el mouse pasa por encima o por defecto */
 .wallet-icon .fa-apple {
-    color: #000;
+    color: #000;               /* Negro Apple */
 }
-/* Color específico para Google Pay (suelen usar azul o logo multicolor, gris está bien para minimalismo o azul) */
+
 .wallet-icon .fa-google-pay {
-    color: #4285F4;
+    color: #4285F4;            /* Azul Google */
+}
+
+/* Ajuste Responsive: En celulares, asegurar que no se amontonen */
+@media (max-width: 480px) {
+    .wallet-icons-container {
+        justify-content: space-around; /* En móvil los distribuimos */
+    }
 }

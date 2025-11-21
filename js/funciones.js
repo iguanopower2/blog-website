@@ -734,10 +734,20 @@ const funciones = {
             // 5. Billeteras digitales
             let htmlBilleteras = '';
             if (t.billeteras) {
-                htmlBilleteras += '<div class="wallet-icons">';
-                if (t.billeteras.apple_pay) htmlBilleteras += '<i class="fab fa-apple" title="Apple Pay"></i> ';
-                if (t.billeteras.google_wallet) htmlBilleteras += '<i class="fab fa-google-pay" title="Google Wallet"></i> '; // O un svg de GPay
-                htmlBilleteras += '</div>';
+                htmlBilleteras = `<div class="wallet-icons-container">`;
+                // Apple Pay
+                if (t.billeteras.apple_pay) {
+                    htmlBilleteras += `<span class="wallet-icon" title="Compatible con Apple Pay"><i class="fa-brands fa-apple"></i></span>`;
+                }
+                // Google Wallet
+                if (t.billeteras.google_wallet) {
+                    htmlBilleteras += `<span class="wallet-icon" title="Compatible con Google Wallet"><i class="fa-brands fa-google-pay"></i></span>`;
+                }
+                // Samsung Pay (Opcional si decides agregarlo al JSON)
+                if (t.billeteras.samsung_pay) {
+                    htmlBilleteras += `<span class="wallet-icon" title="Samsung Pay"><i class="fa-solid fa-mobile-screen"></i></span>`;
+                }
+                htmlBilleteras += `</div>`;
             }
 
             return `

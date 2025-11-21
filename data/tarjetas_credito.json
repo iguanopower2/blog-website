@@ -1,175 +1,5 @@
 [
   {
-    "id": "nu-credito",
-    "nombre": "Tarjeta de Crédito Nu",
-    "emisor": "Nu México",
-    "imagen_url": "assets/tarjetas/nu-credito.png",
-    "color_hex": "#820ad1",
-    "link_solicitud": "https://nu.com.mx/credito/",
-    "destacado": true,
-    "etiquetas": ["Sin Anualidad", "100% Digital", "Atención 24/7"],
-    "garantia": {
-      "requiere_garantia": false,
-      "monto_minimo": 0,
-      "descripcion": "Existe una versión 'Garantizada' si no aprueban la tradicional."
-    },
-    "costos": {
-      "anualidad_titular": 0,
-      "cat_promedio": 142.0,
-      "condicion_exencion_anualidad": {
-        "es_exenta": true,
-        "descripcion": "Sin anualidad ni comisiones por no uso (sin cobros sorpresa)."
-      }
-    },
-    "requisitos": {
-        "ingreso_minimo_mensual": 0,
-        "documentos": ["INE/Pasaporte vigente", "Selfie para identidad", "Buen historial (deseable)"]
-    },
-    "recompensas": {
-      "tipo": "Sin recompensas",
-      "programa_nombre": null,
-      "porcentaje_general": 0,
-      "reglas": [],
-      "tope_recompensa": {
-        "aplica": false,
-        "descripcion": null
-      }
-    },
-    "billeteras": {
-        "apple_pay": true,
-        "google_wallet": true
-    },
-    "beneficios_clave": [
-      "Meses sin intereses en Amazon, Mercado Libre y miles de aliados",
-      "Adelantar mensualidades de compras diferidas con descuento",
-      "Ajuste de límite de crédito desde la app",
-      "Tarjeta virtual que cambia de CVV para seguridad"
-    ]
-  },
-  {
-    "id": "hsbc-2now",
-    "nombre": "HSBC 2Now",
-    "emisor": "HSBC",
-    "imagen_url": "assets/tarjetas/hsbc-2now.png",
-    "color_hex": "#db0011",
-    "link_solicitud": "https://www.hsbc.com.mx/",
-    "destacado": true,
-    "etiquetas": ["Cashback Alto", "Bancaria"],
-    "garantia": {
-      "requiere_garantia": false,
-      "monto_minimo": 0,
-      "descripcion": null
-    },
-    "costos": {
-      "anualidad_titular": 0,
-      "cat_promedio": 85.4,
-      "condicion_exencion_anualidad": { "es_exenta": false, "descripcion": "Gratis gastando $2,500 MXN al mes. Si no, pagas $179 de mantenimiento." }
-    },
-    "recompensas": {
-      "tipo": "Cashback",
-      "programa_nombre": "Saldo 2Now",
-      "porcentaje_general": 2.0,
-      "reglas": [
-        { "condicion": "Todas las compras", "tasa": 2.0, "detalle": "Saldo directo a tu cuenta" }
-      ],
-      "tope_recompensa": { "aplica": true, "descripcion": "Topado a $1,000 MXN mensuales en cashback." }
-    },
-    "beneficios_clave": ["Happy Weekend HSBC", "Transferencia de saldo", "Sin anualidad bajo condición"]
-  },
-  {
-    "id": "hey-banco-garantizada",
-    "nombre": "Hey Banco Garantizada",
-    "emisor": "Hey Banco",
-    "imagen_url": "assets/tarjetas/hey-garantizada.png",
-    "color_hex": "#000000",
-    "link_solicitud": "https://heybanco.com/",
-    "destacado": false,
-    "etiquetas": ["Garantizada", "Construye Historial", "Cashback"],
-    "garantia": {
-      "requiere_garantia": true,
-      "monto_minimo": 1500,
-      "descripcion": "Tu línea de crédito es igual a tu garantía (Min $1,500, Max $50,000)."
-    },
-    "costos": {
-      "anualidad_titular": 0,
-      "cat_promedio": 0,
-      "condicion_exencion_anualidad": { "es_exenta": true, "descripcion": "Sin costo." }
-    },
-    "recompensas": {
-      "tipo": "Cashback",
-      "programa_nombre": "Recompensas Hey",
-      "porcentaje_general": null,
-      "reglas": [
-        { "condicion": "Tarjeta Virtual", "tasa": 2.0, "detalle": "Compras online" },
-        { "condicion": "Tarjeta Física", "tasa": 1.0, "detalle": "Terminales bancarias" }
-      ],
-      "tope_recompensa": { "aplica": true, "descripcion": "1% de tu línea de crédito." }
-    },
-    "beneficios_clave": ["Mejora de tasa en Inversión Hey", "Posibilidad de graduarse a tarjeta tradicional", "Sin historial crediticio previo"]
-  },
-  {
-    "id": "santander-likeu",
-    "nombre": "Santander LikeU",
-    "emisor": "Santander",
-    "imagen_url": "assets/tarjetas/likeu.png",
-    "color_hex": "#ec0000",
-    "link_solicitud": "https://www.santander.com.mx/",
-    "destacado": false,
-    "etiquetas": ["Personalizable", "Cashback Categorías"],
-    "garantia": {
-      "requiere_garantia": false,
-      "monto_minimo": 0,
-      "descripcion": null
-    },
-    "costos": {
-      "anualidad_titular": 0,
-      "cat_promedio": 81.3,
-      "condicion_exencion_anualidad": { "es_exenta": false, "descripcion": "Gratis gastando $200 MXN al mes." }
-    },
-    "recompensas": {
-      "tipo": "Cashback",
-      "programa_nombre": "Cashback LikeU",
-      "porcentaje_general": null,
-      "reglas": [
-        { "condicion": "Gasolineras", "tasa": 4.0, "detalle": "Estaciones participantes" },
-        { "condicion": "Farmacias", "tasa": 5.0, "detalle": "Farmacias participantes" },
-        { "condicion": "Entretenimiento", "tasa": 6.0, "detalle": "Cines y restaurantes seleccionados" }
-      ],
-      "tope_recompensa": { "aplica": true, "descripcion": "$10,000 MXN anuales." }
-    },
-    "beneficios_clave": ["Apoya causas sociales", "Personalización de colores", "Seguros mastercard"]
-  },
-  {
-    "id": "amex-gold-elite",
-    "nombre": "American Express Gold Elite",
-    "emisor": "American Express",
-    "imagen_url": "assets/tarjetas/amex-gold.png",
-    "color_hex": "#cfaa3d",
-    "link_solicitud": "https://www.americanexpress.com/",
-    "destacado": true,
-    "etiquetas": ["Servicio", "Meses sin Intereses", "Puntos"],
-    "garantia": {
-      "requiere_garantia": false,
-      "monto_minimo": 0,
-      "descripcion": null
-    },
-    "costos": {
-      "anualidad_titular": 1700,
-      "cat_promedio": 78.2,
-      "condicion_exencion_anualidad": { "es_exenta": false, "descripcion": "Primer año sin costo." }
-    },
-    "recompensas": {
-      "tipo": "Puntos",
-      "programa_nombre": "Membership Rewards",
-      "porcentaje_general": null,
-      "reglas": [
-        { "condicion": "Compras generales", "tasa": "1 Puntos", "detalle": "Por cada dólar gastado" }
-      ],
-      "tope_recompensa": { "aplica": false, "descripcion": "Sin límite." }
-    },
-    "beneficios_clave": ["6 MSI en automático (compras > $2,400)", "Dining Program", "Protección de compras"]
-  },
-  {
     "id": "openbank-credito",
     "nombre": "Tarjeta de Crédito Open",
     "emisor": "Openbank (Santander)",
@@ -221,6 +51,208 @@
       "Protección de compras digitales",
       "Personalización de fecha de pago y color de tarjeta física",
       "Controles de seguridad (Card Control) desde la app"
+    ]
+  },
+  {
+    "id": "hsbc-2now",
+    "nombre": "HSBC 2Now",
+    "emisor": "HSBC",
+    "imagen_url": "assets/tarjetas/hsbc-2now.png",
+    "color_hex": "#db0011",
+    "link_solicitud": "https://www.hsbc.com.mx/tarjetas-de-credito/productos/2now/",
+    "destacado": true,
+    "etiquetas": ["Cashback Instantáneo", "Preventas Conciertos", "Sin Anualidad"],
+    "garantia": {
+      "requiere_garantia": false,
+      "monto_minimo": 0,
+      "descripcion": null
+    },
+    "costos": {
+      "anualidad_titular": 0,
+      "cat_promedio": 91.3,
+      "condicion_exencion_anualidad": {
+        "es_exenta": false,
+        "descripcion": "Sin anualidad, PERO cobra mantenimiento ($186 + IVA) si no facturas al menos $3,500 MXN al mes."
+      }
+    },
+    "requisitos": {
+        "ingreso_minimo_mensual": 15000,
+        "documentos": ["INE vigente", "Comprobante de domicilio", "Buen historial crediticio", "1 año de antigüedad laboral"]
+    },
+    "recompensas": {
+      "tipo": "Cashback",
+      "programa_nombre": "Saldo HSBC 2Now",
+      "porcentaje_general": 2.0,
+      "reglas": [
+        {
+          "condicion": "Todas las compras",
+          "tasa": 2.0,
+          "detalle": "Saldo disponible al instante en cajeros o terminales"
+        }
+      ],
+      "tope_recompensa": {
+        "aplica": true,
+        "monto_tope_mensual": 850,
+        "descripcion": "Aplica solo para los primeros $42,500 MXN de compras al mes."
+      }
+    },
+    "billeteras": {
+        "apple_pay": true,
+        "google_wallet": true
+    },
+    "beneficios_clave": [
+      "Retiro de efectivo del cashback directo en cajeros",
+      "Acceso a la 'Gran Venta HSBC' (Preventa de conciertos)",
+      "Transferencia de saldo de otras tarjetas a tasa preferencial",
+      "Hasta 5 tarjetas adicionales sin costo"
+    ]
+  },
+  {
+    "id": "santander-likeu",
+    "nombre": "Tarjeta de Crédito LikeU",
+    "emisor": "Santander",
+    "imagen_url": "assets/tarjetas/likeu.png",
+    "color_hex": "#ec0000",
+    "link_solicitud": "https://www.santander.com.mx/personas/tarjetas-de-credito/likeu.html",
+    "destacado": true,
+    "etiquetas": ["Sin Anualidad", "Causas Sociales", "Personalizable"],
+    "garantia": {
+      "requiere_garantia": false,
+      "monto_minimo": 0,
+      "descripcion": null
+    },
+    "costos": {
+      "anualidad_titular": 0,
+      "cat_promedio": 90.6,
+      "condicion_exencion_anualidad": {
+        "es_exenta": true,
+        "descripcion": "Sin anualidad. Comisión de mantenimiento ($169 MXN) se exenta gastando solo $200 MXN al mes."
+      }
+    },
+    "requisitos": {
+        "ingreso_minimo_mensual": 7500,
+        "documentos": ["Identificación oficial vigente", "Comprobante de ingresos (últimos 2)", "Comprobante de domicilio (< 2 meses)"],
+        "edad_minima": 20,
+        "edad_maxima": 69
+    },
+    "recompensas": {
+      "tipo": "Cashback",
+      "programa_nombre": "Cashback Baby",
+      "porcentaje_general": null,
+      "reglas": [
+        {
+          "condicion": "Telecomunicaciones",
+          "tasa": "4%",
+          "detalle": "En comercios participantes seleccionados"
+        },
+        {
+          "condicion": "Restaurantes",
+          "tasa": "5%",
+          "detalle": "En comercios participantes seleccionados"
+        },
+        {
+          "condicion": "Farmacias",
+          "tasa": "6%",
+          "detalle": "En comercios participantes seleccionados"
+        },
+        {
+          "condicion": "Supermercados",
+          "tasa": "1%",
+          "detalle": "En comercios participantes seleccionados"
+        }
+      ],
+      "tope_recompensa": {
+        "aplica": true,
+        "monto_tope_mensual": 500,
+        "descripcion": "Monto máximo de cashback es de 500 al mes."
+      }
+    },
+    "billeteras": {
+        "apple_pay": true,
+        "google_wallet": true
+    },
+    "beneficios_clave": [
+      "Personalización con asistencias (Médica, Viajes, Hogar, Mascota)",
+      "Apoyo a causas sociales (Limpieza de mares, Cáncer de mama, etc.)",
+      "Sin números impresos en la tarjeta física (Seguridad)",
+      "Código de seguridad dinámico para compras online"
+    ]
+  },
+  {
+    "id": "amex-gold-elite",
+    "nombre": "American Express Gold Elite",
+    "emisor": "American Express",
+    "imagen_url": "assets/tarjetas/amex-gold.png",
+    "color_hex": "#cfaa3d",
+    "link_solicitud": "https://www.americanexpress.com/",
+    "destacado": true,
+    "etiquetas": ["Servicio", "Meses sin Intereses", "Puntos"],
+    "garantia": {
+      "requiere_garantia": false,
+      "monto_minimo": 0,
+      "descripcion": null
+    },
+    "costos": {
+      "anualidad_titular": 1700,
+      "cat_promedio": 78.2,
+      "condicion_exencion_anualidad": { "es_exenta": false, "descripcion": "Primer año sin costo." }
+    },
+    "recompensas": {
+      "tipo": "Puntos",
+      "programa_nombre": "Membership Rewards",
+      "porcentaje_general": null,
+      "reglas": [
+        { "condicion": "Compras generales", "tasa": "1 Puntos", "detalle": "Por cada dólar gastado" }
+      ],
+      "tope_recompensa": { "aplica": false, "descripcion": "Sin límite." }
+    },
+    "beneficios_clave": ["6 MSI en automático (compras > $2,400)", "Dining Program", "Protección de compras"]
+  },
+  {
+    "id": "nu-credito",
+    "nombre": "Tarjeta de Crédito Nu",
+    "emisor": "Nu México",
+    "imagen_url": "assets/tarjetas/nu-credito.png",
+    "color_hex": "#820ad1",
+    "link_solicitud": "https://nu.com.mx/credito/",
+    "destacado": true,
+    "etiquetas": ["Sin Anualidad", "100% Digital", "Atención 24/7"],
+    "garantia": {
+      "requiere_garantia": false,
+      "monto_minimo": 0,
+      "descripcion": "Existe una versión 'Garantizada' si no aprueban la tradicional."
+    },
+    "costos": {
+      "anualidad_titular": 0,
+      "cat_promedio": 142.0,
+      "condicion_exencion_anualidad": {
+        "es_exenta": true,
+        "descripcion": "Sin anualidad ni comisiones por no uso (sin cobros sorpresa)."
+      }
+    },
+    "requisitos": {
+        "ingreso_minimo_mensual": 0,
+        "documentos": ["INE/Pasaporte vigente", "Selfie para identidad", "Buen historial (deseable)"]
+    },
+    "recompensas": {
+      "tipo": "Sin recompensas",
+      "programa_nombre": null,
+      "porcentaje_general": 0,
+      "reglas": [],
+      "tope_recompensa": {
+        "aplica": false,
+        "descripcion": null
+      }
+    },
+    "billeteras": {
+        "apple_pay": true,
+        "google_wallet": true
+    },
+    "beneficios_clave": [
+      "Meses sin intereses en Amazon, Mercado Libre y miles de aliados",
+      "Adelantar mensualidades de compras diferidas con descuento",
+      "Ajuste de límite de crédito desde la app",
+      "Tarjeta virtual que cambia de CVV para seguridad"
     ]
   }
 ]
