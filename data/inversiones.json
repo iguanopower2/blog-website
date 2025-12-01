@@ -16,7 +16,7 @@
     "nombre": "NU",
     "tipo": "SOFIPO",
     "sitioweb": "https://nu.com.mx",
-    "plazos": { "Vista": 15, "1 mes": 7.60, "3 meses": 7.7, "6 meses": 7.8, "12 meses": null, "24 meses": null  },
+    "plazos": { "Vista": 15, "1 mes": 7.35, "3 meses": 7.45, "6 meses": 7.55, "12 meses": null, "24 meses": null},
     "NICAP": 223.49,
     "IMOR": 6.47,
     "resultadoneto": -1580070.14,
@@ -29,7 +29,7 @@
     "nombre": "Finsus",
     "tipo": "SOFIPO",
     "sitioweb": "https://finsus.mx",
-    "plazos": { "Vista": 8.09, "1 mes": 8.09, "3 meses": 8.39, "6 meses": 8.59, "12 meses": 10.09, "24 meses": 8.19  },
+    "plazos": { "Vista": 8.09, "1 mes": 8.09, "3 meses": 8.39, "6 meses": 8.59, "12 meses": 10.09, "24 meses": 8.19},
     "NICAP": 132.62,
     "IMOR": 2.15,
     "resultadoneto": 41107.62,
@@ -42,7 +42,7 @@
     "nombre": "SuperTasas",
     "tipo": "SOFIPO",
     "sitioweb": "https://supertasas.com",
-    "plazos": { "Vista": 7.3, "1 mes": 7.4, "3 meses": 7.5, "6 meses": 8, "12 meses": 8.75, "24 meses": null  },
+    "plazos": { "Vista": 7.2, "1 mes": 7.3, "3 meses": 7.5, "6 meses": 7.75, "12 meses": 8.5, "24 meses": null  },
     "NICAP": 423.37,
     "IMOR": 2.37,
     "resultadoneto": 38466.71,
@@ -61,7 +61,7 @@
     "nombre": "Mifel (cuenta digital)",
     "tipo": "Banco",
     "sitioweb": "https://www.mifel.com.mx/personas",
-    "plazos": { "Vista": 10, "1 mes": 5.25, "3 meses": 7.75, "6 meses": 7.5, "12 meses": 7.6, "24 meses": null  }
+    "plazos": { "Vista": 10, "1 mes": 5.25, "3 meses": 7.2, "6 meses": 7.2, "12 meses": 7.3, "24 meses": null  }
   },
   {
     "nombre": "Openbank",
@@ -73,7 +73,7 @@
     "nombre": "Banco Covalto",
     "tipo": "Banco",
     "sitioweb": "https://www.covalto.com",
-    "plazos": { "Vista": null, "1 mes": 6.15, "3 meses": 7.4, "6 meses": 7.65, "12 meses": 9.75, "24 meses": 10}
+    "plazos": { "Vista": null, "1 mes": 5.9, "3 meses": 7.15, "6 meses": 7.4, "12 meses": 9.75, "24 meses": 10}
   },
   {
     "nombre": "Ualá",
@@ -98,7 +98,7 @@
     "nombre": "Kubo Financiero<sup>CON GRUPO</sup>",
     "tipo": "SOFIPO",
     "sitioweb": "https://www.kubofinanciero.com",
-    "plazos": { "Vista": null, "1 mes": 8.5, "3 meses": 9.3, "6 meses": 9.5, "12 meses": 10.5, "24 meses": 11.5  },
+    "plazos": { "Vista": null, "1 mes": 8.5, "3 meses": 9.3, "6 meses": 9.5, "12 meses": 10.5, "24 meses": 11.5},
     "NICAP": 133.27,
     "IMOR": 18.03,
     "resultadoneto": -75722.19,
@@ -111,7 +111,7 @@
     "nombre": "Kubo Financiero<sup>SIN GRUPO</sup>",
     "tipo": "SOFIPO",
     "sitioweb": "https://www.kubofinanciero.com",
-    "plazos": { "Vista": null, "1 mes": 7.5, "3 meses": 8.3, "6 meses": 8.5, "12 meses": 9.5, "24 meses": 10.5  },
+    "plazos": { "Vista": null, "1 mes": 7.5, "3 meses": 8.3, "6 meses": 8.5, "12 meses": 9.5, "24 meses": 10.5},
     "NICAP": 133.27,
     "IMOR": 18.03,
     "resultadoneto": -75722.19,
@@ -124,20 +124,21 @@
     "nombre": "Stori",
     "tipo": "SOFIPO",
     "sitioweb": "https://www.storicard.com",
-    "plazos": { "Vista": 7.72, "1 mes": 7.77, "3 meses": 7.96, "6 meses": 7.36, "12 meses": 7, "24 meses": null  },
+    "plazos": { "Vista": 7.7, "1 mes": 15, "3 meses": 9.65, "6 meses": 11.66, "12 meses": 10, "24 meses": null  },
     "NICAP": 142.66,
     "IMOR": 12.98,
     "resultadoneto": 72484.83,
     "cartera_vig":7342228.08,
     "notas": {
-      "nombre": "Se muestra la tasa nominal (Igual que las demás sofipos)."
+      "nombre": "Se muestra la tasa nominal.",
+      "1 mes": "Tasa del 15% topada hasta $5,000 MXN y por tiempo limitado. Revisar condiciones en su página oficial."
     }
   },
   {
     "nombre": "BIM",
     "tipo": "Banco",
     "sitioweb": "https://www.bim.mx",
-    "plazos": { "Vista": null, "1 mes": 6.2, "3 meses": 6.3, "6 meses": 6.65, "12 meses": 6.65, "24 meses": null  }
+    "plazos": { "Vista": null, "1 mes": 6.2, "3 meses": 6.3, "6 meses": 6.55, "12 meses": 6.55, "24 meses": null  }
   },
     {
     "nombre": "Klar",
@@ -186,7 +187,7 @@
     "nombre": "PROGRESSA",
     "tipo": "SOFIPO",
     "sitioweb": "https://progressa.com.mx",
-    "plazos": { "Vista": null, "1 mes": 7, "3 meses": 8, "6 meses": 8.5, "12 meses": 7.5, "24 meses": null },
+    "plazos": { "Vista": null, "1 mes": 6.5, "3 meses": 7.65, "6 meses": 8.2, "12 meses": 7.25, "24 meses": null },
     "NICAP": 154.76,
     "IMOR": 16.07,
     "resultadoneto": 15058,
@@ -202,23 +203,33 @@
     "resultadoneto": 21871,
     "cartera_vig": 479220
   },
+  {
+    "nombre": "Operaciones de tu lado",
+    "tipo": "SOFIPO",
+    "sitioweb": "https://www.avantthya.com.mx",
+    "plazos": { "Vista": null, "1 mes": 8.75, "3 meses": 10, "6 meses": 10.75, "12 meses": 11.75, "24 meses": null },
+    "NICAP": 221.33,
+    "IMOR": 5.4,
+    "resultadoneto": 5019,
+    "cartera_vig": 159831
+  },
    {
     "nombre": "Pagaré digital BBVA",
     "tipo": "Banco",
-    "sitioweb": "https://www.bbva.com/es/mx/",
-    "plazos": { "Vista": null, "1 mes": 2.8, "3 meses": 2.85, "6 meses": 2.95, "12 meses": null, "24 meses": null  }
+    "sitioweb": "https://www.bbva.mx",
+    "plazos": { "Vista": null, "1 mes": 2.75, "3 meses": 2.8, "6 meses": 2.95, "12 meses": null, "24 meses": null  }
   },
   {
     "nombre": "Pagaré Kapital Bank",
     "tipo": "Banco",
     "sitioweb": "https://kapital.com",
-    "plazos": { "Vista": null, "1 mes": 6.75, "3 meses": 7.80, "6 meses": 8.00, "12 meses": 7.00, "24 meses": 7.00  }
+    "plazos": { "Vista": null, "1 mes": 6.75, "3 meses": 7.55, "6 meses": 7.75, "12 meses": 7.00, "24 meses": 7.00  }
   },
   {
     "nombre": "Cetes Directo",
     "tipo": "Gubernamental",
     "sitioweb": "https://www.cetesdirecto.com/sites/portal/inicio",
-    "plazos": { "Vista": null, "1 mes": 7.05, "3 meses": 7.27, "6 meses": 7.38, "12 meses": 7.51, "24 meses": null  },
+    "plazos": { "Vista": null, "1 mes": 7.15, "3 meses": 7.27, "6 meses": 7.46, "12 meses": 7.63, "24 meses": null  },
     "notas": {
       "1 mes": "La tasa es a descuento.",
       "3 meses": "La tasa es a descuento.",
