@@ -197,7 +197,7 @@
     "nombre": "Leva Invierte",
     "tipo": "SOFIPO",
     "sitioweb": "https://levainvierte.com",
-    "plazos": { "Vista": null, "1 mes": null, "3 meses": 10.5, "6 meses": 11.75, "12 meses": 14, "24 meses": 15 },
+    "plazos": { "Vista": null, "1 mes": null, "3 meses": 10, "6 meses": 11.25, "12 meses": 13.5, "24 meses": 14.5 },
     "NICAP": 144.88,
     "IMOR": 5.51,
     "resultadoneto": 21871,
