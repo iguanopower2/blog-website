@@ -9,12 +9,12 @@
     "tags": ["sofipo", "didi", "inversión", "rendimiento"]
   },
   {
-    "id": "leva-opinion",
-    "titulo": "Leva Invierte: Análisis Real y Opinión 2025",
-    "resumen": "Analizamos los estados financieros de Alternativas Económicas ante la CNBV. ¿Es seguro su 15% de rendimiento? Te cuento mi experiencia abriendo cuenta.",
-    "fecha": "2025-12-02",
+    "id": "leva-invierte-opinion",
+    "title": "Leva Invierte: Análisis Real y Opinión 2025",
+    "summary": "Analizamos los estados financieros de Alternativas Económicas ante la CNBV. ¿Es seguro su 14.5% de rendimiento? Te cuento mi experiencia abriendo cuenta.",
+    "date": "2025-12-02",
     "imagen": "assets/blog/leva-cover.png",
-    "link": "blog/leva-invierte-opinion.html",
-    "categoria": "Análisis"
+    "url": "blog/leva-invierte-opinion.html",
+    "tags": ["Análisis", "sofipo", "leva", "inversión", "rendimiento"]
   }
 ]
