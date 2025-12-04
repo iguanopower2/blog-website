@@ -370,16 +370,18 @@ const funciones = {
         const footerCont = document.getElementById("footer-container");
 
         try {
-            // Rutas relativas al subdirectorio (../)
-            const headerRes = await fetch("../components/header.html");
-            const footerRes = await fetch("../components/footer.html");
+            // ✅ CAMBIO AQUI: Usamos rutas absolutas (con / al inicio)
+            const headerRes = await fetch("/components/header.html");
+            const footerRes = await fetch("/components/footer.html");
 
-            if (!headerRes.ok) throw new Error("Error al cargar ../components/header.html");
-            if (!footerRes.ok) throw new Error("Error al cargar ../components/footer.html");
+            // Actualizamos los mensajes de error para que coincidan con la nueva ruta
+            if (!headerRes.ok) throw new Error("Error al cargar /components/header.html");
+            if (!footerRes.ok) throw new Error("Error al cargar /components/footer.html");
 
             headerCont.innerHTML = await headerRes.text();
             footerCont.innerHTML = await footerRes.text();
 
+            // Reactivamos el menú móvil después de inyectar el HTML
             if (typeof this.activarMenuMovil === 'function') {
                 this.activarMenuMovil();
             }
