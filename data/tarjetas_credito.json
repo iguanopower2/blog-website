@@ -224,5 +224,111 @@
       "Ajuste de límite de crédito desde la app",
       "Tarjeta virtual que cambia de CVV para seguridad"
     ]
+  },
+  {
+    "id": "bbva-azul",
+    "nombre": "Tarjeta Azul BBVA",
+    "emisor": "BBVA México",
+    "imagen_url": "assets/tarjetas/bbva-azul.png",
+    "color_hex": "#004481",
+    "link_solicitud": "https://www.bbva.mx/personas/productos/tarjetas-de-credito/tarjeta-de-credito-azul.html",
+    "destacado": false,
+    "etiquetas": ["Banco Tradicional", "Puntos BBVA", "Promo Digital"],
+    "garantia": {
+      "requiere_garantia": false,
+      "monto_minimo": 0,
+      "descripcion": null
+    },
+    "costos": {
+      "anualidad_titular": 748,
+      "cat_promedio": 72.8,
+      "condicion_exencion_anualidad": { 
+        "es_exenta": true, 
+        "descripcion": "Costo normal $748 + IVA. Algunas formas de exentar es tener tu nómina en BBVA." 
+      }
+    },
+    "requisitos": {
+        "ingreso_minimo_mensual": 6000, 
+        "documentos": ["INE vigente", "Comprobante de ingresos", "Comprobante de domicilio (< 3 meses)"]
+    },
+    "recompensas": {
+      "tipo": "Puntos",
+      "programa_nombre": "Puntos BBVA",
+      "porcentaje_general": 9,
+      "reglas": [
+        { 
+          "condicion": "Todas las compras", 
+          "tasa": "9% en Puntos", 
+          "detalle": "1 Punto BBVA aprox. $0.07 - $0.10 pesos (No es cashback directo)." 
+        }
+      ],
+      "tope_recompensa": { 
+        "aplica": false, 
+        "descripcion": "No especificado en la página del producto." 
+      }
+    },
+    "billeteras": {
+        "apple_pay": true,
+        "google_wallet": true
+    },
+    "beneficios_clave": [
+      "3 Meses sin Intereses en todas las compras los primeros 30 días",
+      "Puntos BBVA en todas tus compras (9%)",
+      "Ofertas de estreno al contratar en línea",
+      "Alertas BBVA sin costo al celular"
+    ]
+  },
+  {
+    "id": "bbva-oro",
+    "nombre": "Tarjeta Oro BBVA",
+    "emisor": "BBVA México",
+    "imagen_url": "assets/tarjetas/bbva-oro.png",
+    "color_hex": "#c5a059",
+    "link_solicitud": "https://www.bbva.mx/personas/productos/tarjetas-de-credito/tarjeta-de-credito-oro.html",
+    "destacado": false,
+    "etiquetas": ["Puntos Extra", "Seguros Visa", "Solicitud en Sucursal"],
+    "garantia": {
+      "requiere_garantia": false,
+      "monto_minimo": 0,
+      "descripcion": null
+    },
+    "costos": {
+      "anualidad_titular": 1151,
+      "cat_promedio": 61.5,
+      "condicion_exencion_anualidad": { 
+        "es_exenta": false, 
+        "descripcion": "Costo de $1,151 MXN + IVA. Algunas formas de exentar es tener tu nómina en BBVA" 
+      }
+    },
+    "requisitos": {
+        "ingreso_minimo_mensual": 20000, 
+        "documentos": ["Identificación oficial vigente", "Comprobante de ingresos", "Comprobante de domicilio"]
+    },
+    "recompensas": {
+      "tipo": "Puntos",
+      "programa_nombre": "Puntos BBVA",
+      "porcentaje_general": 11,
+      "reglas": [
+        { 
+          "condicion": "Todas las compras", 
+          "tasa": "11% en Puntos", 
+          "detalle": "Acumulación mayor que la Azul (11% vs 9%)." 
+        }
+      ],
+      "tope_recompensa": { 
+        "aplica": false, 
+        "descripcion": null 
+      }
+    },
+    "billeteras": {
+        "apple_pay": true,
+        "google_wallet": true
+    },
+    "beneficios_clave": [
+      "Tarjetas Adicionales sin costo (según la sección de preguntas frecuentes)",
+      "Seguros Gratuitos: Compra Protegida y Demora de Equipaje",
+      "Puntos BBVA (11%) en todas tus compras",
+      "Acceso a ofertas de estreno y meses sin intereses"
+    ]
   }
 ]
