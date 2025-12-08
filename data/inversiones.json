@@ -226,7 +226,7 @@
     "nombre": "Pagaré Kapital Bank",
     "tipo": "Banco",
     "sitioweb": "https://kapital.com",
-    "plazos": { "Vista": null, "1 mes": 6.75, "3 meses": 7.55, "6 meses": 7.75, "12 meses": 7.80, "24 meses": 7.00  }
+    "plazos": { "Vista": null, "1 mes": 6.75, "3 meses": 7.55, "6 meses": 7.75, "12 meses": 8.00, "24 meses": 7.00  }
   },
   {
     "nombre": "Cetes Directo",
