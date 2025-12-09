@@ -81,7 +81,7 @@
     "sitioweb": "https://www.uala.mx",
     "plazos": { "Vista": 16, "1 mes": 7.6, "3 meses": 7.75, "6 meses": 7.6, "12 meses": 7.1, "24 meses": null},
     "notas": {
-      "Vista": "Tasa del 16% está topada a $30,000 MXN y se activa si migras tu nómina o desde que consumes $3,000 MXN durante el mes. La vigencia es hasta que termine el mes."
+      "Vista": "Si consumes $6,000 o traes tu nómina por $6,000, tu tasa sube a 16% hasta que termine el mes. Si consumes $3,000 en el mes o traes tu nómina por $3,000 tu tasa será del 13% anual hasta que termine el mes. En otro caso, la tasa de rendimiento es del 7.5% anual. Todas las tasas están topadas hasta $30,000 MXN."
     }
   },
   {
@@ -203,7 +203,7 @@
     "resultadoneto": 26101,
     "cartera_vig": 489524,
     "notas": {
-      "nombre": "Tasas disponibles para montos superiores a $100,000 MXN, monto mínimo de $20,000 MXN con una tasa menor. Puedes elegir pago de rendimientos mensual, lo que también disminuye la tasa. Consulta el sitio oficial para más información."
+      "nombre": "Tasas disponibles para montos superiores a $100,000 MXN, monto mínimo de $20,000 MXN con una tasa menor. Puedes elegir pago de rendimientos mensual, lo que también disminuye la tasa. Inversión máxima por persona es de $1,000,000 MXN. Consulta el sitio oficial para más información."
     }
   },
   {
