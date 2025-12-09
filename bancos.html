@@ -67,45 +67,51 @@
   </main>
 
   <div id="footer-container"></div>
-  <script src="js/funciones.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", async () => {
-        // 1️⃣ Cargar header y footer comunes
-        funciones.cargarComponentes();
+<script src="js/funciones.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", async () => {
+    // 1️⃣ Cargar header y footer comunes
+    funciones.cargarComponentes();
+    await funciones.aplicarConfiguracionGlobal();
 
-        // 1.A️⃣ Cargar configuración global (para valor de UDI/IPAB)
-        await funciones.aplicarConfiguracionGlobal();
+    // 2️⃣ Cargar y validar los datos
+    const datosCrudos = await funciones.obtenerDatosJSON("data/inversiones.json");
+    if (!funciones.validarEstructuraBase(datosCrudos)) return;
 
-        // 2️⃣ Cargar y validar los datos
-        const data = await funciones.obtenerDatosJSON("data/inversiones.json");
-        if (!funciones.validarEstructuraBase(data)) return;
-        const bancos = funciones.filtrarPorTipo(data, "Banco");
+    // Filtrar solo Bancos
+    const datosBancos = funciones.filtrarPorTipo(datosCrudos, "Banco");
 
-        // 3️⃣ Renderizar tabla principal
-        funciones.renderizarTablaGeneral({
-          data: bancos,
-          headId: "tabla-bancos-head",
-          bodyId: "tabla-bancos-body",
-          mostrarTipo: false,
-          mostrarNICAP: false,
-          mostrarIMOR: false
-        });
+    // 3️⃣ ORDENAR DATOS POR DEFECTO (A-Z)
+    // Usamos 'bajoMejor' en la columna nombre para forzar orden Ascendente
+    const data = funciones.ordenarDatos(datosBancos, 'nombre', 'bajoMejor');
 
-        // 4️⃣ Cargar las nuevas tarjetas de bancos destacados
-        await funciones.renderizarBancosDestacados();
+    // 4️⃣ Definir reglas de colores
+    const modosColores = {
+      "Vista": "altoMejor",
+      "1 mes": "altoMejor",
+      "3 meses": "altoMejor",
+      "6 meses": "altoMejor",
+      "12 meses": "altoMejor",
+      "24 meses": "altoMejor",
+      "IMOR (%)": "bajoMejor" 
+    };
 
-        // 5️⃣ Aplicar colores
-        const modos = {
-          Vista: "altoMejor",
-          "1 mes": "altoMejor",
-          "3 meses": "altoMejor",
-          "6 meses": "altoMejor",
-          "12 meses": "altoMejor",
-          "24 meses": "altoMejor"
-        };
+    // 5️⃣ Renderizar tabla principal
+    funciones.renderizarTablaGeneral({
+      data: data,
+      headId: "tabla-bancos-head",
+      bodyId: "tabla-bancos-body",
+      mostrarTipo: false,
+      mostrarNICAP: false,
+      mostrarIMOR: false,
+      mostrarResultado: false,
+      mostrarRendimientos: true,
+      modosColores: modosColores // 👈 Esto asegura que los colores no se borren al ordenar
+    });
 
-        funciones.aplicarColoresPorNombre(".sofipos-table", modos);
-      });
-    </script>
+    // 6️⃣ Cargar tarjetas de bancos destacados
+    await funciones.renderizarBancosDestacados();
+  });
+</script>
 </body>
 </html>

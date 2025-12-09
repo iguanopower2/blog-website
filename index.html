@@ -69,30 +69,19 @@
 <script src="js/funciones.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", async () => {
-    // 1️⃣ Cargar header y footer comunes
     funciones.cargarComponentes();
-
-    // 1.A️⃣ Cargar configuración global (para valor de UDI/IPAB)
     await funciones.aplicarConfiguracionGlobal();
 
     // 2️⃣ Cargar y validar los datos
-    const data = await funciones.obtenerDatosJSON("data/inversiones.json");
-    if (!funciones.validarEstructuraBase(data)) return;
+    const datosCrudos = await funciones.obtenerDatosJSON("data/inversiones.json");
+    if (!funciones.validarEstructuraBase(datosCrudos)) return;
 
-    // 3️⃣ Renderizar tabla principal
-    funciones.renderizarTablaGeneral({
-      data,
-      headId: "tabla-inversiones-head",
-      bodyId: "tabla-inversiones-body",
-      mostrarTipo: true,
-      mostrarNICAP: false,
-      mostrarIMOR: false,
-      mostrarResultado: false,
-    });
+    // 2.1️⃣ ORDENAR POR DEFECTO (A-Z)
+    const data = funciones.ordenarDatos(datosCrudos, 'nombre', 'bajoMejor');
 
-    // 4️⃣ Aplicar colores
-    const modos = {
-      Vista: "altoMejor",
+    // 3️⃣ Configuración de Colores
+    const modosColores = {
+      "Vista": "altoMejor",
       "1 mes": "altoMejor",
       "3 meses": "altoMejor",
       "6 meses": "altoMejor",
@@ -100,7 +89,17 @@
       "24 meses": "altoMejor"
     };
 
-    funciones.aplicarColoresPorNombre(".sofipos-table", modos);
+    // 4️⃣ Renderizar tabla principal
+    funciones.renderizarTablaGeneral({
+      data, 
+      headId: "tabla-inversiones-head",
+      bodyId: "tabla-inversiones-body",
+      mostrarTipo: true,
+      mostrarNICAP: false,
+      mostrarIMOR: false,
+      mostrarResultado: false,
+      modosColores: modosColores
+    });
   });
 </script>
 </body>

@@ -120,20 +120,40 @@
   document.addEventListener("DOMContentLoaded", async () => {
     // 1️⃣ Cargar header y footer comunes
     funciones.cargarComponentes();
-    const data = await funciones.obtenerDatosJSON("data/inversiones.json");
-    if (!funciones.validarEstructuraBase(data)) return;
+    const datosCrudos = await funciones.obtenerDatosJSON("data/inversiones.json");
+    if (!funciones.validarEstructuraBase(datosCrudos)) return;
 
-    //Variables a nivel global
+    // Variables a nivel global
     await funciones.aplicarConfiguracionGlobal();
 
     // Inicializar sistema de pestañas
     funciones.inicializarTabs();
 
-    const sofipos = funciones.filtrarPorTipo(data, "SOFIPO");
+    // Filtrar SOFIPOs
+    const datosSofipos = funciones.filtrarPorTipo(datosCrudos, "SOFIPO");
+
+    // 2️⃣ ORDENAR DATOS POR DEFECTO (A-Z)
+    // Esto asegura que ambas tablas empiecen ordenadas alfabéticamente
+    const data = funciones.ordenarDatos(datosSofipos, 'nombre', 'bajoMejor');
+
+    // 3️⃣ DEFINIR REGLAS DE COLORES (Para ambas tablas)
+    const modosColores = {
+      // Rendimientos
+      "Vista": "altoMejor",
+      "1 mes": "altoMejor",
+      "3 meses": "altoMejor",
+      "6 meses": "altoMejor",
+      "12 meses": "altoMejor",
+      "24 meses": "altoMejor",
+      // Indicadores Financieros
+      "NICAP (%)": "altoMejor",                  // Más alto es más capitalización (mejor)
+      "IMOR (%)": "bajoMejor",                   // Menos morosidad es mejor
+      "Resultado Neto (millones MXN)": "positivoMejor" // Verde si gana, Rojo si pierde
+    };
 
     // 📊 Pestaña 1: Rendimientos
     funciones.renderizarTablaGeneral({
-      data: sofipos,
+      data: data, // Pasamos los datos ordenados
       headId: "tabla-rendimientos-head",
       bodyId: "tabla-rendimientos-body",
       mostrarTipo: false,
@@ -141,13 +161,13 @@
       mostrarIMOR: false,
       mostrarResultado: false,
       mostrarCarteraVig: false,
-      mostrarRendimientos: true
-
+      mostrarRendimientos: true,
+      modosColores: modosColores // 👈 ¡La tabla se colorea sola!
     });
 
     // 📈 Pestaña 2: Indicadores Financieros
     funciones.renderizarTablaGeneral({
-      data: sofipos,
+      data: data, // Pasamos los mismos datos ordenados
       headId: "tabla-indicadores-head",
       bodyId: "tabla-indicadores-body",
       mostrarTipo: false,
@@ -156,27 +176,11 @@
       mostrarIMOR: true,
       mostrarResultado: true,
       mostrarCarteraVig: true,
-      mostrarRendimientos: false
+      mostrarRendimientos: false,
+      modosColores: modosColores // 👈 ¡Esta también se colorea sola!
     });
 
     await funciones.renderizarSofiposDestacadas();
-
-    const modos = {
-    "NICAP (%)": "altoMejor",
-    "IMOR (%)": "bajoMejor",
-    "Resultado Neto (millones MXN)": "positivoMejor",
-    Vista: "altoMejor",
-    "1 mes": "altoMejor",
-    "3 meses": "altoMejor",
-    "6 meses": "altoMejor",
-    "12 meses": "altoMejor",
-    "24 meses": "altoMejor"
-    };
-    // 📊 Colores para rendimientos
-    document.querySelectorAll(".tab-content .sofipos-table").forEach(tabla => {
-      funciones.aplicarColoresPorNombre(`#${tabla.closest('.tab-content').id} .sofipos-table`, modos);
-    });
-
   });
 </script>
 </body>

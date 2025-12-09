@@ -330,5 +330,69 @@
       "Puntos BBVA (11%) en todas tus compras",
       "Acceso a ofertas de estreno y meses sin intereses"
     ]
+  },
+  {
+    "id": "rappicard",
+    "nombre": "RappiCard",
+    "emisor": "RappiPay / Tarjetas del Futuro",
+    "imagen_url": "assets/tarjetas/rappicard.png",
+    "color_hex": "#ff4242",
+    "link_solicitud": "https://rappicard.mx/",
+    "destacado": true,
+    "etiquetas": ["Cashback Alto", "Sin Anualidad", "Descuentos en Gift Cards"],
+    "garantia": {
+      "requiere_garantia": false,
+      "monto_minimo": 0,
+      "descripcion": "No pide comprobante de ingresos ni historial previo estricto."
+    },
+    "costos": {
+      "anualidad_titular": 0,
+      "cat_promedio": 108.1,
+      "condicion_exencion_anualidad": {
+        "es_exenta": true,
+        "descripcion": "Sin anualidad y sin comisión por manejo de cuenta de por vida."
+      }
+    },
+    "requisitos": {
+        "ingreso_minimo_mensual": 0,
+        "documentos": ["INE/IFE vigente", "RFC con homoclave", "App de Rappi instalada"]
+    },
+    "recompensas": {
+      "tipo": "Cashback",
+      "programa_nombre": "RappiCashback",
+      "porcentaje_general": 1.0,
+      "reglas": [
+        {
+          "condicion": "Rappi Travel",
+          "tasa": "5%",
+          "detalle": "En vuelos, hoteles y renta de autos dentro de la App."
+        },
+        {
+          "condicion": "Compras en Rappi",
+          "tasa": "3%",
+          "detalle": "Comida, Super, Farmacia y Gift Cards (Amazon, Spotify, etc)."
+        },
+        {
+          "condicion": "Compras Externas",
+          "tasa": "1%",
+          "detalle": "En cualquier comercio físico o digital (Visa)."
+        }
+      ],
+      "tope_recompensa": {
+        "aplica": true,
+        "monto_tope_mensual": 0,
+        "descripcion": "Sujeto a tope anual (aprox. $5,000) o límites por nivel de usuario (Ver TyC)."
+      }
+    },
+    "billeteras": {
+        "apple_pay": true,
+        "google_wallet": true
+    },
+    "beneficios_clave": [
+      "3% Cashback comprando Tarjetas de Regalo (Amazon, Uber, PlayStation)",
+      "Atención 24/7 vía Chat (Personal Advisor)",
+      "Hasta 50% de descuento en restaurantes aliados (Rappi)",
+      "Tarjeta sin números impresos para mayor seguridad"
+    ]
   }
 ]

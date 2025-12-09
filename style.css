@@ -1469,3 +1469,28 @@ a {
         justify-content: space-around; /* En móvil los distribuimos */
     }
 }
+/* --- INICIO BLOQUE ORDENAMIENTO --- */
+th.sortable {
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    transition: background-color 0.2s;
+    padding-right: 20px; /* Espacio para la flecha */
+}
+
+th.sortable:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+th.sortable i {
+    margin-left: 5px;
+    font-size: 0.8em;
+    color: #999;
+}
+
+/* Flecha activa (color rojo de tu diseño) */
+th.sortable i.active {
+    color: #b71c1c;
+    opacity: 1 !important;
+}
+/* --- FIN BLOQUE ORDENAMIENTO --- */
