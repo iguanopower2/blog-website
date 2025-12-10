@@ -212,6 +212,7 @@ const calculadoras = {
     // ========================================================
 
     // Helper de Cálculo de Hipoteca
+    // Helper de Cálculo de Hipoteca (CORREGIDO)
     calculateMortgage: function() {
         const loanAmount = this.getNumericValue('loan-amount');
         const extraPayment = this.getNumericValue('extra-payment');
@@ -219,6 +220,7 @@ const calculadoras = {
         const years = parseInt(document.getElementById('loan-term').value) || 0;
 
         if (loanAmount <= 0 || annualRate <= 0 || years <= 0) {
+            // Resetear valores si faltan datos
             this.updateElement('monthly-payment', 0);
             this.updateElement('total-interest-paid', 0);
             this.updateElement('total-paid-no-extra', 0);
@@ -230,14 +232,20 @@ const calculadoras = {
 
         const monthlyRate = annualRate / 12;
         const numberOfPayments = years * 12;
+        
+        // Cálculo del pago mensual estándar
         const monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
+        
+        // Totales originales (SIN abonos extra)
         const totalPaidNoExtra = monthlyPayment * numberOfPayments;
         const totalInterestNoExtra = totalPaidNoExtra - loanAmount;
 
+        // Actualizamos UI inicial (por defecto asume sin extras)
         this.updateElement('monthly-payment', monthlyPayment);
         this.updateElement('total-paid-no-extra', totalPaidNoExtra);
         this.updateElement('total-interest-paid', totalInterestNoExtra);
 
+        // --- Lógica de Amortización con Abonos Extra ---
         let remainingBalance = loanAmount, monthsWithExtra = 0, totalInterestWithExtra = 0;
         let localAmortizationData = [];
 
@@ -247,11 +255,14 @@ const calculadoras = {
             let principalComponent = monthlyPayment - interestComponent;
             let totalMonthlyPayment = monthlyPayment;
 
+            // Aplicar abono extra si existe
             if (extraPayment > 0) {
                 let actualExtraPayment = Math.min(extraPayment, remainingBalance - principalComponent);
                 principalComponent += actualExtraPayment;
                 totalMonthlyPayment += actualExtraPayment;
             }
+            
+            // Ajustes finales si el pago supera el saldo
             if (principalComponent > remainingBalance) {
                 principalComponent = remainingBalance;
                 totalMonthlyPayment = interestComponent + principalComponent;
@@ -277,17 +288,28 @@ const calculadoras = {
 
         this.generateAmortizationTable(localAmortizationData);
 
+        // --- ACTUALIZACIÓN DE RESULTADOS ---
         if (extraPayment > 0) {
             const yearsWithExtra = Math.floor(monthsWithExtra / 12);
             const remainingMonths = monthsWithExtra % 12;
             const interestSaved = totalInterestNoExtra - totalInterestWithExtra;
+            
+            // Calcular el NUEVO total pagado (Préstamo + Intereses reales pagados)
+            const totalPaidWithExtra = loanAmount + totalInterestWithExtra; 
+
             this.updateElement('new-loan-term', `${yearsWithExtra} años y ${remainingMonths} meses`, false);
             this.updateElement('interest-saved', interestSaved);
             this.updateElement('total-interest-paid', totalInterestWithExtra);
+            
+            // 👇 AQUÍ ESTABA EL ERROR: Faltaba actualizar esta línea
+            this.updateElement('total-paid-no-extra', totalPaidWithExtra); 
+            
         } else {
+            // Si no hay pagos extra, nos aseguramos de mostrar los valores originales
             this.updateElement('new-loan-term', `${years} años`, false);
             this.updateElement('interest-saved', 0);
             this.updateElement('total-interest-paid', totalInterestNoExtra);
+            this.updateElement('total-paid-no-extra', totalPaidNoExtra);
         }
         return localAmortizationData;
     },
