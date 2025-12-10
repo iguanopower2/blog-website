@@ -103,12 +103,6 @@ const calculadoras = {
             `;
             resultadoDiv.style.display = 'block';
         });
-
-        setTimeout(() => {
-            if (montoInicialInput.value) {
-                form.dispatchEvent(new Event('submit'));
-            }
-        }, 500);
     },
 
     // ========================================================
@@ -192,13 +186,6 @@ const calculadoras = {
             `;
             resultadoDiv.style.display = 'block';
         });
-
-        // Calcular al inicio
-        setTimeout(() => {
-            if (montoInput.value) {
-                form.dispatchEvent(new Event('submit'));
-            }
-        }, 500);
     },
 
     // ========================================================
