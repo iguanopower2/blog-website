@@ -134,12 +134,6 @@ const calculadoras = {
         if (exportCsvBtn) {
             exportCsvBtn.addEventListener('click', () => this.exportAmortizationToCsv(amortizationData));
         }
-
-        setTimeout(() => {
-            if(document.getElementById('loan-amount') && document.getElementById('loan-amount').value) {
-                 mortgageForm.dispatchEvent(new Event('submit'));
-            }
-        }, 500);
     },
 
     // ========================================================
