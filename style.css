@@ -1494,3 +1494,135 @@ th.sortable i.active {
     opacity: 1 !important;
 }
 /* --- FIN BLOQUE ORDENAMIENTO --- */
+/* ==========================================================================
+   MODAL DE NOTAS (ESTILO ROJO Y DORADO)
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Fondo oscuro semitransparente */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background: #fff;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    overflow: hidden;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+    border-top: 6px solid #b30000; /* Toque rojo marca */
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: #b30000; /* Texto rojo marca */
+    font-size: 1.3rem;
+}
+
+.btn-cerrar-modal {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: #999;
+    cursor: pointer;
+    line-height: 1;
+}
+.btn-cerrar-modal:hover { color: #333; }
+
+.modal-body {
+    padding: 20px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.lista-notas-modal {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lista-notas-modal li {
+    margin-bottom: 15px;
+    border-left: 3px solid #d4b200; /* Línea dorada sutil */
+    padding-left: 12px;
+}
+
+.nota-etiqueta {
+    display: block;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #d4b200; /* Dorado para las etiquetas */
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.nota-texto {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #444;
+    line-height: 1.5;
+}
+
+.modal-footer {
+    padding: 15px 20px;
+    background: #f9f9f9;
+    text-align: right;
+}
+
+.btn-entendido {
+    background-color: #b30000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.btn-entendido:hover {
+    background-color: #d4b200; /* Cambio a dorado al pasar el mouse */
+    color: #333;
+}
+
+/* --- Botón en la tabla --- */
+.btn-ver-notas {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #b30000;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.btn-ver-notas:hover {
+    background-color: #fff3cd; /* Fondo dorado muy suave */
+    transform: scale(1.1);
+}

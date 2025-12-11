@@ -138,15 +138,23 @@ const funciones = {
     // ========================================================
     // 📊 6. RENDERIZAR TABLA (REEMPLAZAR ESTA FUNCIÓN COMPLETA)
     // ========================================================
+    datosActuales: [],
+
+    // ========================================================
+    // 📊 6. RENDERIZAR TABLA (VERSIÓN ACTUALIZADA CON NOTAS)
+    // ========================================================
     renderizarTablaGeneral({
         data, headId, bodyId, 
         mostrarTipo = false, mostrarNICAP = false, mostrarCategoriaNICAP = false, 
         mostrarIMOR = false, mostrarCarteraVig = false, mostrarResultado = false, 
         mostrarRendimientos = true,
-        modosColores = {} // <--- Recibimos la configuración de colores
+        modosColores = {} 
     }) {
         const cuerpo = document.getElementById(bodyId);
         const encabezado = document.getElementById(headId);
+
+        // 1. Guardamos los datos actuales para que el modal sepa qué abrir
+        this.datosActuales = data; 
 
         if (!cuerpo || !encabezado) return;
         cuerpo.innerHTML = "";
@@ -157,30 +165,23 @@ const funciones = {
             return;
         }
 
-        // --- 1. Encabezados con Click ---
+        // --- 2. Encabezados ---
         const filaHead = document.createElement("tr");
         const plazos = Object.keys(data[0].plazos || {});
 
         const crearTH = (texto, campoJson) => {
             const th = document.createElement("th");
             th.className = "sortable";
-            
-            // Icono
             let icono = '<i class="fas fa-sort"></i>';
             if (this.estadoOrden.columna === campoJson) {
                 icono = this.estadoOrden.direccion === 'asc' 
                     ? '<i class="fas fa-sort-up active"></i>' 
                     : '<i class="fas fa-sort-down active"></i>';
             }
-            
-            // Usamos innerHTML para poner texto + icono
             th.innerHTML = `${texto} ${icono}`;
-
             th.onclick = () => {
                 const modo = modosColores[texto] || 'altoMejor';
                 const datosOrdenados = this.ordenarDatos(data, campoJson, modo);
-                
-                // Recursividad: repintar tabla ordenada
                 this.renderizarTablaGeneral({
                     data: datosOrdenados, headId, bodyId, mostrarTipo, mostrarNICAP,
                     mostrarCategoriaNICAP, mostrarIMOR, mostrarCarteraVig, mostrarResultado,
@@ -201,10 +202,17 @@ const funciones = {
         if (mostrarRendimientos) {
             plazos.forEach(plazo => filaHead.appendChild(crearTH(plazo, `plazos.${plazo}`)));
         }
+
+        // 🆕 NUEVA COLUMNA DE NOTAS
+        const thNotas = document.createElement("th");
+        thNotas.innerHTML = 'Ver más';
+        thNotas.style.textAlign = 'center';
+        filaHead.appendChild(thNotas);
+
         encabezado.appendChild(filaHead);
 
-        // --- 2. Filas (Corregido "No Disponible") ---
-        data.forEach(item => {
+        // --- 3. Filas ---
+        data.forEach((item, index) => { // Agregamos 'index'
             const fila = document.createElement("tr");
             
             let nombreHTML = item.sitioweb ? `<a href="${item.sitioweb}" target="_blank">${item.nombre}</a>` : item.nombre;
@@ -220,26 +228,109 @@ const funciones = {
             if (mostrarRendimientos) {
                 plazos.forEach(plazo => {
                     const tasa = item.plazos?.[plazo];
-                    // AQUÍ ESTÁ LA CORRECCIÓN: "No Disponible"
                     const mostrar = (tasa !== null && tasa !== undefined && tasa !== '') ? `${tasa}%` : "No Disponible";
-                    // IMPORTANTE: data-rate debe tener el número puro o vacío
                     htmlFila += `<td data-rate="${tasa ?? ''}">${mostrar}${this.crearIconoNota(item.notas?.[plazo])}</td>`;
                 });
             }
+
+            // 🆕 CELDA DEL BOTÓN DE NOTAS (ICONO)
+            let botonNotas = "";
+            if (item.notas && Object.keys(item.notas).length > 0) {
+                botonNotas = `
+                    <button class="btn-ver-notas" onclick="funciones.abrirModalNotas(${index})" title="Ver todas las condiciones">
+                        <i class="fas fa-file-alt"></i>
+                    </button>`;
+            } else {
+                 botonNotas = `<span style="color:#ccc;">-</span>`;
+            }
+            htmlFila += `<td style="text-align:center;">${botonNotas}</td>`;
 
             fila.innerHTML = htmlFila;
             cuerpo.appendChild(fila);
         });
 
-        // --- 3. Aplicar colores automáticamente ---
         if (Object.keys(modosColores).length > 0) {
-            // Buscamos la tabla subiendo desde el bodyId
             const tablaPadre = document.getElementById(bodyId).closest('table');
-            // Pequeño retardo para asegurar que el DOM esté listo
-            setTimeout(() => {
-                 this.aplicarColoresPorNombre(tablaPadre, modosColores);
-            }, 0);
+            setTimeout(() => { this.aplicarColoresPorNombre(tablaPadre, modosColores); }, 0);
         }
+    },
+
+    // ... (Mantén tus funciones intermedias: aplicarColores, cargarComponentes, etc.) ...
+
+    // ========================================================
+    // 📝 SISTEMA DE MODAL DE NOTAS (NUEVO)
+    // ========================================================
+    
+    // 1. Crear el HTML del modal solo si no existe
+    inicializarModal() {
+        if (document.getElementById('modal-notas')) return;
+        
+        const modalHTML = `
+            <div id="modal-notas" class="modal-overlay" onclick="funciones.cerrarModal(event)">
+                <div class="modal-content" onclick="event.stopPropagation()">
+                    <div class="modal-header">
+                        <h3 id="modal-titulo">Notas Importantes</h3>
+                        <button class="btn-cerrar-modal" onclick="funciones.cerrarModal()">×</button>
+                    </div>
+                    <div id="modal-cuerpo" class="modal-body">
+                        </div>
+                    <div class="modal-footer">
+                        <button class="btn-entendido" onclick="funciones.cerrarModal()">Entendido</button>
+                    </div>
+                </div>
+            </div>`;
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+    },
+
+    // 2. Abrir el modal con la información del ítem seleccionado
+    abrirModalNotas(index) {
+        this.inicializarModal();
+        const item = this.datosActuales[index];
+        
+        if (!item || !item.notas) return;
+
+        const modal = document.getElementById('modal-notas');
+        const titulo = document.getElementById('modal-titulo');
+        const cuerpo = document.getElementById('modal-cuerpo');
+
+        // Personalizar título
+        titulo.innerText = `Condiciones: ${item.nombre}`;
+
+        // Construir lista de notas
+        let htmlNotas = '<ul class="lista-notas-modal">';
+        for (const [clave, nota] of Object.entries(item.notas)) {
+            // Embellecer la etiqueta (ej: "1 mes" -> "PLAZO 1 MES")
+            let etiqueta = clave === 'nombre' ? 'Información General' : clave;
+            // Capitalizar
+            etiqueta = etiqueta.charAt(0).toUpperCase() + etiqueta.slice(1);
+
+            htmlNotas += `
+                <li>
+                    <span class="nota-etiqueta">${etiqueta}</span>
+                    <p class="nota-texto">${nota}</p>
+                </li>`;
+        }
+        htmlNotas += '</ul>';
+
+        cuerpo.innerHTML = htmlNotas;
+        modal.classList.add('active');
+    },
+
+    // 3. Cerrar el modal
+    cerrarModal(e) {
+        const modal = document.getElementById('modal-notas');
+        if (modal) modal.classList.remove('active');
+    },
+
+    // ... (Mantén tu función crearIconoNota al final tal como estaba) ...
+    crearIconoNota(notaTexto) {
+        if (!notaTexto) return "";
+        return `
+            <i class="fa-solid fa-circle-exclamation info-icon"
+               title="${notaTexto}"
+               onclick="alert('${notaTexto.replace(/'/g, "\\'")}')">
+            </i>
+        `;
     },
     // ========================================================
     // 🎨 10. Aplicar colores (MODIFICADA con 'positivoMejor')
