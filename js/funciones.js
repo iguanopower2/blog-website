@@ -333,7 +333,7 @@ const funciones = {
         `;
     },
     // ========================================================
-    // 🎨 10. Aplicar colores (MODIFICADA con 'positivoMejor')
+    // 🎨 10. Aplicar colores (CORREGIDA Y DEFINITIVA)
     // ========================================================
     aplicarColoresPorNombre(tablaSelector, modos = {}) {
         const tabla = (typeof tablaSelector === 'string') 
@@ -346,25 +346,22 @@ const funciones = {
         if (filas.length === 0) return;
 
         const encabezados = Array.from(tabla.querySelectorAll("thead th"));
-        
-        // CORRECCIÓN: Obtenemos solo el texto directo, ignorando el icono <i>
-        const columnas = encabezados.map(th => {
-             // Clonamos para quitar hijos sin afectar el DOM real, o simplemente tomamos textContent y limpiamos
-             return th.textContent.trim(); 
-        });
+        const columnas = encabezados.map(th => th.textContent.trim());
 
         Object.keys(modos).forEach(nombreColumna => {
-            // Buscamos coincidencia parcial ("Vista" coincide con "Vista ▾")
-            const index = columnas.findIndex(col => col.includes(nombreColumna));
+            // Buscamos la columna (ignorando mayúsculas/minúsculas)
+            const index = columnas.findIndex(col => 
+                col.toLowerCase().includes(nombreColumna.toLowerCase())
+            );
 
             if (index === -1) return;
 
-            const modo = modos[nombreColumna];
+            const modo = modos[nombreColumna] || "altoMejor";
             
-            // Extraer valores usando data-rate
+            // Extraer celdas y valores
             const celdasInfo = filas.map(fila => {
                 const celda = fila.children[index];
-                if (!celda) return { valor: NaN };
+                if (!celda) return { celda, valor: NaN };
                 
                 // Limpiar estilos previos
                 celda.style.backgroundColor = "";
@@ -375,36 +372,62 @@ const funciones = {
                 return { celda, valor };
             });
 
-            const valoresNumericos = celdasInfo.map(c => c.valor).filter(v => !isNaN(v));
-            if (valoresNumericos.length < 2) return;
+            // --- LÓGICA DE COLORES ---
 
-            const max = Math.max(...valoresNumericos);
-            const min = Math.min(...valoresNumericos);
+            // 1. Modos Comparativos (Max vs Min)
+            if (modo === "altoMejor" || modo === "bajoMejor") {
+                const valoresValidos = celdasInfo.map(c => c.valor).filter(v => !isNaN(v));
+                if (valoresValidos.length < 2) return;
 
-            celdasInfo.forEach(({ celda, valor }) => {
-                if (!celda || isNaN(valor)) return;
+                const max = Math.max(...valoresValidos);
+                const min = Math.min(...valoresValidos);
 
-                let esVerde = false, esRojo = false;
+                celdasInfo.forEach(({ celda, valor }) => {
+                    if (isNaN(valor)) return;
+                    let esVerde = false, esRojo = false;
 
-                if (modo === "altoMejor") {
-                    if (valor === max) esVerde = true;
-                    if (valor === min) esRojo = true;
-                } else if (modo === "bajoMejor") {
-                    if (valor === min) esVerde = true;
-                    if (valor === max) esRojo = true;
-                }
+                    if (modo === "altoMejor") {
+                        if (valor === max) esVerde = true;
+                        if (valor === min) esRojo = true;
+                    } else { // bajoMejor
+                        if (valor === min) esVerde = true;
+                        if (valor === max) esRojo = true;
+                    }
+                    
+                    this.pintarCelda(celda, esVerde, esRojo);
+                });
 
-                if (esVerde) {
-                    celda.style.backgroundColor = "#2e7d32"; // Verde
-                    celda.style.color = "white";
-                    celda.style.fontWeight = "bold";
-                } else if (esRojo) {
-                    celda.style.backgroundColor = "#b71c1c"; // Rojo
-                    celda.style.color = "white";
-                    celda.style.fontWeight = "bold";
-                }
-            });
+            } 
+            // 2. Modo Absoluto: Resultado Neto
+            else if (modo === "positivoMejor") {
+                celdasInfo.forEach(({ celda, valor }) => {
+                    if (isNaN(valor)) return;
+                    // Verde si gana (>0), Rojo si pierde (<0)
+                    this.pintarCelda(celda, valor > 0, valor < 0);
+                });
+            }
+            // 3. Modo Absoluto: NICAP (Lógica recuperada)
+            else if (modo === "nicap") {
+                celdasInfo.forEach(({ celda, valor }) => {
+                    if (isNaN(valor)) return;
+                    // Verde si es Nivel 1 (>= 131), Rojo si es menor (Nivel 2, 3, 4)
+                    this.pintarCelda(celda, valor >= 131, valor < 131);
+                });
+            }
         });
+    },
+
+    // Helper para no repetir código de estilos
+    pintarCelda(celda, esVerde, esRojo) {
+        if (esVerde) {
+            celda.style.backgroundColor = "#2e7d32"; // Verde
+            celda.style.color = "white";
+            celda.style.fontWeight = "bold";
+        } else if (esRojo) {
+            celda.style.backgroundColor = "#b71c1c"; // Rojo
+            celda.style.color = "white";
+            celda.style.fontWeight = "bold";
+        }
     },
     // ========================================================
     // 🧱 11. Cargar componentes (PARA PÁGINAS PRINCIPALES) - (CORREGIDA)
