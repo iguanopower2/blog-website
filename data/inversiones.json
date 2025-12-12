@@ -239,5 +239,20 @@
       "6 meses": "La tasa es a descuento.",
       "12 meses": "La tasa es a descuento."
     }
+  },
+  {
+    "nombre": "Plazo Azteca",
+    "tipo": "Banco",
+    "sitioweb": "https://www.bancoazteca.com.mx",
+    "plazos": { "Vista": null, "1 mes": 5.8, "3 meses": 6.7, "6 meses": 6.25, "12 meses": 5.85, "24 meses": null  },
+    "notas":{
+      "Condiciones": "Oferta Plazo Azteca aplicable en Sucursal y Banca Móvil."
+    }
+  },
+  {
+    "nombre": "GBM Smart Cash",
+    "tipo": "Casa de Bolsa",
+    "sitioweb": "https://gbm.com",
+    "plazos": { "Vista": 4.75, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null, "24 meses": null  }
   }
 ]
