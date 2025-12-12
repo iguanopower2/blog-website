@@ -947,7 +947,30 @@ const funciones = {
                 this.pintarTarjetas(filtradas, document.getElementById('contenedor-tarjetas'));
             });
         });
-    }
+    },
+    // ========================================================
+    // 🎨 MÓDULO: Renderizar Leyenda de Colores (Modular)
+    // ========================================================
+    renderizarLeyenda(contenedorId) {
+        const contenedor = document.getElementById(contenedorId);
+        if (!contenedor) return;
+
+        // El HTML es idéntico al que hicimos antes, pero ahora generado por JS
+        const html = `
+            <div class="leyenda-container">
+                <div class="leyenda-item">
+                    <span class="dot-leyenda dot-verde"></span>
+                    <span>Mejor opción / Saludable / Ganancia</span>
+                </div>
+                <div class="leyenda-item">
+                    <span class="dot-leyenda dot-rojo"></span>
+                    <span>Menos conveniente / Alerta / Pérdida</span>
+                </div>
+            </div>
+        `;
+        
+        contenedor.innerHTML = html;
+    },
 
 };
 

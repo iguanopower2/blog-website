@@ -1626,3 +1626,37 @@ th.sortable i.active {
     background-color: #fff3cd; /* Fondo dorado muy suave */
     transform: scale(1.1);
 }
+/* --- LEYENDA DE COLORES (SIMBOLOGÍA) --- */
+.leyenda-container {
+    display: flex;
+    justify-content: flex-end; /* Alinear a la derecha */
+    gap: 20px;
+    margin-bottom: 10px;
+    padding: 0 10px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.leyenda-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.dot-leyenda {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot-verde { background-color: #2e7d32; }
+.dot-rojo { background-color: #b71c1c; }
+
+/* Ajuste para móvil: centrar la leyenda si la pantalla es chica */
+@media (max-width: 768px) {
+    .leyenda-container {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}

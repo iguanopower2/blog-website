@@ -32,6 +32,7 @@
     <h2 class="titulo-tabla">Mejores Tasas de Inversión en México</h2>
     <p class="ultima-actualizacion">Última actualización: <span id="fecha-actualizacion"></span></p>
     <div class="table-container">
+      <div id="leyenda-index"></div>
       <table class="sofipos-table">
         <thead id="tabla-inversiones-head">
           </thead>
@@ -40,7 +41,7 @@
       </table>
        <div class="table-footnotes">
         <ol>
-          <li>La tasa de CETES es a descuento.</li>
+          <li><span style="color:#2e7d32; font-weight:bold;">Verde:</span> Tasas más altas del plazo. <span style="color:#b71c1c; font-weight:bold;">Rojo:</span> Tasas más bajas del plazo.</li>
         </ol>
       </div>
     </div>
@@ -88,6 +89,8 @@
       "12 meses": "altoMejor",
       "24 meses": "altoMejor"
     };
+
+    funciones.renderizarLeyenda("leyenda-index");
 
     // 4️⃣ Renderizar tabla principal
     funciones.renderizarTablaGeneral({

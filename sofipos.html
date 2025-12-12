@@ -32,6 +32,8 @@
         <button class="tab-btn" data-tab="indicadores">📊 Indicadores Financieros</button>
       </div>
 
+      <div id="leyenda-sofipos"></div>
+
       <!-- 📊 Pestaña 1: Rendimientos -->
       <div class="tab-content active" id="tab-rendimientos">
         <table class="sofipos-table">
@@ -41,8 +43,9 @@
 
         <div class="table-footnotes">
           <ol>
+            <li><span style="color:#2e7d32; font-weight:bold;">Verde:</span> Indica la tasa de rendimiento más alta del mercado.</li>
+            <li><span style="color:#b71c1c; font-weight:bold;">Rojo:</span> Indica la tasa más baja comparativa.</li>
             <li>Las tasas están expresadas en términos anuales nominales.</li>
-            <li>Las tasas a la vista pueden estar sujetas a condiciones específicas (por ejemplo, uso de tarjeta mensual).</li>
             <li>Los rendimientos no consideran impuestos ni retenciones.</li>
           </ol>
         </div>
@@ -57,10 +60,10 @@
 
         <div class="table-footnotes">
           <ol>
-            <li><strong>NICAP:</strong> Nivel de capitalización de la SOFIPO, un indicador de solidez financiera.</li>
+            <li><strong>NICAP:</strong> Nivel de capitalización. <span style="color:#2e7d32; font-weight:bold;">Verde</span> indica Categoría 1 (≥ 131%), indicando solidez.</li>
             <li><strong>Categorías NICAP:</strong> Nivel 1 (≥ 131%), Nivel 2 (≥ 100% y < 131%), Nivel 3 (≥ 56% y < 100%), Nivel 4 (< 56%).</li>
-            <li><strong>IMOR:</strong> Índice de morosidad, indica el porcentaje de cartera vencida sobre la cartera total.</li>
-            <li><strong>Resultado Neto:</strong> Resultado contable del periodo, en millones de pesos.</li>
+            <li><strong>IMOR:</strong> Índice de morosidad (Cartera Vencida). <span style="color:#2e7d32; font-weight:bold;">Verde</span> indica el menor índice (mejor gestión de cobro).</li>
+            <li><strong>Resultado Neto:</strong> Ganancias o pérdidas. <span style="color:#2e7d32; font-weight:bold;">Verde</span> indica ganancias (números positivos), <span style="color:#b71c1c; font-weight:bold;">Rojo</span> indica pérdidas.</li>
             <li>El seguro <strong>PROSOFIPO</strong> protege hasta por aproximadamente <span class="valor-prosofipo"></span> MXN.</li>
             <li>Indicadores financieros al cierre del mes de <strong class="fecha-indicadores-fin"></strong></li>
           </ol>
@@ -150,6 +153,7 @@
       "IMOR (%)": "bajoMejor",      
       "Resultado Neto": "positivoMejor" 
     };
+    funciones.renderizarLeyenda("leyenda-sofipos");
 
     // 📊 Pestaña 1: Rendimientos
     funciones.renderizarTablaGeneral({
@@ -164,6 +168,7 @@
       mostrarRendimientos: true,
       modosColores: modosColores // 👈 ¡La tabla se colorea sola!
     });
+    
 
     // 📈 Pestaña 2: Indicadores Financieros
     funciones.renderizarTablaGeneral({
