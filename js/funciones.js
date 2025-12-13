@@ -951,20 +951,25 @@ const funciones = {
     // ========================================================
     // 🎨 MÓDULO: Renderizar Leyenda de Colores (Modular)
     // ========================================================
-    renderizarLeyenda(contenedorId) {
+    renderizarLeyenda(contenedorId, mostrarNotaMillones = false) {
         const contenedor = document.getElementById(contenedorId);
         if (!contenedor) return;
 
-        // El HTML es idéntico al que hicimos antes, pero ahora generado por JS
-        const html = `
+        let html = `
             <div class="leyenda-container">
-                <div class="leyenda-item">
-                    <span class="dot-leyenda dot-verde"></span>
-                    <span>Mejor opción / Saludable / Ganancia</span>
+                <div class="leyenda-extra">
+                    ${mostrarNotaMillones ? '<span class="badge-millones">* Cifras en millones de MXN</span>' : ''}
                 </div>
-                <div class="leyenda-item">
-                    <span class="dot-leyenda dot-rojo"></span>
-                    <span>Menos conveniente / Alerta / Pérdida</span>
+
+                <div class="leyenda-simbolos">
+                    <div class="leyenda-item">
+                        <span class="dot-leyenda dot-verde"></span>
+                        <span>Mejor / Ganancia</span>
+                    </div>
+                    <div class="leyenda-item">
+                        <span class="dot-leyenda dot-rojo"></span>
+                        <span>Menor / Pérdida</span>
+                    </div>
                 </div>
             </div>
         `;
