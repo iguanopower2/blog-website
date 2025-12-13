@@ -9,7 +9,7 @@
     "resultadoneto": -200440,
     "cartera_vig":40261,
     "notas": {
-      "Vista": "Tasa del 16% topada hasta $10,000 MXN. Montos mayores ofrecen 8.5% de rendimiento"
+      "Vista": "Tasa del 16% topada hasta $10,000 MXN. Montos mayores ofrecen 8.5% de rendimiento."
     }
   },
   {
@@ -22,7 +22,7 @@
     "resultadoneto": -1443458,
     "cartera_vig": 25470746,
     "notas": {
-      "Vista": "Tasa del 15% disponible al una compra al mes y topada hasta $25,000 MXN. Montos mayores ofrecen 7.25% de rendimiento"
+      "Vista": "Tasa del 15% se activa (Cajita Turbo) al realizar una compra al mes y topada hasta $25,000 MXN. Montos mayores ofrecen 7.25% de rendimiento a la vista."
     }
   },
   {
@@ -46,7 +46,10 @@
     "NICAP": 426.75,
     "IMOR": 2.99,
     "resultadoneto": 40271,
-    "cartera_vig": 3017876
+    "cartera_vig": 3017876,
+    "notas": {
+      "12 meses": "El rendimiento mostrado de 364 días es al recibir los intereses al final del plazo. Se pueden recibir intereses cada 28 días con una tasa menor."
+    }
   },
   {
     "nombre": "Mercado Pago",
@@ -73,7 +76,10 @@
     "nombre": "Banco Covalto",
     "tipo": "Banco",
     "sitioweb": "https://www.covalto.com",
-    "plazos": { "Vista": null, "1 mes": 5.9, "3 meses": 7.15, "6 meses": 7.4, "12 meses": 9.75, "24 meses": 10}
+    "plazos": { "Vista": null, "1 mes": 5.9, "3 meses": 7.15, "6 meses": 7.4, "12 meses": 9.5, "24 meses": 9.75},
+    "notas": {
+      "Condiciones": "Las tasas de rendimiento mostradas son al recibir los intereses al final del periodo. Para algunos plazos, se pueden recibir intereses cada 28 días con una tasa menor."
+    }
   },
   {
     "nombre": "Ualá",
@@ -124,21 +130,24 @@
     "nombre": "Stori",
     "tipo": "SOFIPO",
     "sitioweb": "https://www.storicard.com",
-    "plazos": { "Vista": 7.7, "1 mes": 14.14, "3 meses": 9.65, "6 meses": 11.66, "12 meses": 10, "24 meses": null  },
+    "plazos": { "Vista": 7.7, "1 mes": 7.77, "3 meses": 9.65, "6 meses": 11.66, "12 meses": 10, "24 meses": null  },
     "NICAP": 140.47,
     "IMOR": 13.31,
     "resultadoneto": 130272,
     "cartera_vig":7481807,
     "notas": {
-      "nombre": "Se muestra la tasa nominal.",
-      "1 mes": "Tasa del 14.14% (15% GAT) topada hasta $5,000 MXN y por tiempo limitado. Revisar condiciones en su página oficial."
+      "nombre": "Se muestra la tasa nominal para una comparación justa con los demás instrumentos.",
+      "Condiciones": "Existe una tasa del 14.14% (15% GAT) topada hasta $5,000 MXN y por tiempo limitado a 60 días. Revisar condiciones en su página oficial."
     }
   },
   {
     "nombre": "BIM",
     "tipo": "Banco",
     "sitioweb": "https://www.bim.mx",
-    "plazos": { "Vista": null, "1 mes": 6.2, "3 meses": 6.3, "6 meses": 6.55, "12 meses": 6.55, "24 meses": null  }
+    "plazos": { "Vista": null, "1 mes": 6.2, "3 meses": 6.3, "6 meses": 6.55, "12 meses": 6.55, "24 meses": null  },
+    "notas": {
+      "Condiciones": "Rendimientos calculados con un monto de inversión de $5,000 MXN e invertidos en su pagaré con rendimiento liquidable al vencimiento (Pago al final del plazo)."
+    }
   },
     {
     "nombre": "Klar",
@@ -148,7 +157,10 @@
     "NICAP": 157.29,
     "IMOR": 11.95,
     "resultadoneto": -436073,
-    "cartera_vig": 5744106
+    "cartera_vig": 5744106,
+    "notas": {
+      "Vista": "En inversión flexible obtienes una tasa del 6% anual."
+    }
   },
   {
     "nombre": "Klar Plus y Platino",
@@ -160,18 +172,21 @@
     "resultadoneto": -436073,
     "cartera_vig": 5744106,
     "notas": {
-      "Vista": "Tasa del 15% topada hasta $15,000 MXN. Montos mayores ofrecen 5% de rendimiento"
+      "Vista": "Tasa del 15% topada hasta $15,000 MXN. En inversión flexible obtienes una tasa del 8% anual. Obtienes 5% de rendimiento en tu cuenta a la vista."
     }
   },
   {
     "nombre": "Premo",
     "tipo": "SOFIPO",
     "sitioweb": "https://premo.mx",
-    "plazos": { "Vista": 4, "1 mes": 8.1, "3 meses": 8.23, "6 meses": 8.39, "12 meses": 9.37, "24 meses": 9.76 },
+    "plazos": { "Vista": 4, "1 mes": 8.15, "3 meses": 8.27, "6 meses": 8.46, "12 meses": 9.63, "24 meses": 9.85 },
     "NICAP": 646.07,
     "IMOR": 14.17,
     "resultadoneto": 18501,
-    "cartera_vig": 391224
+    "cartera_vig": 391224,
+    "notas": {
+      "Condiciones": "Rendimientos calculados con un monto de inversión de $100 MXN"
+    }
   },
   {
     "nombre": "Capital ACTIVO",
@@ -187,7 +202,7 @@
     "nombre": "PROGRESSA",
     "tipo": "SOFIPO",
     "sitioweb": "https://progressa.com.mx",
-    "plazos": { "Vista": null, "1 mes": 6.5, "3 meses": 7, "6 meses": 8.2, "12 meses": 7.25, "24 meses": null },
+    "plazos": { "Vista": null, "1 mes": 6.5, "3 meses": 7.75, "6 meses": 8.2, "12 meses": 7.25, "24 meses": null },
     "NICAP": 142.36,
     "IMOR": 8.34,
     "resultadoneto": -28191,
@@ -203,14 +218,15 @@
     "resultadoneto": 26101,
     "cartera_vig": 489524,
     "notas": {
-      "nombre": "Tasas disponibles para montos superiores a $100,000 MXN, monto mínimo de $20,000 MXN con una tasa menor. Puedes elegir pago de rendimientos mensual, lo que también disminuye la tasa. Inversión máxima por persona es de $1,000,000 MXN. Consulta el sitio oficial para más información."
+      "nombre": "Tasas disponibles para montos superiores a $100,000 MXN, monto mínimo de $20,000 MXN con una tasa menor. Puedes elegir pago de rendimientos mensual, lo que también disminuye la tasa. Inversión máxima por persona es de $1,000,000 MXN. Consulta el sitio oficial para más información.",
+      "Condiciones": "Rendimientos calculados con un monto de inversión de $100,000 MXN y rendimientos pagados al final del plazo. El monto mínimo es de $20,000 MXN con una tasas menores. Puedes elegir pago de rendimientos mensual, lo que también disminuye la tasa. Inversión máxima por persona es de $1,000,000 MXN. Consulta el sitio oficial para más información."
     }
   },
   {
     "nombre": "Operaciones de tu lado",
     "tipo": "SOFIPO",
     "sitioweb": "https://www.avantthya.com.mx",
-    "plazos": { "Vista": null, "1 mes": 8.75, "3 meses": 10, "6 meses": 10.75, "12 meses": 11.75, "24 meses": null },
+    "plazos": { "Vista": null, "1 mes": 8.25, "3 meses": 9.25, "6 meses": 10, "12 meses": 11.25, "24 meses": null },
     "NICAP": 234.15,
     "IMOR": 7.92,
     "resultadoneto": 5466,
@@ -226,7 +242,7 @@
     "nombre": "Pagaré Kapital Bank",
     "tipo": "Banco",
     "sitioweb": "https://kapital.com",
-    "plazos": { "Vista": null, "1 mes": 6.75, "3 meses": 7.55, "6 meses": 7.75, "12 meses": 8.00, "24 meses": 7.00  }
+    "plazos": { "Vista": null, "1 mes": 6.75, "3 meses": 7.55, "6 meses": 7.75, "12 meses": 8.00, "24 meses": 7.00}
   },
   {
     "nombre": "Cetes Directo",
