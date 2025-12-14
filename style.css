@@ -1229,6 +1229,7 @@ a {
 
 .cc-img-wrapper img {
     width: 100%;
+    object-fit: contain;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
@@ -1678,3 +1679,4 @@ th.sortable i.active {
         justify-content: center; /* Centrar todo en pantallas chicas */
     }
 }
+
