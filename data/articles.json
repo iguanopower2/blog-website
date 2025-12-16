@@ -6,7 +6,8 @@
     "summary": "Didi ha revolucionado el mercado de las SOFIPOs con una tasa del 15% anual a la vista. Analizamos si es la mejor opción para ti, sus ventajas, riesgos y cómo se compara con la competencia.",
     "image": "assets/blog/mini_didi_cuenta.png",
     "url": "blog/didi-cuenta-15-por-ciento.html",
-    "tags": ["sofipo", "didi", "inversión", "rendimiento"]
+    "tags": ["sofipo", "didi", "inversión", "rendimiento"],
+    "readTime": "4 min"
   },
   {
     "id": "leva-invierte-opinion",
@@ -15,6 +16,7 @@
     "date": "2025-12-02",
     "image": "assets/blog/mini_leva_invierte.png",
     "url": "blog/leva-invierte-opinion.html",
-    "tags": ["Análisis", "sofipo", "leva", "inversión", "rendimiento"]
+    "tags": ["Análisis", "sofipo", "leva", "inversión", "rendimiento"],
+    "readTime": "8 min"
   }
 ]

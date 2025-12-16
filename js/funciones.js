@@ -856,6 +856,16 @@ const funciones = {
                 htmlBilleteras += `</div>`;
             }
 
+            let htmlIngreso = '';
+            if (t.requisitos && t.requisitos.mostrar_ingreso === true) {
+                const ingresoFmt = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(t.requisitos.ingreso_minimo_mensual);
+                htmlIngreso = `
+                    <div class="income-requirement">
+                        <i class="fas fa-money-bill-wave"></i> Ingreso Mínimo: <strong>${ingresoFmt}</strong>
+                    </div>`;
+            } else {
+            }
+
             return `
             <div class="credit-card-item">
                 <div class="card-header-band" style="background-color: ${t.color_hex || '#333'};"></div>
@@ -892,6 +902,8 @@ const funciones = {
                     <div class="cc-tags-container">
                         ${htmlEtiquetas}
                     </div>
+
+                    ${htmlIngreso}
 
                     ${htmlBilleteras}
 

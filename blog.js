@@ -35,7 +35,20 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             articleCard.innerHTML = `
-                <img src="${article.image}" alt="${article.title}" class="article-image" loading = "lazy" onerror="this.onerror=null;this.src='https://placehold.co/400x200/cccccc/ffffff?text=Imagen';">
+                <img src="${article.image}" 
+                    alt="${article.title}" 
+                    class="article-image" 
+                    loading = "lazy" 
+                    width="400"
+                    height="200"
+                    onerror="this.onerror=null;this.src='https://placehold.co/400x200/cccccc/ffffff?text=Imagen';">
+
+                    <div class="image-overlay">
+                    <span class="read-time">📖 ${article.readTime || '5 min'}</span>
+                    ${article.tags && article.tags.includes('popular') ? 
+                      '<span class="badge-popular">🔥 Popular</span>' : ''}
+                    </div>
+
                 <div class="article-content">
                     <p class="article-date">${formattedDate}</p>
                     <h3 class="article-title">${article.title}</h3>
