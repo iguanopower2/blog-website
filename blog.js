@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             articleCard.innerHTML = `
-                <img src="${article.image}" alt="${article.title}" class="article-image" onerror="this.onerror=null;this.src='https://placehold.co/400x200/cccccc/ffffff?text=Imagen';">
+                <img src="${article.image}" alt="${article.title}" class="article-image" loading = "lazy" onerror="this.onerror=null;this.src='https://placehold.co/400x200/cccccc/ffffff?text=Imagen';">
                 <div class="article-content">
                     <p class="article-date">${formattedDate}</p>
                     <h3 class="article-title">${article.title}</h3>

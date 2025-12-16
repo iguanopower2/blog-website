@@ -865,15 +865,25 @@ a {
   flex-direction: column;
 }
 
-.article-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+.article-card:hover .article-image {
+  transform: scale(1.03);
 }
 
 .article-image {
   width: 100%;
-  height: 180px;
-  object-fit: cover;
+  height: 100%;
+  object-fit: contain; /* Muestra toda la imagen */
+  object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.article-image-container {
+  width: 100%;
+  height: 200px; /* Altura fija para consistencia */
+  overflow: hidden;
+  position: relative;
+  border-radius: 8px 8px 0 0;
+  background: linear-gradient(135deg, #f8f7eb 0%, #f0f0f0 100%);
 }
 
 .article-content {
