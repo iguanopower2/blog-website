@@ -839,21 +839,30 @@ const funciones = {
 
             // 5. Billeteras digitales
             let htmlBilleteras = '';
-            if (t.billeteras) {
-                htmlBilleteras = `<div class="wallet-icons-container">`;
+            // Verificamos si existe el objeto y si TIENE al menos una billetera activa
+            const tieneBilleteras = t.billeteras && (t.billeteras.apple_pay || t.billeteras.google_wallet || t.billeteras.samsung_pay);
+
+            if (tieneBilleteras) {
+                htmlBilleteras = `
+                <div class="wallet-section">
+                    <label>Billeteras Digitales</label> <div class="wallet-icons-container">`;
+                
                 // Apple Pay
                 if (t.billeteras.apple_pay) {
-                    htmlBilleteras += `<span class="wallet-icon" title="Compatible con Apple Pay"><i class="fa-brands fa-apple"></i></span>`;
+                    htmlBilleteras += `
+                        <span class="wallet-icon" title="Esta tarjeta acepta Apple Pay">
+                            <i class="fa-brands fa-apple"></i>
+                        </span>`;
                 }
                 // Google Wallet
                 if (t.billeteras.google_wallet) {
-                    htmlBilleteras += `<span class="wallet-icon" title="Compatible con Google Wallet"><i class="fa-brands fa-google-pay"></i></span>`;
+                    htmlBilleteras += `
+                        <span class="wallet-icon" title="Esta tarjeta acepta Google Wallet">
+                            <i class="fa-brands fa-google-pay"></i>
+                        </span>`;
                 }
-                // Samsung Pay (Opcional si decides agregarlo al JSON)
-                if (t.billeteras.samsung_pay) {
-                    htmlBilleteras += `<span class="wallet-icon" title="Samsung Pay"><i class="fa-solid fa-mobile-screen"></i></span>`;
-                }
-                htmlBilleteras += `</div>`;
+                
+                htmlBilleteras += `</div></div>`;
             }
 
             let htmlIngreso = '';
@@ -886,7 +895,10 @@ const funciones = {
                         <div class="cc-info-block">
                             <label>Anualidad</label>
                             <p class="anualidad-price">${textoAnualidad}</p>
-                            <small class="text-muted">${t.costos.anualidad_titular === 0 ? t.costos.condicion_exencion_anualidad.descripcion : ''}</small>
+                            
+                            <small class="text-muted" style="display:block; line-height:1.2; margin-top:4px;">
+                                ${t.costos.condicion_exencion_anualidad.descripcion || ''}
+                            </small>
                         </div>
                         <div class="cc-info-block">
                             <label>CAT Promedio</label>

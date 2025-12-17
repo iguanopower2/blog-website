@@ -1399,6 +1399,41 @@ a {
     border-radius: 12px;
 }
 
+/* --- SECCIÓN DE BILLETERAS DIGITALES --- */
+.wallet-section {
+    margin-top: 15px;      /* Separación del elemento anterior */
+    margin-bottom: 10px;   /* Separación del botón solicitar */
+    text-align: left;      /* Alineado a la izquierda */
+}
+
+.wallet-section label {
+    display: block;
+    font-size: 0.75rem;    /* Letra pequeña */
+    color: #888;           /* Gris suave */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;    /* Espacio entre texto e iconos */
+    font-weight: 600;
+}
+
+.wallet-icons-container {
+    display: flex;
+    gap: 15px;             /* Espacio entre la manzanita y la G */
+    align-items: center;
+}
+
+.wallet-icon {
+    font-size: 1.6rem;     /* Tamaño de los logos */
+    color: #333;           /* Color base oscuro */
+    cursor: help;          /* 💡 Cambia el cursor a interrogación (?) para invitar a leer el tooltip */
+    transition: transform 0.2s, color 0.2s;
+}
+
+.wallet-icon:hover {
+    color: #000;           /* Negro puro al pasar el mouse */
+    transform: scale(1.1); /* Efecto leve de zoom */
+}
+
 /* Botones de Acción */
 .cc-actions {
     margin-top: auto; /* Empuja los botones al fondo */

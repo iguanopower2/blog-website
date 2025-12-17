@@ -104,7 +104,7 @@
     },
     "beneficios_clave": [
       "Retiro de efectivo del cashback directo en cajeros",
-      "Acceso a la 'Gran Venta HSBC' (Preventa de conciertos)",
+      "Acceso a la Gran Venta HSBC (Preventa de conciertos)",
       "Transferencia de saldo de otras tarjetas a tasa preferencial",
       "Hasta 5 tarjetas adicionales sin costo"
     ]
@@ -401,5 +401,60 @@
       "Hasta 50% de descuento en restaurantes aliados (Rappi)",
       "Tarjeta sin números impresos para mayor seguridad"
     ]
+  },
+  {
+    "id": "plata-card",
+    "nombre": "Plata Card",
+    "emisor": "Plata",
+    "tipo": "Fintech",
+    "imagen_url": "assets/tarjetas/cc_platacard.png",
+    "link_solicitud": "https://platacard.mx/es/",
+    "color_hex": "#a6a6a6",
+    "destacado": true,
+    "fecha_actualizacion": "2025-12-15",
+    "costos": {
+      "anualidad_titular": 199,
+      "cat_promedio": 164.2,
+      "condicion_exencion_anualidad": {
+        "es_exenta": true,
+        "descripcion": "Gratis los primeros 3 meses. (Exención vitalicia disponible ocasionalmente por promoción)."
+      }
+    },
+    "requisitos": {
+      "ingreso_minimo_mensual": null,
+      "mostrar_ingreso": false,
+      "historial_crediticio": "Bueno",
+      "documentos": ["INE vigente", "RFC"]
+    },
+    "recompensas": {
+      "tipo": "Cashback",
+      "programa_nombre": "Plata Cashback",
+      "porcentaje_general": 0.5,
+      "reglas": [
+        { "condicion": "4 Categorías a elegir", "tasa": 5, "detalle": "Seleccionables cada mes (ej. Gasolina, Farmacias, etc.)" },
+        { "condicion": "Resto de compras", "tasa": 0.5 },
+        { "condicion": "Con Membresía Plata+", "tasa": 1, "detalle": "1% en todo y más categorías disponibles" }
+      ],
+      "tope_recompensa": {
+        "aplica": true,
+        "monto_tope_mensual": 1500,
+        "descripcion": "$1,500 MXN mensual (Sube a $3,000 MXN con membresía Plata+)"
+      }
+    },
+    "beneficios_clave": [
+      "Hasta 60 días para pagar (periodo de gracia extendido)",
+      "Posibilidad de diferir compras a meses (con interés)",
+      "Cambio de categorías de Cashback cada mes",
+      "Entrega rápida de tarjeta física (en 24h en zonas con cobertura)"
+    ],
+    "garantia": {
+      "requiere_garantia": false,
+      "monto_minimo": 0
+    },
+    "etiquetas": ["Cashback Alto", "Fintech", "Periodo de Gracia 60 días"],
+    "billeteras": {
+      "apple_pay": true,
+      "google_wallet": false
+    }
   }
 ]
