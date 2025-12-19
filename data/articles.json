@@ -2,37 +2,389 @@
   {
     "id": "openbank-credito-opinion",
     "title": "Openbank México: ¿De las mejores tarjetas de crédito con cashback sin anualidad?",
-    "summary": "Mi Experiencia usando la tarjeta de crédito Openbank, ventajas y desventajas.",
+    "summary": "Mi Experiencia usando la tarjeta de crédito Openbank, ventajas y desventajas. ¿Realmente vale la pena?",
     "date": "2025-12-16",
     "author": "De Cero al Infinito",
+    "readingTime": "4 min",
     "category": "Tarjetas de Crédito",
-    "image": "assets/blog/mini_cc_openbank.png",
-    "url": "blog/2025_12_16_cc_openbank_opinion.html",
     "tags": ["Openbank", "Santander", "Sin Anualidad", "Cashback", "Bancos"],
-    "readTime": "4 min"
+    "coverImage": "assets/blog/mini_cc_openbank.png",
+    "related": ["didi-cuenta-15-por-ciento", "leva-invierte-opinion"],
+    "sources": [
+      { "name": "Openbank México", "url": "https://www.openbank.mx" }
+    ],
+    "content": [
+      {
+        "type": "header",
+        "data": { "text": "¿Qué es Openbank?", "level": 2 }
+      },
+      {
+        "type": "paragraph",
+        "data": {
+          "text": "<strong>Openbank</strong> es un banco digital que lleva ya algunos meses operando en México, es la marca 100% digital de Santander, y ha llegado con interesantes promociones, cashback y una cuenta con rendimiento del 10% a la vista para competir contra otras instituciones financieras como Nu o Klar. Aquí tu dinero está protegido por el IPAB hasta por más de 3 millones de pesos. No tiene sucursales físicas y puedes retirar sin pagar comisión en cajeros de Santander. Pero, ¿Qué tan buena es su tarjeta de crédito? Aquí te comparto mi experiencia."
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "src": "assets/tarjetas/cc_openbank.png",
+          "alt": "Tarjeta de Crédito Openbank",
+          "caption": "Diseño vertical de la tarjeta física.",
+          "width": "40%",
+          "credit": "Imagen: Sitio oficial Openbank"
+        }
+      },
+      {
+        "type": "paragraph",
+        "data": {
+            "text": "El producto estrella es su tarjeta de crédito. Es una tarjeta que solicitas mediante la aplicación, sin anualidad y con cashback del 3% en <strong>compras digitales</strong>. Debes llenar la solicitud adecuadamente y en ese mismo instante sabrás si aprobaron tu línea de crédito."
+        }
+      },
+      {
+        "type": "paragraph",
+        "data": {
+            "text": "La tarjeta ofrece un cashback del 3% en todas tus compras digitales, es decir, si realizas compras mediante la tarjeta digital (que puedes consultar en tu aplicación) obentdrás en tu cuenta de débito el cashback. Eso no significa que no puedas aprovechar cashback en terminales físicas ya que puedes agregar la tarjeta a la billetera de Google y pagando con tu celular, esas compras también seran consideradas para obtener el 3% de cashback. A diferencia de prácticamente todas las tarjetas que había tenido, durante el buen fin y el blackfriday openbank lanzó promociones en las que te devolvía el 20% de cashback para los primeros 2500 pesos que gastaras, o sea que podías gastar solo 500 pesos y recibirías tu bonificación en la fecha estipulada. Esas promociones tenían la limitante de que solo se bonificaría para los primeros 16,000 clientes, a pesar de que yo compré el último día de ambas campañas sí recibí mi bonificación. Tienen más promociones en su sitio web para que tengas accesos a más descuentos, ya que cambian constantemente te invito a revisarlos directamente en su página oficial."
+        }
+      },
+      {
+        "type": "highlight",
+        "data": {
+          "text": "Dato Clave: Al ser un banco regulado, Openbank reporta a Buró de Crédito como crédito bancario, lo cual tiene un peso mayor para tu Score que un crédito no bancario."
+        }
+      },
+      {
+        "type": "header",
+        "data": { "text": "Lo bueno y lo malo", "level": 2 }
+      },
+      {
+        "type": "pros-cons",
+        "data": {
+            "pros": [
+                "<strong>Sin Anualidad:</strong> De por vida, sin condiciones de uso mínimo.",
+                "<strong>Cashback 3%:</strong> Topado a $500 MXN mensuales en compras digitales y Google Wallet.",
+                "<strong>Respaldo:</strong> Licencia bancaria y retiro en cajeros Santander sin comisiones.",
+                "<strong>Meses sin Intereses:</strong> Puedes diferir tus compras mayores a $1,500 MXN a 3 meses sin intereses o más meses pagando intereses."
+            ],
+            "cons": [
+                "<strong>CAT Alto:</strong> Promedio de 93.8% (similar a otras instituciones).",
+                "<strong>Atención:</strong> Al ser 100% digital, no hay sucursales físicas, por lo que todo debe hacerse mediante la aplicación, correo o llamadas.",
+                "<strong>App Nueva:</strong> Algunos usuarios reportan problemas técnicos ocasionales en el registro.",
+                "<strong>Vigencia de promoción:</strong> En su página web mencionan que la oferta del cashback del 3% está vigente solamente hasta terminar el año."
+            ]
+        }
+      },
+      {
+        "type": "header",
+        "data": { "text": "Requisitos y Costos", "level": 2 }
+      },
+      {
+        "type": "paragraph",
+        "data": { "text": "Openbank busca democratizar el crédito con estos requisitos:" }
+      },
+      {
+        "type": "table",
+        "data": {
+          "headers": ["Concepto", "Detalle"],
+          "rows": [
+            ["Ingreso Mínimo", "$7,000 MXN mensuales"],
+            ["Anualidad", "$0.00 MXN (Sin condiciones)"],
+            ["CAT Promedio", "93.8% sin IVA"],
+            ["Historial", "Requiere historial crediticio bueno/regular"]
+          ]
+        }
+      },
+      {
+        "type": "header",
+        "data": { "text": "Veredicto Final", "level": 2 }
+      },
+      {
+        "type": "paragraph",
+        "data": {
+          "text": "La tarjeta de crédito Openbank es una excelente opción si buscas <strong>Cashback</strong> (3% en todo lo digital) y una tarjeta bancaria real sin anualidad, en caso de que tus gastos fueran altos, tal vez te convendría combinar la tarjeta con otras opciones."
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+            "text": "Comparar Openbank vs Otras Tarjetas",
+            "url": "../tarjetas.html",
+            "style": "primary"
+        }
+      },
+      {
+        "type": "references",
+        "data": {
+            "title": "Fuentes consultadas",
+            "items": [
+                { "text": "Sitio Oficial Openbank México", "url": "https://www.openbank.mx" },
+                { "text": "Folleto Informativo de Costos", "url": "https://www.openbank.mx/tarjeta-credito-open" }
+            ]
+        }
+      }
+    ]
   },
+
   {
     "id": "didi-cuenta-15-por-ciento",
     "title": "¿Vale la pena el 15% de Didi Cuenta? Análisis Completo",
-    "summary": "Didi ha revolucionado el mercado de las SOFIPOs con una tasa del 15% anual a la vista. Analizamos si es la mejor opción para ti, sus ventajas, riesgos y cómo se compara con la competencia.",
+    "summary": "Didi ha revolucionado el mercado con una tasa del 15% anual a la vista. Analizamos si es seguro, sus riesgos y beneficios reales.",
     "date": "2025-08-17",
-    "author":"De Cero al Infinito",
-    "category":"Sofipos",
-    "image": "assets/blog/mini_didi_cuenta.png",
-    "url": "blog/didi-cuenta-15-por-ciento.html",
-    "tags": ["sofipo", "didi", "inversión", "rendimiento"],
-    "readTime": "4 min"
+    "author": "De Cero al Infinito",
+    "readingTime": "4 min",
+    "category": "Análisis SOFIPOs",
+    "tags": ["Didi", "SOFIPO", "Ahorro", "Rendimientos", "Inversión"],
+    "coverImage": "assets/blog/mini_didi_cuenta.png",
+    "related": ["openbank-credito-opinion", "leva-invierte-opinion"],
+    "content": [
+      {
+        "type": "paragraph",
+        "data": {
+          "text": "En el competitivo mundo de las finanzas en México, pocas ofertas han causado tanto revuelo como la tasa de rendimiento del <strong>15% anual a la vista</strong> de Didi Cuenta. Esta propuesta, respaldada por la SOFIPO JP Sofiexpress, ha capturado la atención de miles de ahorradores. Pero, ¿es oro todo lo que reluce? En este análisis, desglosamos los pros, los contras y todo lo que necesitas saber."
+        }
+      },
+      {
+        "type": "header",
+        "data": { "text": "¿Qué es Didi Cuenta y cómo funciona?", "level": 2 }
+      },
+      {
+        "type": "paragraph",
+        "data": {
+          "text": "Didi Cuenta es una cuenta de débito y ahorro ofrecida por Didi a través de la SOFIPO (Sociedad Financiera Popular) JP Sofiexpress. Al ser una SOFIPO, está regulada por la Comisión Nacional Bancaria y de Valores (CNBV) y cuenta con la protección del seguro PROSOFIPO."
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "src": "assets/blog/mini_didi_cuenta.png",
+          "alt": "Interfaz de Didi Cuenta",
+          "caption": "Pantalla principal de rendimientos diarios.",
+          "width": "40%",
+          "credit": "Fuente: Aplicación Didi"
+        }
+      },
+      {
+        "type": "paragraph",
+        "data": {
+            "text": "La característica principal es su rendimiento diario sobre el saldo que mantengas en la cuenta, con una tasa anualizada del 15%. Esto significa que tu dinero crece todos los días, sin necesidad de estar atado a plazos fijos."
+        }
+      },
+      {
+        "type": "highlight",
+        "data": {
+          "text": "Seguro PROSOFIPO: Tu dinero está protegido hasta por 25,000 UDIS (aprox. $200,000 MXN) en caso de que la institución quiebre."
+        }
+      },
+      {
+        "type": "header",
+        "data": { "text": "Ventajas Principales", "level": 2 }
+      },
+      {
+        "type": "pros-cons",
+        "data": {
+            "pros": [
+                "<strong>Tasa Superior:</strong> 15% anual a la vista, superando a bancos y CETES 28 días.",
+                "<strong>Liquidez Total:</strong> Disponibilidad diaria 24/7 sin penalizaciones.",
+                "<strong>Sin Comisiones:</strong> No hay costos por apertura ni manejo de cuenta.",
+                "<strong>Regulación:</strong> Supervisada por la CNBV y CONDUSEF."
+            ],
+            "cons": [
+                "<strong>Tasa Variable:</strong> El 15% no es fijo y puede bajar en cualquier momento.",
+                "<strong>Riesgo de Concentración:</strong> No se recomienda exceder el monto del seguro PROSOFIPO.",
+                "<strong>Historial:</strong> JP Sofiexpress es una entidad pequeña comparada con Nu o Finsus."
+            ]
+        }
+      },
+      {
+        "type": "header",
+        "data": { "text": "Puntos a Considerar y Riesgos", "level": 2 }
+      },
+      {
+        "type": "paragraph",
+        "data": {
+          "text": "Aunque la oferta es atractiva, es crucial considerar algunos puntos. Primero, las tasas de rendimiento de las SOFIPOs son variables y pueden cambiar en cualquier momento. El 15% actual probablemente bajará considerablemente. Además, aunque el seguro PROSOFIPO es una gran ventaja, es importante no exceder el monto protegido en una sola entidad para minimizar riesgos."
+        }
+      },
+      {
+        "type": "header",
+        "data": { "text": "Conclusión: ¿Es para ti?", "level": 2 }
+      },
+      {
+        "type": "paragraph",
+        "data": {
+          "text": "Didi Cuenta es una excelente opción para quienes buscan un alto rendimiento con liquidez diaria, especialmente para guardar un <strong>fondo de emergencia</strong> o ahorros a corto plazo. Su tasa es difícil de ignorar y la protección del seguro PROSOFIPO le da una capa de seguridad importante."
+        }
+      },
+      {
+        "type": "paragraph",
+        "data": {
+          "text": "Sin embargo, la clave es la <strong>diversificación</strong>. No es recomendable concentrar todos tus ahorros en una sola institución. Considera usar Didi Cuenta como parte de una estrategia más amplia."
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+            "text": "Comparar Didi vs Otras SOFIPOs",
+            "url": "../sofipos.html",
+            "style": "primary"
+        }
+      },
+      {
+        "type": "references",
+        "data": {
+            "title": "Fuentes consultadas",
+            "items": [
+                { "text": "Sitio Oficial Didi Finanzas", "url": "https://web.didiglobal.com/mx/jpsofiexpress/didi-cuenta/" },
+                { "text": "CNBV - Padrón de Entidades Supervisadas", "url": "https://www.gob.mx/cnbv" }
+            ]
+        }
+      }
+    ]
   },
+
   {
     "id": "leva-invierte-opinion",
-    "title": "Leva Invierte: Análisis Real y Opinión 2025",
+    "title": "Leva Invierte (Alternativas Económicas): ¿Riesgo o Ganancia Real del 14.5%?",
     "summary": "Analizamos los estados financieros de Alternativas Económicas ante la CNBV. ¿Es seguro su 14.5% de rendimiento? Te cuento mi experiencia abriendo cuenta.",
-    "date": "2025-12-02",
-    "author":"De Cero al Infinito",
-    "category":"Sofipos",
-    "image": "assets/blog/mini_leva_invierte.png",
-    "url": "blog/leva-invierte-opinion.html",
-    "tags": ["Análisis", "sofipo", "leva", "inversión", "rendimiento", "sofipo"],
-    "readTime": "8 min"
+    "date": "2025-12-01",
+    "author": "De Cero al Infinito",
+    "readingTime": "5 min",
+    "category": "Análisis SOFIPOs",
+    "tags": ["Análisis", "Sofipo", "Leva", "Inversión", "Rendimiento"],
+    "coverImage": "assets/blog/leva-cover.png",
+    "related": ["openbank-credito-opinion", "didi-cuenta-15-por-ciento"],
+    "content": [
+      {
+        "type": "paragraph",
+        "data": {
+          "text": "El día de hoy analizamos a la SOFIPO <strong>Alternativas Económicas</strong> y su producto de inversión <strong>Leva Invierte</strong>, el cual me ha llamado la atención por ofrecer tasas muy atractivas de hasta el <strong>14.5% anual</strong>. Pero... ¿Quiénes son? ¿Es seguro meter tu dinero ahí? Hoy analizamos sus números reales ante la CNBV, su NICAP y te cuento mi experiencia abriendo mi cuenta e invirtiendo ahí."
+        }
+      },
+      {
+        "type": "header",
+        "data": { "text": "¿Quién es Alternativas Económicas?", "level": 2 }
+      },
+      {
+        "type": "paragraph",
+        "data": {
+          "text": "Leva es el brazo de inversión de la SOFIPO 'Alternativas Económicas'. Su modelo de negocio es interesante y diferente al de otras instituciones como Nu o Finsus. Esta financiera se dedica principalmente a <strong>consolidar deudas</strong>. A través de su marca 'Bravo', negocian descuentos para personas endeudadas y crean planes de pago. Tu inversión en Leva se utiliza para prestar dinero a estas personas para que liquiden sus deudas con descuento. Al ser un modelo de reestructura, las tasas que cobran permiten pagar altos rendimientos a los inversionistas. Estas son las tasas de interés vigentes al momento de escribir el artículo."
+        }
+      },
+      {
+        "type": "table",
+        "data": {
+          "headers": ["Plazo", "Invierte (Desde $20k)", "Invierte + (Desde $100k)"],
+          "rows": [
+            ["24 Meses", "13.00%", "14.50%"],
+            ["18 Meses", "12.75%", "14.00%"],
+            ["12 Meses", "12.25%", "13.50%"],
+            ["6 Meses", "10.75%", "11.25%"],
+            ["3 Meses", "9.50%", "10.00%"]
+          ]
+        }
+      },
+      {
+        "type": "paragraph",
+        "data": { "text": "<em>*Las tasas mostradas son anuales fijas con pago de rendimientos al vencimiento. La opción de pago de rendimientos mensuales disminuye la tasa en 1%.</em>" }
+      },
+      {
+        "type": "header",
+        "data": { "text": "Análisis Financiero: La Verdad en los Números", "level": 2 }
+      },
+      {
+        "type": "paragraph",
+        "data": { "text": "Para saber si nuestro dinero corre peligro, no basta con ver la publicidad. Fuimos a los datos oficiales de la <strong> Comisión Nacional Bancaria y de Valores (CNBV) </strong> para revisar la salud de la empresa. Aquí lo que encontramos:" }
+      },
+      {
+        "type": "header",
+        "data": { "text": "1. Activos en crecimiento", "level": 3 }
+      },
+      {
+        "type": "paragraph",
+        "data": { "text": "Al revisar la tendencia de activos, vemos una empresa que sigue creciendo. Si bien entre 2021 y 2022 hubo un decrecimiento (atribuible a la economía post-pandemia), en los últimos meses han tenido un repunte notable. Una empresa cuyos activos crecen es un buen primer indicador de salud operativa." }
+      },
+      
+      {
+        "type": "header",
+        "data": { "text": "2. Resultado Neto (¿Ganan dinero?)", "level": 3 }
+      },
+      {
+        "type": "paragraph",
+        "data": { "text": "Este es el indicador clave: Las ganancias finales después de gastos operativos, intereses y reservas." }
+      },
+      {
+        "type": "image",
+        "data": {
+          "src": "assets/blog/2025_12_01_Leva_ganancias-leva-cnbv.png",
+          "alt": "Gráfica de ganancias Leva CNBV",
+          "caption": "Utilidades netas reportadas ante la CNBV.",
+          "credit": "Fuente: Portal CNBV Diciembre 2025"
+        }
+      },
+      {
+        "type": "paragraph",
+        "data": {
+          "text": "La gráfica nos muestra que <strong>Leva gana dinero de forma constante</strong>. En el último reporte oficial (septiembre), reportaron una ganancia de <strong>30 millones de pesos</strong>. Esto nos da tranquilidad de que el negocio es rentable hoy en día."
+        }
+      },
+      {
+        "type": "header",
+        "data": { "text": "3. NICAP y Solvencia", "level": 3 }
+      },
+      {
+        "type": "paragraph",
+        "data": { "text": "El Nivel de Capitalización (NICAP) se ha mantenido en Categoría 1 a lo largo de varios años. Esto significa que la empresa tiene el capital suficiente para hacer frente a sus obligaciones y riesgos sin problemas regulatorios." }
+      },
+      {
+        "type": "header",
+        "data": { "text": "4. Calidad de la Cartera (IMOR)", "level": 3 }
+      },
+      {
+        "type": "paragraph",
+        "data": { "text": "El Índice de Morosidad (IMOR) nos dice qué porcentaje de clientes no paga. Sorpresivamente, aunque el número de acreditados continúa creciendo, su índice de morosidad no se ha disparado. Esto sugiere que están prestando dinero de forma responsable." }
+      },
+
+      {
+        "type": "highlight",
+        "data": { "text": "Nota importante: Que estén bien hoy no garantiza el futuro. En De Cero al Infinito monitoreamos estos datos mensualmente." }
+      },
+      {
+        "type": "header",
+        "data": { "text": "Lo Bueno y Lo Malo: Mi Experiencia Real", "level": 2 }
+      },
+      {
+        "type": "pros-cons",
+        "data": {
+            "pros": [
+                "<strong>Rendimientos Top:</strong> Ofrecen hasta el 14.5%, de lo más alto en el mercado regulado. En mi caso pude invertí a un plazo de 2 años con pagos mensuales.",
+                "<strong>Pagos Mensuales:</strong> Son muy puntuales y depositan los rendimientos al final de cada mes.",
+                "<strong>Rentabilidad:</strong> Es una de las pocas SOFIPOs que reporta utilidades constantes (a diferencia de otras que operan con pérdidas)."
+            ],
+            "cons": [
+                "<strong>Apertura Arcaica:</strong> No tienen una app funcional para esto. Llenas un formulario web y esperas. En mi caso, tuve que ir presencialmente a sus oficinas para agilizar el trámite, ya que la atención remota fue deficiente y nunca me contestaron después de llenar el formulario.",
+                "<strong>Transferencia Whatsapp:</strong> Debes hacer una transferencia a una cuenta CLABE que te proporcionan ellos mediante whatsapp. Honestamente tuve desconfianza y por ello realicé un pago pequeño para validar con el uso del CEP (Comprobante electrónico de pago) que la CLABE a la que debía depositar estuviera a mi nombre. Así fue y después transferí el monto completo. Mediante Whatsapp di las instrucciones del plazo, monto y pago de rendimientos mensuales. Ellos se encargaron de mandarme mi constancia de inversión por correo.",
+                "<strong>Sin App:</strong> Te envían una tabla de amortización por correo y todo lo debes firmar digitalmente. No puedes ver tu saldo en tiempo real en una app.",
+                "<strong>Monto Alto:</strong> La barrera de entrada es alta ($20,000 MXN mínimo) y para acceder a la tasa más alta piden mínimo $100,000 MXN."
+            ]
+        }
+      },
+      {
+        "type": "header",
+        "data": { "text": "Conclusión", "level": 2 }
+      },
+      {
+        "type": "paragraph",
+        "data": {
+          "text": "Alternativas Económicas (Leva) parece ser una opción financiera sólida basada en sus números actuales de 2025. Su rentabilidad y NICAP Categoría 1 brindan confianza. Sin embargo, su experiencia de usuario digital es deficiente es una barrera importante al abrir una cuenta con ellos. Si ya abriste tu cuenta por lo regular contestan rápido por Whatsapp. Si estás dispuesto a lidiar con un proceso de apertura lento a cambio de asegurar una tasa del 14.5%, es una excelente opción para diversificar. Recuerda que, como toda SOFIPO, cuenta con el seguro PROSOFIPO que protege tus ahorros hasta por 25,000 UDIS (~$214,000 MXN)."
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+            "text": "Comparar Leva vs Nu y Finsus",
+            "url": "../sofipos.html",
+            "style": "primary"
+        }
+      }
+    ]
   }
 ]

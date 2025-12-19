@@ -466,34 +466,49 @@ const funciones = {
         }
     },
     // ========================================================
-    // 🧱 1.B NUEVA: Cargar componentes (PARA EL BLOG)
+    // 🧱 11.B Cargar componentes (PARA EL BLOG - SUBCARPETA)
     // ========================================================
-    // Esta es la nueva función para páginas en subdirectorios (ej. /blog/articulo.html)
     async cargarComponentesBlog() {
         const headerCont = document.getElementById("header-container");
         const footerCont = document.getElementById("footer-container");
 
         try {
-            // ✅ CAMBIO AQUI: Usamos rutas absolutas (con / al inicio)
-            const headerRes = await fetch("/components/header.html");
-            const footerRes = await fetch("/components/footer.html");
+            // 1. Usamos "../" para salir de la carpeta blog y buscar los componentes
+            const headerRes = await fetch("../components/header.html");
+            const footerRes = await fetch("../components/footer.html");
 
-            // Actualizamos los mensajes de error para que coincidan con la nueva ruta
-            if (!headerRes.ok) throw new Error("Error al cargar /components/header.html");
-            if (!footerRes.ok) throw new Error("Error al cargar /components/footer.html");
+            if (!headerRes.ok) throw new Error("Error al cargar ../components/header.html");
+            if (!footerRes.ok) throw new Error("Error al cargar ../components/footer.html");
 
-            headerCont.innerHTML = await headerRes.text();
-            footerCont.innerHTML = await footerRes.text();
+            let headerHtml = await headerRes.text();
+            let footerHtml = await footerRes.text();
 
-            // Reactivamos el menú móvil después de inyectar el HTML
+            // 2. 🪄 MAGIA: Corregir las rutas dentro del HTML cargado
+            // Convertimos 'href="index.html"' en 'href="../index.html"'
+            const corregirRutas = (html) => {
+                return html
+                    .replace(/href="index.html"/g, 'href="../index.html"')
+                    .replace(/href="tarjetas.html"/g, 'href="../tarjetas.html"')
+                    .replace(/href="sofipos.html"/g, 'href="../sofipos.html"')
+                    .replace(/href="calculadoras.html"/g, 'href="../calculadoras.html"')
+                    .replace(/href="bancos.html"/g, 'href="../bancos.html"')
+                    .replace(/href="blog.html"/g, 'href="../blog.html"')
+                    .replace(/href="about.html"/g, 'href="../about.html"')
+                    .replace(/src="assets\//g, 'src="../assets/') // Arregla logos e imágenes del footer
+                    .replace(/href="style.css"/g, 'href="../style.css"'); // Arregla estilos si están linkeados
+            };
+
+            if (headerCont) headerCont.innerHTML = corregirRutas(headerHtml);
+            if (footerCont) footerCont.innerHTML = corregirRutas(footerHtml);
+
+            // 3. Reactivamos el menú móvil
             if (typeof this.activarMenuMovil === 'function') {
                 this.activarMenuMovil();
             }
 
         } catch (error) {
             console.error("❌ Error al cargar componentes del blog:", error);
-            if (headerCont) headerCont.innerHTML = "<p style='color:red; text-align:center;'>Error al cargar el menú.</p>";
-            if (footerCont) footerCont.innerHTML = "<p style='color:red; text-align:center;'>Error al cargar el pie de página.</p>";
+            if (headerCont) headerCont.innerHTML = "<p style='color:red; text-align:center;'>Error al cargar menú.</p>";
         }
     },
     // ========================================================

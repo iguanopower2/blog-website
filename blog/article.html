@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title id="article-title"></title>
+  
+  <link rel="stylesheet" href="../style.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div id="header-container"></div>
+
+<main class="container article-container">
+
+  <header class="article-header">
+    <span id="article-category" class="badge-warning"></span>
+    <h1 id="article-title-h1"></h1>
+    <div class="article-meta">
+      <span id="article-date"></span>
+      <span id="article-author"></span>
+      <span id="article-readtime"></span>
+    </div>
+  </header>
+
+  <img id="article-cover" class="article-cover">
+
+  <div id="article-content"></div>
+
+  <section id="related-posts-container"></section>
+
+</main>
+
+<div id="footer-container"></div>
+
+<script src="../js/funciones.js"></script>
+<script src="../js/article.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        // 👇 Llamamos a la función específica para el blog
+        await funciones.cargarComponentesBlog();
+    });
+</script>
+
+</body>
+</html>
