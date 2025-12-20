@@ -29,7 +29,7 @@
     "nombre": "Finsus",
     "tipo": "SOFIPO",
     "sitioweb": "https://finsus.mx",
-    "plazos": { "Vista": 8.09, "1 mes": 8.09, "3 meses": 8.39, "6 meses": 8.59, "12 meses": 10.09, "24 meses": 8.19},
+    "plazos": { "Vista": 7.09, "1 mes": 7.19, "3 meses": 7.59, "6 meses": 7.69, "12 meses": 9.09, "24 meses": 7.01},
     "NICAP": 133.13,
     "IMOR": 2.13,
     "resultadoneto": 67000,
@@ -76,7 +76,7 @@
     "nombre": "Banco Covalto",
     "tipo": "Banco",
     "sitioweb": "https://www.covalto.com",
-    "plazos": { "Vista": null, "1 mes": 5.9, "3 meses": 7.15, "6 meses": 7.4, "12 meses": 9.5, "24 meses": 9.75},
+    "plazos": { "Vista": null, "1 mes": 5.65, "3 meses": 6.9, "6 meses": 7.15, "12 meses": 9.5, "24 meses": 9.75},
     "notas": {
       "Condiciones": "Las tasas de rendimiento mostradas son al recibir los intereses al final del periodo. Para algunos plazos, se pueden recibir intereses cada 28 días con una tasa menor."
     }
@@ -130,7 +130,7 @@
     "nombre": "Stori",
     "tipo": "SOFIPO",
     "sitioweb": "https://www.storicard.com",
-    "plazos": { "Vista": 7.7, "1 mes": 7.77, "3 meses": 9.65, "6 meses": 11.66, "12 meses": 10, "24 meses": null  },
+    "plazos": { "Vista": 7.7, "1 mes": 7.53, "3 meses": 9.41, "6 meses": 10.24, "12 meses": 9.75, "24 meses": null  },
     "NICAP": 140.47,
     "IMOR": 13.31,
     "resultadoneto": 130272,
@@ -192,7 +192,7 @@
     "nombre": "Capital ACTIVO",
     "tipo": "SOFIPO",
     "sitioweb": "https://capitalactivo.com.mx",
-    "plazos": { "Vista": 1.5, "1 mes": 2.5, "3 meses": 4.5, "6 meses": 9, "12 meses": 10, "24 meses": 10.5 },
+    "plazos": { "Vista": 1.5, "1 mes": 2.5, "3 meses": 4.5, "6 meses": 9, "12 meses": 10, "24 meses": 9.75 },
     "NICAP": 151.65,
     "IMOR": 22.63,
     "resultadoneto": 6291,
@@ -226,7 +226,7 @@
     "nombre": "Operaciones de tu lado",
     "tipo": "SOFIPO",
     "sitioweb": "https://www.avantthya.com.mx",
-    "plazos": { "Vista": null, "1 mes": 8.25, "3 meses": 9.25, "6 meses": 10, "12 meses": 11.25, "24 meses": null },
+    "plazos": { "Vista": null, "1 mes": 8.75, "3 meses": 10, "6 meses": 10.75, "12 meses": 11.75, "24 meses": null },
     "NICAP": 234.15,
     "IMOR": 7.92,
     "resultadoneto": 5466,
@@ -236,7 +236,10 @@
     "nombre": "Pagaré digital BBVA",
     "tipo": "Banco",
     "sitioweb": "https://www.bbva.mx",
-    "plazos": { "Vista": null, "1 mes": 2.75, "3 meses": 2.8, "6 meses": 2.95, "12 meses": null, "24 meses": null  }
+    "plazos": { "Vista": null, "1 mes": 2.75, "3 meses": 2.8, "6 meses": 2.95, "12 meses": null, "24 meses": null  },
+    "notas": {
+      "Condiciones": "Rendimientos calculados con un monto de inversión de $2,000 MXN e invertidos en su pagaré con rendimiento liquidable al vencimiento (Pago al final del plazo)."
+    }
   },
   {
     "nombre": "Pagaré Kapital Bank",
@@ -248,7 +251,7 @@
     "nombre": "Cetes Directo",
     "tipo": "Gubernamental",
     "sitioweb": "https://www.cetesdirecto.com/sites/portal/inicio",
-    "plazos": { "Vista": null, "1 mes": 7.29, "3 meses": 7.26, "6 meses": 7.44, "12 meses": 7.63, "24 meses": null  },
+    "plazos": { "Vista": null, "1 mes": 7.15, "3 meses": 7.25, "6 meses": 7.5, "12 meses": 7.65, "24 meses": null  },
     "notas": {
       "1 mes": "La tasa es a descuento.",
       "3 meses": "La tasa es a descuento.",
@@ -269,6 +272,6 @@
     "nombre": "GBM Smart Cash",
     "tipo": "Casa de Bolsa",
     "sitioweb": "https://gbm.com",
-    "plazos": { "Vista": 4.75, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null, "24 meses": null  }
+    "plazos": { "Vista": 4.5, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null, "24 meses": null  }
   }
 ]
