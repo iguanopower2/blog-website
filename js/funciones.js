@@ -222,8 +222,8 @@ const funciones = {
             if (mostrarNICAP) htmlFila += `<td data-rate="${item.NICAP ?? ''}">${item.NICAP ? item.NICAP.toFixed(2)+'%' : 'N/A'}${this.crearIconoNota(item.notas?.NICAP)}</td>`;
             if (mostrarCategoriaNICAP) htmlFila += `<td class="categoria-nicap">${this.obtenerCategoriaNICAP(item.NICAP)}</td>`;
             if (mostrarIMOR) htmlFila += `<td data-rate="${item.IMOR ?? ''}">${item.IMOR ? item.IMOR.toFixed(2)+'%' : 'N/A'}${this.crearIconoNota(item.notas?.IMOR)}</td>`;
-            if (mostrarResultado) { const r = item.resultadoneto; htmlFila += `<td data-rate="${r ?? ''}">${r ? Math.round(r/1000).toLocaleString('es-MX') : 'N/A'}</td>`; }
-            if (mostrarCarteraVig) { const c = item.cartera_vig; htmlFila += `<td data-rate="${c ?? ''}">${c ? Math.round(c/1000).toLocaleString('es-MX') : 'N/A'}</td>`; }
+            if (mostrarResultado) { const r = item.resultadoneto; htmlFila += `<td data-rate="${r ?? ''}">${r ? Math.round(r/1).toLocaleString('es-MX') : 'N/A'}</td>`; }
+            if (mostrarCarteraVig) { const c = item.cartera_vig; htmlFila += `<td data-rate="${c ?? ''}">${c ? Math.round(c/1).toLocaleString('es-MX') : 'N/A'}</td>`; }
 
             if (mostrarRendimientos) {
                 plazos.forEach(plazo => {
