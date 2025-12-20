@@ -29,9 +29,9 @@
         "data": {
           "src": "assets/tarjetas/cc_openbank.png",
           "alt": "Tarjeta de Crédito Openbank",
-          "caption": "Diseño vertical de la tarjeta física.",
+          "caption": "Diseño horizontal de la tarjeta física.",
           "width": "40%",
-          "credit": "Imagen: Sitio oficial Openbank"
+          "credit": "Imagen: Tarjeta Genérica de Openbank"
         }
       },
       {
