@@ -263,7 +263,7 @@
     "nombre": "Plazo Azteca",
     "tipo": "Banco",
     "sitioweb": "https://www.bancoazteca.com.mx",
-    "plazos": { "Vista": null, "1 mes": 5.8, "3 meses": 6.7, "6 meses": 6.25, "12 meses": 5.85, "24 meses": null  },
+    "plazos": { "Vista": null, "1 mes": 5.8, "3 meses": 6.4, "6 meses": null, "12 meses": 5.75, "24 meses": null  },
     "notas":{
       "Condiciones": "Oferta Plazo Azteca aplicable en Sucursal y Banca Móvil."
     }
