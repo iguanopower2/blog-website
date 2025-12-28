@@ -7,7 +7,7 @@ exports.handler = async (event) => {
   try {
     const message = await client.messages.create({
       from: process.env.TWILIO_PHONE_NUMBER,
-      to: 'whatsapp:+521XXXXXXXXXX', // PONE AQUÍ TU NÚMERO (con código de país)
+      to: 'whatsapp:+525566729352', // PONE AQUÍ TU NÚMERO (con código de país)
       body: '🚀 ¡Hola! Este es un mensaje de prueba desde tu Netlify Function para Infinito.'
     });
 
