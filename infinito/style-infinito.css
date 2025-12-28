@@ -1,0 +1,90 @@
+.dashboard-body {
+    background-color: #f4f7f6;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 260px;
+    background-color: #1a1a1a;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-nav {
+    flex-grow: 1;
+    margin-top: 30px;
+}
+
+.nav-item {
+    display: block;
+    color: #888;
+    text-decoration: none;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    transition: 0.3s;
+}
+
+.nav-item.active, .nav-item:hover:not(.disabled) {
+    background-color: #333;
+    color: white;
+}
+
+.nav-item.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    font-size: 0.85rem;
+}
+
+.app-content {
+    flex-grow: 1;
+    padding: 40px;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Estilo de Tarjeta de Alerta */
+.card-alert {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border-top: 5px solid #ffcc00;
+}
+/* Status Global Bar */
+.global-status-bar {
+    display: flex;
+    gap: 20px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.bank-badge {
+    background: #e0e0e0;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.status-paid { border-top: 5px solid #4caf50; opacity: 0.8; }
+.status-pending { border-top: 5px solid #f44336; }
+
+.text-danger { color: #f44336; font-weight: bold; }
