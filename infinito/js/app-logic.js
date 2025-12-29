@@ -1,13 +1,6 @@
 // infinito/js/app-logic.js
-// Configuración de Supabase (Frontend)
-const SUPABASE_URL = 'https://frluxcthpwhkxoiygihn.supabase.co'; // La misma que usaste en Netlify
-const SUPABASE_ANON_KEY = 'sb_publishable_fiwkSgrbFrQjownPSGTbMw_9gTPeRoP'; // ¡Usa la PUBLIC, no la Service Role!
-
-// Inicializamos el cliente con un nombre específico
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // 1. Verificar si hay un usuario conectado usando supabaseClient
     const { data: { user }, error: authError } = await supabaseClient.auth.getUser();
 
     if (authError || !user) {
@@ -15,15 +8,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
-    // Mostramos el correo del usuario (sin el @dominio.com)
     document.getElementById('welcome-user').textContent = `Hola, ${user.email.split('@')[0]}`;
     
-    // 2. Cargar tus tarjetas y calcular el Estado Global
+    // Llamamos a la función con el ID del usuario
     cargarDashboard(user.id);
 });
 
 async function cargarDashboard(userId) {
-    // CAMBIO CLAVE: Usamos supabaseClient
     const { data: tarjetas, error } = await supabaseClient
         .from('card_reminders')
         .select('*')
@@ -34,10 +25,8 @@ async function cargarDashboard(userId) {
         return;
     }
 
-    // 📊 PROPUESTA 1: ESTADO GLOBAL
     renderizarResumenGlobal(tarjetas);
 
-    // 🃏 RENDERIZAR TARJETAS
     const grid = document.getElementById('cards-grid');
     grid.innerHTML = '';
 
@@ -122,10 +111,12 @@ async function marcarComoPagada(tarjetaId) {
     if (error) {
         alert("Error al actualizar: " + error.message);
     } else {
-        location.reload(); // Recarga para ver el cambio de color y estado
+        const { data: { user } } = await supabaseClient.auth.getUser();
+        cargarDashboard(user.id); // Recarga sin refrescar toda la página
     }
 }
 
+// CORRECCIÓN DEL FORMULARIO
 document.getElementById('card-form').addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -134,7 +125,10 @@ document.getElementById('card-form').addEventListener('submit', async (e) => {
     const cut_off_day = parseInt(document.getElementById('cut_off_day').value);
 
     try {
-        // USAMOS supabaseClient en lugar de supabase
+        const { data: { user } } = await supabaseClient.auth.getUser();
+
+        if (!user) throw new Error("No hay usuario autenticado");
+
         const { data, error } = await supabaseClient
             .from('card_reminders')
             .insert([
@@ -142,8 +136,7 @@ document.getElementById('card-form').addEventListener('submit', async (e) => {
                     bank_name: bank_name, 
                     last_four_digits: last_four_digits, 
                     cut_off_day: cut_off_day,
-                    // Si no tienes autenticación aún, puedes comentar la línea de user_id temporalmente
-                    // user_id: (await supabaseClient.auth.getUser()).data.user?.id 
+                    user_id: user.id 
                 }
             ]);
 
@@ -151,7 +144,9 @@ document.getElementById('card-form').addEventListener('submit', async (e) => {
 
         alert('¡Tarjeta agregada con éxito!');
         document.getElementById('card-form').reset();
-        if (typeof loadCards === 'function') loadCards(); 
+        
+        // CORRECCIÓN: Llamamos a cargarDashboard, no a loadCards
+        cargarDashboard(user.id); 
 
     } catch (error) {
         console.error('Error al guardar:', error);
