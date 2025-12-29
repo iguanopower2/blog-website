@@ -1,23 +1,22 @@
 const { createClient } = require('@supabase/supabase-js');
 const twilio = require('twilio');
+const { schedule } = require('@netlify/functions'); // Nueva herramienta
 
-// 1. Inicialización de clientes con variables de entorno
+// 1. Inicialización (Igual que antes)
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
-exports.handler = async (event) => {
+// 2. La lógica principal (La movemos a una función interna)
+const checkAndSendReminders = async (event) => {
   try {
-    // 2. Obtener el día actual forzando la zona horaria de México (CDMX)
-    // Esto evita que después de las 6:00 PM detecte el día de mañana (UTC)
     const hoyEnCDMX = new Intl.DateTimeFormat('es-MX', {
       day: '2-digit',
       timeZone: 'America/Mexico_City'
     }).format(new Date());
 
     const today = parseInt(hoyEnCDMX);
-    console.log(`Ejecutando revisión para el día: ${today}`);
+    console.log(`[AUTOMÁTICO] Revisando día: ${today}`);
 
-    // 3. Consultar en Supabase las tarjetas que cortan hoy
     const { data: cards, error } = await supabase
       .from('card_reminders')
       .select('*')
@@ -25,46 +24,26 @@ exports.handler = async (event) => {
 
     if (error) throw error;
 
-    // 4. Si no hay tarjetas, respondemos con éxito pero sin enviar mensajes
-    if (!cards || cards.length === 0) {
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ 
-          message: `No hay tarjetas que corten hoy (día ${today} en CDMX).`,
-          timezone_check: new Date().toISOString()
-        }),
-      };
+    if (cards && cards.length > 0) {
+      await Promise.all(cards.map(async (card) => {
+        const mensaje = `🔔 *Recordatorio Infinito*\n\nHoy es el día de corte de tu tarjeta *${card.bank_name}* (terminación ${card.last_four_digits}).\n\n¡Revisa tu app para confirmar el saldo a pagar!`;
+        
+        return twilioClient.messages.create({
+          from: process.env.TWILIO_PHONE_NUMBER,
+          to: 'whatsapp:+5215566729352', // <-- TU NÚMERO
+          body: mensaje
+        });
+      }));
+      console.log(`Enviados ${cards.length} mensajes.`);
     }
 
-    // 5. Enviar un WhatsApp por cada tarjeta encontrada
-    const results = await Promise.all(cards.map(async (card) => {
-      const mensaje = `🔔 *Recordatorio Infinito*\n\nHoy es el día de corte de tu tarjeta *${card.bank_name}* (terminación ${card.last_4_digits}).\n\n¡Revisa tu app para confirmar el saldo a pagar!`;
-      
-      return twilioClient.messages.create({
-        from: process.env.TWILIO_PHONE_NUMBER,
-        to: 'whatsapp:+5215566729352', // <-- ASEGÚRATE DE QUE TENGA EL "1" DESPUÉS DEL +52
-        body: mensaje
-      });
-    }));
-
-    // 6. Respuesta final exitosa
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ 
-        message: `Se enviaron ${results.length} recordatorios correctamente.`,
-        cards_processed: cards.map(c => c.bank_name)
-      }),
-    };
-
-  } catch (error) {
-    // 7. Captura de errores
-    console.error('Error detallado:', error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ 
-        error: "Hubo un error al procesar la función",
-        details: error.message 
-      }),
-    };
+    return { statusCode: 200 };
+  } catch (err) {
+    console.error("Error en automático:", err);
+    return { statusCode: 500 };
   }
 };
+
+// 3. ESTA ES LA MAGIA: Le dice a Netlify que ejecute la función cada día
+// El formato '0 14 * * *' significa: Minuto 0, Hora 14 (UTC), Todos los días.
+exports.handler = schedule('0 14 * * *', checkAndSendReminders);
