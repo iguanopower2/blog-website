@@ -1,4 +1,10 @@
 // infinito/js/app-logic.js
+// Configuración de Supabase (Frontend)
+const SUPABASE_URL = 'https://frluxcthpwhkxoiygihn.supabase.co'; // La misma que usaste en Netlify
+const SUPABASE_ANON_KEY = 'sb_publishable_fiwkSgrbFrQjownPSGTbMw_9gTPeRoP'; // ¡Usa la PUBLIC, no la Service Role!
+
+// Inicializamos el cliente con un nombre específico
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 document.addEventListener('DOMContentLoaded', async () => {
     // 1. Verificar si hay un usuario conectado usando supabaseClient
@@ -119,3 +125,36 @@ async function marcarComoPagada(tarjetaId) {
         location.reload(); // Recarga para ver el cambio de color y estado
     }
 }
+
+document.getElementById('card-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const bank_name = document.getElementById('bank_name').value;
+    const last_four_digits = document.getElementById('last_four_digits').value;
+    const cut_off_day = parseInt(document.getElementById('cut_off_day').value);
+
+    try {
+        // USAMOS supabaseClient en lugar de supabase
+        const { data, error } = await supabaseClient
+            .from('card_reminders')
+            .insert([
+                { 
+                    bank_name: bank_name, 
+                    last_four_digits: last_four_digits, 
+                    cut_off_day: cut_off_day,
+                    // Si no tienes autenticación aún, puedes comentar la línea de user_id temporalmente
+                    // user_id: (await supabaseClient.auth.getUser()).data.user?.id 
+                }
+            ]);
+
+        if (error) throw error;
+
+        alert('¡Tarjeta agregada con éxito!');
+        document.getElementById('card-form').reset();
+        if (typeof loadCards === 'function') loadCards(); 
+
+    } catch (error) {
+        console.error('Error al guardar:', error);
+        alert('Error al guardar la tarjeta: ' + error.message);
+    }
+});

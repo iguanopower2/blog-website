@@ -30,6 +30,29 @@
                 <div class="status-badge">Cuenta: <span id="account-type">Prueba Gratis</span></div>
             </header>
 
+            <section id="add-card-section" style="margin-bottom: 2rem; padding: 1.5rem; background: #f8f9fa; border-radius: 12px;">
+                <h3>+ Agregar Nueva Tarjeta</h3>
+                <form id="card-form" style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
+                    <div>
+                        <label>Banco:</label>
+                        <input type="text" id="bank_name" placeholder="Ej: Nu, BBVA" required style="width: 100%; padding: 8px;">
+                    </div>
+                    <div>
+                        <label>Últimos 4 dígitos:</label>
+                        <input type="text" id="last_four_digits" placeholder="1234" maxlength="4" required style="width: 100%; padding: 8px;">
+                    </div>
+                    <div>
+                        <label>Día de corte:</label>
+                        <input type="number" id="cut_off_day" min="1" max="31" placeholder="Ej: 15" required style="width: 100%; padding: 8px;">
+                    </div>
+                    <div style="display: flex; align-items: flex-end;">
+                        <button type="submit" style="background: #000; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; width: 100%;">
+                            Guardar Tarjeta
+                        </button>
+                    </div>
+                </form>
+            </section>
+
             <section id="module-reminders" class="module-section">
                 <div class="section-header">
                     <h2>Mis Tarjetas</h2>
