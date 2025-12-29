@@ -42,7 +42,7 @@ exports.handler = async (event) => {
       
       return twilioClient.messages.create({
         from: process.env.TWILIO_PHONE_NUMBER,
-        to: 'whatsapp:+521XXXXXXXXXX', // <-- ASEGÚRATE DE QUE TENGA EL "1" DESPUÉS DEL +52
+        to: 'whatsapp:+5215566729352', // <-- ASEGÚRATE DE QUE TENGA EL "1" DESPUÉS DEL +52
         body: mensaje
       });
     }));
