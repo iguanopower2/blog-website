@@ -86,10 +86,10 @@ function crearTarjetaHTML(t) {
 
     div.innerHTML = `
         <div class="card-info">
-            <span class="bank-badge">${t.bank_name || 'Banco'}</span>
-            <h3>**** ${t.last_four_digits}</h3>
+            <span class="bank-badge">${t.title || 'Banco'}</span>
+            <h3>**** ${t.description}</h3>
             <div class="card-details">
-                <p>Corte: Día ${t.cut_off_day}</p>
+                <p>Corte: Día ${t.due_day}</p>
                 <p class="gracia-info">${mensajeGracia}</p>
             </div>
         </div>
@@ -103,16 +103,33 @@ function crearTarjetaHTML(t) {
 }
 
 async function marcarComoPagada(tarjetaId) {
-    const { error } = await supabaseClient
-        .from('card_reminders')
-        .update({ is_paid_this_month: true })
-        .eq('id', tarjetaId);
-
-    if (error) {
-        alert("Error al actualizar: " + error.message);
-    } else {
+    try {
+        // 1. Obtenemos el usuario actual para asegurar que solo edite sus propias tarjetas
         const { data: { user } } = await supabaseClient.auth.getUser();
-        cargarDashboard(user.id); // Recarga sin refrescar toda la página
+        
+        if (!user) {
+            alert("Sesión expirada. Por favor, inicia sesión de nuevo.");
+            return;
+        }
+
+        // 2. Ejecutamos la actualización
+        const { error } = await supabaseClient
+            .from('card_reminders')
+            .update({ is_paid_this_month: true })
+            .eq('id', tarjetaId)
+            .eq('user_id', user.id); // Seguridad extra: solo si le pertenece al usuario
+
+        if (error) throw error;
+
+        // 3. Feedback visual inmediato
+        console.log("Pago registrado con éxito");
+        
+        // 4. En lugar de location.reload(), recargamos solo los datos para que sea más rápido
+        cargarDashboard(user.id);
+
+    } catch (error) {
+        console.error("Error al marcar como pagada:", error.message);
+        alert("No se pudo actualizar el estado de pago.");
     }
 }
 

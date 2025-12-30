@@ -7,43 +7,65 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SER
 const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 // 2. La lógica principal (La movemos a una función interna)
+// netlify/functions/whatsapp-test.js
 const checkAndSendReminders = async (event) => {
   try {
+    const ahora = new Date();
     const hoyEnCDMX = new Intl.DateTimeFormat('es-MX', {
       day: '2-digit',
+      month: '2-digit',
       timeZone: 'America/Mexico_City'
-    }).format(new Date());
+    }).formatToParts(ahora);
 
-    const today = parseInt(hoyEnCDMX);
-    console.log(`[AUTOMÁTICO] Revisando día: ${today}`);
+    const diaActual = parseInt(hoyEnCDMX.find(p => p.type === 'day').value);
+    const mesActual = parseInt(hoyEnCDMX.find(p => p.type === 'month').value);
 
-    const { data: cards, error } = await supabase
-      .from('card_reminders')
+    // Consultamos solo los activos que coincidan con el día de hoy
+    const { data: items, error } = await supabase
+      .from('reminders')
       .select('*')
-      .eq('cut_off_day', today);
+      .eq('is_active', true)
+      .eq('due_day', diaActual);
 
     if (error) throw error;
 
-    if (cards && cards.length > 0) {
-      await Promise.all(cards.map(async (card) => {
-        const mensaje = `🔔 *Recordatorio Infinito*\n\nHoy es el día de corte de tu tarjeta *${card.bank_name}* (terminación ${card.last_four_digits}).\n\n¡Revisa tu app para confirmar el saldo a pagar!`;
-        
-        return twilioClient.messages.create({
-          from: process.env.TWILIO_PHONE_NUMBER,
-          to: 'whatsapp:+5215566729352', // <-- TU NÚMERO
-          body: mensaje
+    // Filtro de frecuencia
+    const aNotificar = items.filter(item => {
+      if (item.frequency === 'monthly' || !item.frequency) return true;
+      
+      if (item.frequency === 'bimonthly') {
+        // Ejemplo: Si target_month es 1 (enero), notificará en 1, 3, 5, 7, 9, 11
+        return (mesActual % 2) === (item.target_month % 2);
+      }
+      
+      if (item.frequency === 'annually') {
+        return mesActual === item.target_month;
+      }
+      
+      return false;
+    });
+
+    // Enviar WhatsApps
+    for (const item of aNotificar) {
+        const msg = `🔔 *Infinito: Recordatorio*\n\nHoy vence/corta: *${item.title}*\nInfo: ${item.description || ''}\n\n¡No olvides registrar tu pago!`;
+        await twilioClient.messages.create({
+            from: process.env.TWILIO_PHONE_NUMBER,
+            to: 'whatsapp:+521...', // Tu número
+            body: msg
         });
-      }));
-      console.log(`Enviados ${cards.length} mensajes.`);
+    }
+
+    // RESET MENSUAL: Si es día 1, ponemos todos los del mes en false
+    if (diaActual === 1) {
+        await supabase.from('reminders').update({ is_paid_this_month: false }).eq('frequency', 'monthly');
     }
 
     return { statusCode: 200 };
   } catch (err) {
-    console.error("Error en automático:", err);
+    console.error(err);
     return { statusCode: 500 };
   }
 };
-
 // 3. ESTA ES LA MAGIA: Le dice a Netlify que ejecute la función cada día
 // El formato '0 14 * * *' significa: Minuto 0, Hora 14 (UTC), Todos los días.
 exports.handler = schedule('0 14 * * *', checkAndSendReminders);

@@ -32,22 +32,36 @@
 
             <section id="add-card-section" style="margin-bottom: 2rem; padding: 1.5rem; background: #f8f9fa; border-radius: 12px;">
                 <h3>+ Agregar Nueva Tarjeta</h3>
-                <form id="card-form" style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
+                <form id="card-form" style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
                     <div>
-                        <label>Banco:</label>
-                        <input type="text" id="bank_name" placeholder="Ej: Nu, BBVA" required style="width: 100%; padding: 8px;">
+                        <label>Categoría:</label>
+                        <select id="category" style="width: 100%; padding: 8px;">
+                            <option value="tarjeta">Tarjeta de Crédito</option>
+                            <option value="servicio">Servicio (Luz, Agua, etc.)</option>
+                            <option value="suscripcion">Suscripción</option>
+                            <option value="otro">Otro</option>
+                        </select>
                     </div>
                     <div>
-                        <label>Últimos 4 dígitos:</label>
-                        <input type="text" id="last_four_digits" placeholder="1234" maxlength="4" required style="width: 100%; padding: 8px;">
+                        <label>Nombre / Título:</label>
+                        <input type="text" id="title" placeholder="Ej: Nu o Recibo CFE" required style="width: 100%; padding: 8px;">
                     </div>
                     <div>
-                        <label>Día de corte:</label>
-                        <input type="number" id="cut_off_day" min="1" max="31" placeholder="Ej: 15" required style="width: 100%; padding: 8px;">
+                        <label>Día de Pago/Corte:</label>
+                        <input type="number" id="due_day" min="1" max="31" placeholder="Día del mes" required style="width: 100%; padding: 8px;">
+                    </div>
+                    <div>
+                        <label>Frecuencia:</label>
+                        <select id="frequency" style="width: 100%; padding: 8px;">
+                            <option value="monthly">Mensual</option>
+                            <option value="bimonthly">Bimestral</option>
+                            <option value="annually">Anual</option>
+                            <option value="weekly">Semanal</option>
+                        </select>
                     </div>
                     <div style="display: flex; align-items: flex-end;">
                         <button type="submit" style="background: #000; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; width: 100%;">
-                            Guardar Tarjeta
+                            Guardar Recordatorio
                         </button>
                     </div>
                 </form>
