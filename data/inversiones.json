@@ -132,7 +132,10 @@
     "NICAP": 227.18,
     "IMOR": 5.61,
     "resultadoneto": 7,
-    "cartera_vig": 158
+    "cartera_vig": 158,
+    "notas": {
+      "Condiciones": "Rendimientos calculados con un monto de inversión de $100,000 MXN. En montos menores [$1,000 MXN a $99,999 MXN] la tasa decrementa 0.5%. Consulta el sitio oficial para más información."
+    }
   },
   {
     "nombre": "Premo",
@@ -155,10 +158,7 @@
     "NICAP": 146.62,
     "IMOR": 7.97,
     "resultadoneto": -24,
-    "cartera_vig": 730,
-    "notas": {
-      "Condiciones": "Rendimientos calculados con un monto de inversión de $100,000 MXN. En montos menores [$1,000 MXN a $99,999 MXN] la tasa decrementa 0.5%. Consulta el sitio oficial para más información."
-    }
+    "cartera_vig": 730
   },
   {
     "nombre": "Stori",
