@@ -151,7 +151,7 @@
     "nombre": "PROGRESSA",
     "tipo": "SOFIPO",
     "sitioweb": "https://progressa.com.mx",
-    "plazos": { "Vista": null, "1 mes": 6.5, "3 meses": 7.75, "6 meses": 8.2, "12 meses": 7.25, "24 meses": null },
+    "plazos": { "Vista": 1.0, "1 mes": 6.5, "3 meses": 7.75, "6 meses": 8.2, "12 meses": 7.25, "24 meses": null },
     "NICAP": 146.62,
     "IMOR": 7.97,
     "resultadoneto": -24,
@@ -175,7 +175,7 @@
     "nombre": "SuperTasas",
     "tipo": "SOFIPO",
     "sitioweb": "https://supertasas.com",
-    "plazos": { "Vista": 7.2, "1 mes": 7.3, "3 meses": 7.5, "6 meses": 7.75, "12 meses": 8.5, "24 meses": null  },
+    "plazos": { "Vista": 7.2, "1 mes": 7.1, "3 meses": 7.3, "6 meses": 7.75, "12 meses": 8.5, "24 meses": null  },
     "NICAP": 430.51,
     "IMOR": 2.88,
     "resultadoneto": 56,
@@ -245,13 +245,13 @@
     "nombre": "Pagaré Kapital Bank",
     "tipo": "Banco",
     "sitioweb": "https://kapital.com",
-    "plazos": { "Vista": null, "1 mes": 6.75, "3 meses": 7.55, "6 meses": 7.75, "12 meses": 8.00, "24 meses": 7.00}
+    "plazos": { "Vista": null, "1 mes": 6.65, "3 meses": 7.30, "6 meses": 7.45, "12 meses": 8.00, "24 meses": 6.75}
   },
   {
     "nombre": "Cetes Directo",
     "tipo": "Gubernamental",
     "sitioweb": "https://www.cetesdirecto.com/sites/portal/inicio",
-    "plazos": { "Vista": null, "1 mes": 7.15, "3 meses": 7.25, "6 meses": 7.5, "12 meses": 7.65, "24 meses": null  },
+    "plazos": { "Vista": null, "1 mes": 7.07, "3 meses": 7.24, "6 meses": 7.37, "12 meses": 7.55, "24 meses": null  },
     "notas": {
       "1 mes": "La tasa es a descuento.",
       "3 meses": "La tasa es a descuento.",
