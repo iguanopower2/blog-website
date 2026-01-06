@@ -1,106 +1,115 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Infinito - Dashboard</title>
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="style-infinito.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Infinito – Dashboard</title>
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="style-infinito.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
+
 <body class="dashboard-body">
-    <div class="app-container">
-        <aside class="sidebar">
-            <div class="sidebar-logo">
-                <h2>Infinito</h2>
-            </div>
-            <nav class="sidebar-nav">
-                <a href="#" class="nav-item active"><i class="fas fa-bell"></i> Recordatorios</a>
-                <a href="#" class="nav-item disabled"><i class="fas fa-wallet"></i> Gastos <small>(Próximamente)</small></a>
-                <a href="#" class="nav-item disabled"><i class="fas fa-file-invoice"></i> CFDI <small>(Próximamente)</small></a>
-            </nav>
-            <div class="sidebar-footer">
-                <button id="btn-logout" class="btn-logout">Cerrar Sesión</button>
-            </div>
-        </aside>
+<div class="app-container">
 
-        <main class="app-content">
-            <header class="app-header">
-                <h1 id="welcome-user">Hola, [Nombre]</h1>
-                <div class="status-badge">Cuenta: <span id="account-type">Prueba Gratis</span></div>
-            </header>
-
-            <section id="add-card-section" style="margin-bottom: 2rem; padding: 1.5rem; background: #f8f9fa; border-radius: 12px;">
-                <h3>+ Agregar Nueva Tarjeta</h3>
-                <form id="card-form" style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
-                    <div>
-                        <label>Categoría:</label>
-                        <select id="category" style="width: 100%; padding: 8px;">
-                            <option value="tarjeta">Tarjeta de Crédito</option>
-                            <option value="servicio">Servicio (Luz, Agua, etc.)</option>
-                            <option value="suscripcion">Suscripción</option>
-                            <option value="otro">Otro</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>Nombre / Título:</label>
-                        <input type="text" id="title" placeholder="Ej: Nu o Recibo CFE" required style="width: 100%; padding: 8px;">
-                    </div>
-                    <div>
-                        <label>Día de Pago/Corte:</label>
-                        <input type="number" id="due_day" min="1" max="31" placeholder="Día del mes" required style="width: 100%; padding: 8px;">
-                    </div>
-                    <div>
-                        <label>Frecuencia:</label>
-                        <select id="frequency" style="width: 100%; padding: 8px;">
-                            <option value="monthly">Mensual</option>
-                            <option value="bimonthly">Bimestral</option>
-                            <option value="annually">Anual</option>
-                            <option value="weekly">Semanal</option>
-                        </select>
-                    </div>
-                    <div style="display: flex; align-items: flex-end;">
-                        <button type="submit" style="background: #000; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; width: 100%;">
-                            Guardar Recordatorio
-                        </button>
-                    </div>
-                </form>
-            </section>
-
-            <section id="module-reminders" class="module-section">
-                <div class="section-header">
-                    <h2>Mis Tarjetas</h2>
-                    <button class="btn-primary" onclick="abrirModalNuevaTarjeta()">+ Agregar Tarjeta</button>
-                </div>
-
-                <div id="cards-grid" class="cards-grid">
-                    </div>
-            </section>
-        </main>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <h2>Infinito</h2>
     </div>
 
-    <div id="modal-tarjeta" class="modal-overlay" style="display:none;">
-        <div class="modal-content">
-            <h3>Agregar Nueva Tarjeta</h3>
-            <form id="form-nueva-tarjeta">
-                <input type="text" id="bank_name" placeholder="Nombre del Banco (ej. Nu)" required>
-                <input type="text" id="last_digits" placeholder="Últimos 4 dígitos" maxlength="4" required>
-                <input type="number" id="cut_off" placeholder="Día de Corte (1-31)" min="1" max="31" required>
-                <input type="number" id="deadline" placeholder="Días para pagar tras corte (ej. 20)" value="20" required>
-                
-                <div class="modal-buttons">
-                    <button type="button" onclick="cerrarModal()" class="btn-secondary">Cancelar</button>
-                    <button type="submit" class="btn-primary">Guardar Tarjeta</button>
-                </div>
-            </form>
+    <nav class="sidebar-nav">
+      <a class="nav-item active">
+        <i class="fas fa-credit-card"></i> Tarjetas
+      </a>
+      <a class="nav-item disabled">
+        <i class="fas fa-wallet"></i> Gastos <small>(Próx.)</small>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button id="btn-logout" class="btn-logout">Cerrar sesión</button>
+    </div>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="app-content">
+
+    <header class="app-header">
+      <h1 id="welcome-user">Hola</h1>
+      <div class="status-badge">
+        Cuenta: <span id="account-type">Prueba Gratis</span>
+      </div>
+    </header>
+
+    <!-- AGREGAR TARJETA -->
+    <section class="module-section">
+      <h2>Agregar tarjeta</h2>
+
+      <form id="credit-card-form" class="card-form">
+        <div>
+        <label>Banco:</label>
+            <input 
+                type="text" 
+                id="bank_name" 
+                placeholder="Banco (ej. Nu, BBVA)" 
+                required>
         </div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+        <div>
+            <label>Identificador</label>
+            <input 
+                type="text" 
+                id="last_four_digits" 
+                placeholder="Últimos 4 dígitos de la tarjeta" 
+                maxlength="4" 
+                required
+            >
+        </div>
 
-    <script src="js/auth.js"></script>
+        <div>
+            <label>Día de corte de la tarjeta</label>
+            <input 
+                type="number" 
+                id="cut_off_day" 
+                placeholder="Día de corte (1–31)" 
+                min="1" 
+                max="31" 
+                required
+            >
+        </div>
 
-    <script src="js/app-logic.js"></script>
-    
+        <div>
+            <label>Día límite de pago</label>
+            <input 
+                type="number" 
+                id="payment_due_day" 
+                placeholder="Día límite de pago (1–31)" 
+                min="1" 
+                max="31" 
+                required
+            >
+        </div>
+
+        <button type="submit" class="btn-primary">
+            Guardar tarjeta
+        </button>
+        </form>
+    </section>
+
+    <!-- TARJETAS -->
+    <section class="module-section">
+      <h2>Mis tarjetas</h2>
+      <div id="cards-grid" class="cards-grid"></div>
+    </section>
+
+  </main>
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/app-logic.js"></script>
 </body>
 </html>

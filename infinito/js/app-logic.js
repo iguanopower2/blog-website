@@ -1,172 +1,205 @@
-// infinito/js/app-logic.js
+//Inicialización
+document.addEventListener('DOMContentLoaded', initDashboard);
 
-document.addEventListener('DOMContentLoaded', async () => {
-    const { data: { user }, error: authError } = await supabaseClient.auth.getUser();
+async function initDashboard() {
+  const { data: { user }, error } = await supabaseClient.auth.getUser();
 
-    if (authError || !user) {
-        console.log("No hay sesión activa");
-        return;
-    }
+  if (error || !user) {
+    console.warn('No authenticated user');
+    return;
+  }
 
-    document.getElementById('welcome-user').textContent = `Hola, ${user.email.split('@')[0]}`;
-    
-    // Llamamos a la función con el ID del usuario
-    cargarDashboard(user.id);
-});
-
-async function cargarDashboard(userId) {
-    const { data: tarjetas, error } = await supabaseClient
-        .from('card_reminders')
-        .select('*')
-        .eq('user_id', userId);
-
-    if (error) {
-        console.error("Error cargando tarjetas:", error.message);
-        return;
-    }
-
-    renderizarResumenGlobal(tarjetas);
-
-    const grid = document.getElementById('cards-grid');
-    grid.innerHTML = '';
-
-    if (tarjetas.length === 0) {
-        grid.innerHTML = '<p>No tienes tarjetas registradas. ¡Agrega la primera!</p>';
-    } else {
-        tarjetas.forEach(tarjeta => {
-            grid.appendChild(crearTarjetaHTML(tarjeta));
-        });
-    }
+  setWelcomeMessage(user);
+  setupCreditCardForm();
+  loadCreditCards();
 }
 
-function renderizarResumenGlobal(tarjetas) {
-    const pendientes = tarjetas.filter(t => !t.is_paid_this_month).length;
-    const pagadas = tarjetas.filter(t => t.is_paid_this_month).length;
-    
-    const header = document.querySelector('.app-header');
-    let resumen = document.getElementById('global-status-bar');
-    
-    if (!resumen) {
-        resumen = document.createElement('div');
-        resumen.id = 'global-status-bar';
-        resumen.className = 'global-status-bar';
-        header.appendChild(resumen);
-    }
-
-    resumen.innerHTML = `
-        <div class="stat"><span>Pendientes:</span> <strong>${pendientes}</strong></div>
-        <div class="stat"><span>Pagadas:</span> <strong>${pagadas}</strong></div>
-        <div class="stat"><span>Salud:</span> <strong>${pendientes === 0 ? '✅ Todo Pagado' : '⚠️ Pendientes'}</strong></div>
-    `;
+//UI helpers
+function setWelcomeMessage(user) {
+  const name = user.email.split('@')[0];
+  document.getElementById('welcome-user').textContent = `Hola, ${name}`;
 }
 
-function crearTarjetaHTML(t) {
-    const div = document.createElement('div');
-    // Si está pagada, le ponemos una clase suave, si no, una de alerta
-    div.className = `card-alert ${t.is_paid_this_month ? 'status-paid' : 'status-pending'}`;
+//Data layer (Supabase aislado)
+async function fetchCreditCards() {
+  const { data, error } = await supabaseClient
+    .from('credit_cards')
+    .select('*')
+    .in('status', ['active', 'paused'])
+    .order('cut_off_day');
 
-    // 🧠 PROPUESTA 2: DÍAS DE GRACIA INTELIGENTES
-    // Obtenemos el día actual (Hoy es 27)
-    const hoy = new Date().getDate();
-    
-    // Cálculo simplificado: Día de corte + días para pagar
-    let fechaLimite = t.cut_off_day + t.payment_deadline_days;
-    let diasRestantes = fechaLimite - hoy;
-    
-    let mensajeGracia = "";
-    if (t.is_paid_this_month) {
-        mensajeGracia = `<span class="text-success">¡Listo! Pago registrado.</span>`;
-    } else if (diasRestantes > 0) {
-        mensajeGracia = `Quedan <strong>${diasRestantes} días</strong> para pagar sin recargos.`;
-    } else if (diasRestantes === 0) {
-        mensajeGracia = `<span class="text-warning">¡Hoy es el último día de pago!</span>`;
-    } else {
-        mensajeGracia = `<span class="text-danger">Fecha límite vencida. Revisa tu estado.</span>`;
-    }
-
-    div.innerHTML = `
-        <div class="card-info">
-            <span class="bank-badge">${t.title || 'Banco'}</span>
-            <h3>**** ${t.description}</h3>
-            <div class="card-details">
-                <p>Corte: Día ${t.due_day}</p>
-                <p class="gracia-info">${mensajeGracia}</p>
-            </div>
-        </div>
-        <div class="card-actions">
-            <button class="btn-pay" onclick="marcarComoPagada('${t.id}')" ${t.is_paid_this_month ? 'disabled' : ''}>
-                ${t.is_paid_this_month ? '<i class="fas fa-check"></i>' : 'Ya pagué'}
-            </button>
-        </div>
-    `;
-    return div;
+  if (error) throw error;
+  return data;
 }
 
-async function marcarComoPagada(tarjetaId) {
-    try {
-        // 1. Obtenemos el usuario actual para asegurar que solo edite sus propias tarjetas
-        const { data: { user } } = await supabaseClient.auth.getUser();
-        
-        if (!user) {
-            alert("Sesión expirada. Por favor, inicia sesión de nuevo.");
-            return;
-        }
+async function insertCreditCard(cardData) {
+  const { error } = await supabaseClient
+    .from('credit_cards')
+    .insert(cardData);
 
-        // 2. Ejecutamos la actualización
-        const { error } = await supabaseClient
-            .from('card_reminders')
-            .update({ is_paid_this_month: true })
-            .eq('id', tarjetaId)
-            .eq('user_id', user.id); // Seguridad extra: solo si le pertenece al usuario
-
-        if (error) throw error;
-
-        // 3. Feedback visual inmediato
-        console.log("Pago registrado con éxito");
-        
-        // 4. En lugar de location.reload(), recargamos solo los datos para que sea más rápido
-        cargarDashboard(user.id);
-
-    } catch (error) {
-        console.error("Error al marcar como pagada:", error.message);
-        alert("No se pudo actualizar el estado de pago.");
-    }
+  if (error) throw error;
 }
 
-// CORRECCIÓN DEL FORMULARIO
-document.getElementById('card-form').addEventListener('submit', async (e) => {
+// Form setup
+function setupCreditCardForm() {
+  const form = document.getElementById('credit-card-form');
+
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const bank_name = document.getElementById('bank_name').value;
-    const last_four_digits = document.getElementById('last_four_digits').value;
-    const cut_off_day = parseInt(document.getElementById('cut_off_day').value);
+    const cardData = await getCreditCardFormData();
 
     try {
-        const { data: { user } } = await supabaseClient.auth.getUser();
-
-        if (!user) throw new Error("No hay usuario autenticado");
-
-        const { data, error } = await supabaseClient
-            .from('card_reminders')
-            .insert([
-                { 
-                    bank_name: bank_name, 
-                    last_four_digits: last_four_digits, 
-                    cut_off_day: cut_off_day,
-                    user_id: user.id 
-                }
-            ]);
-
-        if (error) throw error;
-
-        alert('¡Tarjeta agregada con éxito!');
-        document.getElementById('card-form').reset();
-        
-        // CORRECCIÓN: Llamamos a cargarDashboard, no a loadCards
-        cargarDashboard(user.id); 
-
-    } catch (error) {
-        console.error('Error al guardar:', error);
-        alert('Error al guardar la tarjeta: ' + error.message);
+      await insertCreditCard(cardData);
+      form.reset();
+      loadCreditCards();
+    } catch (err) {
+      alert('Error al guardar la tarjeta');
+      console.error(err);
     }
-});
+  });
+}
+
+async function getCreditCardFormData() {
+  const { data: { user } } = await supabaseClient.auth.getUser();
+
+  return {
+    user_id: user.id, // 👈 CLAVE
+    bank_name: document.getElementById('bank_name').value.trim(),
+    last_four_digits: document.getElementById('last_four_digits').value.trim(),
+    cut_off_day: Number(document.getElementById('cut_off_day').value),
+    payment_due_day: Number(document.getElementById('payment_due_day').value),
+    status: 'active',
+    is_active: true,
+    is_paid_current_cycle: false
+  };
+}
+
+//Render principal
+
+async function loadCreditCards() {
+  try {
+    const cards = await fetchCreditCards();
+    renderCreditCards(cards);
+  } catch (err) {
+    console.error('Error loading cards:', err.message);
+  }
+}
+
+//Render grid
+function renderCreditCards(cards) {
+  const grid = document.getElementById('cards-grid');
+  grid.innerHTML = '';
+
+  if (!cards.length) {
+    grid.innerHTML = '<p>No tienes tarjetas registradas.</p>';
+    return;
+  }
+
+  cards.forEach(card => {
+    grid.appendChild(createCreditCardElement(card));
+  });
+}
+
+//Crear tarjeta individual
+function createCreditCardElement(card) {
+  const div = document.createElement('div');
+  div.className = `card-alert ${card.is_paid_current_cycle ? 'status-paid' : 'status-pending'}`;
+
+  const remainingDays = calculateRemainingDays(card);
+  const isPaused = card.status === 'paused';
+
+  div.innerHTML = `
+    <div class="card-info">
+      <span class="bank-badge">${card.bank_name}</span>
+      <h3>**** ${card.last_four_digits}</h3>
+      <p>${remainingDays}</p>
+    </div>
+    <button 
+      class="btn-pay" 
+      ${card.is_paid_current_cycle ? 'disabled' : ''}
+      onclick="markCardAsPaid('${card.id}')">
+      ${card.is_paid_current_cycle ? 'Pagado' : 'Ya pagué'}
+    </button>
+    <button 
+        class="btn-toggle"
+        onclick="toggleCardStatus('${card.id}', '${card.status}')">
+        ${isPaused ? 'Reactivar' : 'Pausar'}
+    </button>
+    <button 
+        class="btn-close"
+        onclick="closeCard('${card.id}')">
+        Cerrar
+    </button>
+  `;
+
+  return div;
+}
+
+//Lógica de negocio (aislada)
+function calculateRemainingDays(card) {
+  const today = new Date().getDate();
+  const limitDay = card.payment_due_day;
+  const remaining = limitDay - today;
+
+  if (card.is_paid_current_cycle) return '✅ Pago registrado';
+  if (remaining > 0) return `⏳ Quedan ${remaining} días`;
+  if (remaining === 0) return '⚠️ Hoy es el último día';
+  if (card.status === 'paused') return '⏸ Tarjeta pausada';
+  if (card.is_paid_current_cycle) return '✅ Pago registrado';
+  return '❌ Pago vencido';
+}
+
+//Update seguro (RLS protege)
+async function markCardAsPaid(cardId) {
+  try {
+    const { error } = await supabaseClient
+      .from('credit_cards')
+      .update({
+        is_paid_current_cycle: true,
+        last_paid_at: new Date()
+      })
+      .eq('id', cardId);
+
+    if (error) throw error;
+
+    loadCreditCards();
+  } catch (err) {
+    alert('No se pudo actualizar la tarjeta');
+  }
+}
+
+async function updateCardStatus(cardId, newStatus) {
+  const { error } = await supabaseClient
+    .from('credit_cards')
+    .update({ status: newStatus })
+    .eq('id', cardId);
+
+  if (error) throw error;
+}
+
+async function toggleCardStatus(cardId, currentStatus) {
+  const newStatus = currentStatus === 'active' ? 'paused' : 'active';
+
+  try {
+    await updateCardStatus(cardId, newStatus);
+    loadCreditCards();
+  } catch (err) {
+    alert('No se pudo cambiar el estado de la tarjeta');
+    console.error(err);
+  }
+}
+
+async function closeCard(cardId) {
+  if (!confirm('¿Seguro que deseas cerrar esta tarjeta?')) return;
+
+  try {
+    await updateCardStatus(cardId, 'closed');
+    loadCreditCards();
+  } catch (err) {
+    alert('No se pudo cerrar la tarjeta');
+    console.error(err);
+  }
+}
