@@ -115,13 +115,13 @@
     "nombre": "NU",
     "tipo": "SOFIPO",
     "sitioweb": "https://nu.com.mx",
-    "plazos": { "Vista": 15, "1 mes": 7.35, "3 meses": 7.45, "6 meses": 7.55, "12 meses": null, "24 meses": null},
+    "plazos": { "Vista": 13, "1 mes": 7.1, "3 meses": 7.2, "6 meses": 7.3, "12 meses": null, "24 meses": null},
     "NICAP": 219.62,
     "IMOR": 6.57,
     "resultadoneto": -1484,
     "cartera_vig": 26756,
     "notas": {
-      "Vista": "Tasa del 15% se activa (Cajita Turbo) al realizar una compra al mes y topada hasta $25,000 MXN. Montos mayores ofrecen 7.25% de rendimiento a la vista."
+      "Vista": "Tasa del 13% se activa (Cajita Turbo) al realizar una compra al mes y topada hasta $25,000 MXN. Montos mayores ofrecen 7.00% de rendimiento a la vista."
     }
   },
   {
@@ -141,7 +141,7 @@
     "nombre": "Premo",
     "tipo": "SOFIPO",
     "sitioweb": "https://premo.mx",
-    "plazos": { "Vista": 4, "1 mes": 8.15, "3 meses": 8.27, "6 meses": 8.46, "12 meses": 9.63, "24 meses": 9.85 },
+    "plazos": { "Vista": 4, "1 mes": 8.07, "3 meses": 8.24, "6 meses": 8.37, "12 meses": 9.55, "24 meses": 9.98 },
     "NICAP": 661.24,
     "IMOR": 15.26,
     "resultadoneto": 18,
@@ -212,7 +212,7 @@
     "nombre": "Banco Covalto",
     "tipo": "Banco",
     "sitioweb": "https://www.covalto.com",
-    "plazos": { "Vista": null, "1 mes": 5.65, "3 meses": 6.9, "6 meses": 7.15, "12 meses": 9.5, "24 meses": 9.75},
+    "plazos": { "Vista": null, "1 mes": 5.65, "3 meses": 6.9, "6 meses": 7.15, "12 meses": 9.25, "24 meses": 9.5},
     "notas": {
       "Condiciones": "Las tasas de rendimiento mostradas son al recibir los intereses al final del periodo. Para algunos plazos, se pueden recibir intereses cada 28 días con una tasa menor."
     }
@@ -230,7 +230,7 @@
     "nombre": "BIM",
     "tipo": "Banco",
     "sitioweb": "https://www.bim.mx",
-    "plazos": { "Vista": null, "1 mes": 6.2, "3 meses": 6.3, "6 meses": 6.55, "12 meses": 6.55, "24 meses": null  },
+    "plazos": { "Vista": null, "1 mes": 6.05, "3 meses": 6.15, "6 meses": 6.4, "12 meses": 6.4, "24 meses": null  },
     "notas": {
       "Condiciones": "Rendimientos calculados con un monto de inversión de $5,000 MXN e invertidos en su pagaré con rendimiento liquidable al vencimiento (Pago al final del plazo)."
     }
