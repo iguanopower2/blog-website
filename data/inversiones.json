@@ -154,7 +154,7 @@
     "nombre": "PROGRESSA",
     "tipo": "SOFIPO",
     "sitioweb": "https://progressa.com.mx",
-    "plazos": { "Vista": 1.0, "1 mes": 6.5, "3 meses": 7.75, "6 meses": 8.2, "12 meses": 7.25, "24 meses": null },
+    "plazos": { "Vista": 1.0, "1 mes": 6.5, "3 meses": 7.25, "6 meses": 7.85, "12 meses": 7, "24 meses": null },
     "NICAP": 146.62,
     "IMOR": 7.97,
     "resultadoneto": -24,
@@ -164,7 +164,7 @@
     "nombre": "Stori",
     "tipo": "SOFIPO",
     "sitioweb": "https://www.storicard.com",
-    "plazos": { "Vista": 7.7, "1 mes": 7.53, "3 meses": 9.41, "6 meses": 10.24, "12 meses": 9.75, "24 meses": null  },
+    "plazos": { "Vista": 7.23, "1 mes": 7.3, "3 meses": 8.48, "6 meses": 9.05, "12 meses": 9.00, "24 meses": null  },
     "NICAP": 140.53,
     "IMOR": 13.41,
     "resultadoneto": 176,
@@ -223,7 +223,7 @@
     "sitioweb": "https://www.uala.mx",
     "plazos": { "Vista": 16, "1 mes": 7.6, "3 meses": 7.75, "6 meses": 7.6, "12 meses": 7.1, "24 meses": null},
     "notas": {
-      "Vista": "Si consumes $6,000 o traes tu nómina por $6,000, tu tasa sube a 16% hasta que termine el mes. Si consumes $3,000 en el mes o traes tu nómina por $3,000 tu tasa será del 13% anual hasta que termine el mes. En otro caso, la tasa de rendimiento es del 7.5% anual. Todas las tasas están topadas hasta $30,000 MXN."
+      "Vista": "Si consumes $6,000 o traes tu nómina por $6,000, tu tasa sube a 16% hasta que termine el mes. Si consumes $3,000 en el mes o traes tu nómina por $3,000 tu tasa será del 13% anual hasta que termine el mes. En otro caso, la tasa de rendimiento es del 7.25% anual. Todas las tasas están topadas hasta $30,000 MXN."
     }
   },
   {
@@ -254,7 +254,7 @@
     "nombre": "Cetes Directo",
     "tipo": "Gubernamental",
     "sitioweb": "https://www.cetesdirecto.com/sites/portal/inicio",
-    "plazos": { "Vista": null, "1 mes": 7.07, "3 meses": 7.24, "6 meses": 7.37, "12 meses": 7.55, "24 meses": null  },
+    "plazos": { "Vista": null, "1 mes": 6.99, "3 meses": 7.13, "6 meses": 7.19, "12 meses": 7.44, "24 meses": null  },
     "notas": {
       "1 mes": "La tasa es a descuento.",
       "3 meses": "La tasa es a descuento.",
