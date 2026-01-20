@@ -206,7 +206,7 @@
     "nombre": "Openbank",
     "tipo": "Banco",
     "sitioweb": "https://www.openbank.mx",
-    "plazos": { "Vista": 10, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null, "24 meses": null }
+    "plazos": { "Vista": 9, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null, "24 meses": null }
   },
   {
     "nombre": "Banco Covalto",
