@@ -200,7 +200,10 @@
     "nombre": "Mifel (cuenta digital)",
     "tipo": "Banco",
     "sitioweb": "https://www.mifel.com.mx/personas",
-    "plazos": { "Vista": 10, "1 mes": 5.25, "3 meses": 7.2, "6 meses": 7.2, "12 meses": 7.3, "24 meses": null  }
+    "plazos": { "Vista": 10, "1 mes": 5.25, "3 meses": 7.2, "6 meses": 7.2, "12 meses": 7.3, "24 meses": null  },
+    "notas": {
+      "Vista": "El monto máximo para recibir intereses es de $500,000 MXN y el monto mínimo es de $100 MXN."
+    }
   },
   {
     "nombre": "Openbank",
