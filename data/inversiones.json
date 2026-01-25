@@ -4,20 +4,20 @@
     "tipo": "SOFIPO",
     "sitioweb": "https://capitalactivo.com.mx",
     "plazos": { "Vista": 1.5, "1 mes": 2.5, "3 meses": 4.5, "6 meses": 9, "12 meses": 10, "24 meses": 9.75 },
-    "NICAP": 142.01,
-    "IMOR": 24.15,
-    "resultadoneto": 3,
-    "cartera_vig": 367
+    "NICAP": 135.69,
+    "IMOR": 26.76,
+    "resultadoneto": 0.36,
+    "cartera_vig": 361.84
   },
   {
     "nombre": "Didi Cuenta",
     "tipo": "SOFIPO",
     "sitioweb": "https://web.didiglobal.com/mx/jpsofiexpress/didi-cuenta/",
     "plazos": { "Vista": 16, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null, "24 meses": null },
-    "NICAP": 927.24,
-    "IMOR": 33.62,
-    "resultadoneto": -268,
-    "cartera_vig":37,
+    "NICAP": 712.33,
+    "IMOR": 35.75,
+    "resultadoneto": -345,
+    "cartera_vig":33.18,
     "notas": {
       "Vista": "Tasa del 16% topada hasta $10,000 MXN. Montos mayores ofrecen 8.5% de rendimiento."
     }
@@ -27,10 +27,10 @@
     "tipo": "SOFIPO",
     "sitioweb": "https://finsus.mx",
     "plazos": { "Vista": 7.09, "1 mes": 7.19, "3 meses": 7.59, "6 meses": 7.69, "12 meses": 9.09, "24 meses": 7.01},
-    "NICAP": 131.45,
-    "IMOR": 1.80,
-    "resultadoneto": 137,
-    "cartera_vig":13856,
+    "NICAP": 132.86,
+    "IMOR": 1.9,
+    "resultadoneto": 142.51,
+    "cartera_vig":14203,
     "notas": {
       "Vista": "Los rendimientos de los apartados finsus+ (a la vista) se depositan de forma mensual."
     }
@@ -40,20 +40,20 @@
     "tipo": "SOFIPO",
     "sitioweb": "https://fondeadora.com",
     "plazos": { "Vista": null, "1 mes": 9, "3 meses": null, "6 meses": null, "12 meses": null, "24 meses": null  },
-    "NICAP": 211.79,
-    "IMOR": 5.46,
-    "resultadoneto": -79,
-    "cartera_vig":227
+    "NICAP": 165.04,
+    "IMOR": 4.52,
+    "resultadoneto": -89.06,
+    "cartera_vig":271.84
   },
   {
     "nombre": "Klar",
     "tipo": "SOFIPO",
     "sitioweb": "https://www.klar.mx",
     "plazos": { "Vista": 3, "1 mes": 6.2, "3 meses": 6.3, "6 meses": 6.4, "12 meses": 6.5, "24 meses": null  },
-    "NICAP": 156.47,
-    "IMOR": 11.44,
-    "resultadoneto": -416,
-    "cartera_vig": 5964,
+    "NICAP": 156.94,
+    "IMOR": 11.23,
+    "resultadoneto": -390.11,
+    "cartera_vig": 6235,
     "notas": {
       "Vista": "En inversión flexible obtienes una tasa del 6% anual."
     }
@@ -63,10 +63,10 @@
     "tipo": "SOFIPO",
     "sitioweb": "https://www.klar.mx",
     "plazos": { "Vista": 15, "1 mes": 8.2, "3 meses": 8.3, "6 meses": 8.4, "12 meses": 8.5, "24 meses": null  },
-    "NICAP": 156.47,
-    "IMOR": 11.44,
-    "resultadoneto": -416,
-    "cartera_vig": 5964,
+    "NICAP": 156.94,
+    "IMOR": 11.23,
+    "resultadoneto": -390.11,
+    "cartera_vig": 6235,
     "notas": {
       "Vista": "Tasa del 15% topada hasta $15,000 MXN. En inversión flexible obtienes una tasa del 8% anual. Obtienes 5% de rendimiento en tu cuenta a la vista."
     }
@@ -76,10 +76,10 @@
     "tipo": "SOFIPO",
     "sitioweb": "https://www.kubofinanciero.com",
     "plazos": { "Vista": null, "1 mes": 8.5, "3 meses": 9.3, "6 meses": 9.5, "12 meses": 10.5, "24 meses": 11.5},
-    "NICAP": 272.85,
-    "IMOR": 16.40,
-    "resultadoneto": -434,
-    "cartera_vig":664,
+    "NICAP": 267.7,
+    "IMOR": 16.88,
+    "resultadoneto": -529.99,
+    "cartera_vig":743,
     "notas": {
       "nombre": "Rendimientos calculados al recibir los intereses al final del plazo. Puedes elegir los pagos de tus rendimientos mensuales con una tasa ligeramente inferior. Al crear tu cuenta puedes pedir que te agreguen a un grupo, lo cual incrementará tus rendimientos."
     }
@@ -89,10 +89,10 @@
     "tipo": "SOFIPO",
     "sitioweb": "https://www.kubofinanciero.com",
     "plazos": { "Vista": null, "1 mes": 7.5, "3 meses": 8.3, "6 meses": 8.5, "12 meses": 9.5, "24 meses": 10.5},
-    "NICAP": 272.85,
-    "IMOR": 16.40,
-    "resultadoneto": -434,
-    "cartera_vig":664,
+    "NICAP": 267.7,
+    "IMOR": 16.88,
+    "resultadoneto": -529.99,
+    "cartera_vig":743,
     "notas": {
       "nombre": "Rendimientos calculados al recibir los intereses al final del plazo. Puedes elegir los pagos de tus rendimientos mensuales con una tasa ligeramente inferior. Al crear tu cuenta puedes pedir que te agreguen a un grupo, lo cual incrementará tus rendimientos."
     }
@@ -102,10 +102,10 @@
     "tipo": "SOFIPO",
     "sitioweb": "https://levainvierte.com",
     "plazos": { "Vista": null, "1 mes": null, "3 meses": 10, "6 meses": 11.25, "12 meses": 13.5, "24 meses": 14.5 },
-    "NICAP": 149.86,
-    "IMOR": 5.4,
-    "resultadoneto": 30,
-    "cartera_vig": 513,
+    "NICAP": 151.99,
+    "IMOR": 5.54,
+    "resultadoneto": 33.87,
+    "cartera_vig": 529.31,
     "notas": {
       "nombre": "Tasas disponibles para montos superiores a $100,000 MXN, monto mínimo de $20,000 MXN con una tasa menor. Puedes elegir pago de rendimientos mensual, lo que también disminuye la tasa. Inversión máxima por persona es de $1,000,000 MXN. Consulta el sitio oficial para más información.",
       "Condiciones": "Rendimientos calculados con un monto de inversión de $100,000 MXN y rendimientos pagados al final del plazo. El monto mínimo es de $20,000 MXN con una tasas menores. Puedes elegir pago de rendimientos mensual, lo que también disminuye la tasa. Inversión máxima por persona es de $1,000,000 MXN. Consulta el sitio oficial para más información."
@@ -116,10 +116,10 @@
     "tipo": "SOFIPO",
     "sitioweb": "https://nu.com.mx",
     "plazos": { "Vista": 13, "1 mes": 7.1, "3 meses": 7.2, "6 meses": 7.3, "12 meses": null, "24 meses": null},
-    "NICAP": 219.62,
-    "IMOR": 6.57,
-    "resultadoneto": -1484,
-    "cartera_vig": 26756,
+    "NICAP": 201.67,
+    "IMOR": 6.83,
+    "resultadoneto": -1546.8,
+    "cartera_vig": 28571.78,
     "notas": {
       "Vista": "Tasa del 13% se activa (Cajita Turbo) al realizar una compra al mes y topada hasta $25,000 MXN. Montos mayores ofrecen 7.00% de rendimiento a la vista."
     }
@@ -129,10 +129,10 @@
     "tipo": "SOFIPO",
     "sitioweb": "https://www.avantthya.com.mx",
     "plazos": { "Vista": null, "1 mes": 8.75, "3 meses": 10, "6 meses": 10.75, "12 meses": 11.75, "24 meses": null },
-    "NICAP": 227.18,
-    "IMOR": 5.61,
-    "resultadoneto": 7,
-    "cartera_vig": 158,
+    "NICAP": 229.74,
+    "IMOR": 5.43,
+    "resultadoneto": 7.67,
+    "cartera_vig": 160.7,
     "notas": {
       "Condiciones": "Rendimientos calculados con un monto de inversión de $100,000 MXN. En montos menores [$1,000 MXN a $99,999 MXN] la tasa decrementa 0.5%. Consulta el sitio oficial para más información."
     }
@@ -142,10 +142,10 @@
     "tipo": "SOFIPO",
     "sitioweb": "https://premo.mx",
     "plazos": { "Vista": 4, "1 mes": 8.07, "3 meses": 8.24, "6 meses": 8.37, "12 meses": 9.55, "24 meses": 9.98 },
-    "NICAP": 661.24,
-    "IMOR": 15.26,
-    "resultadoneto": 18,
-    "cartera_vig": 378,
+    "NICAP": 661.36,
+    "IMOR": 14.41,
+    "resultadoneto": 18.98,
+    "cartera_vig": 396.55,
     "notas": {
       "Condiciones": "Rendimientos calculados con un monto de inversión de $100 MXN"
     }
@@ -155,20 +155,20 @@
     "tipo": "SOFIPO",
     "sitioweb": "https://progressa.com.mx",
     "plazos": { "Vista": 1.0, "1 mes": 6.5, "3 meses": 7.25, "6 meses": 7.85, "12 meses": 7, "24 meses": null },
-    "NICAP": 146.62,
-    "IMOR": 7.97,
-    "resultadoneto": -24,
-    "cartera_vig": 730
+    "NICAP": 147.82,
+    "IMOR": 7.73,
+    "resultadoneto": -20.19,
+    "cartera_vig": 755.24
   },
   {
     "nombre": "Stori",
     "tipo": "SOFIPO",
     "sitioweb": "https://www.storicard.com",
     "plazos": { "Vista": 7.23, "1 mes": 7.3, "3 meses": 8.48, "6 meses": 9.05, "12 meses": 9.00, "24 meses": null  },
-    "NICAP": 140.53,
-    "IMOR": 13.41,
-    "resultadoneto": 176,
-    "cartera_vig":7794,
+    "NICAP": 141.42,
+    "IMOR": 13.13,
+    "resultadoneto": 211.05,
+    "cartera_vig":8099.4,
     "notas": {
       "nombre": "Se muestra la tasa nominal para una comparación justa con los demás instrumentos.",
       "Condiciones": "Existe una tasa del 14.14% (15% GAT) topada hasta $5,000 MXN y por tiempo limitado a 60 días. Revisar condiciones en su página oficial."
@@ -179,10 +179,10 @@
     "tipo": "SOFIPO",
     "sitioweb": "https://supertasas.com",
     "plazos": { "Vista": 7.2, "1 mes": 7.1, "3 meses": 7.3, "6 meses": 7.75, "12 meses": 8.5, "24 meses": null  },
-    "NICAP": 430.51,
-    "IMOR": 2.88,
-    "resultadoneto": 56,
-    "cartera_vig": 3017876,
+    "NICAP": 429.16,
+    "IMOR": 2.92,
+    "resultadoneto": 61.26,
+    "cartera_vig": 3213,
     "notas": {
       "12 meses": "El rendimiento mostrado de 364 días es al recibir los intereses al final del plazo. Se pueden recibir intereses cada 28 días con una tasa menor."
     }
