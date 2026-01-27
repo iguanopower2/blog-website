@@ -23,7 +23,7 @@ function setWelcomeMessage(user) {
 //Data layer (Supabase aislado)
 async function fetchCreditCards() {
   const { data, error } = await supabaseClient
-    .from('credit_cards')
+    .from('credit_cards_information')
     .select('*')
     .in('status', ['active', 'paused'])
     .order('cut_off_day');
@@ -34,7 +34,7 @@ async function fetchCreditCards() {
 
 async function insertCreditCard(cardData) {
   const { error } = await supabaseClient
-    .from('credit_cards')
+    .from('credit_cards_information')
     .insert(cardData);
 
   if (error) throw error;
@@ -71,7 +71,6 @@ async function getCreditCardFormData() {
     last_four_digits: document.getElementById('last_four_digits').value.trim(),
     cut_off_day: Number(document.getElementById('cut_off_day').value),
     payment_due_day: Number(document.getElementById('payment_due_day').value),
-    status: 'active',
     is_active: true,
     is_paid_current_cycle: false
   };
