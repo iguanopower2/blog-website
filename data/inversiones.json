@@ -188,6 +188,15 @@
     }
   },
   {
+    "nombre": "Revolut",
+    "tipo": "Banco",
+    "sitioweb": "https://www.revolut.com/es-MX/",
+    "plazos": { "Vista": 15, "1 mes": null, "3 meses": null, "6 meses": null, "12 meses": null, "24 meses": null},
+    "notas": {
+      "Vista": "Tasa del 15% topada hasta $25,000 MXN. De $25,000 a $1,000,000 7.5% de rendimiento y 5% para montos mayores."
+    }
+  },
+  {
     "nombre": "Mercado Pago",
     "tipo": "Otro",
     "sitioweb": "https://www.mercadopago.com.mx",
