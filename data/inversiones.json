@@ -251,7 +251,7 @@
     "nombre": "Pagaré digital BBVA",
     "tipo": "Banco",
     "sitioweb": "https://www.bbva.mx",
-    "plazos": { "Vista": null, "1 mes": 2.75, "3 meses": 2.8, "6 meses": 2.95, "12 meses": null, "24 meses": null  },
+    "plazos": { "Vista": null, "1 mes": 2.7, "3 meses": 2.75, "6 meses": 2.9, "12 meses": null, "24 meses": null  },
     "notas": {
       "Condiciones": "Rendimientos calculados con un monto de inversión de $2,000 MXN e invertidos en su pagaré con rendimiento liquidable al vencimiento (Pago al final del plazo)."
     }
