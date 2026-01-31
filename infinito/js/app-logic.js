@@ -1,4 +1,4 @@
-//Inicialización
+// Inicialización
 document.addEventListener('DOMContentLoaded', initDashboard);
 
 async function initDashboard() {
@@ -6,33 +6,74 @@ async function initDashboard() {
 
   if (error || !user) {
     console.warn('No authenticated user');
+    window.location.href = 'index.html'; // Redirigir si no hay sesión
     return;
   }
 
   setWelcomeMessage(user);
+  loadSubscriptionInfo(user.id); // Nueva función para ver el plan
   setupCreditCardForm();
   loadCreditCards();
 }
 
-//UI helpers
+// UI helpers
 function setWelcomeMessage(user) {
   const name = user.email.split('@')[0];
   document.getElementById('welcome-user').textContent = `Hola, ${name}`;
 }
 
-//Data layer (Supabase aislado)
+// NUEVA: Cargar info de suscripción y plan
+async function loadSubscriptionInfo(userId) {
+  try {
+    const { data, error } = await supabaseClient
+      .from('customer_subscription')
+      .select('status, subscription_plans(plan_name, max_active_cards)')
+      .eq('user_id', userId)
+      .single();
+
+    if (error) throw error;
+
+    const plan = data.subscription_plans;
+    document.getElementById('account-type').textContent = 
+      `${plan.plan_name.toUpperCase()} (${plan.max_active_cards} tarjetas)`;
+  } catch (err) {
+    console.error('Error loading subscription:', err);
+  }
+}
+
+// Data layer: Notar el cambio a 'credit_cards_information'
 async function fetchCreditCards() {
   const { data, error } = await supabaseClient
-    .from('credit_cards_information')
+    .from('credit_cards_information') // 👈 Nombre actualizado
     .select('*')
-    .in('status', ['active', 'paused'])
+    .eq('is_closed', false) // Solo las que no han sido eliminadas lógicamente
     .order('cut_off_day');
 
   if (error) throw error;
   return data;
 }
 
+// Lógica de inserción con validación de límite
 async function insertCreditCard(cardData) {
+  // 1. Verificar límite antes de insertar
+  const { data: cards } = await supabaseClient
+    .from('credit_cards_information')
+    .select('id')
+    .eq('user_id', cardData.user_id)
+    .eq('is_active', true)
+    .eq('is_closed', false);
+
+  // Aquí consultamos el plan (simplificado para el ejemplo)
+  const { data: sub } = await supabaseClient
+    .from('customer_subscription')
+    .select('subscription_plans(max_active_cards)')
+    .eq('user_id', cardData.user_id)
+    .single();
+
+  if (cards.length >= sub.subscription_plans.max_active_cards) {
+    throw new Error(`Límite alcanzado. Tu plan permite max ${sub.subscription_plans.max_active_cards} tarjetas activas.`);
+  }
+
   const { error } = await supabaseClient
     .from('credit_cards_information')
     .insert(cardData);
@@ -43,21 +84,24 @@ async function insertCreditCard(cardData) {
 // Form setup
 function setupCreditCardForm() {
   const form = document.getElementById('credit-card-form');
-
   if (!form) return;
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
-    const cardData = await getCreditCardFormData();
+    const btn = form.querySelector('button');
+    btn.disabled = true;
 
     try {
+      const cardData = await getCreditCardFormData();
       await insertCreditCard(cardData);
       form.reset();
       loadCreditCards();
+      alert('Tarjeta guardada con éxito');
     } catch (err) {
-      alert('Error al guardar la tarjeta');
+      alert(err.message || 'Error al guardar la tarjeta');
       console.error(err);
+    } finally {
+      btn.disabled = false;
     }
   });
 }
@@ -66,17 +110,16 @@ async function getCreditCardFormData() {
   const { data: { user } } = await supabaseClient.auth.getUser();
 
   return {
-    user_id: user.id, // 👈 CLAVE
+    user_id: user.id,
     bank_name: document.getElementById('bank_name').value.trim(),
     last_four_digits: document.getElementById('last_four_digits').value.trim(),
     cut_off_day: Number(document.getElementById('cut_off_day').value),
     payment_due_day: Number(document.getElementById('payment_due_day').value),
+    status: 'active', // 👈 Nuevo campo
     is_active: true,
     is_paid_current_cycle: false
   };
 }
-
-//Render principal
 
 async function loadCreditCards() {
   try {
@@ -87,7 +130,6 @@ async function loadCreditCards() {
   }
 }
 
-//Render grid
 function renderCreditCards(cards) {
   const grid = document.getElementById('cards-grid');
   grid.innerHTML = '';
@@ -102,103 +144,108 @@ function renderCreditCards(cards) {
   });
 }
 
-//Crear tarjeta individual
 function createCreditCardElement(card) {
   const div = document.createElement('div');
-  div.className = `card-alert ${card.is_paid_current_cycle ? 'status-paid' : 'status-pending'}`;
+  // Usar el nuevo campo 'status' para la clase visual
+  div.className = `card-alert status-${card.status} ${card.is_paid_current_cycle ? 'paid-border' : ''}`;
 
-  const remainingDays = calculateRemainingDays(card);
+  const remainingDaysText = calculateRemainingDays(card);
   const isPaused = card.status === 'paused';
 
   div.innerHTML = `
     <div class="card-info">
       <span class="bank-badge">${card.bank_name}</span>
       <h3>**** ${card.last_four_digits}</h3>
-      <p>${remainingDays}</p>
+      <p class="status-text">${remainingDaysText}</p>
     </div>
-    <button 
-      class="btn-pay" 
-      ${card.is_paid_current_cycle ? 'disabled' : ''}
-      onclick="markCardAsPaid('${card.id}')">
-      ${card.is_paid_current_cycle ? 'Pagado' : 'Ya pagué'}
-    </button>
-    <button 
-        class="btn-toggle"
-        onclick="toggleCardStatus('${card.id}', '${card.status}')">
-        ${isPaused ? 'Reactivar' : 'Pausar'}
-    </button>
-    <button 
-        class="btn-close"
-        onclick="closeCard('${card.id}')">
-        Cerrar
-    </button>
+    <div class="card-actions">
+        <button 
+          class="btn-pay" 
+          ${card.is_paid_current_cycle ? 'disabled' : ''}
+          onclick="markCardAsPaid('${card.id}')">
+          <i class="fas fa-check"></i> ${card.is_paid_current_cycle ? 'Pagado' : 'Ya pagué'}
+        </button>
+        <button 
+            class="btn-toggle"
+            onclick="toggleCardStatus('${card.id}', '${card.status}')">
+            <i class="fas ${isPaused ? 'fa-play' : 'fa-pause'}"></i>
+        </button>
+        <button 
+            class="btn-close"
+            onclick="closeCard('${card.id}')">
+            <i class="fas fa-trash"></i>
+        </button>
+    </div>
   `;
 
   return div;
 }
 
-//Lógica de negocio (aislada)
 function calculateRemainingDays(card) {
+  if (card.status === 'paused') return '⏸ Pausada';
+  if (card.is_paid_current_cycle) return '✅ Ciclo pagado';
+
   const today = new Date().getDate();
   const limitDay = card.payment_due_day;
-  const remaining = limitDay - today;
-
-  if (card.is_paid_current_cycle) return '✅ Pago registrado';
-  if (remaining > 0) return `⏳ Quedan ${remaining} días`;
-  if (remaining === 0) return '⚠️ Hoy es el último día';
-  if (card.status === 'paused') return '⏸ Tarjeta pausada';
-  if (card.is_paid_current_cycle) return '✅ Pago registrado';
+  
+  // Lógica simple de días restantes para el mes actual
+  let remaining = limitDay - today;
+  
+  if (remaining > 0) return `⏳ Faltan ${remaining} días para pago`;
+  if (remaining === 0) return '⚠️ ¡Hoy es el último día!';
   return '❌ Pago vencido';
 }
 
-//Update seguro (RLS protege)
 async function markCardAsPaid(cardId) {
   try {
     const { error } = await supabaseClient
-      .from('credit_cards')
-      .update({
-        is_paid_current_cycle: true,
-        last_paid_at: new Date()
-      })
+      .from('credit_cards_information')
+      .update({ is_paid_current_cycle: true })
       .eq('id', cardId);
 
     if (error) throw error;
-
     loadCreditCards();
   } catch (err) {
-    alert('No se pudo actualizar la tarjeta');
+    alert('Error al actualizar pago');
   }
-}
-
-async function updateCardStatus(cardId, newStatus) {
-  const { error } = await supabaseClient
-    .from('credit_cards')
-    .update({ status: newStatus })
-    .eq('id', cardId);
-
-  if (error) throw error;
 }
 
 async function toggleCardStatus(cardId, currentStatus) {
   const newStatus = currentStatus === 'active' ? 'paused' : 'active';
+  const isActive = newStatus === 'active';
 
   try {
-    await updateCardStatus(cardId, newStatus);
+    const { error } = await supabaseClient
+      .from('credit_cards_information')
+      .update({ 
+        status: newStatus,
+        is_active: isActive 
+      })
+      .eq('id', cardId);
+
+    if (error) throw error;
     loadCreditCards();
   } catch (err) {
-    alert('No se pudo cambiar el estado de la tarjeta');
-    console.error(err);
+    alert('Error al cambiar estado');
   }
 }
 
 async function closeCard(cardId) {
-  if (!confirm('¿Seguro que deseas cerrar esta tarjeta?')) return;
+  if (!confirm('¿Deseas eliminar esta tarjeta de tu lista?')) return;
 
   try {
-    await updateCardStatus(cardId, 'closed');
+    const { error } = await supabaseClient
+      .from('credit_cards_information')
+      .update({ 
+        is_closed: true,
+        is_active: false,
+        status: 'paused'
+      })
+      .eq('id', cardId);
+
+    if (error) throw error;
     loadCreditCards();
   } catch (err) {
-    alert('No se pudo cerrar la tarjeta');
-    console.error(err);
+    alert('Error al eliminar');
   }
 }
